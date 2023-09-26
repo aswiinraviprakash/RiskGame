@@ -1,3 +1,5 @@
+import gameplay.GameEngine;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -18,6 +20,8 @@ public class GameMenu {
                     case 1:
                         break;
                     case 2:
+                        GameEngine l_game_engine_obj = new GameEngine();
+                        l_game_engine_obj.initializeAndRunEngine();
                         break;
                     default:
                         System.out.println("Enter Valid Input!! Type 1 - Map Editor 2 - GamePlay 3 - Exit");
