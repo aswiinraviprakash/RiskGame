@@ -1,11 +1,10 @@
 package gameplay;
 
+import gameutils.GameException;
+
 import java.util.HashMap;
 
 public class GameEngine {
-
-    private String d_current_phase = GameStartUpPhase.D_PHASE_NAME;
-
     private static HashMap<String, String> D_game_phases;
 
     static {
@@ -13,31 +12,55 @@ public class GameEngine {
         D_game_phases.put(GameStartUpPhase.D_PHASE_NAME, "gameplay.GameStartUpPhase");
     }
 
+    private boolean validatePhases(String p_next_phase) {
+        if (p_next_phase.isEmpty()) {
+            return false;
+        }
+
+        if (p_next_phase.equals("TERMINATE_GAME")) {
+            System.out.println("GAME TERMINATED");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public void initializeAndRunEngine() throws Exception {
         System.out.println("---GAME STARTED---");
-        while (!d_current_phase.equals("END_GAME")) {
 
-            try {
+        try {
 
-                Class l_current_phase_class = Class.forName(D_game_phases.get(d_current_phase));
-                GamePhase l_current_phase_obj = (GamePhase) l_current_phase_class.getDeclaredConstructor().newInstance();
-                l_current_phase_obj.executePhase();
-                String l_next_phase = l_current_phase_obj.getNextPhase();
-                if (!l_next_phase.isEmpty()) {
-                    if (l_next_phase.equals("END_GAME")) {
-                        System.out.println("ENDING GAME...");
-                        return;
-                    }
-                    else {
-                        d_current_phase = l_next_phase;
-                    }
-                }
+            GameInformation l_game_information = new GameInformation();
+            String l_current_phase = GameStartUpPhase.D_PHASE_NAME;
+            l_game_information.setCurrentPhase(l_current_phase);
 
-            } catch (Exception e) {
-                throw e;
+            // Executing StartUp phase
+            Class l_current_phase_class = Class.forName(D_game_phases.get(l_current_phase));
+            GamePhase l_current_phase_obj = (GamePhase) l_current_phase_class.getDeclaredConstructor().newInstance();
+            l_current_phase_obj.executePhase(l_game_information);
+
+            l_current_phase = l_game_information.getCurrentPhase();
+            if (!validatePhases(l_current_phase)) {
+                return;
             }
 
+            while (!l_current_phase.equals("END_GAME")) {
+                l_current_phase_class = Class.forName(D_game_phases.get(l_current_phase));
+                l_current_phase_obj = (GamePhase) l_current_phase_class.getDeclaredConstructor().newInstance();
+                l_current_phase_obj.executePhase(l_game_information);
+
+                l_current_phase = l_game_information.getCurrentPhase();
+                if (!validatePhases(l_current_phase)) {
+                    return;
+                }
+            }
+
+        } catch (GameException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            throw e;
         }
+
     }
 
 }
