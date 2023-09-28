@@ -1,4 +1,6 @@
+import constants.GameMessageConstants;
 import gameplay.GameEngine;
+import gameutils.GameException;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,9 +12,9 @@ public class GameMenu {
 
             BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 
-            System.out.printf("Welcome to Risk War Game!!!%nMenu");
+            System.out.printf("Welcome to Risk War Game!!!%nMenu%n");
 
-            System.out.println("Type 1 - Map Editor 2 - GamePlay 3 - Exit");
+            System.out.printf("Type 1 - Map Editor 2 - GamePlay 3 - Exit%n%n");
             int l_menu_option = Integer.parseInt(l_reader.readLine());
             do {
 
@@ -27,12 +29,15 @@ public class GameMenu {
                         System.out.println("Enter Valid Input!! Type 1 - Map Editor 2 - GamePlay 3 - Exit");
                 }
 
+                System.out.printf("Menu%nType 1 - Map Editor 2 - GamePlay 3 - Exit%%");
                 l_menu_option = Integer.parseInt(l_reader.readLine());
 
             } while (l_menu_option != 3);
 
+        } catch (GameException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
-            System.out.println("There seems to be some issue try restarting the Game");
+            System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
         }
 
     }
