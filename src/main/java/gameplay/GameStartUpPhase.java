@@ -16,19 +16,19 @@ public class GameStartUpPhase extends GamePhase {
 
     private GameInformation d_current_game_info;
 
-    public void addOrRemovePlayers(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
+    private void addOrRemovePlayers(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
         if (p_command_details.isEmpty()) {
-            throw new GameException(GameMessageConstants.D_COMMAND_INCOMPLETE + "\nExample Format : " + GameMessageConstants.D_PLAYER_COMMAND);
+            throw new GameException(GameMessageConstants.D_COMMAND_INCOMPLETE + "\nExample Format: " + GameMessageConstants.D_PLAYER_COMMAND);
         }
 
         for (GameCommandParser.CommandDetails l_command_detail : p_command_details) {
             if (!l_command_detail.getHasCommandOption()) {
-                throw new GameException(GameMessageConstants.D_COMMAND_OPTION_NOTFOUND + "\nExample Format : " + GameMessageConstants.D_PLAYER_COMMAND);
+                throw new GameException(GameMessageConstants.D_COMMAND_OPTION_NOTFOUND + "\nExample Format: " + GameMessageConstants.D_PLAYER_COMMAND);
             }
 
             List<String> l_command_parameters = l_command_detail.getCommandParameters();
             if (l_command_parameters.isEmpty()) {
-                throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_NOTFOUND + "\nExample Format : " + GameMessageConstants.D_PLAYER_COMMAND);
+                throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_NOTFOUND + "\nExample Format: " + GameMessageConstants.D_PLAYER_COMMAND);
             }
 
             String l_command_option = l_command_detail.getCommandOption();
