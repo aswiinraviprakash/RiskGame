@@ -31,7 +31,11 @@ public class GameMessageConstants {
     public static final String D_PLAYER_NOTFOUND = "Player your are trying to remove not found";
 
     public static final String D_ARMIES_EXCEEDED = "Armies you are trying to deploy exceeded available limit";
-
+    
+    public static final String D_MAP_LOAD_FAILED = "There seems to be an issue loading your map";
+    
+    public static final String D_MAP_VALIDATION_ERROR = "There seems to be an issue with the map structure";
+    
     // Success Message Constants
     public static final String D_PLAYER_ADDED = "Player Added Successfully";
 
