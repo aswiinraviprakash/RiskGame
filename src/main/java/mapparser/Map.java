@@ -164,15 +164,10 @@ public class Map {
         System.out.println("Map Information:");
         for (Continent continent : l_continents) {
             System.out.println("Continent: " + continent.d_continent_name);
-            System.out.println("Special Number: " + continent.d_special_number);
-            System.out.println("Is Conquered: " + continent.d_is_continent_conquered);
             System.out.println("Countries in " + continent.d_continent_name + ":");
             for (Country country : l_countries) {
                 if (country.d_continent_obj == continent) {
                     System.out.println("Country: " + country.d_country_name);
-                    System.out.println("Is Conquered: " + country.d_is_country_conquered);
-                    System.out.println("Army Count: " + country.d_army_count);
-
                     List<Integer> neighbors = l_borders.get(country.d_country_id);
                     System.out.print("Neighbors: ");
                     for (Integer neighborId : neighbors) {
