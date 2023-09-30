@@ -155,10 +155,31 @@ public class Map {
     public List<List<Integer>> getBorders() {
         return this.d_borders;
     }
-    
-    public void showMap(){
+
+    public void showMap() {
         List<Country> l_countries = this.getCountries();
         List<Continent> l_continents = this.getContinents();
+        List<List<Integer>> l_borders = this.getBorders();
+
+        System.out.println("Continents:");
+        for (Continent continent : l_continents) {
+            System.out.println("Continent Name: " + continent.d_continent_name);
+            System.out.println("Special Number: " + continent.d_special_number);
+            System.out.println("Is Conquered: " + continent.d_is_continent_conquered);
+            System.out.println();
+        }
+        System.out.println("Countries:");
+        for (Country country : l_countries) {
+            System.out.println("Country Name: " + country.d_country_name);
+            System.out.println("Country ID: " + country.d_country_id);
+            System.out.println("Is Conquered: " + country.d_is_country_conquered);
+            System.out.println("Army Count: " + country.d_army_count);
+            System.out.println("Continent: " + country.d_continent_obj.d_continent_name);
+            System.out.print("Neighbors: ");
+            }
+
+            System.out.println("\n");
+        }
     }
 
 }

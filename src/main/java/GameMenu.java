@@ -13,6 +13,7 @@ public class GameMenu {
         //load default map
         MapParser l_map_parser_obj = new MapParser();
         Map l_map = l_map_parser_obj.loadMap();
+2
         
 
         try {
