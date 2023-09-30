@@ -18,8 +18,8 @@ public class GameEngine {
             return false;
         }
 
-        if (p_next_phase.equals("TERMINATE_GAME")) {
-            System.out.println("GAME TERMINATED");
+        if (p_next_phase.equals("END_GAME")) {
+            System.out.println("----GAME TERMINATED----");
             return false;
         } else {
             return true;
