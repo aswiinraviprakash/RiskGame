@@ -1,12 +1,19 @@
 import constants.GameMessageConstants;
 import gameplay.GameEngine;
 import gameutils.GameException;
+import mapparser.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+
 public class GameMenu {
     public static void main(String[] args) {
+        
+        //load default map
+        
+        MapParser.loadMap("D:\\Concordia\\Fall2023\\APP\\Project\\canada.map");
+        
 
         try {
 
