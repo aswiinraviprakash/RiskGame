@@ -12,7 +12,7 @@ public class GameMenu {
         
         //load default map
         
-        MapParser.loadMap("D:\\Concordia\\Fall2023\\APP\\Project\\canada.map");
+        //MapParser.loadMap("file-name");
         
 
         try {

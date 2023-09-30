@@ -8,7 +8,8 @@ package gameutils;
  *
  * @author USER
  */
-public class MapException extends Exception{
+public class MapException extends Exception {
+
     public MapException(String p_message) {
         super(p_message);
     }
