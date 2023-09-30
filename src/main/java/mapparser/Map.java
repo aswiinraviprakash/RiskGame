@@ -24,14 +24,15 @@ import java.util.Arrays;
  */
 public class Map {
 
-    public static List<List<Integer>> d_borders = new ArrayList<List<Integer>>();
-    public static List<Country> d_countries = new ArrayList<Country>();
-    public static List<Continent> d_continents = new ArrayList<Continent>();
+    public List<List<Integer>> d_borders = new ArrayList<List<Integer>>();
+    public List<Country> d_countries = new ArrayList<Country>();
+    public List<Continent> d_continents = new ArrayList<Continent>();
 
-    public Map(List<List<Integer>> p_borders, List<Country> p_countries, List<Continent> p_continents) {
-        this.d_borders = p_borders;
-        this.d_countries = p_countries;
-        this.d_continents = p_continents;
+    public Map(String p_file_path) {
+
+        this.loadBorders(p_file_path);
+        this.loadContinents(p_file_path);
+        this.loadCountries(p_file_path);
     }
 
     class Continent {
@@ -103,7 +104,7 @@ public class Map {
             l_borders.add(l_borders_sub);
         }
 
-        Map.this.d_borders = l_borders;
+        this.d_borders = l_borders;
     }
 
     public void loadCountries(String p_file_path) {
@@ -153,6 +154,11 @@ public class Map {
 
     public List<List<Integer>> getBorders() {
         return this.d_borders;
+    }
+    
+    public void showMap(){
+        List<Country> l_countries = this.getCountries();
+        List<Continent> l_continents = this.getContinents();
     }
 
 }

@@ -11,8 +11,8 @@ public class GameMenu {
     public static void main(String[] args) {
         
         //load default map
-        
-        //MapParser.loadMap("file-name");
+        MapParser l_map_parser_obj = new MapParser();
+        Map l_map = l_map_parser_obj.loadMap();
         
 
         try {
@@ -27,6 +27,8 @@ public class GameMenu {
 
                 switch (l_menu_option) {
                     case 1:
+                        MapEditor l_map_editor_obj = new MapEditor();
+                        l_map = l_map_editor_obj.initialiseMapEditingPhase(l_map);
                         break;
                     case 2:
                         GameEngine l_game_engine_obj = new GameEngine();

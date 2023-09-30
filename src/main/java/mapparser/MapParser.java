@@ -7,6 +7,7 @@ package mapparser;
 import constants.GameMessageConstants;
 import gameplay.GameEngine;
 import gameutils.GameException;
+import gameutils.MapException;
 import java.util.List;
 import mapparser.Map.Continent;
 import mapparser.Map.Country;
@@ -16,19 +17,35 @@ import mapparser.Map.Country;
  * @author USER
  */
 public class MapParser {
+    
+    public String d_map_file_name; 
+    
+    public MapParser(){
+        this.d_map_file_name = "D:\\Concordia\\Fall2023\\APP\\Project\\canada.map";
+        //if this does not exist throw error;
+    }
+    
+    public MapParser(String p_map_file_name){
+        this.d_map_file_name = p_map_file_name;
+    }
 
-    public static void loadMap(String p_file_path) {
+    public Map loadMap() {
 
         //create map object
-        Map l_map = new Map(null, null, null);
-
-        //to inialise map data members
-        l_map.loadBorders(p_file_path);
-        l_map.loadContinents(p_file_path);
-        l_map.loadCountries(p_file_path);
-
-        List<Country> l_countries = l_map.getCountries();
-        List<Continent> l_continents = l_map.getContinents();
+        Map l_map = new Map(this.d_map_file_name);
+        
+        try{
+            if(l_map.d_borders == null || l_map.d_countries == null || l_map.d_continents == null){
+            throw new MapException(GameMessageConstants.D_MAP_LOAD_FAILED);
+        }
+        } catch(MapException e){
+            System.out.println(e.getMessage());
+        }catch (Exception e) {
+            System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
+        }
+       
+        
+        return l_map;
     }
 
 }
