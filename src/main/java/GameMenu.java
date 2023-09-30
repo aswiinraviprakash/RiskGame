@@ -11,9 +11,14 @@ public class GameMenu {
     public static void main(String[] args) {
         
         //load default map
-        MapParser l_map_parser_obj = new MapParser();
+        MapParser l_map_parser_obj  = new MapParser();
         Map l_map = l_map_parser_obj.loadMap();
+<<<<<<< Updated upstream
 2
+=======
+
+        Map.showMap();
+>>>>>>> Stashed changes
         
 
         try {
