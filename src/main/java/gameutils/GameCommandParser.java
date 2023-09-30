@@ -22,18 +22,14 @@ public class GameCommandParser {
         String l_entire_command = d_entire_command;
         l_entire_command = l_entire_command.replace(getPrimaryCommand(), "").trim();
 
-        if (l_entire_command.isEmpty()) {
-            return l_command_details;
-        }
+        if (l_entire_command.isEmpty()) return l_command_details;
 
         List<String> l_command_parameters;
         if (l_entire_command.startsWith("-")) {
             String[] l_sub_commands = l_entire_command.split("-");
 
             for (String l_sub_command : l_sub_commands) {
-                if (l_sub_command.isEmpty()) {
-                    continue;
-                }
+                if (l_sub_command.isEmpty()) continue;
 
                 l_command_parameters = Arrays.asList(l_sub_command.split(" "));
                 CommandDetails l_command_details_obj = new CommandDetails();

@@ -7,7 +7,7 @@ public class Order {
 
     private String d_order_type;
 
-    private int d_country_id;
+    private String d_country_name;
 
     private int d_armies_number;
 
@@ -15,16 +15,16 @@ public class Order {
         this.d_order_type = p_order_type;
     }
 
-    public void setCountryId(int p_country_id) {
-        this.d_country_id = p_country_id;
+    public void setCountryName(String p_country_name) {
+        this.d_country_name = p_country_name;
     }
 
     public void setArmiesNumber(int d_armies_number) {
         this.d_armies_number = d_armies_number;
     }
 
-    public int getCountryId() {
-        return this.d_country_id;
+    public String getCountryName() {
+        return this.d_country_name;
     }
 
     public int getArmiesNumber() {
