@@ -342,7 +342,59 @@ public class MapEditor {
     }
 
     public boolean validateMap(Map p_map) {
+        boolean hasNullObjects = checkForNullObjects();
+
+        if (!hasNullObjects) {
+            System.out.println("Map objects are valid.");
+            // Continue with further map validation or game logic
+        } else {
+            System.out.println("Map objects contain null or empty elements.");
+        }
         return (!checkForNullObjects() && checkContinentConnectivity() && checkCountryConnectivity());
+    }
+
+    private boolean checkCountryConnectivity() {
+    }
+
+    private boolean checkContinentConnectivity() {
+    }
+
+    private boolean checkForNullObjects(Map p_map) {
+        List<Map.Country> l_countries = p_map.getCountryObjects();
+        List<Map.Continent> l_continents = p_map.getContinentObjects();
+        List<List<Integer>> l_borders = p_map.getBorders();
+        if (l_continents == null || l_continents.isEmpty()) {
+            System.err.println("Map must possess at least one continent!");
+            return true;
+        }
+
+        // Check for null or empty countries
+        if (l_countries == null || l_countries.isEmpty()) {
+            System.err.println("Map must possess at least one country!");
+            return true;
+        }
+
+        // Check for null or empty borders
+        if (l_borders == null || l_borders.isEmpty()) {
+            System.err.println("Map must possess at least one border!");
+            return true;
+        }
+
+        // Additional checks can be added as needed
+
+        return false; // No null objects found
+    }
+    public List<Map.Country> getAdjacentCountry(Map.Country p_country) throws InvalidMap {
+        List<Map.Country> l_adjCountries = new ArrayList<Map.Country>();
+
+        if (p_country.getD_adjacentCountryIds().size() > 0) {
+            for (int i : p_country.getD_adjacentCountryIds()) {
+                l_adjCountries.add(getCountry(i));
+            }
+        } else {
+            throw new InvalidMap(p_country.getD_countryName() + " doesn't have any adjacent countries");
+        }
+        return l_adjCountries;
     }
 
     public void saveMap(Map p_map) {
