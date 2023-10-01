@@ -341,8 +341,8 @@ public class MapEditor {
 
     }
 
-    public void validateMap(Map p_map) {
-
+    public boolean validateMap(Map p_map) {
+        return (!checkForNullObjects() && checkContinentConnectivity() && checkCountryConnectivity());
     }
 
     public void saveMap(Map p_map) {
