@@ -10,9 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import static java.lang.Integer.parseInt;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
 
 /**
  *
@@ -342,6 +341,10 @@ public class MapEditor {
     }
 
     public boolean validateMap(Map p_map) {
+        List<Map.Country> l_countries = p_map.getCountryObjects();
+        List<Map.Continent> l_continents = p_map.getContinentObjects();
+        List<List<Integer>> l_borders = p_map.getBorders();
+
         boolean hasNullObjects = checkForNullObjects();
 
         if (!hasNullObjects) {
@@ -351,13 +354,80 @@ public class MapEditor {
             System.out.println("Map objects contain null or empty elements.");
         }
         return (!checkForNullObjects() && checkContinentConnectivity() && checkCountryConnectivity());
+
+        boolean isMapValid = checkContinentConnectivity(Map p_map);
+
+        if (isMapValid) {
+            System.out.println("Map is valid.");
+            // Continue with further game logic
+        } else {
+            System.out.println("Map is not valid.");
+        }
+    }
+
     }
 
     private boolean checkCountryConnectivity() {
     }
 
-    private boolean checkContinentConnectivity() {
+    private boolean checkContinentConnectivity(Map p_map) {
+        List<Map.Country> l_countries = p_map.getCountryObjects();
+        List<Map.Continent> l_continents = p_map.getContinentObjects();
+        List<List<Integer>> l_borders = p_map.getBorders();
+        Map<Integer, Map.Country> countryMap = new HashMap<>();
+        for (Map.Country country : countries) {
+            countryMap.put(country.getId(), country);
+        }
+
+        Map<Map.Continent, Set<Map.Country>> continentCountries = new HashMap<>();
+        for (Map.Continent continent : continents) {
+            continentCountries.put(continent, new HashSet<>());
+        }
+
+        for (Map.Country country : countries) {
+            for (Map.Continent continent : continents) {
+                if (continent.getCountries().contains(country.getId())) {
+                    continentCountries.get(continent).add(country);
+                    break;
+                }
+            }
+        }
+
+        Set<Map.Country> visited = new HashSet<>();
+        Map.Country startCountry = continentCountries.get(continents.get(0)).iterator().next();
+        dfsContinentConnectivity(startCountry, continentCountries, visited, borders);
+
+        for (Map.Continent continent : continents) {
+            Set<Map.Country> continentCountrySet = continentCountries.get(continent);
+            if (!visited.containsAll(continentCountrySet)) {
+                System.out.println("Continent " + continent.getName() + " is not connected.");
+                return false;
+            }
+        }
+
+        return true;
     }
+    private static void dfsContinentConnectivity(
+            Map.Country currentCountry,
+            Map<Map.Continent, Set<Map.Country>> continentCountries,
+            Set<Map.Country> visited,
+            List<List<Integer>> borders
+    ) {
+        visited.add(currentCountry);
+
+        for (int neighborId : borders.get(currentCountry.getId() - 1)) {
+            Map.Country neighbor = continentCountries.values().stream()
+                    .flatMap(Collection::stream)
+                    .filter(c -> c.getId() == neighborId)
+                    .findFirst()
+                    .orElse(null);
+
+            if (neighbor != null && !visited.contains(neighbor)) {
+                dfsContinentConnectivity(neighbor, continentCountries, visited, borders);
+            }
+        }
+    }
+
 
     private boolean checkForNullObjects(Map p_map) {
         List<Map.Country> l_countries = p_map.getCountryObjects();
@@ -384,18 +454,7 @@ public class MapEditor {
 
         return false; // No null objects found
     }
-    public List<Map.Country> getAdjacentCountry(Map.Country p_country) throws InvalidMap {
-        List<Map.Country> l_adjCountries = new ArrayList<Map.Country>();
 
-        if (p_country.getD_adjacentCountryIds().size() > 0) {
-            for (int i : p_country.getD_adjacentCountryIds()) {
-                l_adjCountries.add(getCountry(i));
-            }
-        } else {
-            throw new InvalidMap(p_country.getD_countryName() + " doesn't have any adjacent countries");
-        }
-        return l_adjCountries;
-    }
 
     public void saveMap(Map p_map) {
 
