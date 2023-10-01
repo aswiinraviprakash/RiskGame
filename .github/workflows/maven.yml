@@ -25,3 +25,6 @@ jobs:
         cache: maven
     - name: Build Project with Maven
       run: mvn clean install
+    - name: Genearte Java Docs
+      run: mvn javadoc:javadoc
+
