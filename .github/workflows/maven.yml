@@ -26,11 +26,9 @@ jobs:
         ref: ${{ github.event.inputs.branch }}
     - name: Build Project with Maven
       run: mvn clean install
-    - name: Generate JavaDoc
-      run: mvn javadoc:javadoc
     - name: GIT Push
       run: |
-        date > generated.txt
+        mvn javadoc:javadoc
         git config user.name aswiinraviprakash
         git config user.email aswiinr19@gmail.com
         git branch patch_test
