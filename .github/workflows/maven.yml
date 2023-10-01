@@ -23,6 +23,7 @@ jobs:
         java-version: '20'
         distribution: 'temurin'
         cache: maven
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Build Project with Maven
       run: mvn clean install
     - name: Generate Java Docs
