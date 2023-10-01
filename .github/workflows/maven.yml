@@ -31,6 +31,7 @@ jobs:
         mvn javadoc:javadoc
         git config user.name aswiinraviprakash
         git config user.email aswiinr19@gmail.com
+        git checkout ${{ github.event.inputs.branch }}
         git add .
         git commit -m "generated"
         git push -u origin ${{ github.event.inputs.branch }}
