@@ -367,15 +367,46 @@ public class MapEditor {
 
     }
 
-    private boolean checkCountryConnectivity() {
+    private boolean checkCountryConnectivity(Map p_map) {
+        List<Map.Country> l_countries = p_map.getCountryObjects();
+        List<Map.Continent> l_continents = p_map.getContinentObjects();
+        List<List<Integer>> l_borders = p_map.getBorders();
+        Map<Integer, Map.Country> countryMap = new HashMap<>();
+        for (Map.Country country : l_countries) {
+            countryMap.put(country.getId(), country);
+        }
+
+        Set<Map.Country> visited = new HashSet<>();
+        Map.Country startCountry = l_countries.get(0); // Assume the first country as the starting point
+        dfsCountryConnectivity(startCountry, visited, l_borders, countryMap);
+
+        return visited.size() == l_countries.size();
     }
+
+    private static void dfsCountryConnectivity(
+            Map.Country currentCountry,
+            Set<Map.Country> visited,
+            List<List<Integer>> borders,
+            Map<Integer, Map.Country> countryMap
+    ) {
+        visited.add(currentCountry);
+
+        for (int neighborId : borders.get(currentCountry.getId() - 1)) {
+            Map.Country neighbor = countryMap.get(neighborId);
+
+            if (neighbor != null && !visited.contains(neighbor)) {
+                dfsCountryConnectivity(neighbor, visited, borders, countryMap);
+            }
+        }
+    }
+
 
     private boolean checkContinentConnectivity(Map p_map) {
         List<Map.Country> l_countries = p_map.getCountryObjects();
         List<Map.Continent> l_continents = p_map.getContinentObjects();
         List<List<Integer>> l_borders = p_map.getBorders();
         Map<Integer, Map.Country> countryMap = new HashMap<>();
-        for (Map.Country country : countries) {
+        for (Map.Country country : l_countries) {
             countryMap.put(country.getId(), country);
         }
 
