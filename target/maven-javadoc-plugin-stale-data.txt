@@ -1,0 +1,61 @@
+@options
+@packages
+@argfile
+-classpath
+'/home/runner/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/home/runner/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'20'
+-sourcepath
+'/home/runner/work/RiskGame/RiskGame/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'RiskGame 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'RiskGame 1.0-SNAPSHOT API'
+gameutils
+mapparser
+constants
+gameplay
+'/home/runner/work/RiskGame/RiskGame/src/main/java/GameMenu.java'
+/home/runner/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar = 1696142944773
+/home/runner/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar = 1696142944693
+/home/runner/work/RiskGame/RiskGame/src/main/java/GameMenu.java = 1696142934220
+/home/runner/work/RiskGame/RiskGame/src/main/java = 1696142934220
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/help-doc.html = 1696142956477
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/package-summary.html = 1696142956297
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/serialized-form.html = 1696142956333
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/module-search-index.js = 1696142956445
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/search.html = 1696142956473
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/index-all.html = 1696142956469
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/script.js = 1696142956481
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/stylesheet.css = 1696142956481
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/allclasses-index.html = 1696142956445
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/search-page.js = 1696142956485
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/member-search-index.js = 1696142956449
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/search.js = 1696142956485
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/index.html = 1696142956421
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/package-use.html = 1696142956389
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/allpackages-index.html = 1696142956445
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/overview-tree.html = 1696142956417
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/package-search-index.js = 1696142956445
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/tag-search-index.js = 1696142956449
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/element-list = 1696142956293
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/constant-values.html = 1696142956329
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/type-search-index.js = 1696142956445
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/overview-summary.html = 1696142956477
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/copy.svg = 1696142956481
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/GameMenu.html = 1696142956165
+/home/runner/work/RiskGame/RiskGame/apidocumentation/apidocs/package-tree.html = 1696142956301
