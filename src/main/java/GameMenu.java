@@ -4,8 +4,12 @@ import gameutils.GameException;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
 public class GameMenu {
+    /***
+     *
+     * @param args default arg
+     * @author S
+     */
     public static void main(String[] args) {
 
         try {
