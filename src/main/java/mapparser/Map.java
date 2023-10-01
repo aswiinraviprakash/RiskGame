@@ -177,15 +177,6 @@ public class Map {
                     System.out.println("\n");
                 }
             }
-            System.out.println();
-        for(int l_ii = 0; l_ii < l_countries.size(); l_ii++) {
-            string abcde = l_countries.get(l_ii);
-            system.out.println(abcde);
-        }
-        for(int l_ii = 0; l_ii < l_continents.size(); l_ii++) {
-            string zxcvb = l_continents.get(l_ii);
-            system.out.println(zxcvb);
         }
     }
-
 }
