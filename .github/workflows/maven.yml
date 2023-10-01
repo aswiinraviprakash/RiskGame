@@ -26,7 +26,7 @@ jobs:
     - name: Build Project with Maven
       run: mvn clean install
 
-  post merge process:
+  post_merge_process:
 
     if: github.event.pull_request.merged == true
 
