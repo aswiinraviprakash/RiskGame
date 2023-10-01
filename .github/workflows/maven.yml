@@ -30,7 +30,9 @@ jobs:
         date > generated.txt
         git config user.name aswiinraviprakash
         git config user.email aswiinr19@gmail.com
+        git branch patch_docs
+        git checkout patch_docs
         git add .
         git commit -m "generated"
-        git push
+        git push -u origin patch_docs
 
