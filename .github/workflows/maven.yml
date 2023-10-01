@@ -25,6 +25,12 @@ jobs:
         cache: maven
     - name: Build Project with Maven
       run: mvn clean install
-    - name: Genearte Java Docs
-      run: mvn javadoc:javadoc
+    - name: Generate Java Docs
+      run: |
+        date > generated.txt
+        git config user.name aswiinraviprakash
+        git config user.email aswiinr19@gmail.com
+        git add .
+        git commit -m "generated"
+        git push
 
