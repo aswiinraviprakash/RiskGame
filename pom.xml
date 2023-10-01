@@ -15,7 +15,8 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <outputDirectory>${basedir}/apidocumentation</outputDirectory>
+                    <outputDirectory>${basedir}/src</outputDirectory>
+                    <reportOutputDirectory>${basedir}/src</reportOutputDirectory>
                 </configuration>
             </plugin>
         </plugins>
