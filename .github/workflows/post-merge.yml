@@ -1,32 +1,32 @@
-name: Java CI with Maven
+name: Post Merge Process - Document Generation
 
 on:
   pull_request:
     types:
       - closed
 
-  jobs:
-    post_merge_process:
+jobs:
+  post_merge_process:
 
-      if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
 
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@v3
-        - name: Set up JDK 20
-          uses: actions/setup-java@v3
-          with:
-            java-version: '20'
-            distribution: 'temurin'
-            cache: maven
-        - name: Generate Java Documentation
-          run: |
-            mvn javadoc:javadoc
-            git config user.name aswiinraviprakash
-            git config user.email aswiinr19@gmail.com
-            git fetch
-            git checkout main
-            git add .
-            git commit -m "API documentation generated"
-            git push -u origin main
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 20
+        uses: actions/setup-java@v3
+        with:
+          java-version: '20'
+          distribution: 'temurin'
+          cache: maven
+      - name: Generate Java Documentation
+        run: |
+          mvn javadoc:javadoc
+          git config user.name aswiinraviprakash
+          git config user.email aswiinr19@gmail.com
+          git fetch
+          git checkout main
+          git add .
+          git commit -m "API documentation generated"
+          git push -u origin main
