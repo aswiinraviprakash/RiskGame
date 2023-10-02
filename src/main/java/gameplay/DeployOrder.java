@@ -27,7 +27,13 @@ public class DeployOrder extends Order {
 
     @Override
     public void execute(Player p_player_obj) {
-        List<Map.Country>
+        List<Map.Country> l_conquered_countries = p_player_obj.getConqueredCountries() ;
+        for (Map.Country l_country_obj : l_conquered_countries) {
+            if (l_country_obj.d_country_name.equals(getCountryName())) {
+                l_country_obj.d_army_count = l_country_obj.d_army_count + getArmiesNumber();
+                break;
+            }
+        }
 
     }
 
