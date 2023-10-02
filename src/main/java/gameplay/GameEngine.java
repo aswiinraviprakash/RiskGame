@@ -10,6 +10,7 @@ public class GameEngine {
     static {
         D_game_phases = new HashMap<>();
         D_game_phases.put(GameStartUpPhase.D_PHASE_NAME, "gameplay.GameStartUpPhase");
+        //D_game_phases.put(ReinforcementPhase.D_PHASE_NAME, "gameplay.ReinforcementPhase");
         D_game_phases.put(IssueOrderPhase.D_PHASE_NAME, "gameplay.IssueOrderPhase");
         D_game_phases.put(ExecuteOrderPhase.D_PHASE_NAME, "gameplay.ExecuteOrderPhase");
     }

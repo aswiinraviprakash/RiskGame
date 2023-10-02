@@ -26,7 +26,7 @@ public class Player {
 
     public void setCurrentArmies(int p_current_armies) {
         this.d_current_armies = p_current_armies;
-    }
+    }   
 
     public void setConqueredCountry(Map.Country p_conquered_country) {
         this.d_conquered_countries.add(p_conquered_country);
