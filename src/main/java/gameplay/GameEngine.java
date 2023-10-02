@@ -11,6 +11,7 @@ public class GameEngine {
         D_game_phases = new HashMap<>();
         D_game_phases.put(GameStartUpPhase.D_PHASE_NAME, "gameplay.GameStartUpPhase");
         D_game_phases.put(IssueOrderPhase.D_PHASE_NAME, "gameplay.IssueOrderPhase");
+        D_game_phases.put(ExecuteOrderPhase.D_PHASE_NAME, "gameplay.ExecuteOrderPhase");
     }
 
     private boolean validatePhases(String p_next_phase) {

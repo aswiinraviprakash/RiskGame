@@ -15,7 +15,6 @@ public class DeployOrder extends Order {
         this.d_armies_number = p_armies_number;
     }
 
-
     public String getCountryName() {
         return this.d_country_name;
     }
@@ -24,17 +23,15 @@ public class DeployOrder extends Order {
         return this.d_armies_number;
     }
 
-
     @Override
     public void execute(Player p_player_obj) {
-        List<Map.Country> l_conquered_countries = p_player_obj.getConqueredCountries() ;
+        List<Map.Country> l_conquered_countries = p_player_obj.getConqueredCountries();
         for (Map.Country l_country_obj : l_conquered_countries) {
             if (l_country_obj.d_country_name.equals(getCountryName())) {
-                l_country_obj.d_army_count = l_country_obj.d_army_count + getArmiesNumber();
+                l_country_obj.setArmyCount(l_country_obj.d_army_count + getArmiesNumber());
                 break;
             }
         }
-
     }
 
 }
