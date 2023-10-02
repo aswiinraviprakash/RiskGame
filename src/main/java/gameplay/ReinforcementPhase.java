@@ -1,26 +1,63 @@
 package gameplay;
 
-import gameplay.Player;
-import mapparser.Map;
+import constants.GameConstants;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
-import gameplay.GameInformation;
+import mapparser.Map;
 
 public class ReinforcementPhase extends GamePhase {
 
-    private Player pl;
-    private void determining_countries(){
-        String l_playerName = pl.getPlayerName();
-        List<Map.Country> p = pl.getConqueredCountries();
+    public static final String D_PHASE_NAME = "REINFORCEMENT_PHASE";
+
+    private String d_next_phase = IssueOrderPhase.D_PHASE_NAME;
+
+    private GameInformation d_current_game_info;
+
+    private void assignArmiesToPlayers(Player p_player_obj) throws Exception {
+
+        int l_armies_value = GameConstants.D_DEFAULT_ARMY_COUNT;
+
+        int l_country_armies = Math.floorDiv(p_player_obj.getConqueredCountries().size(), 3);
+        if (l_country_armies < 3) l_country_armies = 3;
+
+        l_armies_value = l_armies_value + l_country_armies;
+
+        Map l_gamemap_obj = d_current_game_info.getGameMap();
+        List<Map.Continent> l_continents_list = l_gamemap_obj.getContinentObjects();
+
+        for (Map.Continent l_continent_obj : l_continents_list) {
+            boolean l_continent_conquered = true;
+            List<Integer> l_available_countries = l_continent_obj.getCountryIDList();
+
+            for (Integer l_country_id : l_available_countries) {
+                if (!p_player_obj.checkIfCountryConquered(l_country_id)) l_continent_conquered = false;
+            }
+
+            if (l_continent_conquered) l_armies_value = l_armies_value + l_continent_obj.getSpecialNumber();
+        }
+
+        p_player_obj.setCurrentArmies(l_armies_value);
     }
+
     @Override
     public void executePhase(GameInformation p_game_information) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'executePhase'");
+        System.out.println("Assigning reinforcements....");
+        d_current_game_info = p_game_information;
+
+        LinkedHashMap<String, Player> l_player_list = p_game_information.getPlayerList();
+
+        for (java.util.Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
+            try {
+                Player l_player_obj = l_player.getValue();
+                assignArmiesToPlayers(l_player_obj);
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+
+        d_current_game_info.setCurrentPhase(this.d_next_phase);
     }
 
-
-    
-    
 }

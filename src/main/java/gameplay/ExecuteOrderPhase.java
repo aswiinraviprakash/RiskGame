@@ -6,7 +6,7 @@ import java.util.Map;
 public class ExecuteOrderPhase extends GamePhase {
     public static final String D_PHASE_NAME = "EXECUTE_ORDER_PHASE";
 
-    private String d_next_phase = "REINFORCEMENT_PHASE";
+    private String d_next_phase = ReinforcementPhase.D_PHASE_NAME;
 
     private GameInformation d_current_game_info;
 

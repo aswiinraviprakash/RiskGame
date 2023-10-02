@@ -15,7 +15,7 @@ public class IssueOrderPhase extends GamePhase {
 
     public static final String D_PHASE_NAME = "ISSUE_ORDER_PHASE";
 
-    private String d_next_phase = "EXECUTE_ORDER_PHASE";
+    private String d_next_phase = ExecuteOrderPhase.D_PHASE_NAME;
 
     private GameInformation d_current_game_info;
 
