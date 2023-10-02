@@ -10,10 +10,6 @@ public class ExecuteOrderPhase extends GamePhase {
 
     }
 
-    public Order next_order() {
-
-    }
-
 
 
 }
