@@ -4,12 +4,9 @@ import gameutils.GameException;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import mapparser.MapEditor;
 public class GameMenu {
-    /***
-     *
-     * @param args default arg
-     * @author S
-     */
+  
     public static void main(String[] args) {
 
         try {
@@ -24,6 +21,8 @@ public class GameMenu {
 
                 switch (l_menu_option) {
                     case 1:
+                        MapEditor l_map_edit_obj = new MapEditor();
+                        l_map_edit_obj.initialiseMapEditingPhase();
                         break;
                     case 2:
                         GameEngine l_game_engine_obj = new GameEngine();
@@ -41,6 +40,7 @@ public class GameMenu {
         } catch (GameException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
+            System.out.println(e);
             System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
         }
 
