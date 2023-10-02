@@ -25,3 +25,5 @@ jobs:
           cache: maven
       - name: Build Project with Maven
         run: mvn clean install
+      - name: Run Junit Test Cases
+        run: mvn -Dtest=RiskGameTestSuite test
