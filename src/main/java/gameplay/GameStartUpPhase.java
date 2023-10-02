@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Collections;
 
 public class GameStartUpPhase extends GamePhase {
     public static final String D_PHASE_NAME = "STARTUP_PHASE";
@@ -40,6 +41,7 @@ public class GameStartUpPhase extends GamePhase {
 
         d_current_game_info.setCurrenGameMap(l_gamemap_obj);
         d_completed_operations.add("loadmap");
+        System.out.println(GameMessageConstants.D_GAMEMAP_LOADED);
     }
 
     private void addOrRemovePlayers(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
@@ -86,6 +88,33 @@ public class GameStartUpPhase extends GamePhase {
         if (d_current_game_info.getPlayerList().size() >= 2) d_completed_operations.add("gameplayer");
     }
 
+    private void assignCountriesToPlayers(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
+
+        if (!p_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_ASSIGNCOUNTRIES_COMMAND);
+
+        Map l_gamemap_obj = d_current_game_info.getGameMap();
+        List<Map.Country> l_countries = l_gamemap_obj.getCountryObjects();
+        Collections.shuffle(l_countries);
+
+        LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+
+        int l_neutral_countries_count = l_countries.size() % l_player_list.values().size();
+        int l_countriesto_assign = l_countries.size() - l_neutral_countries_count;
+
+        int l_start_index = 0;
+        int l_end_index = l_countriesto_assign;
+        for (java.util.Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
+            Player l_player_obj = l_player.getValue();
+            List<Map.Country> l_player_countries = l_countries.subList(l_start_index, l_countriesto_assign);
+            l_player_obj.setConqueredCountries(l_player_countries);
+            l_start_index = l_countriesto_assign;
+            l_end_index = l_end_index + l_countriesto_assign;
+        }
+
+        d_completed_operations.add("assigncountries");
+        System.out.println(GameMessageConstants.D_COUNTRIES_ASSIGNED);
+    }
+
     @Override
     public void validateAndExecuteCommands(String p_input_command) throws Exception {
         GameCommandParser l_command_parser = new GameCommandParser(p_input_command);
@@ -103,7 +132,7 @@ public class GameStartUpPhase extends GamePhase {
             }
             case "assigncountries": {
                 if (d_completed_operations.contains("loadmap") && d_completed_operations.contains("gameplayer")) {
-                    System.out.println("assigncountries");
+                    assignCountriesToPlayers(l_command_details);
                 } else {
                     throw new GameException(GameMessageConstants.D_STARTUP_STEPS_INAVLID);
                 }

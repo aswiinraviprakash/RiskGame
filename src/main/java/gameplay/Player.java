@@ -32,6 +32,12 @@ public class Player {
         this.d_conquered_countries.add(p_conquered_country);
     }
 
+    public void setConqueredCountries(List<Map.Country> p_conquered_countries) {
+        for (Map.Country l_conquered_country : p_conquered_countries) {
+            this.d_conquered_countries.add(l_conquered_country);
+        }
+    }
+
     public String getPlayerName() {
         return this.d_player_name;
     }
