@@ -15,7 +15,7 @@ public class IssueOrderPhase extends GamePhase {
 
     public static final String D_PHASE_NAME = "ISSUE_ORDER_PHASE";
 
-    private String d_next_phase = "";
+    private String d_next_phase = "EXECUTE_ORDER_PHASE";
 
     private GameInformation d_current_game_info;
 
@@ -30,15 +30,15 @@ public class IssueOrderPhase extends GamePhase {
         List<String> l_command_parameters = l_command_detail.getCommandParameters();
         if (l_command_parameters.size() > 2 || !GameCommonUtils.isNumeric(l_command_parameters.get(1))) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_DEPLOY_COMMAND);
 
-        String l_country_id = l_command_parameters.get(0);
+        String l_country_name = l_command_parameters.get(0);
         int l_armies_number = Integer.parseInt(l_command_parameters.get(1));
 
-        //need to check if player owns the country
+        if (!p_current_player.checkIfCountryConquered(l_country_name)) throw new GameException(GameMessageConstants.D_COUNTRY_INVALID_FOR_PLAYER);
 
         if (l_armies_number > p_current_player.getCurrentArmies()) throw new GameException(GameMessageConstants.D_ARMIES_EXCEEDED + "\nAvailable Armies: " + p_current_player.getCurrentArmies());
 
         Order l_order = new Order(Order.D_DEPLOY_ORDER);
-        l_order.setCountryName(l_country_id);
+        l_order.setCountryName(l_country_name);
         l_order.setArmiesNumber(l_armies_number);
 
         p_current_player.d_current_order = l_order;
@@ -68,10 +68,12 @@ public class IssueOrderPhase extends GamePhase {
         System.out.println("start issuing your orders or enter endgame to terminate");
         d_current_game_info = p_game_information;
 
+        BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
+
         LinkedHashMap<String, Player> l_player_list = p_game_information.getPlayerList();
 
         for (Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
-            System.out.println("Player "+ l_player.getKey() + "turn");
+            System.out.println("Player: "+ l_player.getKey() + "turn");
             Player l_player_obj = l_player.getValue();
             int l_current_armies = l_player_obj.getCurrentArmies();
 
@@ -80,7 +82,6 @@ public class IssueOrderPhase extends GamePhase {
                 l_player_obj.d_current_order = null;
                 try {
                     System.out.println();
-                    BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
                     String l_input_command = l_reader.readLine();
                     if (l_input_command.equals("endgame")) {
                         d_current_game_info.setCurrentPhase("END_GAME");
@@ -93,8 +94,12 @@ public class IssueOrderPhase extends GamePhase {
                     System.out.println(e.getMessage());
                 } catch (Exception e) {
                     throw e;
+                } finally {
+                    l_reader.close();
                 }
             }
         }
+
+        d_current_game_info.setCurrentPhase(this.d_next_phase);
     }
 }

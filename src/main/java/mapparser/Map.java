@@ -30,7 +30,7 @@ public class Map {
         }
     }
 
-    class Continent {
+    public class Continent {
 
         public String d_continent_name;
         public boolean d_is_continent_conquered;
@@ -64,7 +64,7 @@ public class Map {
 
     }
 
-    class Country {
+    public class Country {
 
         public int d_country_id;
         public String d_country_name;

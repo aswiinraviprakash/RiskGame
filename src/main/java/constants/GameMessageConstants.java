@@ -3,9 +3,13 @@ package constants;
 public class GameMessageConstants {
 
     // Command Format Constants
+    public static final String D_LOADMAP = "loadmap filename";
+
     public static final String D_PLAYER_COMMAND = "gameplayer -add playername -remove playername";
 
     public static final String D_DEPLOY_COMMAND = "deploy countryID num";
+
+    public static final String D_ASSIGNCOUNTRIES_COMMAND = "gameplayer -add playername -remove playername";
 
     // Error Message Constants
     public static final String D_INTERNAL_ERROR = "There seems to be some issue try restarting the Game";
@@ -25,6 +29,8 @@ public class GameMessageConstants {
     public static final String D_PLAYER_NOTFOUND = "Player your are trying to remove not found";
 
     public static final String D_ARMIES_EXCEEDED = "Armies you are trying to deploy exceeded available limit";
+
+    public static final String D_COUNTRY_INVALID_FOR_PLAYER = "Player does'nt own the country your are trying to deploy armies";
     
     public static final String D_MAP_LOAD_FAILED = "There seems to be an issue loading your map";
     
