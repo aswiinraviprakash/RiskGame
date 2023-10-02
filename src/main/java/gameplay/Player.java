@@ -57,4 +57,12 @@ public class Player {
         return false;
     }
 
+    public Order next_order() {
+        if (d_orders_list.isEmpty()) return null;
+
+        Order d_current_order = this.d_orders_list.get(0);
+        this.d_orders_list.remove(0);
+        return d_current_order;
+    }
+
 }

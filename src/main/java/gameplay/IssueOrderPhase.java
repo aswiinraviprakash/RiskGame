@@ -37,11 +37,7 @@ public class IssueOrderPhase extends GamePhase {
 
         if (l_armies_number > p_current_player.getCurrentArmies()) throw new GameException(GameMessageConstants.D_ARMIES_EXCEEDED + "\nAvailable Armies: " + p_current_player.getCurrentArmies());
 
-        Order l_order = new Order(Order.D_DEPLOY_ORDER);
-        l_order.setCountryName(l_country_name);
-        l_order.setArmiesNumber(l_armies_number);
-
-        p_current_player.d_current_order = l_order;
+        p_current_player.d_current_order = new DeployOrder(l_country_name, l_armies_number);
         p_current_player.issue_order();
         p_current_player.setCurrentArmies(p_current_player.getCurrentArmies() - l_armies_number);
         System.out.println(GameMessageConstants.D_ORDER_ISSUED);
