@@ -2,6 +2,7 @@ package gameplay;
 
 import java.util.ArrayList;
 import java.util.List;
+import mapparser.Map;
 
 public class Player {
 
@@ -12,6 +13,8 @@ public class Player {
     private List<Order> d_orders_list = new ArrayList<>();
 
     public Order d_current_order = null;
+
+    public List<Map.Country> d_conquered_countries = new ArrayList<>();
 
     public Player(String l_player_name) {
         this.d_player_name = l_player_name;
@@ -25,12 +28,27 @@ public class Player {
         this.d_current_armies = p_current_armies;
     }
 
+    public void setConqueredCountry(Map.Country p_conquered_country) {
+        this.d_conquered_countries.add(p_conquered_country);
+    }
+
     public String getPlayerName() {
         return this.d_player_name;
     }
 
     public int getCurrentArmies() {
         return this.d_current_armies;
+    }
+
+    public List<Map.Country> getConqueredCountries() {
+        return this.d_conquered_countries;
+    }
+
+    public boolean checkIfCountryConquered(String p_country_name) {
+        for (Map.Country l_conquered_country : d_conquered_countries) {
+            if (l_conquered_country.d_country_name.equals(p_country_name)) return true;
+        }
+        return false;
     }
 
 }
