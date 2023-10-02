@@ -2,7 +2,6 @@ package gameplay;
 
 import gameutils.GameCommandParser;
 import constants.GameMessageConstants;
-import gameutils.GameCommonUtils;
 import gameutils.GameException;
 import mapparser.Map;
 
@@ -17,7 +16,7 @@ import java.util.Collections;
 public class GameStartUpPhase extends GamePhase {
     public static final String D_PHASE_NAME = "STARTUP_PHASE";
 
-    private String d_next_phase = "REINFORCEMENT_PHASE";
+    private String d_next_phase = ReinforcementPhase.D_PHASE_NAME;
 
     private GameInformation d_current_game_info;
 
@@ -145,7 +144,7 @@ public class GameStartUpPhase extends GamePhase {
 
     @Override
     public void executePhase(GameInformation p_game_information) throws Exception {
-        System.out.println("Start Game with following steps 1. Loadmap 2. Create Players 3. Assign Countries or enter endgame to terminate");
+        System.out.println("Start Game with following steps I. Loadmap II. Create Players III. Assign Countries or enter endgame to terminate");
         d_current_game_info = p_game_information;
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 
