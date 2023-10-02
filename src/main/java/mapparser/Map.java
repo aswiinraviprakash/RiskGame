@@ -18,7 +18,6 @@ public class Map {
     public List<Continent> d_continents = new ArrayList<Continent>();
 
     public Map(String p_file_path) {
-
         this.loadBorders(p_file_path);
         this.loadContinents(p_file_path);
         this.loadCountries(p_file_path);
@@ -55,10 +54,6 @@ public class Map {
 
         public void setIsContinentConqered(boolean p_value) {
             this.d_is_continent_conquered = p_value;
-
-        }
-
-        public void setCountryIDList() {
 
         }
 
@@ -173,7 +168,7 @@ public class Map {
 
     public int getContinentIDfromName(String p_continent_name) {
 
-        List<Map.Continent> l_continents = new ArrayList<Map.Continent>();
+        List<Map.Continent> l_continents = this.getContinentObjects();
         for (int l_i = 0; l_i < l_continents.size(); l_i++) {
             if (l_continents.get(l_i).d_continent_name.compareTo(p_continent_name) == 0) {
                 return l_i + 1;
