@@ -9,7 +9,7 @@ public class GameMessageConstants {
 
     public static final String D_DEPLOY_COMMAND = "deploy countryID num";
 
-    public static final String D_ASSIGNCOUNTRIES_COMMAND = "gameplayer -add playername -remove playername";
+    public static final String D_ASSIGNCOUNTRIES_COMMAND = "assigncountries";
 
     // Error Message Constants
     public static final String D_INTERNAL_ERROR = "There seems to be some issue try restarting the Game";
@@ -37,12 +37,16 @@ public class GameMessageConstants {
     public static final String D_MAP_VALIDATION_ERROR = "There seems to be an issue with the map structure";
     
     // Success Message Constants
-    public static final String D_PLAYER_ADDED = "Player Added Successfully";
+    public static final String D_GAMEMAP_LOADED = "Game Map loaded successfully";
 
-    public static final String D_PLAYER_REMOVED = "Player Removed Successfully";
+    public static final String D_PLAYER_ADDED = "Player added successfully";
 
-    public static final String D_GAME_STARTUP_SUCCESS = "Game Startup Completed";
+    public static final String D_PLAYER_REMOVED = "Player removed successfully";
 
-    public static final String D_ORDER_ISSUED = "Order Issued Successfully";
+    public static final String D_COUNTRIES_ASSIGNED = "Countries assigned successfully";
+
+    public static final String D_GAME_STARTUP_SUCCESS = "Game startup completed";
+
+    public static final String D_ORDER_ISSUED = "Order issued successfully";
 
 }
