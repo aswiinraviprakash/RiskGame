@@ -1,5 +1,6 @@
 package gameplay;
 
+import constants.GameConstants;
 import gameutils.GameCommandParser;
 import constants.GameMessageConstants;
 import gameutils.GameException;
@@ -32,15 +33,23 @@ public class GameStartUpPhase extends GamePhase {
         List<String> l_command_parameters = l_command_detail.getCommandParameters();
         if (!(l_command_parameters.size() == 1)) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_LOADMAP);
 
-        String l_gamemap_filename = l_command_parameters.get(0);
-        File l_gamemap_file = new File(l_gamemap_filename);
-        if (!l_gamemap_file.exists()) throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
+        try {
+            String l_gamemap_filename = l_command_parameters.get(0);
+            File l_file_dir = new File("").getCanonicalFile();
+            l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_DIRECTORY + l_gamemap_filename;
 
-        mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
 
-        d_current_game_info.setCurrenGameMap(l_gamemap_obj);
-        d_completed_operations.add("loadmap");
-        System.out.println(GameMessageConstants.D_GAMEMAP_LOADED);
+            File l_gamemap_file = new File(l_gamemap_filename);
+            if (!l_gamemap_file.exists()) throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
+            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+
+            d_current_game_info.setCurrenGameMap(l_gamemap_obj);
+            d_completed_operations.add("loadmap");
+            System.out.println(GameMessageConstants.D_GAMEMAP_LOADED);
+
+        } catch (Exception e) {
+            throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
+        }
     }
 
     private void addOrRemovePlayers(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
@@ -98,13 +107,13 @@ public class GameStartUpPhase extends GamePhase {
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
 
         int l_neutral_countries_count = l_countries.size() % l_player_list.values().size();
-        int l_countriesto_assign = l_countries.size() - l_neutral_countries_count;
+        int l_countriesto_assign = (l_countries.size() - l_neutral_countries_count) / l_player_list.values().size();
 
         int l_start_index = 0;
         int l_end_index = l_countriesto_assign;
         for (java.util.Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
             Player l_player_obj = l_player.getValue();
-            List<GameMap.Country> l_player_countries = l_countries.subList(l_start_index, l_countriesto_assign);
+            List<GameMap.Country> l_player_countries = l_countries.subList(l_start_index, l_end_index);
             l_player_obj.setConqueredCountries(l_player_countries);
             l_start_index = l_countriesto_assign;
             l_end_index = l_end_index + l_countriesto_assign;
@@ -168,8 +177,6 @@ public class GameStartUpPhase extends GamePhase {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
                 throw e;
-            } finally {
-                l_reader.close();
             }
         }
     }

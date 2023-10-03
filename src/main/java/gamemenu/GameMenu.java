@@ -32,7 +32,7 @@ public class GameMenu {
                         System.out.println("Enter Valid Input!! Type 1 - Map Editor 2 - GamePlay 3 - Exit");
                 }
 
-                System.out.printf("Menu%nType 1 - Map Editor 2 - GamePlay 3 - Exit%%");
+                System.out.printf("Menu%nType 1 - Map Editor 2 - GamePlay 3 - Exit%n");
                 l_menu_option = Integer.parseInt(l_reader.readLine());
 
             } while (l_menu_option != 3);

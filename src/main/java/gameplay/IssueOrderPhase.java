@@ -61,7 +61,7 @@ public class IssueOrderPhase extends GamePhase {
 
     @Override
     public void executePhase(GameInformation p_game_information) throws Exception {
-        System.out.println("start issuing your orders or enter endgame to terminate");
+        System.out.printf("%nstart issuing your orders or enter endgame to terminate%n");
         d_current_game_info = p_game_information;
 
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
@@ -69,7 +69,7 @@ public class IssueOrderPhase extends GamePhase {
         LinkedHashMap<String, Player> l_player_list = p_game_information.getPlayerList();
 
         for (Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
-            System.out.println("Player: "+ l_player.getKey() + "turn");
+            System.out.println("Player: "+ l_player.getKey() + " turn");
             Player l_player_obj = l_player.getValue();
             int l_current_armies = l_player_obj.getCurrentArmies();
 
@@ -90,8 +90,6 @@ public class IssueOrderPhase extends GamePhase {
                     System.out.println(e.getMessage());
                 } catch (Exception e) {
                     throw e;
-                } finally {
-                    l_reader.close();
                 }
             }
         }
