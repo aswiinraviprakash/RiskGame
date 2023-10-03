@@ -45,7 +45,7 @@ public class GameMapEditor {
                         String l_map_path = l_command_details.get(0).getCommandParameters().get(0);
                         File l_file;
                         File l_file_dir = new File("").getCanonicalFile();
-                        l_map_path = l_file_dir.getParent() + GameConstants.D_FILE_DIRECTORY_MAP_ + l_map_path;
+                        l_map_path = l_file_dir.getParent() + GameConstants.D_MAP_DIRECTORY + l_map_path;
                         //check if this path exists, if not, create a new map file and ask user to enter map data
                         try {
                             l_file = new File(l_map_path);
