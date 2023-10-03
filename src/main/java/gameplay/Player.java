@@ -2,7 +2,7 @@ package gameplay;
 
 import java.util.ArrayList;
 import java.util.List;
-import mapparser.Map;
+import mapparser.GameMap;
 
 public class Player {
 
@@ -14,7 +14,7 @@ public class Player {
 
     public Order d_current_order = null;
 
-    private List<Map.Country> d_conquered_countries = new ArrayList<>();
+    public List<GameMap.Country> d_conquered_countries = new ArrayList<>();
 
     public Player(String l_player_name) {
         this.d_player_name = l_player_name;
@@ -28,12 +28,12 @@ public class Player {
         this.d_current_armies = p_current_armies;
     }   
 
-    public void setConqueredCountry(Map.Country p_conquered_country) {
+    public void setConqueredCountry(GameMap.Country p_conquered_country) {
         this.d_conquered_countries.add(p_conquered_country);
     }
 
-    public void setConqueredCountries(List<Map.Country> p_conquered_countries) {
-        for (Map.Country l_conquered_country : p_conquered_countries) {
+    public void setConqueredCountries(List<GameMap.Country> p_conquered_countries) {
+        for (GameMap.Country l_conquered_country : p_conquered_countries) {
             this.d_conquered_countries.add(l_conquered_country);
         }
     }
@@ -46,20 +46,20 @@ public class Player {
         return this.d_current_armies;
     }
 
-    public List<Map.Country> getConqueredCountries() {
+    public List<GameMap.Country> getConqueredCountries() {
         return this.d_conquered_countries;
     }
 
     public boolean checkIfCountryConquered(int p_country_id) {
-        for (Map.Country l_conquered_country : d_conquered_countries) {
-            if (l_conquered_country.d_country_id == p_country_id) return true;
+        for (GameMap.Country l_conquered_country : d_conquered_countries) {
+            if (l_conquered_country.getCountryID() == p_country_id) return true;
         }
         return false;
     }
 
     public boolean checkIfCountryConquered(String p_country_name) {
-        for (Map.Country l_conquered_country : d_conquered_countries) {
-            if (l_conquered_country.d_country_name.equals(p_country_name)) return true;
+        for (GameMap.Country l_conquered_country : d_conquered_countries) {
+            if (l_conquered_country.getCountryName().equals(p_country_name)) return true;
         }
         return false;
     }

@@ -1,7 +1,7 @@
 package gameplay;
 
 import java.util.LinkedHashMap;
-import mapparser.Map;
+import mapparser.GameMap;
 
 public class GameInformation {
 
@@ -9,7 +9,7 @@ public class GameInformation {
 
     private LinkedHashMap<String, Player> d_player_list = new LinkedHashMap<>();
 
-    private mapparser.Map d_current_game_map;
+    private mapparser.GameMap d_current_game_map;
 
     public void setCurrentPhase(String p_current_phase) {
         this.d_current_phase = p_current_phase;
@@ -19,7 +19,7 @@ public class GameInformation {
         this.d_player_list = p_player_list;
     }
 
-    public void setCurrenGameMap(Map p_current_game_map) {
+    public void setCurrenGameMap(GameMap p_current_game_map) {
         this.d_current_game_map = p_current_game_map;
     }
 
@@ -31,7 +31,7 @@ public class GameInformation {
         return this.d_player_list;
     }
 
-    public mapparser.Map getGameMap() {
+    public mapparser.GameMap getGameMap() {
         return this.d_current_game_map;
     }
 

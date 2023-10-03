@@ -4,7 +4,7 @@ import gameutils.GameException;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import mapparser.MapEditor;
+import mapparser.GameMapEditor;
 public class GameMenu {
   
     public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class GameMenu {
 
                 switch (l_menu_option) {
                     case 1:
-                        MapEditor l_map_edit_obj = new MapEditor();
+                        GameMapEditor l_map_edit_obj = new GameMapEditor();
                         l_map_edit_obj.initialiseMapEditingPhase();
                         break;
                     case 2:

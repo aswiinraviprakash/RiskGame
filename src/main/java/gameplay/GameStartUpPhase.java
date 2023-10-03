@@ -3,7 +3,7 @@ package gameplay;
 import gameutils.GameCommandParser;
 import constants.GameMessageConstants;
 import gameutils.GameException;
-import mapparser.Map;
+import mapparser.GameMap;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,7 +36,7 @@ public class GameStartUpPhase extends GamePhase {
         File l_gamemap_file = new File(l_gamemap_filename);
         if (!l_gamemap_file.exists()) throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
 
-        mapparser.Map l_gamemap_obj = new mapparser.Map(l_gamemap_filename);
+        mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
 
         d_current_game_info.setCurrenGameMap(l_gamemap_obj);
         d_completed_operations.add("loadmap");
@@ -91,8 +91,8 @@ public class GameStartUpPhase extends GamePhase {
 
         if (!p_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_ASSIGNCOUNTRIES_COMMAND);
 
-        Map l_gamemap_obj = d_current_game_info.getGameMap();
-        List<Map.Country> l_countries = l_gamemap_obj.getCountryObjects();
+        GameMap l_gamemap_obj = d_current_game_info.getGameMap();
+        List<GameMap.Country> l_countries = l_gamemap_obj.getCountryObjects();
         Collections.shuffle(l_countries);
 
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
@@ -104,7 +104,7 @@ public class GameStartUpPhase extends GamePhase {
         int l_end_index = l_countriesto_assign;
         for (java.util.Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
             Player l_player_obj = l_player.getValue();
-            List<Map.Country> l_player_countries = l_countries.subList(l_start_index, l_countriesto_assign);
+            List<GameMap.Country> l_player_countries = l_countries.subList(l_start_index, l_countriesto_assign);
             l_player_obj.setConqueredCountries(l_player_countries);
             l_start_index = l_countriesto_assign;
             l_end_index = l_end_index + l_countriesto_assign;
