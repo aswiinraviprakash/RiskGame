@@ -12,7 +12,7 @@ public class ExecuteOrderPhase extends GamePhase {
 
     @Override
     public void executePhase(GameInformation p_game_information) throws Exception {
-        System.out.println("Executing orders issued....");
+        System.out.printf("%nExecuting orders issued....%n");
         d_current_game_info = p_game_information;
 
         LinkedHashMap<String, Player> l_player_list = p_game_information.getPlayerList();
