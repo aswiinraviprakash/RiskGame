@@ -11,7 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +30,10 @@ public class GameMapEditor {
             BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 
             // validate user input map commands commands
-            System.out.printf("Map Menu!!!  Type 1 - edit Map (editmap -mapfilename) -  2 - Exit");
+            System.out.println("Map Menu - Type editmap filename or exit to Exit");
 
             String l_map_command = l_reader.readLine();
             do {
-                System.out.printf("Type 1 - editmap (editmap -mapfilename) -  2 - Exit");
                 GameCommandParser l_command_parser = new GameCommandParser(l_map_command);
                 String l_primary_command = l_command_parser.getPrimaryCommand();
                 List<GameCommandParser.CommandDetails> l_command_details = l_command_parser.getParsedCommandDetails();
@@ -64,9 +62,10 @@ public class GameMapEditor {
                         break;
 
                     default:
-                        System.out.println("Enter Valid Input!! Type 1 - Edit Map -  2 - Exit");
+                        System.out.println("Enter Valid Input!! Type editmap filename or exit to Exit");
                 }
 
+                System.out.println("Map Menu - Type editmap filename or exit to Exit");
                 l_map_command = l_reader.readLine();
 
             } while (l_map_command.compareTo("exit") != 0);
@@ -81,68 +80,74 @@ public class GameMapEditor {
             BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 
             // validate user input map commands commands
-            System.out.printf("Map Editor Menu!!! ");
+            System.out.printf("Map Editor Menu!!! %n");
+            System.out.printf("Proceed valid commands editcontinent / editcountry / editneighbor / validatemap / savemap%n%n");
             String l_map_command = l_reader.readLine();
 
             do {
-                System.out.printf("Type 1 - Edit Continent - 2 - Edit Country - 3 - Edit Borders - 4 - Show Map  - 5 - Upload a map file - 6 - Exit");
+                try {
+                    GameCommandParser l_command_parser = new GameCommandParser(l_map_command);
+                    String l_primary_command = l_command_parser.getPrimaryCommand();
+                    List<GameCommandParser.CommandDetails> l_command_details = l_command_parser.getParsedCommandDetails();
 
-                GameCommandParser l_command_parser = new GameCommandParser(l_map_command);
-                String l_primary_command = l_command_parser.getPrimaryCommand();
-                List<GameCommandParser.CommandDetails> l_command_details = l_command_parser.getParsedCommandDetails();
+                    int l_command_count = l_command_details.size();
 
-                int l_command_count = l_command_details.size();
+                    switch (l_command_parser.getPrimaryCommand()) {
+                        case "editcontinent":
+                            for (int l_index = 0; l_index < l_command_count; l_index++) {
+                                if (l_command_details.get(l_index).getHasCommandOption()) {
+                                    p_map = this.editContinent(p_map, l_command_details.get(l_index).getCommandOption(), l_command_details.get(l_index).getCommandParameters(), p_map_path);
+                                } else {
+                                    throw new GameException(GameMessageConstants.D_COMMAND_NO_OPTION_SUPPORT);
+                                }
 
-                switch (l_command_parser.getPrimaryCommand()) {
-                    case "editcontinent":
-                        for (int l_index = 0; l_index < l_command_count; l_index++) {
-                            if (l_command_details.get(l_index).getHasCommandOption()) {
-                                p_map = this.editContinent(p_map, l_command_details.get(l_index).getCommandOption(), l_command_details.get(l_index).getCommandParameters(), p_map_path);
-                            } else {
-                                throw new GameException(GameMessageConstants.D_COMMAND_NO_OPTION_SUPPORT);
                             }
+                            break;
+                        case "editcountry":
+                            for (int l_index = 0; l_index < l_command_count; l_index++) {
+                                if (l_command_details.get(l_index).getHasCommandOption()) {
+                                    p_map = this.editCountry(p_map, l_command_details.get(l_index).getCommandOption(), l_command_details.get(l_index).getCommandParameters(), p_map_path);
+                                } else {
+                                    throw new GameException(GameMessageConstants.D_COMMAND_NO_OPTION_SUPPORT);
+                                }
+                            }
+                            break;
+                        case "editneighbor":
+                            for (int l_index = 0; l_index < l_command_count; l_index++) {
+                                if (l_command_details.get(l_index).getHasCommandOption()) {
+                                    p_map = this.editBorders(p_map, l_command_details.get(l_index).getCommandOption(), l_command_details.get(l_index).getCommandParameters(), p_map_path);
+                                } else {
+                                    throw new GameException(GameMessageConstants.D_COMMAND_NO_OPTION_SUPPORT);
+                                }
+                            }
+                            break;
+                        case "showmap":
+                            p_map.showMap();
+                            break;
+                        case "savemap":
+                            boolean l_is_map_valid = p_map.validateGameMap();
+                            if (l_is_map_valid) {
+                                p_map = this.modifyMapFile(p_map, p_map_path);
+                                System.out.println("Map file saved");
+                            } else {
+                                System.out.println("Something is wrong with the map, type 'exit' to leave map editor menu  and choose another map file using editmap command");
+                            }
+                            break;
+                        default:
+                            System.out.printf("Enter Valid Input!!%n");
+                    }
 
-                        }
-                        break;
-                    case "editcountry":
-                        for (int l_index = 0; l_index < l_command_count; l_index++) {
-                            if (l_command_details.get(l_index).getHasCommandOption()) {
-                                p_map = this.editCountry(p_map, l_command_details.get(l_index).getCommandOption(), l_command_details.get(l_index).getCommandParameters(), p_map_path);
-                            } else {
-                                throw new GameException(GameMessageConstants.D_COMMAND_NO_OPTION_SUPPORT);
-                            }
-                        }
-                        break;
-                    case "editneighbor":
-                        for (int l_index = 0; l_index < l_command_count; l_index++) {
-                            if (l_command_details.get(l_index).getHasCommandOption()) {
-                                p_map = this.editBorders(p_map, l_command_details.get(l_index).getCommandOption(), l_command_details.get(l_index).getCommandParameters(), p_map_path);
-                            } else {
-                                throw new GameException(GameMessageConstants.D_COMMAND_NO_OPTION_SUPPORT);
-                            }
-                        }
-                        break;
-                    case "showmap":
-                        p_map.showMap();
-                        break;
-                    case "savemap":
-                     //   boolean l_is_map_valid = p_map.validateGameMap();
-                        boolean l_is_map_valid = true;
-                        if(l_is_map_valid){
-                            p_map = this.modifyMapFile(p_map, p_map_path);
-                            System.out.println("Map file saved");
-                        }else{
-                            System.out.println("Something is wrong with the map, type 'exit' to leave map editor menu  and choose another map file using editmap command");
-                        }
-                        break;
-                    default:
-                        System.out.println("Enter Valid Input!! Type 1 - Edit Continent - 2 - Edit Country - 3 - Edit Borders - 4 - Show Map  - 5 - Upload a map file - 6 - Exit");
+                } catch (GameException e) {
+                    System.out.println(e.getMessage());
+                } catch (Exception e) {
+                    System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
                 }
+
+                System.out.printf("%nProceed valid commands editcontinent / editcountry / editneighbor / validatemap / savemap%n%n");
                 l_map_command = l_reader.readLine();
 
             } while (l_map_command.compareTo("exit") != 0);
-        } catch (GameException e) {
-            System.out.println(e.getMessage());
+
         } catch (Exception e) {
             System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
         }
@@ -290,7 +295,7 @@ public class GameMapEditor {
         if (p_map_option.compareTo("add") == 0) {
 
             l_continent_name = p_parameter_list.get(0);
-            l_continent_value = parseInt(p_parameter_list.get(1));
+            l_continent_value = Integer.parseInt(p_parameter_list.get(1));
 
             //creating continent object
             GameMap.Continent l_continent_obj = p_map.new Continent(l_continent_name, GameConstants.D_DEFAULT_IS_CONQUERED, l_continent_value, null);

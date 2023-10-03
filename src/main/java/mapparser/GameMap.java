@@ -242,8 +242,10 @@ public class GameMap {
 
         if (d_borders.isEmpty()) throw new GameException(GameMessageConstants.D_MAP_EMPTY_BORDERS);
         for (Country l_country_obj : getCountryObjects()) {
-            List<Integer> l_country_border_list = d_borders.get(l_country_obj.getCountryID() - 1);
-            if (l_country_border_list == null || l_country_border_list.isEmpty()) throw new GameException("Country: " + l_country_obj.getCountryName() + "" + GameMessageConstants.D_MAP_COUNTRY_EMPTY_BORDERS);
+            int l_country_index = d_countries.indexOf(l_country_obj);
+            List<Integer> l_country_border_list = d_borders.get(l_country_index);
+            l_country_border_list = l_country_border_list.subList(1, l_country_border_list.size());
+            if (l_country_border_list == null || l_country_border_list.isEmpty()) throw new GameException("Country: " + l_country_obj.getCountryName() + " " + GameMessageConstants.D_MAP_COUNTRY_EMPTY_BORDERS);
         }
 
         return validateContinents();
@@ -253,7 +255,7 @@ public class GameMap {
         boolean isCountriesInterConnected = true;
 
         for (Continent l_continent_obj : d_continents) {
-            if (l_continent_obj.getCountryIDList() == null || l_continent_obj.getCountryIDList().isEmpty()) throw new GameException("Continent: " + l_continent_obj.getContinentName() + "list of" + GameMessageConstants.D_MAP_EMPTY_COUNTRIES);
+            if (l_continent_obj.getCountryIDList() == null || l_continent_obj.getCountryIDList().isEmpty()) throw new GameException("Continent: " + l_continent_obj.getContinentName() + "list of " + GameMessageConstants.D_MAP_EMPTY_COUNTRIES);
 
             if (!validateContinentConnectivity(l_continent_obj)) isCountriesInterConnected = false;
         }
@@ -273,7 +275,7 @@ public class GameMap {
         for (Map.Entry<Integer, Boolean> l_country_entry : l_country_map.entrySet()) {
             if (!l_country_entry.getValue()) {
                 Country l_country_obj = getCountryById(l_country_entry.getKey());
-                throw new GameException("Country: " + l_country_obj.getCountryName() + "" + GameMessageConstants.D_MAP_COUNTRY_INVALID_BORDERS);
+                throw new GameException("Country: " + l_country_obj.getCountryName() + " " + GameMessageConstants.D_MAP_COUNTRY_INVALID_BORDERS);
             }
         }
 
@@ -286,6 +288,7 @@ public class GameMap {
         for (int l_country_id : p_continent_obj.getCountryIDList()) {
             int l_border_index = getCountryObjects().indexOf(l_country_obj);
             List<Integer> l_adjacent_ids = getBorders().get(l_border_index);
+            l_adjacent_ids = l_adjacent_ids.subList(1, l_adjacent_ids.size());
             if (l_adjacent_ids.contains(l_country_id)) {
                 if (!p_country_map.get(l_country_id)) {
                     validateCountryAdjacency(getCountryById(l_country_id), p_country_map, p_continent_obj);
