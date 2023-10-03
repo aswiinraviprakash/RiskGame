@@ -9,7 +9,8 @@ public class GameCommandParser {
     private final String d_entire_command;
 
     public GameCommandParser(String p_entire_command) {
-        this.d_entire_command = p_entire_command;
+       this.d_entire_command = p_entire_command.trim();
+       
     }
 
     public String getPrimaryCommand() {

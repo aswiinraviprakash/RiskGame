@@ -1,6 +1,6 @@
 package gameplay;
 
-import mapparser.Map;
+import mapparser.GameMap;
 
 import java.util.List;
 
@@ -25,10 +25,10 @@ public class DeployOrder extends Order {
 
     @Override
     public void execute(Player p_player_obj) {
-        List<Map.Country> l_conquered_countries = p_player_obj.getConqueredCountries();
-        for (Map.Country l_country_obj : l_conquered_countries) {
-            if (l_country_obj.d_country_name.equals(getCountryName())) {
-                l_country_obj.setArmyCount(l_country_obj.d_army_count + getArmiesNumber());
+        List<GameMap.Country> l_conquered_countries = p_player_obj.getConqueredCountries();
+        for (GameMap.Country l_country_obj : l_conquered_countries) {
+            if (l_country_obj.getCountryName().equals(getCountryName())) {
+                l_country_obj.setArmyCount(l_country_obj.getArmyCount() + getArmiesNumber());
                 break;
             }
         }
