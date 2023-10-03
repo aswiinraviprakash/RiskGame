@@ -1,9 +1,9 @@
 package mapparser;
 
+import constants.GameConstants;
+import gameutils.MapCommonUtils;
 import java.util.ArrayList;
 import java.util.List;
-import constants.*;
-import gameutils.*;
 import static java.lang.Integer.parseInt;
 import java.util.Arrays;
 

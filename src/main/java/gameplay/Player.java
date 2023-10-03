@@ -52,7 +52,7 @@ public class Player {
 
     public boolean checkIfCountryConquered(int p_country_id) {
         for (GameMap.Country l_conquered_country : d_conquered_countries) {
-            if (l_conquered_country.d_country_id == p_country_id) return true;
+            if (l_conquered_country.getCountryID() == p_country_id) return true;
         }
         return false;
     }

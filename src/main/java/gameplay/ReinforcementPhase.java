@@ -5,7 +5,7 @@ import constants.GameConstants;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import mapparser.Map;
+import mapparser.GameMap;
 
 public class ReinforcementPhase extends GamePhase {
 
@@ -24,10 +24,10 @@ public class ReinforcementPhase extends GamePhase {
 
         l_armies_value = l_armies_value + l_country_armies;
 
-        Map l_gamemap_obj = d_current_game_info.getGameMap();
-        List<Map.Continent> l_continents_list = l_gamemap_obj.getContinentObjects();
+        GameMap l_gamemap_obj = d_current_game_info.getGameMap();
+        List<GameMap.Continent> l_continents_list = l_gamemap_obj.getContinentObjects();
 
-        for (Map.Continent l_continent_obj : l_continents_list) {
+        for (GameMap.Continent l_continent_obj : l_continents_list) {
             boolean l_continent_conquered = true;
             List<Integer> l_available_countries = l_continent_obj.getCountryIDList();
 
