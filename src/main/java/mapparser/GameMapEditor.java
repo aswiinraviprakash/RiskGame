@@ -40,7 +40,7 @@ public class GameMapEditor {
                 String l_primary_command = l_command_parser.getPrimaryCommand();
                 List<GameCommandParser.CommandDetails> l_command_details = l_command_parser.getParsedCommandDetails();
 
-                switch (l_command_parser.getPrimaryCommand()) {
+                switch (l_primary_command) {
                     case "editmap":
                         String l_map_path = l_command_details.get(0).getCommandParameters().get(0);
                         File l_file;
@@ -93,7 +93,7 @@ public class GameMapEditor {
 
                 int l_command_count = l_command_details.size();
 
-                switch (l_command_parser.getPrimaryCommand()) {
+                switch (l_primary_command) {
                     case "editcontinent":
                         for (int l_index = 0; l_index < l_command_count; l_index++) {
                             if (l_command_details.get(l_index).getHasCommandOption()) {
