@@ -5,8 +5,7 @@
 package constants;
 
 /**
- *
- * @author USER
+ * This package contains all the constant classes.
  */
 public class GameConstants {
 

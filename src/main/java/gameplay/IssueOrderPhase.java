@@ -11,6 +11,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class for players to issue orders.
+ */
 public class IssueOrderPhase extends GamePhase {
 
     public static final String D_PHASE_NAME = "ISSUE_ORDER_PHASE";
@@ -19,7 +22,12 @@ public class IssueOrderPhase extends GamePhase {
 
     private GameInformation d_current_game_info;
 
-
+    /**
+     * Excecutes deploy orders based on the provided command details.
+     * @param p_command_details Parsed command details.
+     * @param p_current_player Current player issuing an order.
+     * @throws Exception If an error occurs during order execution.
+     */
     private void executeDeployOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
 
         if (!(p_command_details.size() == 1)) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_DEPLOY_COMMAND);
@@ -47,6 +55,13 @@ public class IssueOrderPhase extends GamePhase {
         System.out.println(GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * {@inheritDoc}
+     * Validates and Executes commands for Issue_order_phase.
+     * @param p_input_command Input command provided by the player.
+     * @param p_current_player Current player issuing the command.
+     * @throws Exception If an error occurs during validation or execution.
+     */
     @Override
     public void validateAndExecuteCommands(String p_input_command, Player p_current_player) throws Exception {
         GameCommandParser l_command_parser = new GameCommandParser(p_input_command);
@@ -63,6 +78,12 @@ public class IssueOrderPhase extends GamePhase {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     *  Allows player to issue orders.
+     * @param p_game_information Relevant information to the current ignore.
+     * @throws Exception If an error occurs.
+     */
     @Override
     public void executePhase(GameInformation p_game_information) throws Exception {
         System.out.println("start issuing your orders or enter endgame to terminate");

@@ -16,6 +16,14 @@ import java.util.List;
  */
 public class MapCommonUtils {
 
+    /**
+     *
+     * @param p_file_path The path to  the map file.
+     * @param p_from_keyword Starting keyword to search for in the file.
+     * @param p_to_keyword Ending keyword to search for in the file.
+     * @return A list of map details.
+     * @throws MapException If there is an issue while reading or parsing the map.
+     */
     public static List<String> getMapDetails(String p_file_path, String p_from_keyword, String p_to_keyword) {
         List<String> l_all_lines = null;
         List<String> l_map_details = new ArrayList<String>();

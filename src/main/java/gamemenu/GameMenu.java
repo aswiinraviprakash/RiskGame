@@ -4,11 +4,14 @@ import gameutils.GameException;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
+/**
+ * The GameMenu class is the entry point of the game.
+ */
 public class GameMenu {
-    /***
+    /**
      *
-     * @param args default arg
-     * @author S
+     * Main class gets the input from the player.
      */
     public static void main(String[] args) {
 
