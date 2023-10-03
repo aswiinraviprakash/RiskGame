@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package constants;
 
 import java.io.File;
@@ -17,4 +13,5 @@ public class GameConstants {
     public static final boolean D_DEFAULT_IS_CONQUERED = false;
 
     public static final String D_MAP_DIRECTORY = File.separator + "RiskGame" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+
 }
