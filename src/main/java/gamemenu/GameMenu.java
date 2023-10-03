@@ -1,3 +1,5 @@
+package gamemenu;
+
 import constants.GameMessageConstants;
 import gameplay.GameEngine;
 import gameutils.GameException;
@@ -5,6 +7,7 @@ import gameutils.GameException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import mapparser.GameMapEditor;
+
 public class GameMenu {
   
     public static void main(String[] args) {
@@ -29,7 +32,7 @@ public class GameMenu {
                         l_game_engine_obj.initializeAndRunEngine();
                         break;
                     default:
-                        System.out.println("Enter Valid Input!! Type 1 - Map Editor 2 - GamePlay 3 - Exit");
+                        System.out.println("Enter Valid Input!!");
                 }
 
                 System.out.printf("Menu%nType 1 - Map Editor 2 - GamePlay 3 - Exit%n");

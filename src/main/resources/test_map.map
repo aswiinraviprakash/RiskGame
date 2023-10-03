@@ -9,10 +9,12 @@ karnataka 5
 3 coimbatore 2
 4 kanniya 2
 5 bng 3
+6 and 1
 
 [borders]
 1 2 3 5
 2 1 3
 3 1 2
-4 
+4 5
 5 1 4
+6 5
