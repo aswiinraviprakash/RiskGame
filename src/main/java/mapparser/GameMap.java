@@ -284,9 +284,6 @@ public class GameMap {
         }
     }
 
-    public boolean validateMap() {
-        return true;
-    }
 
     public Country getCountryById(int p_country_id) {
         for (Country l_country_obj : d_countries) {
