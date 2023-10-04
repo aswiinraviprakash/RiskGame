@@ -81,7 +81,7 @@ public class GameMapEditor {
 
             // validate user input map commands commands
             System.out.printf("Map Editor Menu!!! %n");
-            System.out.printf("Proceed valid commands editcontinent / editcountry / editneighbor / validatemap / savemap%n%n");
+            System.out.printf("Proceed valid commands editcontinent / editcountry / editneighbor / validatemap / savemap / showmap%n%n");
             String l_map_command = l_reader.readLine();
 
             do {

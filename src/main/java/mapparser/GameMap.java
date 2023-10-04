@@ -229,7 +229,11 @@ public class GameMap {
         System.out.println("!!!YOUR MAP!!!!");
 
         for (int l_index = 0; l_index < l_countries.size(); l_index++) {
-            System.out.println(l_countries.get(l_index).getCountryName() + "      " + l_countries.get(l_index).getContinentName() + "      " + l_countries.get(l_index).getArmyCount());
+            System.out.println();
+            System.out.format("%-35s %-35s %-5s", "Continent", "Country", "Army Count");
+            System.out.println();
+            System.out.format("%-35s %-35s %-5s", l_countries.get(l_index).getCountryName(), l_countries.get(l_index).getContinentName(), l_countries.get(l_index).getArmyCount());
+            System.out.println();
             int l_continent_id = getContinentIDfromName(l_countries.get(l_index).getContinentName());
             for (int l_j_index = 0; l_j_index < l_borders.size(); l_j_index++) {
                 if (l_borders.get(l_j_index).get(0) == l_countries.get(l_index).getCountryID()) {
@@ -249,7 +253,6 @@ public class GameMap {
     }
 
     public void showMap(List<Player> p_players) {
-
         List<Country> l_countries = this.getCountryObjects();
         List<Continent> l_continents = this.getContinentObjects();
         List<List<Integer>> l_borders = this.getBorders();
@@ -266,8 +269,14 @@ public class GameMap {
                     break;
                 }
             }
-
-            System.out.println(l_player_name + "      " + l_countries.get(l_index).getCountryName() + "      " + l_countries.get(l_index).getContinentName() + "          " + l_countries.get(l_index).getArmyCount());
+        if(l_player_name.compareTo("")==0){
+            l_player_name = "Null";
+        }
+            System.out.println();
+            System.out.format("%-35s %-35s %-35s %-5s", "Player name", "Continent", "Country", "Army Count");
+            System.out.println();
+            System.out.format("%-35s %-35s %-35s %-5s", l_player_name, l_countries.get(l_index).getCountryName(), l_countries.get(l_index).getContinentName(), l_countries.get(l_index).getArmyCount());
+            System.out.println();
             int l_continent_id = getContinentIDfromName(l_countries.get(l_index).getContinentName());
             for (int l_j_index = 0; l_j_index < l_borders.size(); l_j_index++) {
                 if (l_borders.get(l_j_index).get(0) == l_countries.get(l_index).getCountryID()) {
