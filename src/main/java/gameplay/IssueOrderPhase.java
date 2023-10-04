@@ -4,9 +4,11 @@ import constants.GameMessageConstants;
 import gameutils.GameCommandParser;
 import gameutils.GameCommonUtils;
 import gameutils.GameException;
+import mapparser.GameMap;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +56,12 @@ public class IssueOrderPhase extends GamePhase {
                 executeDeployOrder(l_command_details, p_current_player);
                 break;
             }
-            case "showmap" : {
+            case "showmap": {
                 if (!l_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_SHOWMAP);
+                GameMap l_gamemap_obj = d_current_game_info.getGameMap();
+                LinkedHashMap<String, Player> l_players_list = d_current_game_info.getPlayerList();
+                l_gamemap_obj.showMap(l_players_list.values().stream().toList());
+                break;
             }
             default:
                 throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
