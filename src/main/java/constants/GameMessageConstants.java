@@ -11,6 +11,8 @@ public class GameMessageConstants {
 
     public static final String D_ASSIGNCOUNTRIES_COMMAND = "assigncountries";
 
+    public static final String D_SHOWMAP = "showmap";
+
     // Error Message Constants
     public static final String D_INTERNAL_ERROR = "There seems to be some issue try restarting the Game";
 

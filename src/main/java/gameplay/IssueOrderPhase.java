@@ -54,6 +54,9 @@ public class IssueOrderPhase extends GamePhase {
                 executeDeployOrder(l_command_details, p_current_player);
                 break;
             }
+            case "showmap" : {
+                if (!l_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_SHOWMAP);
+            }
             default:
                 throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
         }
