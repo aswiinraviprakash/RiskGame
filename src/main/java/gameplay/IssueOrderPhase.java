@@ -78,11 +78,11 @@ public class IssueOrderPhase extends GamePhase {
         LinkedHashMap<String, Player> l_player_list = p_game_information.getPlayerList();
 
         for (Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
-            System.out.println("Player: "+ l_player.getKey() + " turn");
             Player l_player_obj = l_player.getValue();
             int l_current_armies = l_player_obj.getCurrentArmies();
 
             while (l_current_armies > 0) {
+                System.out.println("Player: "+ l_player.getKey() + " turn");
                 System.out.println("Remaining Armies: " + l_current_armies);
                 l_player_obj.d_current_order = null;
                 try {
