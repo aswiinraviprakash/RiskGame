@@ -6,7 +6,9 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-    ReinforcementPhaseTest.class
+    GameStartUpPhaseTest.class,
+    ReinforcementPhaseTest.class,
+    IssueOrderPhaseTest.class
 })
 
 public class GamePlayTestSuite {

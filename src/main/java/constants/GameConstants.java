@@ -14,4 +14,6 @@ public class GameConstants {
 
     public static final String D_MAP_DIRECTORY = File.separator + "RiskGame" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
 
+    public static final String D_MAP_TEST_DIRECTORY = File.separator + "RiskGame" + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator;
+
 }
