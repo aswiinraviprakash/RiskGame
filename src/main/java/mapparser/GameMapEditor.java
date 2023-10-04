@@ -80,7 +80,7 @@ public class GameMapEditor {
 
             // validate user input map commands commands
             System.out.printf("Map Editor Menu!!! %n");
-            System.out.printf("1 - Edit Continent (editcontinent -add -remove) - 2 - Edit Country (editcountry -add -remove) - 3 - Edit Borders (editneighbor -add -remove) - 4 - Show Map (showmap) - 6 - Exit (exit)");
+            System.out.printf("1 - Edit Continent (editcontinent -add -remove) - 2 - Edit Country (editcountry -add -remove) - 3 - Edit Borders (editneighbor -add -remove) - 4 - Show Map (showmap) - 5 - Save map (savemap -file) - 6 - Validate map (validatemap) - 7 - Exit (exit)");
             String l_map_command = l_reader.readLine();
 
             do {
@@ -124,18 +124,36 @@ public class GameMapEditor {
                             p_map.showMap();
                             break;
                         case "savemap":
-                            boolean l_is_map_valid = p_map.validateGameMap();
-
-                            if (l_is_map_valid) {
-                                p_map = this.modifyMapFile(p_map, p_map_path);
-                                System.out.println("Map file saved");
+                            File l_file_dir = new File("").getCanonicalFile();
+                            String l_map_path_input = l_file_dir.getParent() + GameConstants.D_MAP_DIRECTORY + l_command_details.get(0).getCommandParameters().get(0);
+                            if (l_command_details.get(0).getCommandParameters().size() != 1) {
+                                if (l_map_path_input.compareTo(p_map_path) == 0) {
+                                    boolean l_is_map_valid = p_map.validateGameMap();
+                                    if (l_is_map_valid) {
+                                        p_map = this.modifyMapFile(p_map, p_map_path);
+                                        System.out.println("Map file saved");
+                                    } else {
+                                        System.out.println("Something is wrong with the map, type 'exit' to leave map editor menu  and choose another map file using editmap command");
+                                    }
+                                } else {
+                                    System.out.println("Please enter the correct map file name");
+                                }
                             } else {
-                                System.out.println("Something is wrong with the map, type 'exit' to leave map editor menu  and choose another map file using editmap command");
+                                System.out.println("Please enter the file name");
                             }
 
                             break;
+                        case "validatemap":
+                            boolean l_is_map_valid = p_map.validateGameMap();
+                              if (l_is_map_valid) {
+                                 System.out.println("Something is wrong with the map, type 'exit' to leave map editor menu and choose another map file using editmap command");
+                              }else{
+                                  System.out.println("Map is incorrect");
+                              }
+
+                            break;
                         default:
-                            System.out.printf("Enter Valid Input!!%n \"1 - Edit Continent (editcontinent -add -remove) - 2 - Edit Country (editcountry -add -remove) - 3 - Edit Borders (editneighbor -add -remove) - 4 - Show Map (showmap) - 6 - Exit (exit)\"");
+                            System.out.printf("Enter Valid Input!!! - 1 - Edit Continent (editcontinent -add -remove) - 2 - Edit Country (editcountry -add -remove) - 3 - Edit Borders (editneighbor -add -remove) - 4 - Show Map (showmap) - 5 - Save map (savemap -file) - 6 - Validate map (validatemap) - 7 - Exit (exit)");
                     }
 
                 } catch (GameException e) {
@@ -144,7 +162,7 @@ public class GameMapEditor {
                     System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
                 }
 
-                System.out.printf("%nProceed valid commands editcontinent / editcountry / editneighbor / validatemap / savemap%n%n");
+                System.out.printf("%nProceed valid commands editcontinent / editcountry / editneighbor / validatemap / savemap / showmap %n%n");
                 l_map_command = l_reader.readLine();
 
             } while (l_map_command.compareTo("exit") != 0);
@@ -238,6 +256,8 @@ public class GameMapEditor {
                 ArrayList<Integer> l_new_border = new ArrayList<Integer>();
                 l_new_border.add(l_country_id);
                 p_map.d_borders.add(l_new_border);
+                
+                System.out.println("Added Country");
 
             } else {
                 System.out.println(GameMessageConstants.D_MAP_NO_CONTINENT);
@@ -270,7 +290,7 @@ public class GameMapEditor {
                 }
             }
             //removing country from continent's country list
-            if (l_country_index == -1 || l_country_id == -1) {
+            if (l_country_index != -1 || l_country_id != -1) {
                 for (int l_index = 0; l_index < l_continents.size(); l_index++) {
                     if (l_continents.get(l_index).getCountryIDList().contains(l_country_id)) {
                         p_map.d_continents.get(l_index).getCountryIDList().remove(Integer.valueOf(l_country_id));
@@ -286,6 +306,7 @@ public class GameMapEditor {
                         p_map.d_borders.get(l_index).remove(Integer.valueOf(l_country_id));
                     }
                 }
+                System.out.println("Removed Country");
 
             } else {
                 System.out.println(GameMessageConstants.D_MAP_NO_COUNTRY);
@@ -319,6 +340,8 @@ public class GameMapEditor {
             GameMap.Continent l_continent_obj = p_map.new Continent(l_continent_name, GameConstants.D_DEFAULT_IS_CONQUERED, l_continent_value, null);
 
             p_map.d_continents.add(l_continent_obj);
+            
+            System.out.println("Added Continent "+ l_continent_name);
 
         }
         if (p_map_option.compareTo("remove") == 0) {
@@ -380,6 +403,8 @@ public class GameMapEditor {
                     }
                 }
             }
+            
+            System.out.println("Removed Continent "+ l_continent_name);
 
         }
 
@@ -434,6 +459,7 @@ public class GameMapEditor {
                 System.out.println("Neighbor already added");
             } else {
                 p_map.d_borders.get(l_country_index).add(l_neighbor_country_id);
+                System.out.println("Added neighbor relation between " + l_country_name + " and " +l_neighbor_country_name );
             }
 
         }
@@ -468,6 +494,7 @@ public class GameMapEditor {
                 System.out.println("Neighbor does not exist");
             } else {
                 p_map.d_borders.get(l_country_index).remove(Integer.valueOf(l_neighbor_country_id));
+                System.out.println("Removed neighbor relation between " + l_country_name + " and " +l_neighbor_country_name );
             }
         }
 

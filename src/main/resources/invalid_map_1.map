@@ -1,0 +1,13 @@
+[continents]
+
+[countries]
+1 country1
+2 country2
+3 country3
+4 country4
+
+[borders]
+1 2 4 3
+2 1 4
+3 1
+4 1 2
