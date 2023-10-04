@@ -153,7 +153,7 @@ public class GameStartUpPhase extends GamePhase {
 
     @Override
     public void executePhase(GameInformation p_game_information) throws Exception {
-        System.out.println("Start Game with following steps I. Loadmap II. Create Players III. Assign Countries or enter endgame to terminate");
+        System.out.println("Start Game with following commands loadmap -> gameplayer -> assigncountries or enter endgame to terminate");
         d_current_game_info = p_game_information;
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 

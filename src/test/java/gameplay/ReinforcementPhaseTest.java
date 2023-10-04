@@ -71,7 +71,7 @@ public class ReinforcementPhaseTest {
             Player l_player_Second_obj = l_player_list.get("playersecond");
             List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
 
-            l_player_first_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{ l_countries.get(0), l_countries.get(3), l_countries.get(4),  l_countries.get(5)}));
+            l_player_first_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{ l_countries.get(0), l_countries.get(3), l_countries.get(4), l_countries.get(5)}));
             l_player_Second_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{ l_countries.get(1), l_countries.get(2)}));
 
             ReinforcementPhase l_phase_obj = new ReinforcementPhase();

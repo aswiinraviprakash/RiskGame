@@ -3,6 +3,8 @@ package mapparser;
 import java.io.File;
 
 import constants.GameConstants;
+import constants.GameMessageConstants;
+import gameutils.GameException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -46,6 +48,63 @@ public class GameMapTest {
             try {
                 boolean l_ismap_valid = l_gamemap_obj.validateGameMap();
                 Assert.assertEquals(true, l_ismap_valid);
+            } catch (Exception e) { }
+
+        } catch (Exception e) { }
+    }
+
+    @Test
+    public void testValidateMapEmpty() {
+        try {
+            File l_file_dir = new File("").getCanonicalFile();
+            String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "invalid-testmap-empty.map";
+
+            File l_gamemap_file = new File(l_gamemap_filename);
+            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+
+            // checking valid map case
+            try {
+                boolean l_ismap_valid = l_gamemap_obj.validateGameMap();
+            } catch (GameException e) {
+                Assert.assertEquals(GameMessageConstants.D_MAP_EMPTY_CONTINENTS, e.getMessage());
+            } catch (Exception e) { }
+
+        } catch (Exception e) { }
+    }
+
+    @Test
+    public void testValidateMapBorderConnectivity() {
+        try {
+            File l_file_dir = new File("").getCanonicalFile();
+            String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "invalid-testmap-connection-1.map";
+
+            File l_gamemap_file = new File(l_gamemap_filename);
+            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+
+            // checking valid map case
+            try {
+                boolean l_ismap_valid = l_gamemap_obj.validateGameMap();
+            } catch (GameException e) {
+                Assert.assertEquals("Country: country3" + " " + GameMessageConstants.D_MAP_COUNTRY_EMPTY_BORDERS, e.getMessage());
+            } catch (Exception e) { }
+
+        } catch (Exception e) { }
+    }
+
+    @Test
+    public void testValidateMapCountryConnectivity() {
+        try {
+            File l_file_dir = new File("").getCanonicalFile();
+            String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "invalid-testmap-connection-2.map";
+
+            File l_gamemap_file = new File(l_gamemap_filename);
+            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+
+            // checking valid map case
+            try {
+                boolean l_ismap_valid = l_gamemap_obj.validateGameMap();
+            } catch (GameException e) {
+                Assert.assertEquals("Country: country3" + " " + GameMessageConstants.D_MAP_COUNTRY_INVALID_BORDERS, e.getMessage());
             } catch (Exception e) { }
 
         } catch (Exception e) { }
