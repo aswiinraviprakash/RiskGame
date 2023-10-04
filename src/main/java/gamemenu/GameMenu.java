@@ -18,16 +18,16 @@ public class GameMenu {
 
             System.out.printf("Welcome to Risk War Game!!!%nMenu%n");
 
-            System.out.printf("Type 1 - Map Editor 2 - GamePlay 3 - Exit%n%n");
-            int l_menu_option = Integer.parseInt(l_reader.readLine());
+            System.out.printf("Type: mapeditor - Map Editor / gameplay - GamePlay / exit - Exit%n%n");
+            String l_menu_option = l_reader.readLine();
             do {
 
                 switch (l_menu_option) {
-                    case 1:
+                    case "mapeditor":
                         GameMapEditor l_map_edit_obj = new GameMapEditor();
                         l_map_edit_obj.initialiseMapEditingPhase();
                         break;
-                    case 2:
+                    case "gameplay":
                         GameEngine l_game_engine_obj = new GameEngine();
                         l_game_engine_obj.initializeAndRunEngine();
                         break;
@@ -35,10 +35,10 @@ public class GameMenu {
                         System.out.println("Enter Valid Input!!");
                 }
 
-                System.out.printf("Menu%nType 1 - Map Editor 2 - GamePlay 3 - Exit%n");
-                l_menu_option = Integer.parseInt(l_reader.readLine());
+                System.out.printf("Type: mapeditor - Map Editor / gameplay - GamePlay / exit - Exit%n");
+                l_menu_option = l_reader.readLine();
 
-            } while (l_menu_option != 3);
+            } while (!l_menu_option.equals("exit"));
 
         } catch (GameException e) {
             System.out.println(e.getMessage());
