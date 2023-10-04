@@ -1,5 +1,6 @@
 import gameplay.GamePlayTestSuite;
 import gameutils.GameUtilsTestSuite;
+import mapparser.MapParserTestSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -7,7 +8,8 @@ import org.junit.runners.Suite;
 
 @Suite.SuiteClasses({
     GamePlayTestSuite.class,
-    GameUtilsTestSuite.class
+    GameUtilsTestSuite.class,
+    MapParserTestSuite.class
 })
 
 public class RiskGameTestSuite {
