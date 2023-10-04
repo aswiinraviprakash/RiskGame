@@ -19,7 +19,7 @@ public class GameStartUpPhase extends GamePhase {
 
     private String d_next_phase = ReinforcementPhase.D_PHASE_NAME;
 
-    private GameInformation d_current_game_info;
+    public GameInformation d_current_game_info;
 
     private List<String> d_completed_operations = new ArrayList<>();
 
