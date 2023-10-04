@@ -125,6 +125,7 @@ public class GameMapEditor {
                             break;
                         case "savemap":
                             boolean l_is_map_valid = p_map.validateGameMap();
+
                             if (l_is_map_valid) {
                                 p_map = this.modifyMapFile(p_map, p_map_path);
                                 System.out.println("Map file saved");
@@ -132,7 +133,6 @@ public class GameMapEditor {
                                 System.out.println("Something is wrong with the map, type 'exit' to leave map editor menu  and choose another map file using editmap command");
                             }
 
-                            //
                             break;
                         default:
                             System.out.printf("Enter Valid Input!!%n \"1 - Edit Continent (editcontinent -add -remove) - 2 - Edit Country (editcountry -add -remove) - 3 - Edit Borders (editneighbor -add -remove) - 4 - Show Map (showmap) - 6 - Exit (exit)\"");
@@ -384,6 +384,7 @@ public class GameMapEditor {
         }
 
         return p_map;
+
     }
 
     public GameMap editBorders(GameMap p_map, String p_map_option, List<String> p_parameter_list) throws Exception {
@@ -403,11 +404,20 @@ public class GameMapEditor {
 
         if (p_map_option.compareTo("add") == 0) {
 
+            if (p_parameter_list.size() != 2) {
+                System.out.println("Please enter the country name and the neighbor country name");
+                return p_map;
+            }
+
             l_borders = p_map.getBorders();
             l_countries = p_map.getCountryObjects();
 
             l_country_name = p_parameter_list.get(0);
             l_neighbor_country_name = p_parameter_list.get(1);
+
+            if (l_country_name.compareTo(l_neighbor_country_name) == 0) {
+                System.out.println("Country and neighboring country can not be the same");
+            }
 
             for (int l_index = 0; l_index < l_countries.size(); l_index++) {
                 if (l_countries.get(l_index).getCountryName().compareTo(l_country_name) == 0) {
@@ -438,6 +448,10 @@ public class GameMapEditor {
 
             l_country_name = p_parameter_list.get(0);
             l_neighbor_country_name = p_parameter_list.get(1);
+
+            if (l_country_name.compareTo(l_neighbor_country_name) == 0) {
+                System.out.println("Country and neighboring country can not be the same");
+            }
 
             for (int l_index = 0; l_index < l_countries.size(); l_index++) {
                 if (l_countries.get(l_index).getCountryName().compareTo(l_country_name) == 0) {
@@ -517,10 +531,6 @@ public class GameMapEditor {
         }
 
         return l_new_map;
-    }
-
-    public void saveMap(GameMap p_map) {
-
     }
 
 }
