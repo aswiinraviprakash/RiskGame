@@ -23,15 +23,20 @@ public class GameMap {
     public List<Continent> d_continents = new ArrayList<Continent>();
 
     public GameMap(String p_file_path) {
-        this.loadBorders(p_file_path);
-        this.loadContinents(p_file_path);
-        this.loadCountries(p_file_path);
+        try {
+            this.loadBorders(p_file_path);
+            this.loadContinents(p_file_path);
+            this.loadCountries(p_file_path);
 
-        //pass continent obj to add countries to country list
-        for (int l_index = 0; l_index < this.d_continents.size(); l_index++) {
-            ArrayList<Integer> l_country_list = this.addCountryToContinentObj(this.d_continents.get(l_index));
-            this.d_continents.get(l_index).d_country_list = (ArrayList) l_country_list.clone();
+            //pass continent obj to add countries to country list
+            for (int l_index = 0; l_index < this.d_continents.size(); l_index++) {
+                ArrayList<Integer> l_country_list = this.addCountryToContinentObj(this.d_continents.get(l_index));
+                this.d_continents.get(l_index).d_country_list = (ArrayList) l_country_list.clone();
+            }
+        } catch (Exception e) {
+            System.out.println(GameMessageConstants.D_MAP_LOAD_FAILED);
         }
+
     }
 
     public class Continent {
@@ -136,62 +141,75 @@ public class GameMap {
 
     }
 
-    public void loadBorders(String p_file_path) {
+    public void loadBorders(String p_file_path) throws Exception {
 
         //load border array from map file
-        List<String> l_borders_list = MapCommonUtils.getMapDetails(p_file_path, "borders", "end");
+        try {
+            List<String> l_borders_list = MapCommonUtils.getMapDetails(p_file_path, "borders", "end");
 
-        List<List<Integer>> l_borders = new ArrayList<List<Integer>>();
+            List<List<Integer>> l_borders = new ArrayList<List<Integer>>();
 
-        ArrayList<Integer> l_borders_sub;
-        List<String> l_nested_array;
+            ArrayList<Integer> l_borders_sub;
+            List<String> l_nested_array;
 
-        for (int l_index = 0; l_index < l_borders_list.size(); l_index++) {
-            l_nested_array = Arrays.asList(l_borders_list.get(l_index).split(" "));
-            l_borders_sub = new ArrayList<Integer>();
-            for (int l_j_index = 0; l_j_index < l_nested_array.size(); l_j_index++) {
-                l_borders_sub.add(parseInt(l_nested_array.get(l_j_index)));
+            for (int l_index = 0; l_index < l_borders_list.size(); l_index++) {
+                l_nested_array = Arrays.asList(l_borders_list.get(l_index).split(" "));
+                l_borders_sub = new ArrayList<Integer>();
+                for (int l_j_index = 0; l_j_index < l_nested_array.size(); l_j_index++) {
+                    l_borders_sub.add(parseInt(l_nested_array.get(l_j_index)));
+                }
+                l_borders.add(l_borders_sub);
             }
-            l_borders.add(l_borders_sub);
+
+            this.d_borders = l_borders;
+        } catch (Exception e) {
+            System.out.println(GameMessageConstants.D_MAP_LOAD_FAILED);
         }
 
-        this.d_borders = l_borders;
     }
 
-    public void loadCountries(String p_file_path) {
+    public void loadCountries(String p_file_path) throws Exception {
 
-        List<Continent> l_continents = getContinentObjects();
+        try {
+            List<Continent> l_continents = getContinentObjects();
 
-        List<Country> l_countries = new ArrayList<Country>();
-        List<String> l_countries_list = MapCommonUtils.getMapDetails(p_file_path, "countries", "borders");
+            List<Country> l_countries = new ArrayList<Country>();
+            List<String> l_countries_list = MapCommonUtils.getMapDetails(p_file_path, "countries", "borders");
 
-        for (int l_index = 0; l_index < l_countries_list.size(); l_index++) {
-            int l_country_id = parseInt(l_countries_list.get(l_index).split(" ")[0]);
-            String l_country_name = l_countries_list.get(l_index).split(" ")[1];
-            int l_continent_id = parseInt(l_countries_list.get(l_index).split(" ")[2]) - 1;
-            Continent l_continent_obj = l_continents.get(l_continent_id);
-            String l_continent_name = l_continent_obj.d_continent_name;
-            Country l_country_obj = new Country(l_country_id, l_country_name, GameConstants.D_DEFAULT_IS_CONQUERED, GameConstants.D_DEFAULT_ARMY_COUNT, l_continent_name);
-            l_countries.add(l_country_obj);
+            for (int l_index = 0; l_index < l_countries_list.size(); l_index++) {
+                int l_country_id = parseInt(l_countries_list.get(l_index).split(" ")[0]);
+                String l_country_name = l_countries_list.get(l_index).split(" ")[1];
+                int l_continent_id = parseInt(l_countries_list.get(l_index).split(" ")[2]) - 1;
+                Continent l_continent_obj = l_continents.get(l_continent_id);
+                String l_continent_name = l_continent_obj.d_continent_name;
+                Country l_country_obj = new Country(l_country_id, l_country_name, GameConstants.D_DEFAULT_IS_CONQUERED, GameConstants.D_DEFAULT_ARMY_COUNT, l_continent_name);
+                l_countries.add(l_country_obj);
+            }
+
+            this.d_countries = l_countries;
+        } catch (Exception e) {
+            System.out.println(GameMessageConstants.D_MAP_LOAD_FAILED);
         }
 
-        this.d_countries = l_countries;
     }
 
     public void loadContinents(String p_file_path) {
         //create continent objects
+        try {
+            List<Continent> l_continents = new ArrayList<Continent>();
+            List<String> l_continents_list = MapCommonUtils.getMapDetails(p_file_path, "continents", "countries");
+            Continent l_continent_obj;
+            for (int l_index = 0; l_index < l_continents_list.size(); l_index++) {
+                int l_special_num = parseInt(l_continents_list.get(l_index).split(" ")[1]);
+                String l_continent_name = l_continents_list.get(l_index).split(" ")[0];
+                l_continent_obj = new Continent(l_continent_name, GameConstants.D_DEFAULT_IS_CONQUERED, l_special_num, null);
+                l_continents.add(l_continent_obj);
+            }
 
-        List<Continent> l_continents = new ArrayList<Continent>();
-        List<String> l_continents_list = MapCommonUtils.getMapDetails(p_file_path, "continents", "countries");
-        Continent l_continent_obj;
-        for (int l_index = 0; l_index < l_continents_list.size(); l_index++) {
-            int l_special_num = parseInt(l_continents_list.get(l_index).split(" ")[1]);
-            String l_continent_name = l_continents_list.get(l_index).split(" ")[0];
-            l_continent_obj = new Continent(l_continent_name, GameConstants.D_DEFAULT_IS_CONQUERED, l_special_num, null);
-            l_continents.add(l_continent_obj);
+            this.d_continents = l_continents;
+        } catch (Exception e) {
+            System.out.println(GameMessageConstants.D_MAP_LOAD_FAILED);
         }
-
-        this.d_continents = l_continents;
 
     }
 
@@ -262,13 +280,13 @@ public class GameMap {
 
         for (int l_index = 0; l_index < l_countries.size(); l_index++) {
             String l_player_name = "";
-            for(int l_pl_index = 0; l_pl_index < p_players.size(); l_pl_index++){
-                if(p_players.get(l_pl_index).getConqueredCountries().contains(l_countries.get(l_index))){
+            for (int l_pl_index = 0; l_pl_index < p_players.size(); l_pl_index++) {
+                if (p_players.get(l_pl_index).getConqueredCountries().contains(l_countries.get(l_index))) {
                     l_player_name = p_players.get(l_pl_index).getPlayerName();
                     break;
                 }
             }
-            if(l_player_name.compareTo("")==0){
+            if (l_player_name.compareTo("") == 0) {
                 l_player_name = "Null";
             }
             System.out.println();
