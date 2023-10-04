@@ -48,6 +48,10 @@ public class GameMessageConstants {
 
     public static final String D_MAP_COUNTRY_INVALID_BORDERS = "does not have borders in same continent and is not reachable";
     
+    public static final String D_MAP_NO_COUNTRY = "Country does not exist";
+
+    public static final String D_MAP_NO_CONTINENT = "Continent does not exist";
+    
     // Success Message Constants
     public static final String D_GAMEMAP_LOADED = "Game Map loaded successfully";
 
