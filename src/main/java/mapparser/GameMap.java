@@ -12,10 +12,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import gameplay.Player;
 
-/**
- *
- * @author USER
- */
 public class GameMap {
 
     public List<List<Integer>> d_borders = new ArrayList<List<Integer>>();
