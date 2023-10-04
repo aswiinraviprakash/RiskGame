@@ -34,9 +34,10 @@ public class GameMessageConstants {
 
     public static final String D_COUNTRY_INVALID_FOR_PLAYER = "Player does'nt own the country your are trying to deploy armies";
     
-    public static final String D_MAP_LOAD_FAILED = "There seems to be an issue loading your map";
+    public static final String D_MAP_LOAD_FAILED = "There seems to be an issue loading your map. Please check the structure of Continent, Country and Borders in you map.";
     
     public static final String D_MAP_VALIDATION_ERROR = "There seems to be an issue with the map structure";
+    
     
     public static final String D_MAP_EMPTY_CONTINENTS = "Continents seems to be empty in map";
 

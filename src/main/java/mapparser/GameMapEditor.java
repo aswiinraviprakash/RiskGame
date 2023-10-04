@@ -14,10 +14,6 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author USER
- */
 public class GameMapEditor {
 
     public void initialiseMapEditingPhase() {
@@ -49,12 +45,21 @@ public class GameMapEditor {
                             if (l_file.exists()) {
                                 // load the map (create a map object)
                                 GameMap l_map = new GameMap(l_map_path);
-                                this.editMap(l_map, l_map_path);
+                                boolean l_map_valid = l_map.validateGameMap();
+                                if(l_map_valid){
+                                this.editMap(l_map, l_map_path);    
+                                }else{
+                                    System.out.println(GameMessageConstants.D_MAP_LOAD_FAILED);
+                                }
+                                
                             } else {
                                 GameMap l_map = this.initialiseMapFile(l_map_path);
                                 this.editMap(l_map, l_map_path);
                             }
-                        } catch (Exception e) {
+                        }catch(GameException e){
+                            System.out.println(e.getMessage());
+                        }
+                        catch (Exception e) {
                             System.out.println(e);
                         }
 
@@ -124,31 +129,33 @@ public class GameMapEditor {
                             p_map.showMap();
                             break;
                         case "savemap":
+                            if (l_command_details.size() != 1) throw new GameException("Command seems to be invalid enter valid one");
+
+                            GameCommandParser.CommandDetails l_command_detail = l_command_details.get(0);
+                            List<String> l_command_parameters = l_command_detail.getCommandParameters();
+                            if (l_command_parameters.size() != 1) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID);
+                            
                             File l_file_dir = new File("").getCanonicalFile();
-                            String l_map_path_input = l_file_dir.getParent() + GameConstants.D_MAP_DIRECTORY + l_command_details.get(0).getCommandParameters().get(0);
-                            if (l_command_details.get(0).getCommandParameters().size() != 1) {
-                                if (l_map_path_input.compareTo(p_map_path) == 0) {
-                                    boolean l_is_map_valid = p_map.validateGameMap();
-                                    if (l_is_map_valid) {
-                                        p_map = this.modifyMapFile(p_map, p_map_path);
-                                        System.out.println("Map file saved");
-                                    } else {
-                                        System.out.println("Something is wrong with the map, type 'exit' to leave map editor menu  and choose another map file using editmap command");
-                                    }
+                            String l_map_path_input = l_file_dir.getParent() + GameConstants.D_MAP_DIRECTORY + l_command_parameters.get(0);
+                            if (l_map_path_input.compareTo(p_map_path) == 0) {
+                                boolean l_is_map_valid = p_map.validateGameMap();
+                                if (l_is_map_valid) {
+                                    p_map = this.modifyMapFile(p_map, p_map_path);
+                                    System.out.println("Map file saved");
                                 } else {
-                                    System.out.println("Please enter the correct map file name");
+                                    System.out.println("Something is wrong with the map, type 'exit' to leave map editor menu  and choose another map file using editmap command");
                                 }
                             } else {
-                                System.out.println("Please enter the file name");
+                                System.out.println("Please enter the correct map file name");
                             }
 
                             break;
                         case "validatemap":
                             boolean l_is_map_valid = p_map.validateGameMap();
                               if (l_is_map_valid) {
-                                 System.out.println("Something is wrong with the map, type 'exit' to leave map editor menu and choose another map file using editmap command");
+                                 System.out.println("The map is valid");
                               }else{
-                                  System.out.println("Map is incorrect");
+                                  System.out.println("Something is wrong with the map");
                               }
 
                             break;

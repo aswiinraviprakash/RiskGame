@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package gameutils;
 
 import constants.GameMessageConstants;
@@ -10,10 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author USER
- */
+
 public class MapCommonUtils {
 
     public static List<String> getMapDetails(String p_file_path, String p_from_keyword, String p_to_keyword) {
@@ -46,12 +39,10 @@ public class MapCommonUtils {
                 throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
             }
 
-        } //catch (GameException e) {
-        //    System.out.println(e);
-        //   System.out.println(GameMessageConstants.D_MAP_LOAD_FAILED);
-        // } 
-        catch (Exception e) {
-            System.out.println(e);
+        }
+        catch (GameException e) {
+            System.out.println(e.getMessage());
+        }catch(Exception e){
             System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
         }
 
