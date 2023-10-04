@@ -10,6 +10,7 @@ import static java.lang.Integer.parseInt;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import gameplay.Player;
 
 /**
  *
@@ -221,6 +222,66 @@ public class GameMap {
     public void showMap() {
         List<Country> l_countries = this.getCountryObjects();
         List<Continent> l_continents = this.getContinentObjects();
+        List<List<Integer>> l_borders = this.getBorders();
+
+        List<Integer> l_country_border_list = new ArrayList<Integer>();
+        System.out.println("");
+        System.out.println("!!!YOUR MAP!!!!");
+
+        for (int l_index = 0; l_index < l_countries.size(); l_index++) {
+            System.out.println(l_countries.get(l_index).getCountryName() + "      " + l_countries.get(l_index).getContinentName() + "      " + l_countries.get(l_index).getArmyCount());
+            int l_continent_id = getContinentIDfromName(l_countries.get(l_index).getContinentName());
+            for (int l_j_index = 0; l_j_index < l_borders.size(); l_j_index++) {
+                if (l_borders.get(l_j_index).get(0) == l_countries.get(l_index).getCountryID()) {
+                    l_country_border_list = l_borders.get(l_j_index);
+                    break;
+                }
+            }
+            System.out.println("Neighbors: ");
+            for (int l_j_index = 0; l_j_index < l_countries.size(); l_j_index++) {
+                if (l_country_border_list.subList(1, l_country_border_list.size()).contains(l_countries.get(l_j_index).getCountryID())) {
+                    System.out.println(l_countries.get(l_j_index).getCountryName() + ", ");
+                }
+            }
+        }
+
+        System.out.println("");
+    }
+
+    public void showMap(List<Player> p_players) {
+
+        List<Country> l_countries = this.getCountryObjects();
+        List<Continent> l_continents = this.getContinentObjects();
+        List<List<Integer>> l_borders = this.getBorders();
+
+        List<Integer> l_country_border_list = new ArrayList<Integer>();
+        System.out.println("");
+        System.out.println("!!!YOUR GAME MAP!!!!");
+
+        for (int l_index = 0; l_index < l_countries.size(); l_index++) {
+            String l_player_name = "";
+            for(int l_pl_index = 0; l_pl_index < p_players.size(); l_pl_index++){
+                if(p_players.get(l_pl_index).getConqueredCountries().contains(l_countries.get(l_index))){
+                    l_player_name = p_players.get(l_pl_index).getPlayerName();
+                    break;
+                }
+            }
+
+            System.out.println(l_player_name + "      " + l_countries.get(l_index).getCountryName() + "      " + l_countries.get(l_index).getContinentName() + "          " + l_countries.get(l_index).getArmyCount());
+            int l_continent_id = getContinentIDfromName(l_countries.get(l_index).getContinentName());
+            for (int l_j_index = 0; l_j_index < l_borders.size(); l_j_index++) {
+                if (l_borders.get(l_j_index).get(0) == l_countries.get(l_index).getCountryID()) {
+                    l_country_border_list = l_borders.get(l_j_index);
+                    break;
+                }
+            }
+            System.out.println("Neighbors: ");
+            for (int l_j_index = 0; l_j_index < l_countries.size(); l_j_index++) {
+                if (l_country_border_list.subList(1, l_country_border_list.size()).contains(l_countries.get(l_j_index).getCountryID())) {
+                    System.out.println(l_countries.get(l_j_index).getCountryName() + ", ");
+                }
+            }
+        }
     }
     
     public boolean validateMap(){
