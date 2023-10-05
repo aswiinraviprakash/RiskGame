@@ -244,7 +244,7 @@ public class GameMap {
 
         for (int l_index = 0; l_index < l_countries.size(); l_index++) {
             System.out.println();
-            System.out.format("%-35s %-35s %-5s", "Continent", "Country", "Army Count");
+            System.out.format("%-35s %-35s %-5s", "Country", "Continent", "Army Count");
             System.out.println();
             System.out.format("%-35s %-35s %-5s", l_countries.get(l_index).getCountryName(), l_countries.get(l_index).getContinentName(), l_countries.get(l_index).getArmyCount());
             System.out.println();
@@ -283,10 +283,10 @@ public class GameMap {
                 }
             }
             if (l_player_name.compareTo("") == 0) {
-                l_player_name = "Null";
+                l_player_name = "Not Assigned";
             }
             System.out.println();
-            System.out.format("%-35s %-35s %-35s %-5s", "Player name", "Continent", "Country", "Army Count");
+            System.out.format("%-35s %-35s %-35s %-5s", "Player name", "Country", "Continent", "Army Count");
             System.out.println();
             System.out.format("%-35s %-35s %-35s %-5s", l_player_name, l_countries.get(l_index).getCountryName(), l_countries.get(l_index).getContinentName(), l_countries.get(l_index).getArmyCount());
             System.out.println();
@@ -345,7 +345,7 @@ public class GameMap {
 
         for (Continent l_continent_obj : d_continents) {
             if (l_continent_obj.getCountryIDList() == null || l_continent_obj.getCountryIDList().isEmpty()) {
-                throw new GameException("Continent: " + l_continent_obj.getContinentName() + "list of " + GameMessageConstants.D_MAP_EMPTY_COUNTRIES);
+                throw new GameException("Continent: " + l_continent_obj.getContinentName() + " list of " + GameMessageConstants.D_MAP_EMPTY_COUNTRIES);
             }
 
             if (!validateContinentConnectivity(l_continent_obj)) {
