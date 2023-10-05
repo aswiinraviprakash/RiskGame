@@ -186,7 +186,6 @@ public class GameStartUpPhase extends GamePhase {
     }
 
     /**
-     * {@inheritDoc}
      * Methods guide players, where they can perform actions like loading a map, creating players, and assigning countries.
      * Accepts actions till user chooses to terminate game by entering endgame.
      * @param p_game_information The game information object containing game state and data.
