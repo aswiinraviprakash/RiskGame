@@ -11,10 +11,19 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * Reinforcement Phase test.
+ */
 public class ReinforcementPhaseTest {
 
+    /**
+     * Contains current game info.
+     */
     private GameInformation d_current_game_info;
 
+    /**
+     * Initializes test data.
+     */
     @Before
     public void initializeTestData() {
         try {
@@ -40,6 +49,9 @@ public class ReinforcementPhaseTest {
         } catch (Exception e) {}
     }
 
+    /**
+     * Test to check armies assignment.
+     */
     @Test
     public void testArmiesAssigment() {
         try {
@@ -63,6 +75,9 @@ public class ReinforcementPhaseTest {
         } catch (Exception e) {}
     }
 
+    /**
+     * Test to assign armies with continent bonus.
+     */
     @Test
     public void testArmiesAssigmentWithContientBonus() {
         try {
@@ -86,6 +101,9 @@ public class ReinforcementPhaseTest {
         } catch (Exception e) {}
     }
 
+    /**
+     * Test for armies assignment, default values.
+     */
     @Test
     public void testArmiesAssigmentDefault() {
         try {

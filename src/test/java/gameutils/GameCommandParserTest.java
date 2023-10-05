@@ -5,8 +5,14 @@ import org.junit.Assert;
 
 import java.util.List;
 
+/**
+ * Test for Game command Parser.
+ */
 public class GameCommandParserTest {
 
+    /**
+     * Test to check commands, with options.
+     */
     @Test
     public void testCommandWithOption() {
         GameCommandParser l_gamecommand_parser = new GameCommandParser("gameplayer -add player1");
@@ -23,6 +29,9 @@ public class GameCommandParserTest {
         Assert.assertEquals(l_command_detail.getCommandParameters().get(0), "player1");
     }
 
+    /**
+     * Test to check commands, without options.
+     */
     @Test
     public void testCommandWithoutOption() {
         GameCommandParser l_gamecommand_parser = new GameCommandParser("loadmap filename");
@@ -38,6 +47,9 @@ public class GameCommandParserTest {
         Assert.assertEquals(l_command_detail.getCommandParameters().get(0), "filename");
     }
 
+    /**
+     * Test command without option and parameter.
+     */
     @Test
     public void testCommandWithoutOptionAndParmeter() {
         GameCommandParser l_gamecommand_parser = new GameCommandParser("assigncountries");

@@ -13,14 +13,22 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class GameStartUpPhaseTest {
-
+    /**
+     * Sets current game info.
+     */
     private GameInformation d_current_game_info;
 
+    /**
+     * Initializes Test data
+     */
     @Before
     public void initializeTestData() {
         d_current_game_info = new GameInformation();
     }
 
+    /**
+     * Test to add or remove player.
+     */
     @Test
     public void testAddorRemovePlayer() {
         try {
@@ -43,6 +51,9 @@ public class GameStartUpPhaseTest {
         } catch (Exception e) {}
     }
 
+    /**
+     * Test to add or remove players, but invalid test.
+     */
     @Test
     public void testAddorRemovePlayerInvalid() {
         GameStartUpPhase l_phase_obj = new GameStartUpPhase();

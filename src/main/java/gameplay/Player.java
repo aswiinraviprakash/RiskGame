@@ -9,10 +9,19 @@ import mapparser.GameMap;
  */
 public class Player {
 
+    /**
+     * Used for storing name of the player.
+     */
     private String d_player_name;
 
+    /**
+     * Used for storing current armies.
+     */
     private int d_current_armies;
 
+    /**
+     * Contains orders in a list.
+     */
     private List<Order> d_orders_list = new ArrayList<>();
 
     public Order d_current_order = null;

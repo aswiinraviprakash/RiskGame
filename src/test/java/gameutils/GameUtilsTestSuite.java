@@ -9,5 +9,8 @@ import org.junit.runners.Suite;
     GameCommandParserTest.class
 })
 
+/**
+ * Test for Game utils Test Suite.
+ */
 public class GameUtilsTestSuite {
 }

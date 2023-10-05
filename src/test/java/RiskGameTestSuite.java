@@ -12,5 +12,8 @@ import org.junit.runners.Suite;
     MapParserTestSuite.class
 })
 
+/**
+ * Test group for entire game project.
+ */
 public class RiskGameTestSuite {
 }
