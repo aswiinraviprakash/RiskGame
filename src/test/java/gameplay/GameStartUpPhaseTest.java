@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class GameStartUpPhaseTest {
+
     /**
      * Sets current game info.
      */
