@@ -151,7 +151,6 @@ public class GameStartUpPhase extends GamePhase {
     }
 
     /**
-     * {@iheritdoc}
      * To validate setup commands provided by the user
      * This method takes a String, validates it, and performs action based on the primary command
      * @param p_input_command The input command to validate and execute.
