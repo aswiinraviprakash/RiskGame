@@ -7,7 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ *  This class reads a map file and extracts a specific section of the file based on starting and ending keywords.
+ */
 public class MapCommonUtils {
+
+    /**
+     *
+     * @param p_file_path The path to  the map file.
+     * @param p_from_keyword Starting keyword to search for in the file.
+     * @param p_to_keyword Ending keyword to search for in the file.
+     * @return A list of map details.
+     */
 
     public static List<String> getMapDetails(String p_file_path, String p_from_keyword, String p_to_keyword) {
         List<String> l_all_lines = null;

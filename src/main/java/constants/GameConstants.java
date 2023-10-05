@@ -2,6 +2,12 @@ package constants;
 
 import java.io.File;
 
+<<<<<<< Updated upstream
+=======
+/**
+ * This package contains all the constant classes.
+ */
+>>>>>>> Stashed changes
 public class GameConstants {
 
     public static final int D_DEFAULT_ARMY_COUNT = 5;

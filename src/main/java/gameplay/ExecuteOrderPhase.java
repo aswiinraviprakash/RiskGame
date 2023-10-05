@@ -3,6 +3,9 @@ package gameplay;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Responsible for executing the orders issued by the players during the game.
+ */
 public class ExecuteOrderPhase extends GamePhase {
     public static final String D_PHASE_NAME = "EXECUTE_ORDER_PHASE";
 
@@ -10,6 +13,11 @@ public class ExecuteOrderPhase extends GamePhase {
 
     private GameInformation d_current_game_info;
 
+    /**
+     * Iterates over the player list and executes each player's orders one by one.
+     * @param p_game_information The object containing relevant data.
+     * @throws Exception Throws exception if an error occurs.
+     */
     @Override
     public void executePhase(GameInformation p_game_information) throws Exception {
         System.out.printf("%nExecuting orders issued....%n");

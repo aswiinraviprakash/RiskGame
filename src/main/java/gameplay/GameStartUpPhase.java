@@ -14,6 +14,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Collections;
 
+/**
+ * Class GameStartUpPhase contains current phase, next phase, and current game information
+ */
 public class GameStartUpPhase extends GamePhase {
     public static final String D_PHASE_NAME = "STARTUP_PHASE";
 
@@ -23,6 +26,11 @@ public class GameStartUpPhase extends GamePhase {
 
     private List<String> d_completed_operations = new ArrayList<>();
 
+    /**
+     * Method to laad the Game map.
+     * @param p_command_details Parsed command details of original command.
+     * @throws Exception Displays the message, Command seems to be invalid enter valid one.
+     */
     private void loadGameMap(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
 
         if (p_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_LOADMAP);
@@ -52,6 +60,11 @@ public class GameStartUpPhase extends GamePhase {
         }
     }
 
+    /**
+     * To add or remove players
+     * @param p_command_details Parsed command details of original command.
+     * @throws Exception If it is empty example format is displayed.
+     */
     private void addOrRemovePlayers(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
 
         if (p_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_PLAYER_COMMAND);
@@ -96,6 +109,11 @@ public class GameStartUpPhase extends GamePhase {
         if (d_current_game_info.getPlayerList().size() >= 2) d_completed_operations.add("gameplayer");
     }
 
+    /**
+     * Method to assign countries to players
+     * @param p_command_details Parsed command details of original command.
+     * @throws Exception Command seems to be invalid.
+     */
     private void assignCountriesToPlayers(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
 
         if (!p_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_ASSIGNCOUNTRIES_COMMAND);
@@ -123,6 +141,13 @@ public class GameStartUpPhase extends GamePhase {
         System.out.println(GameMessageConstants.D_COUNTRIES_ASSIGNED);
     }
 
+    /**
+     * {@iheritdoc}
+     * To validate setup commands provided by the user
+     * This method takes a String, validates it, and performs action based on the primary command
+     * @param p_input_command The input command to validate and execute.
+     * @throws Exception Throws exception if there is an error in the command or if the command is invalid.
+     */
     @Override
     public void validateAndExecuteCommands(String p_input_command) throws Exception {
         GameCommandParser l_command_parser = new GameCommandParser(p_input_command);
@@ -151,6 +176,13 @@ public class GameStartUpPhase extends GamePhase {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * Methods guide players, where they can perform actions like loading a map, creating players, and assigning countries.
+     * Accepts actions till user chooses to terminate game by entering endgame.
+     * @param p_game_information The game information object containing game state and data.
+     * @throws Exception If there is an error during the execution of startup steps or if an unexpected exception occurs.
+     */
     @Override
     public void executePhase(GameInformation p_game_information) throws Exception {
         System.out.println("Start Game with following commands loadmap -> gameplayer -> assigncountries or enter endgame to terminate");

@@ -1,5 +1,8 @@
 package constants;
 
+/**
+ * This class initializes all the constant messages that will be used in the application.
+ */
 public class GameMessageConstants {
 
     // Command Format Constants
