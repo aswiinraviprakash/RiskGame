@@ -7,6 +7,9 @@ import java.util.List;
 
 import mapparser.GameMap;
 
+/**
+ * This class is responsible for assigning reinforcement armies to players based on the number of countries they have conquered.
+ */
 public class ReinforcementPhase extends GamePhase {
 
     public static final String D_PHASE_NAME = "REINFORCEMENT_PHASE";
@@ -15,6 +18,11 @@ public class ReinforcementPhase extends GamePhase {
 
     private GameInformation d_current_game_info;
 
+    /**
+     * This method assigns armioes to players.
+     * @param p_player_obj The player object to assign armies to.
+     * @throws Exception Exception If there is an error while assigning armies.
+     */
     private void assignArmiesToPlayers(Player p_player_obj) throws Exception {
 
         int l_armies_value = GameConstants.D_DEFAULT_ARMY_COUNT;
@@ -41,6 +49,12 @@ public class ReinforcementPhase extends GamePhase {
         p_player_obj.setCurrentArmies(l_armies_value);
     }
 
+    /**
+     *{@inheritDoc}
+     * Responsible for assigning reinforcement armies to players based on the number of countries they have conquered.
+     * @param p_game_information The object containing relevant data.
+     * @throws Exception If an exception occurs, it is rethrown.
+     */
     @Override
     public void executePhase(GameInformation p_game_information) throws Exception {
         System.out.printf("%nAssigning reinforcements....%n");

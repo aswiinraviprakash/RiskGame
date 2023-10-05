@@ -2,6 +2,9 @@ package constants;
 
 import java.io.File;
 
+/**
+ * This package contains all the constant classes.
+ */
 public class GameConstants {
 
     public static final int D_DEFAULT_ARMY_COUNT = 5;

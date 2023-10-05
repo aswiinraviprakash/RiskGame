@@ -4,6 +4,10 @@ import gameutils.GameException;
 
 import java.util.HashMap;
 
+/**
+ * This class is responsible for executing the entire game process.
+ */
+
 public class GameEngine {
     private static HashMap<String, String> D_game_phases;
 
@@ -15,6 +19,11 @@ public class GameEngine {
         D_game_phases.put(ExecuteOrderPhase.D_PHASE_NAME, "gameplay.ExecuteOrderPhase");
     }
 
+    /**
+     * Prints information about the game.
+     * @param p_next_phase Contains the next phase.
+     * @return Returns the boolean value, False Game is terminated.
+     */
     private boolean validatePhases(String p_next_phase) {
         if (p_next_phase.isEmpty()) {
             return false;
@@ -28,6 +37,10 @@ public class GameEngine {
         }
     }
 
+    /**
+     * This Method executes Startup phase.
+     * @throws Exception Throws exception when an error occurs, else continues till End Game.
+     */
     public void initializeAndRunEngine() throws Exception {
         System.out.println("---GAME STARTED---");
 

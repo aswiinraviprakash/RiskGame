@@ -8,8 +8,15 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import mapparser.GameMapEditor;
 
+/**
+ * The GameMenu class is the entry point of the game.
+ */
 public class GameMenu {
-  
+
+    /**
+     *
+     * Main class gets the input from the player.
+     */
     public static void main(String[] args) {
 
         try {
