@@ -12,12 +12,19 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import gameplay.Player;
 
+/**
+ * The class loads map files and displays them.
+ */
 public class GameMap {
 
     public List<List<Integer>> d_borders = new ArrayList<List<Integer>>();
     public List<Country> d_countries = new ArrayList<Country>();
     public List<Continent> d_continents = new ArrayList<Continent>();
 
+    /**
+     * Constructor used to load the map
+     * @param p_file_path map file location
+     */
     public GameMap(String p_file_path) {
         try {
             this.loadBorders(p_file_path);
@@ -35,6 +42,9 @@ public class GameMap {
 
     }
 
+    /**
+     * The class is used for creation of continents.
+     */
     public class Continent {
 
         private String d_continent_name;
@@ -42,6 +52,13 @@ public class GameMap {
         private int d_special_number;
         private List<Integer> d_country_list;
 
+        /**
+         * COnstructor is used for initializing a continent.
+         * @param p_continent_name continent name
+         * @param p_is_continent_conquered continent conquered or not.
+         * @param p_special_number continent bonus value
+         * @param p_country_list country list in a continent.
+         */
         public Continent(String p_continent_name, boolean p_is_continent_conquered, int p_special_number, List<Integer> p_country_list) {
 
             this.d_continent_name = p_continent_name;
@@ -50,22 +67,42 @@ public class GameMap {
             this.d_country_list = p_country_list;
         }
 
+        /**
+         * Function returns continent name.
+         * @return continent name.
+         */
         public String getContinentName() {
             return this.d_continent_name;
         }
 
+        /**
+         * Function returns whether a continent is conquered or not.
+         * @return returns a boolean value showing the continent is conquered or not.
+         */
         public boolean getIsContinentConquered() {
             return this.d_is_continent_conquered;
         }
 
+        /**
+         * Function returns the bonus value.
+         * @return bonus value of the continent.
+         */
         public int getSpecialNumber() {
             return this.d_special_number;
         }
 
+        /**
+         * Function returns list of country IDs.
+         * @return list of country IDs.
+         */
         public List<Integer> getCountryIDList() {
             return this.d_country_list;
         }
 
+        /**
+         * Function sets a boolean value to a continent based on its conquered status.
+         * @param p_value boolean value indicating whether a continent is conquered or not.
+         */
         public void setIsContinentConqered(boolean p_value) {
             this.d_is_continent_conquered = p_value;
 
@@ -73,6 +110,9 @@ public class GameMap {
 
     }
 
+    /**
+     * The class is used for creation of countries.
+     */
     public class Country {
 
         private int d_country_id;
@@ -81,6 +121,14 @@ public class GameMap {
         private boolean d_is_country_conquered;
         private String d_continent_name;
 
+        /**
+         * Constructor creates a country
+         * @param p_country_id country ID.
+         * @param p_country_name country name.
+         * @param p_is_country_conquered whether country is conquered or not.
+         * @param p_army_count army count.
+         * @param p_continent_name continent name.
+         */
         public Country(int p_country_id, String p_country_name, boolean p_is_country_conquered, int p_army_count, String p_continent_name) {
             this.d_country_id = p_country_id;
             this.d_country_name = p_country_name;
@@ -89,37 +137,70 @@ public class GameMap {
             this.d_continent_name = p_continent_name;
         }
 
+        /**
+         * Function returns a country ID.
+         * @return country ID.
+         */
         public int getCountryID() {
             return this.d_country_id;
         }
 
+        /**
+         * Function returns country name.
+         * @return country name.
+         */
         public String getCountryName() {
             return this.d_country_name;
         }
 
+        /**
+         * Function returns army count.
+         * @return army count.
+         */
         public int getArmyCount() {
             return this.d_army_count;
         }
 
+        /**
+         * Function returns whether a country is conquered or not.
+         * @return a boolean value based on the country's conquered status.
+         */
         public boolean getIsCountryConquered() {
             return this.d_is_country_conquered;
         }
 
+        /**
+         * Function returns continent name.
+         * @return continent name.
+         */
         public String getContinentName() {
             return this.d_continent_name;
         }
 
+        /**
+         * Function sets a boolean value based on the country's conquered status.
+         * @param p_value boolean value indicating a couontry's conquered status.
+         */
         public void setIsCountryConqered(boolean p_value) {
             this.d_is_country_conquered = p_value;
 
         }
 
+        /**
+         * Function sets army count.
+         * @param p_army_count army count.
+         */
         public void setArmyCount(int p_army_count) {
             this.d_army_count = p_army_count;
         }
 
     }
 
+    /**
+     * Functions adds countries to its respective continents.
+     * @param p_continent continent object
+     * @return list of country IDs.
+     */
     public ArrayList<Integer> addCountryToContinentObj(Continent p_continent) {
 
         List<Continent> l_continents = this.getContinentObjects();
@@ -137,6 +218,10 @@ public class GameMap {
 
     }
 
+    /**
+     * Function adds border values to the country.
+     * @param p_file_path map file location.
+     */
     public void loadBorders(String p_file_path) throws Exception {
 
         //load border array from map file
@@ -164,6 +249,10 @@ public class GameMap {
 
     }
 
+    /**
+     * Function loads countries in a continent.
+     * @param p_file_path map file location.
+     */
     public void loadCountries(String p_file_path) throws Exception {
 
         try {
@@ -189,6 +278,10 @@ public class GameMap {
 
     }
 
+    /**
+     * Function loads continents in a map.
+     * @param p_file_path map file location.
+     */
     public void loadContinents(String p_file_path) {
         //create continent objects
         try {
@@ -209,6 +302,11 @@ public class GameMap {
 
     }
 
+    /**
+     * Function returns continent ID given its name.
+     * @param p_continent_name continent name.
+     * @return index of a country.
+     */
     public int getContinentIDfromName(String p_continent_name) {
 
         List<GameMap.Continent> l_continents = this.getContinentObjects();
@@ -221,18 +319,33 @@ public class GameMap {
         return -1;
     }
 
+    /**
+     * Function returns country objects.
+     * @return list of country objects.
+     */
     public List<Country> getCountryObjects() {
         return this.d_countries;
     }
 
+    /**
+     * Function returns continent objects.
+     * @return list of continent objects.
+     */
     public List<Continent> getContinentObjects() {
         return this.d_continents;
     }
 
+    /**
+     * Function returns list of bordering countries.
+     * @return list of bordering countries.
+     */
     public List<List<Integer>> getBorders() {
         return this.d_borders;
     }
 
+    /**
+     * Function is used to give a detailed view on the continents, countries and its neighbours. It also shows the army count.
+     */
     public void showMap() {
         List<Country> l_countries = this.getCountryObjects();
         List<Continent> l_continents = this.getContinentObjects();
@@ -265,6 +378,10 @@ public class GameMap {
         System.out.println("");
     }
 
+    /**
+     * Function is used to display continents, countries and armies in correspondence to the players.
+     * @param p_players list of player.
+     */
     public void showMap(List<Player> p_players) {
         List<Country> l_countries = this.getCountryObjects();
         List<Continent> l_continents = this.getContinentObjects();
@@ -306,6 +423,11 @@ public class GameMap {
         }
     }
 
+    /**
+     * Function returns country object.
+     * @param p_country_id country ID.
+     * @return country object.
+     */
     public Country getCountryById(int p_country_id) {
         for (Country l_country_obj : d_countries) {
             if (l_country_obj.getCountryID() == p_country_id) {
@@ -316,6 +438,11 @@ public class GameMap {
         return null;
     }
 
+    /**
+     * Function validates the map, ensuring the continents and countries are set in place.
+     * @return boolean value of true or false.
+     * @throws Exception
+     */
     public boolean validateGameMap() throws Exception {
         if (d_continents.isEmpty()) {
             throw new GameException(GameMessageConstants.D_MAP_EMPTY_CONTINENTS);
@@ -340,6 +467,11 @@ public class GameMap {
         return validateContinents();
     }
 
+    /**
+     * Function validates the Continents ensuring they are set in place.
+     * @return boolean value of true or false.
+     * @throws Exception
+     */
     private boolean validateContinents() throws Exception {
         boolean isCountriesInterConnected = true;
 
@@ -356,6 +488,12 @@ public class GameMap {
         return isCountriesInterConnected;
     }
 
+    /**
+     *
+     * @param p_continent_obj continent object.
+     * @return boolean value based on Continent validation.
+     * @throws Exception
+     */
     private boolean validateContinentConnectivity(Continent p_continent_obj) throws Exception {
         LinkedHashMap<Integer, Boolean> l_country_map = new LinkedHashMap<>();
 
@@ -375,6 +513,13 @@ public class GameMap {
         return !l_country_map.containsValue(false);
     }
 
+
+    /**
+     *
+     * @param l_country_obj country object.
+     * @param p_country_map holds country objects to check country connectivity.
+     * @param p_continent_obj continent object.
+     */
     private void validateCountryAdjacency(Country l_country_obj, LinkedHashMap<Integer, Boolean> p_country_map, Continent p_continent_obj) {
         p_country_map.put(l_country_obj.getCountryID(), true);
 
