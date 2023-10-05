@@ -14,8 +14,14 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class is used to initialize map editing phase - which consits of editing, or creating a new map.
+ */
 public class GameMapEditor {
 
+    /**
+     * Function is used for the initial map editing phase.
+     */
     public void initialiseMapEditingPhase() {
 
         //get user input
@@ -78,6 +84,11 @@ public class GameMapEditor {
         }
     }
 
+    /**
+     * Function edit maps, along with displaying the map and saving the map.
+     * @param p_map map object
+     * @param p_map_path map file object
+     */
     public void editMap(GameMap p_map, String p_map_path) {
         try {
 
@@ -179,6 +190,12 @@ public class GameMapEditor {
         }
     }
 
+
+    /**
+     * Function creates a new map file.
+     * @param p_map_path map file location.
+     * @return map object.
+     */
     public GameMap initialiseMapFile(String p_map_path) {
 
         try {
@@ -208,6 +225,15 @@ public class GameMapEditor {
         return l_map;
     }
 
+
+    /**
+     * Function is used for adding, removing countries.
+     * @param p_map map object.
+     * @param p_map_option indicates the operation needed to be performed.
+     * @param p_parameter_list country and continent value.
+     * @return updated map object.
+     * @throws Exception
+     */
     public GameMap editCountry(GameMap p_map, String p_map_option, List<String> p_parameter_list) throws Exception {
 
         //editcountry -add countryID continentID -remove countryID
@@ -324,6 +350,14 @@ public class GameMapEditor {
         return p_map;
     }
 
+    /**
+     * Function is used for adding, removing continents.
+     * @param p_map map object.
+     * @param p_map_option indicates the operation needed to be performed.
+     * @param p_parameter_list contains continent name and the bonus value.
+     * @return updated map object.
+     * @throws Exception
+     */
     public GameMap editContinent(GameMap p_map, String p_map_option, List<String> p_parameter_list) throws Exception {
         // editcontinent -add continentID continentvalue -remove continentID
 
@@ -420,6 +454,15 @@ public class GameMapEditor {
 
     }
 
+
+    /**
+     * Function is used for adding, removing neighbouring countries.
+     * @param p_map map object.
+     * @param p_map_option indicates the operation needed to be performed.
+     * @param p_parameter_list contains a country name and its neighbouring countries.
+     * @return updated map object.
+     * @throws Exception
+     */
     public GameMap editBorders(GameMap p_map, String p_map_option, List<String> p_parameter_list) throws Exception {
 
         //editneighbor -add countryID neighborcountryID -remove countryID neighborcountryID
@@ -509,6 +552,12 @@ public class GameMapEditor {
         return p_map;
     }
 
+    /**
+     * Function is used to create a new map file, to modify its contents and to overwrite map files.
+     * @param p_map map object.
+     * @param p_file_path map file location.
+     * @return updated map files.
+     */
     public GameMap modifyMapFile(GameMap p_map, String p_file_path) {
 
         List<GameMap.Country> l_countries = p_map.getCountryObjects();
