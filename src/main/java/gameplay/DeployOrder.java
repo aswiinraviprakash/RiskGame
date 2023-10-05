@@ -5,12 +5,19 @@ import mapparser.GameMap;
 import java.util.List;
 
 /**
+ *
  * Class represents an order to deploy a certain number of armies to a specific country.
  */
 public class DeployOrder extends Order {
 
+    /**
+     * Contains country name.
+     */
     private String d_country_name;
 
+    /**
+     * Contains number of armies.
+     */
     private int d_armies_number;
 
     /**

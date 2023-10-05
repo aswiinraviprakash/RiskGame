@@ -6,7 +6,6 @@ package gameplay;
 public abstract class GamePhase {
 
     /**
-     * {@inheritDoc}
      * Validates and executes a game command based on the provided input.
      * Validates and executes commands
      * @param p_input_command Input command to be executed and validated.
@@ -15,7 +14,6 @@ public abstract class GamePhase {
     public void validateAndExecuteCommands(String p_input_command) throws Exception { };
 
     /**
-     *{@inheritDoc}
      * Validates and executes a game command based on the provided input.
      * @param p_input_command Input command to be executed and validated.
      * @param p_player_obj Player object associated with the command.

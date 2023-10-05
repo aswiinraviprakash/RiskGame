@@ -10,6 +10,9 @@ import java.util.List;
  */
 public class GameCommandParser {
 
+    /**
+     * Contains the entire command.
+     */
     private final String d_entire_command;
 
     /**
@@ -74,8 +77,19 @@ public class GameCommandParser {
      */
     public class CommandDetails {
 
+        /**
+         * Boolean to check if command has an option
+         */
         private boolean d_has_command_option;
+
+        /**
+         * Contains the option in the command.
+         */
         private String d_command_option;
+
+        /**
+         * Contains commands in a list.
+         */
         private List<String> d_command_parameters;
 
         /**

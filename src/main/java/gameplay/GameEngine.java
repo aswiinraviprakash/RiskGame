@@ -9,6 +9,10 @@ import java.util.HashMap;
  */
 
 public class GameEngine {
+
+    /**
+     * Contains gall the ame phases.
+     */
     private static HashMap<String, String> D_game_phases;
 
     static {

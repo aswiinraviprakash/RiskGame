@@ -12,10 +12,19 @@ import mapparser.GameMap;
  */
 public class ReinforcementPhase extends GamePhase {
 
+    /**
+     * Contains the string REINFORCEMENT PHASE.
+     */
     public static final String D_PHASE_NAME = "REINFORCEMENT_PHASE";
 
+    /**
+     * Contains the next phase.
+     */
     private String d_next_phase = IssueOrderPhase.D_PHASE_NAME;
 
+    /**
+     * Contains current game information
+     */
     private GameInformation d_current_game_info;
 
     /**

@@ -20,10 +20,19 @@ import java.util.Collections;
 public class GameStartUpPhase extends GamePhase {
     public static final String D_PHASE_NAME = "STARTUP_PHASE";
 
+    /**
+     * Contains next phase.
+     */
     private String d_next_phase = ReinforcementPhase.D_PHASE_NAME;
 
+    /**
+     * Contains current game information.
+     */
     public GameInformation d_current_game_info;
 
+    /**
+     * Contains completed operations.
+     */
     private List<String> d_completed_operations = new ArrayList<>();
 
     /**

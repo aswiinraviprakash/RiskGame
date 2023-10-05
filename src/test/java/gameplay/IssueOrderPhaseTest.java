@@ -13,9 +13,15 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ *  Issue order test phase.
+ */
 public class IssueOrderPhaseTest {
     private GameInformation d_current_game_info;
 
+    /**
+     * Initializes test data.
+     */
     @Before
     public void initializeTestData() {
         try {
@@ -41,6 +47,9 @@ public class IssueOrderPhaseTest {
         } catch (Exception e) {}
     }
 
+    /**
+     *  Test for deploy order.
+     */
     @Test
     public void testDeployOrder() {
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
@@ -63,6 +72,9 @@ public class IssueOrderPhaseTest {
         } catch (Exception e) {}
     }
 
+    /**
+     * Test for deploy order, but with excess armies.
+     */
     @Test
     public void testDeployOrderWithExcessArmies() {
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
@@ -83,6 +95,9 @@ public class IssueOrderPhaseTest {
         } catch (Exception e) {}
     }
 
+    /**
+     * Test for deploy order, but invalid command.
+     */
     @Test
     public void testDeployOrderWithInvalidCommand() {
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
