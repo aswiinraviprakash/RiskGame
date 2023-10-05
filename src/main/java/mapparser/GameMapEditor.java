@@ -85,7 +85,7 @@ public class GameMapEditor {
 
             // validate user input map commands commands
             System.out.printf("Map Editor Menu!!! %n");
-            System.out.printf("1 - Edit Continent (editcontinent -add -remove) - 2 - Edit Country (editcountry -add -remove) - 3 - Edit Borders (editneighbor -add -remove) - 4 - Show Map (showmap) - 5 - Save map (savemap -file) - 6 - Validate map (validatemap) - 7 - Exit (exit)");
+            System.out.printf("1 - Edit Continent (editcontinent -add -remove) - 2 - Edit Country (editcountry -add -remove) - 3 - Edit Borders (editneighbor -add -remove) - 4 - Show Map (showmap) - 5 - Save map (savemap -file) - 6 - Validate map (validatemap) - 7 - Exit (exit)%n%n");
             String l_map_command = l_reader.readLine();
 
             do {
@@ -253,8 +253,9 @@ public class GameMapEditor {
 
                 //updating continent object's country list
                 for (int l_index = 0; l_index < l_continents.size(); l_index++) {
-                    if (l_continents.get(l_index).getContinentName().compareTo(l_country_name) == 0) {
-                        p_map.d_continents.get(l_index).getCountryIDList().add(l_country_id);
+                    if (l_continents.get(l_index).getContinentName().compareTo(l_continent_name) == 0) {
+                        GameMap.Continent l_continent_obj = p_map.d_continents.get(l_index);
+                        l_continent_obj.getCountryIDList().add(l_country_id);
                         break;
                     }
                 }
@@ -344,7 +345,7 @@ public class GameMapEditor {
             l_continent_value = Integer.parseInt(p_parameter_list.get(1));
 
             //creating continent object
-            GameMap.Continent l_continent_obj = p_map.new Continent(l_continent_name, GameConstants.D_DEFAULT_IS_CONQUERED, l_continent_value, null);
+            GameMap.Continent l_continent_obj = p_map.new Continent(l_continent_name, GameConstants.D_DEFAULT_IS_CONQUERED, l_continent_value, new ArrayList<Integer>());
 
             p_map.d_continents.add(l_continent_obj);
             
