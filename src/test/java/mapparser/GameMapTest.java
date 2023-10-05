@@ -9,11 +9,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
- * @author USER
+ * The class is used for testing GameMap class.
  */
 public class GameMapTest {
 
+    /**
+     * Function checks for the continents, countries and its corresponding neighbour countries.
+     */
     @Test
     public void testLoadValidMap() {
         try {
@@ -29,12 +31,15 @@ public class GameMapTest {
             // checking if countries loaded
             Assert.assertEquals(6, l_gamemap_obj.getCountryObjects().size());
 
-            // checking if countries loaded
+            // checking if borders loaded
             Assert.assertEquals(6, l_gamemap_obj.getBorders().size());
 
         } catch (Exception e) { }
     }
 
+    /**
+     * Function checks for the map.
+     */
     @Test
     public void testValidateMap() {
         try {
@@ -53,6 +58,9 @@ public class GameMapTest {
         } catch (Exception e) { }
     }
 
+    /**
+     * Function checks whether
+     */
     @Test
     public void testValidateMapEmpty() {
         try {
@@ -72,6 +80,9 @@ public class GameMapTest {
         } catch (Exception e) { }
     }
 
+    /**
+     * Function checks for the countries with no other neighbouring country.
+     */
     @Test
     public void testValidateMapBorderConnectivity() {
         try {
@@ -91,6 +102,9 @@ public class GameMapTest {
         } catch (Exception e) { }
     }
 
+    /**
+     * Functions checks for the countries and its neighbouring countries to be matched.
+     */
     @Test
     public void testValidateMapCountryConnectivity() {
         try {
