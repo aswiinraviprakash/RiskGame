@@ -88,17 +88,16 @@ public class IssueOrderPhase extends Phase {
     /**
      * {@inheritDoc}
      *  Allows player to issue orders.
-     * @param p_game_information Relevant information to the current ignore.
      * @throws Exception If an error occurs.
      */
     @Override
-    public void executePhase(GameInformation p_game_information) throws Exception {
+    public void executePhase() throws Exception {
         System.out.printf("%nstart issuing your orders or enter endgame to terminate%n");
-        d_current_game_info = p_game_information;
+        d_current_game_info = GameInformation.getInstance();
 
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 
-        LinkedHashMap<String, Player> l_player_list = p_game_information.getPlayerList();
+        LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
 
         for (Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
             Player l_player_obj = l_player.getValue();

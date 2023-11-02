@@ -9,9 +9,8 @@ public abstract class Phase {
 
     /**
      * Method to execute a game phase.
-     * @param p_game_information The object containing relevant data.
      * @throws Exception If there is an error in the execution or validation.
      */
-    public abstract void executePhase(GameInformation p_game_information) throws Exception;
+    public abstract void executePhase() throws Exception;
 
 }

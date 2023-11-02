@@ -26,7 +26,7 @@ public class IssueOrderPhaseTest {
     public void initializeTestData() {
         try {
 
-            d_current_game_info = new GameInformation();
+            d_current_game_info = GameInformation.getInstance();
 
             File l_file_dir = new File("").getCanonicalFile();
             String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "valid-testmap.map";

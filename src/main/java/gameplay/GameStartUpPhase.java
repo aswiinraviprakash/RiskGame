@@ -185,13 +185,12 @@ public class GameStartUpPhase extends Phase {
     /**
      * Methods guide players, where they can perform actions like loading a map, creating players, and assigning countries.
      * Accepts actions till user chooses to terminate game by entering endgame.
-     * @param p_game_information The game information object containing game state and data.
      * @throws Exception If there is an error during the execution of startup steps or if an unexpected exception occurs.
      */
     @Override
-    public void executePhase(GameInformation p_game_information) throws Exception {
+    public void executePhase() throws Exception {
         System.out.println("Start Game with following commands loadmap -> gameplayer -> assigncountries or enter endgame to terminate");
-        d_current_game_info = p_game_information;
+        d_current_game_info = GameInformation.getInstance();
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
