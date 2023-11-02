@@ -8,7 +8,6 @@ import mapparser.GameMap;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,14 +15,7 @@ import java.util.Map;
 /**
  * Class for players to issue orders.
  */
-public class IssueOrderPhase extends GamePhase {
-
-    public static final String D_PHASE_NAME = "ISSUE_ORDER_PHASE";
-
-    /**
-     * Contains the next phase.
-     */
-    private String d_next_phase = ExecuteOrderPhase.D_PHASE_NAME;
+public class IssueOrderPhase extends Phase {
 
     /**
      * Contains current game information.
@@ -66,7 +58,6 @@ public class IssueOrderPhase extends GamePhase {
      * @param p_current_player Current player issuing the command.
      * @throws Exception If an error occurs during validation or execution.
      */
-    @Override
     public void validateAndExecuteCommands(String p_input_command, Player p_current_player) throws Exception {
         GameCommandParser l_command_parser = new GameCommandParser(p_input_command);
         String l_primary_command = l_command_parser.getPrimaryCommand();
@@ -87,6 +78,11 @@ public class IssueOrderPhase extends GamePhase {
             default:
                 throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
         }
+    }
+
+    @Override
+    public Phase nextPhase() throws Exception {
+        return new ExecuteOrderPhase();
     }
 
     /**
@@ -116,7 +112,7 @@ public class IssueOrderPhase extends GamePhase {
                     System.out.println();
                     String l_input_command = l_reader.readLine();
                     if (l_input_command.equals("endgame")) {
-                        d_current_game_info.setCurrentPhase("END_GAME");
+                        d_current_game_info.setCurrentPhase(new EndGamePhase());
                         return;
                     }
                     validateAndExecuteCommands(l_input_command, l_player_obj);
@@ -130,6 +126,6 @@ public class IssueOrderPhase extends GamePhase {
             }
         }
 
-        d_current_game_info.setCurrentPhase(this.d_next_phase);
+        d_current_game_info.setCurrentPhase(this.nextPhase());
     }
 }

@@ -6,18 +6,17 @@ import java.util.Map;
 /**
  * Responsible for executing the orders issued by the players during the game.
  */
-public class ExecuteOrderPhase extends GamePhase {
-    public static final String D_PHASE_NAME = "EXECUTE_ORDER_PHASE";
-
-    /**
-     * Contains the next phase.
-     */
-    private String d_next_phase = ReinforcementPhase.D_PHASE_NAME;
+public class ExecuteOrderPhase extends Phase {
 
     /**
      * Contains number of armies.
      */
     private GameInformation d_current_game_info;
+
+    @Override
+    public Phase nextPhase() throws Exception {
+        return new ReinforcementPhase();
+    }
 
     /**
      * Iterates over the player list and executes each player's orders one by one.
@@ -46,6 +45,6 @@ public class ExecuteOrderPhase extends GamePhase {
             }
         }
 
-        d_current_game_info.setCurrentPhase(this.d_next_phase);
+        d_current_game_info.setCurrentPhase(this.nextPhase());
     }
 }

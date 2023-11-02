@@ -17,13 +17,7 @@ import java.util.Collections;
 /**
  * Class GameStartUpPhase contains current phase, next phase, and current game information
  */
-public class GameStartUpPhase extends GamePhase {
-    public static final String D_PHASE_NAME = "STARTUP_PHASE";
-
-    /**
-     * Contains next phase.
-     */
-    private String d_next_phase = ReinforcementPhase.D_PHASE_NAME;
+public class GameStartUpPhase extends Phase {
 
     /**
      * Contains current game information.
@@ -156,7 +150,6 @@ public class GameStartUpPhase extends GamePhase {
      * @param p_input_command The input command to validate and execute.
      * @throws Exception Throws exception if there is an error in the command or if the command is invalid.
      */
-    @Override
     public void validateAndExecuteCommands(String p_input_command) throws Exception {
         GameCommandParser l_command_parser = new GameCommandParser(p_input_command);
         String l_primary_command = l_command_parser.getPrimaryCommand();
@@ -184,6 +177,11 @@ public class GameStartUpPhase extends GamePhase {
         }
     }
 
+    @Override
+    public Phase nextPhase() throws Exception {
+        return new ReinforcementPhase();
+    }
+
     /**
      * Methods guide players, where they can perform actions like loading a map, creating players, and assigning countries.
      * Accepts actions till user chooses to terminate game by entering endgame.
@@ -200,14 +198,14 @@ public class GameStartUpPhase extends GamePhase {
             try {
                 if (d_completed_operations.contains("assigncountries")) {
                     System.out.println(GameMessageConstants.D_GAME_STARTUP_SUCCESS);
-                    d_current_game_info.setCurrentPhase(this.d_next_phase);
+                    d_current_game_info.setCurrentPhase(this.nextPhase());
                     return;
                 }
 
                 System.out.println();
                 String l_input_command = l_reader.readLine();
                 if (l_input_command.equals("endgame")) {
-                    d_current_game_info.setCurrentPhase("END_GAME");
+                    d_current_game_info.setCurrentPhase(new EndGamePhase());
                     return;
                 }
                 validateAndExecuteCommands(l_input_command);
