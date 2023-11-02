@@ -85,6 +85,10 @@ public class Player {
         return this.d_current_armies;
     }
 
+    public List<Order> getOrdersList(){
+        return this.d_orders_list;       // to get the list of orders from the player
+    }
+
     /**
      * Gets list of countries conquered by the player.
      * @return Conquered countries.
