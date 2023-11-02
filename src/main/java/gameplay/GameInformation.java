@@ -11,7 +11,7 @@ public class GameInformation {
     /**
      * Contains the current phase.
      */
-    private String d_current_phase;
+    private Phase d_current_phase;
 
     /**
      * Contains Player list.
@@ -27,7 +27,7 @@ public class GameInformation {
      * Sets current phase of the game.
      * @param p_current_phase Current Phase
      */
-    public void setCurrentPhase(String p_current_phase) {
+    public void setCurrentPhase(Phase p_current_phase) {
         this.d_current_phase = p_current_phase;
     }
 
@@ -51,7 +51,7 @@ public class GameInformation {
      * Get Current phase of the game.
      * @return Current game phase.
      */
-    public String getCurrentPhase() {
+    public Phase getCurrentPhase() {
         return this.d_current_phase;
     }
 

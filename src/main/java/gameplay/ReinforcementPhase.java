@@ -10,14 +10,7 @@ import mapparser.GameMap;
 /**
  * This class is responsible for assigning reinforcement armies to players based on the number of countries they have conquered.
  */
-public class ReinforcementPhase extends GamePhase {
-
-    public static final String D_PHASE_NAME = "REINFORCEMENT_PHASE";
-
-    /**
-     * Contains the next phase.
-     */
-    private String d_next_phase = IssueOrderPhase.D_PHASE_NAME;
+public class ReinforcementPhase extends Phase {
 
     /**
      * Contains current game information
@@ -55,6 +48,11 @@ public class ReinforcementPhase extends GamePhase {
         p_player_obj.setCurrentArmies(l_armies_value);
     }
 
+    @Override
+    public Phase nextPhase() throws Exception {
+        return new IssueOrderPhase();
+    }
+
     /**
      *{@inheritDoc}
      * Responsible for assigning reinforcement armies to players based on the number of countries they have conquered.
@@ -77,7 +75,7 @@ public class ReinforcementPhase extends GamePhase {
             }
         }
 
-        d_current_game_info.setCurrentPhase(this.d_next_phase);
+        d_current_game_info.setCurrentPhase(this.nextPhase());
     }
 
 }
