@@ -25,7 +25,7 @@ public class ReinforcementPhase extends GamePhase {
     private GameInformation d_current_game_info;
 
     /**
-     * This method assigns armioes to players.
+     * This method assigns armies to players.
      * @param p_player_obj The player object to assign armies to.
      * @throws Exception Exception If there is an error while assigning armies.
      */

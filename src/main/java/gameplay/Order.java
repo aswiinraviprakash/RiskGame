@@ -1,7 +1,7 @@
 package gameplay;
 
 /**
- *Exectues the order for a player.
+ *Executes the order for a player.
  */
 public abstract class Order {
 

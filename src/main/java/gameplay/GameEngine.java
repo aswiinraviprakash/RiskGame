@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class GameEngine {
 
     /**
-     * Contains gall the ame phases.
+     * Contains all the game phases.
      */
     private static HashMap<String, String> D_game_phases;
 

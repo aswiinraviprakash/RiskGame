@@ -1,0 +1,12 @@
+[continents]
+tamil_nadu 2
+andhra 3
+karnataka 4
+
+[countries]
+22 chennai 1
+34 vellore 1
+71 
+[borders]
+
+

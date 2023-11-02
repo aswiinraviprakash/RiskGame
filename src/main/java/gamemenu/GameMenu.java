@@ -50,7 +50,6 @@ public class GameMenu {
         } catch (GameException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
-            System.out.println(e);
             System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
         }
 

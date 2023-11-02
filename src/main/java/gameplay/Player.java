@@ -1,6 +1,7 @@
 package gameplay;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import mapparser.GameMap;
 
@@ -28,6 +29,7 @@ public class Player {
 
     public List<GameMap.Country> d_conquered_countries = new ArrayList<>();
 
+    private HashMap<String, Integer> d_cards = new HashMap<String, Integer>();
     /**
      * Creates a new player with specified name.
      * @param l_player_name
@@ -43,6 +45,10 @@ public class Player {
         if (d_current_order != null) d_orders_list.add(this.d_current_order);
     }
 
+    public HashMap<String, Integer> getPlayerCards(){
+        return this.d_cards;
+    }
+    
     /**
      * Sets current number of armies owned by player.
      * @param p_current_armies Current number of armies.
@@ -84,6 +90,7 @@ public class Player {
     public int getCurrentArmies() {
         return this.d_current_armies;
     }
+    
 
     /**
      * Gets list of countries conquered by the player.
