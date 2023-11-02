@@ -8,7 +8,7 @@ public class EndGamePhase extends Phase {
     }
 
     @Override
-    public void executePhase(GameInformation p_game_information) {
+    public void executePhase() {
         System.out.println("----GAME TERMINATED----");
     }
 

@@ -28,7 +28,7 @@ public class ReinforcementPhaseTest {
     public void initializeTestData() {
         try {
 
-            d_current_game_info = new GameInformation();
+            d_current_game_info = GameInformation.getInstance();
 
             File l_file_dir = new File("").getCanonicalFile();
             String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "valid-testmap.map";
@@ -64,7 +64,7 @@ public class ReinforcementPhaseTest {
             l_player_Second_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{ l_countries.get(1), l_countries.get(2), l_countries.get(5)}));
 
             ReinforcementPhase l_phase_obj = new ReinforcementPhase();
-            l_phase_obj.executePhase(d_current_game_info);
+            l_phase_obj.executePhase();
 
             //checking playerfirst armies assigned
             Assert.assertEquals(8, l_player_first_obj.getCurrentArmies());
@@ -90,7 +90,7 @@ public class ReinforcementPhaseTest {
             l_player_Second_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{ l_countries.get(1), l_countries.get(2)}));
 
             ReinforcementPhase l_phase_obj = new ReinforcementPhase();
-            l_phase_obj.executePhase(d_current_game_info);
+            l_phase_obj.executePhase();
 
             //checking playerfirst armies assigned with control bonus
             Assert.assertEquals(12, l_player_first_obj.getCurrentArmies());
@@ -113,7 +113,7 @@ public class ReinforcementPhaseTest {
             List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
 
             ReinforcementPhase l_phase_obj = new ReinforcementPhase();
-            l_phase_obj.executePhase(d_current_game_info);
+            l_phase_obj.executePhase();
 
             //checking playerfirst armies assigned without countries assigned
             Assert.assertEquals(8, l_player_first_obj.getCurrentArmies());

@@ -13,13 +13,13 @@ public class GameEngine {
      * @param p_next_phase Contains the next phase.
      * @return Returns the boolean value, False Game is terminated.
      */
-    private boolean validatePhases(Phase p_next_phase, GameInformation p_game_information) throws Exception {
+    private boolean validatePhases(Phase p_next_phase) throws Exception {
         if (p_next_phase == null) {
             return false;
         }
 
         if (p_next_phase instanceof EndGamePhase) {
-            p_next_phase.executePhase(p_game_information);
+            p_next_phase.executePhase();
             return false;
         } else {
             return true;
@@ -35,23 +35,23 @@ public class GameEngine {
 
         try {
 
-            GameInformation l_game_information = new GameInformation();
+            GameInformation l_game_information = GameInformation.getInstance();
             Phase l_current_phase_obj = new GameStartUpPhase();
             l_game_information.setCurrentPhase(l_current_phase_obj);
 
             // Executing StartUp phase
-            l_current_phase_obj.executePhase(l_game_information);
+            l_current_phase_obj.executePhase();
 
             l_current_phase_obj = l_game_information.getCurrentPhase();
-            if (!validatePhases(l_current_phase_obj, l_game_information)) {
+            if (!validatePhases(l_current_phase_obj)) {
                 return;
             }
 
             while (!(l_current_phase_obj instanceof EndGamePhase)) {
-                l_current_phase_obj.executePhase(l_game_information);
+                l_current_phase_obj.executePhase();
 
                 l_current_phase_obj = l_game_information.getCurrentPhase();
-                if (!validatePhases(l_current_phase_obj, l_game_information)) {
+                if (!validatePhases(l_current_phase_obj)) {
                     return;
                 }
             }

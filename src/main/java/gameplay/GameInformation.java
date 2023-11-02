@@ -8,6 +8,8 @@ import mapparser.GameMap;
  */
 public class GameInformation {
 
+    private static GameInformation d_game_info_instance = null;
+
     /**
      * Contains the current phase.
      */
@@ -22,6 +24,13 @@ public class GameInformation {
      * Contains game map.
      */
     private mapparser.GameMap d_current_game_map;
+
+    private GameInformation() {}
+
+    public static GameInformation getInstance() {
+        if (d_game_info_instance == null) d_game_info_instance = new GameInformation();
+        return d_game_info_instance;
+    }
 
     /**
      * Sets current phase of the game.

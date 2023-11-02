@@ -24,7 +24,7 @@ public class GameStartUpPhaseTest {
      */
     @Before
     public void initializeTestData() {
-        d_current_game_info = new GameInformation();
+        d_current_game_info = GameInformation.getInstance();
     }
 
     /**

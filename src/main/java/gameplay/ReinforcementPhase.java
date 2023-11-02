@@ -56,15 +56,14 @@ public class ReinforcementPhase extends Phase {
     /**
      *{@inheritDoc}
      * Responsible for assigning reinforcement armies to players based on the number of countries they have conquered.
-     * @param p_game_information The object containing relevant data.
      * @throws Exception If an exception occurs, it is rethrown.
      */
     @Override
-    public void executePhase(GameInformation p_game_information) throws Exception {
+    public void executePhase() throws Exception {
         System.out.printf("%nAssigning reinforcements....%n");
-        d_current_game_info = p_game_information;
+        d_current_game_info = GameInformation.getInstance();
 
-        LinkedHashMap<String, Player> l_player_list = p_game_information.getPlayerList();
+        LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
 
         for (java.util.Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
             try {
