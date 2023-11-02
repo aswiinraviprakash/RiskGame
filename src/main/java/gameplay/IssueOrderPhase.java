@@ -72,7 +72,7 @@ public class IssueOrderPhase extends Phase {
                 if (!l_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_SHOWMAP);
                 GameMap l_gamemap_obj = d_current_game_info.getGameMap();
                 LinkedHashMap<String, Player> l_players_list = d_current_game_info.getPlayerList();
-                l_gamemap_obj.showMap(l_players_list.values().stream().toList());
+                l_gamemap_obj.showMap(true);
                 break;
             }
             default:

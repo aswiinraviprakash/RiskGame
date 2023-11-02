@@ -10,6 +10,7 @@ import java.util.List;
 /**
  *  This class reads a map file and extracts a specific section of the file based on starting and ending keywords.
  */
+
 public class MapCommonUtils {
 
     /**
@@ -20,10 +21,9 @@ public class MapCommonUtils {
      * @return A list of map details.
      */
 
-    public static List<String> getMapDetails(String p_file_path, String p_from_keyword, String p_to_keyword) {
+    public static List<String> getMapDetails(String p_file_path, String p_from_keyword, String p_to_keyword) throws Exception{
         List<String> l_all_lines = null;
         List<String> l_map_details = new ArrayList<String>();
-        try {
             l_all_lines = Files.readAllLines(Paths.get(p_file_path));
             int l_line_count = Files.readAllLines(Paths.get(p_file_path)).size();
             int l_index_start = -1;
@@ -50,13 +50,7 @@ public class MapCommonUtils {
                 throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
             }
 
-        }
-        catch (GameException e) {
-            System.out.println(e.getMessage());
-        }catch(Exception e){
-            System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
-        }
-
         return l_map_details;
     }
+
 }
