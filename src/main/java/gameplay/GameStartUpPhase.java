@@ -17,7 +17,7 @@ import java.util.Collections;
 /**
  * Class GameStartUpPhase contains current phase, next phase, and current game information
  */
-public class GameStartUpPhase extends GamePhase {
+public class    GameStartUpPhase extends GamePhase {
     public static final String D_PHASE_NAME = "STARTUP_PHASE";
 
     /**
@@ -67,6 +67,7 @@ public class GameStartUpPhase extends GamePhase {
         } catch (Exception e) {
             throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
         }
+
     }
 
     /**

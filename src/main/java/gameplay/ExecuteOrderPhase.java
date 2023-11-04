@@ -1,13 +1,24 @@
 package gameplay;
 
+import Utils.LogEntryBuffer;
+import Utils.LogEntryWriter;
+import Utils.Observable;
+import Utils.Observer;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+
 
 /**
  * Responsible for executing the orders issued by the players during the game.
  */
 public class ExecuteOrderPhase extends GamePhase {
     public static final String D_PHASE_NAME = "EXECUTE_ORDER_PHASE";
+
+    private Utils.LogEntryBuffer LogEntryBuffer;
+    private LogEntryBuffer d_Logger = LogEntryBuffer;
+
 
     /**
      * Contains the next phase.
@@ -27,6 +38,8 @@ public class ExecuteOrderPhase extends GamePhase {
     @Override
     public void executePhase(GameInformation p_game_information) throws Exception {
         System.out.printf("%nExecuting orders issued....%n");
+        d_Logger.log("%nExecuting orders issued....%n");
+
         d_current_game_info = p_game_information;
 
         LinkedHashMap<String, Player> l_player_list = p_game_information.getPlayerList();
