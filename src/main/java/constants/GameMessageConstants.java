@@ -41,6 +41,8 @@ public class GameMessageConstants {
 
     public static final String D_COUNTRY_INVALID_FOR_PLAYER = "Player does'nt own the country your are trying to deploy armies";
     
+    public static final String D_INVALID_COUNTRY = "The country does not belong to you";
+    
     public static final String D_MAP_LOAD_FAILED = "There seems to be an issue loading your map. Please check the structure of Continent, Country and Borders in you map.";
     
     public static final String D_MAP_VALIDATION_ERROR = "There seems to be an issue with the map structure";
@@ -60,6 +62,8 @@ public class GameMessageConstants {
 
     public static final String D_MAP_NO_CONTINENT = "Continent does not exist";
     
+    public static final String D_MAP_VALIDATION_PASS = "The map is valid";
+    
     // Success Message Constants
     public static final String D_GAMEMAP_LOADED = "Game Map loaded successfully";
 
@@ -72,5 +76,7 @@ public class GameMessageConstants {
     public static final String D_GAME_STARTUP_SUCCESS = "Game startup completed";
 
     public static final String D_ORDER_ISSUED = "Order issued successfully";
+    
+    public static final String D_MAP_SAVED = "The map is saved";
 
 }

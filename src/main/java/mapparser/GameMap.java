@@ -189,12 +189,40 @@ public class GameMap {
         public String getPlayerName() {
             return this.d_player_name;
         }
+        
+        public boolean isCountryAdjacent(String p_country_name){
+            
+            List<Country> l_countries = GameMap.this.d_countries;
+            LinkedHashMap<Integer, List<Integer>> l_borders = GameMap.this.d_borders;
+            
+            int l_country_from_index = -1;
+            int l_country_to_index = -1;
+
+            for (int l_index = 0; l_index < l_countries.size(); l_index++) {
+                if (l_countries.get(l_index).getCountryName().compareTo(this.d_country_name) == 0) {
+                    l_country_from_index = l_index;
+                }
+
+                if (l_countries.get(l_index).getCountryName().compareTo(p_country_name) == 0) {
+                    l_country_to_index = l_index;
+                }
+            }
+
+            if (l_country_from_index == -1 || l_country_to_index == -1) {
+                System.out.println("something went wrong");
+                return false;
+            }
+
+            boolean l_countries_adjacent = l_borders.get(l_country_from_index).contains(l_country_to_index) && l_borders.get(l_country_to_index).contains(l_country_from_index);
+
+            return l_countries_adjacent;
+        }
 
         /**
          * Function sets a boolean value based on the country's conquered
          * status.
          *
-         * @param p_value boolean value indicating a couontry's conquered
+         * @param p_value boolean value indicating a country's conquered
          * status.
          */
         public void setIsCountryConqered(boolean p_value) {

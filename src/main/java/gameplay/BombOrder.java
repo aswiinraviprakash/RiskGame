@@ -11,14 +11,13 @@ public class BombOrder extends Order {
     private String d_target_country_name;
 
 
-    private GameInformation d_current_Game_Info;
+    private GameInformation d_current_game_info;
 
     public BombOrder(String p_target_country_name){
 
         this.d_target_country_name = p_target_country_name;
     }
-
-
+    
         @Override
 
         public void execute(Player p_player) throws Exception {
@@ -38,11 +37,11 @@ public class BombOrder extends Order {
             }
 
 
-            for(int l_index = 0;l_index<d_current_Game_Info.getGameMap().getCountryObjects().size();l_index++){
+            for(int l_index = 0;l_index<d_current_game_info.getGameMap().getCountryObjects().size();l_index++){
 
-                if(d_current_Game_Info.getGameMap().getCountryObjects().get(l_index).getCountryName().compareTo(d_target_country_name)==0){
+                if(d_current_game_info.getGameMap().getCountryObjects().get(l_index).getCountryName().compareTo(d_target_country_name)==0){
 
-                    d_current_Game_Info.getGameMap().getCountryObjects().get(l_index).setArmyCount(l_armies_count/2);
+                    d_current_game_info.getGameMap().getCountryObjects().get(l_index).setArmyCount(l_armies_count/2);
                 }
             }
                 
