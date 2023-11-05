@@ -1,5 +1,6 @@
 package gameplay;
 
+import common.Phase;
 import gameutils.GameException;
 
 /**

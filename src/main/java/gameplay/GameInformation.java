@@ -1,6 +1,8 @@
 package gameplay;
 
 import java.util.LinkedHashMap;
+
+import common.Phase;
 import mapparser.GameMap;
 
 /**

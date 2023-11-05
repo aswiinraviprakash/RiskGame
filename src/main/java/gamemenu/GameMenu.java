@@ -32,7 +32,7 @@ public class GameMenu {
                 switch (l_menu_option) {
                     case "mapeditor":
                         GameMapEditor l_map_edit_obj = new GameMapEditor();
-                        l_map_edit_obj.initialiseMapEditingPhase();
+                        l_map_edit_obj.initialiseAndRunMapEditor();
                         break;
                     case "gameplay":
                         GameEngine l_game_engine_obj = new GameEngine();

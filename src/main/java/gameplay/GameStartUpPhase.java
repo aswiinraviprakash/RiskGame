@@ -1,13 +1,13 @@
 package gameplay;
 
-import constants.GameConstants;
+import common.Phase;
 import gameutils.GameCommandParser;
 import constants.GameMessageConstants;
 import gameutils.GameException;
 import mapparser.GameMap;
+import mapparser.LoadMapPhase;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -46,13 +46,9 @@ public class GameStartUpPhase extends Phase {
 
         try {
             String l_gamemap_filename = l_command_parameters.get(0);
-            File l_file_dir = new File("").getCanonicalFile();
-            l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_DIRECTORY + l_gamemap_filename;
-
-
-            File l_gamemap_file = new File(l_gamemap_filename);
-            if (!l_gamemap_file.exists()) throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
-            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+            LoadMapPhase l_loadmap_phase = new LoadMapPhase(l_gamemap_filename, false);
+            l_loadmap_phase.executePhase();
+            mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
 
             d_current_game_info.setCurrenGameMap(l_gamemap_obj);
             d_completed_operations.add("loadmap");
@@ -135,8 +131,11 @@ public class GameStartUpPhase extends Phase {
         for (java.util.Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
             Player l_player_obj = l_player.getValue();
             List<GameMap.Country> l_player_countries = l_countries.subList(l_start_index, l_end_index);
+            for (GameMap.Country l_player_country : l_player_countries) {
+                l_player_country.setPlayerName(l_player.getKey());
+            }
             l_player_obj.setConqueredCountries(l_player_countries);
-            l_start_index = l_countriesto_assign;
+            l_start_index = l_end_index;
             l_end_index = l_end_index + l_countriesto_assign;
         }
 

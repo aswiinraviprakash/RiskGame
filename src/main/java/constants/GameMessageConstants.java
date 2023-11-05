@@ -6,6 +6,10 @@ package constants;
 public class GameMessageConstants {
 
     // Command Format Constants
+    public static final String D_EDITMAP = "editmap filename";
+
+    public static final String D_EDITCONTINENT = "editmap filename";
+
     public static final String D_LOADMAP = "loadmap filename";
 
     public static final String D_PLAYER_COMMAND = "gameplayer -add playername -remove playername";

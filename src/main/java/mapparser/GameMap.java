@@ -20,28 +20,15 @@ public class GameMap {
     public List<Country> d_countries = new ArrayList<Country>();
     public List<Continent> d_continents = new ArrayList<Continent>();
 
+    private String d_file_path;
+
     /**
      * Constructor used to load the map
      *
      * @param p_file_path map file location
      */
     public GameMap(String p_file_path) {
-        try {
-            this.loadBorders(p_file_path);
-            this.loadContinents(p_file_path);
-            this.loadCountries(p_file_path);
-
-            //pass continent obj to add countries to country list
-            for (int l_index = 0; l_index < this.d_continents.size(); l_index++) {
-                ArrayList<Integer> l_country_list = this.addCountryToContinentObj(this.d_continents.get(l_index));
-                this.d_continents.get(l_index).d_country_list = (ArrayList) l_country_list.clone();
-            }
-        } catch (GameException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println(GameMessageConstants.D_MAP_LOAD_FAILED);
-        }
-
+        this.d_file_path = p_file_path;
     }
 
     /**
@@ -116,7 +103,10 @@ public class GameMap {
          */
         public void setIsContinentConqered(boolean p_value) {
             this.d_is_continent_conquered = p_value;
+        }
 
+        public void setCountries(List<Integer> p_country_list) {
+            this.d_country_list = p_country_list;
         }
 
     }
@@ -233,33 +223,27 @@ public class GameMap {
      * @param p_continent continent object
      * @return list of country IDs.
      */
-    public ArrayList<Integer> addCountryToContinentObj(Continent p_continent) {
-
-        List<Continent> l_continents = this.getContinentObjects();
+    public void addCountryToContinentObj(Continent p_continent) {
         List<Country> l_countries = this.getCountryObjects();
 
         ArrayList<Integer> l_country_id_list = new ArrayList<Integer>();
-
         for (int l_index = 0; l_index < l_countries.size(); l_index++) {
             if (l_countries.get(l_index).getContinentName().compareTo(p_continent.getContinentName()) == 0) {
                 l_country_id_list.add(l_countries.get(l_index).getCountryID());
             }
         }
 
-        return l_country_id_list;
-
+        p_continent.setCountries(l_country_id_list);
     }
 
     /**
      * Function adds border values to the country.
-     *
-     * @param p_file_path map file location.
      */
-    public void loadBorders(String p_file_path) throws Exception {
+    public void loadBorders() throws Exception {
 
         //load border array from map file
         //refactored
-        List<String> l_borders_list = MapCommonUtils.getMapDetails(p_file_path, "borders", "end");
+        List<String> l_borders_list = MapCommonUtils.getMapDetails(d_file_path, "borders", "end");
 
         LinkedHashMap<Integer, List<Integer>> l_borders = new LinkedHashMap<Integer, List<Integer>>();
 
@@ -286,15 +270,13 @@ public class GameMap {
 
     /**
      * Function loads countries in a continent.
-     *
-     * @param p_file_path map file location.
      */
-    public void loadCountries(String p_file_path) throws Exception {
+    public void loadCountries() throws Exception {
 
         List<Continent> l_continents = getContinentObjects();
 
         List<Country> l_countries = new ArrayList<Country>();
-        List<String> l_countries_list = MapCommonUtils.getMapDetails(p_file_path, "countries", "borders");
+        List<String> l_countries_list = MapCommonUtils.getMapDetails(d_file_path, "countries", "borders");
 
         for (int l_index = 0; l_index < l_countries_list.size(); l_index++) {
             int l_country_id = parseInt(l_countries_list.get(l_index).split(" ")[0]);
@@ -312,13 +294,11 @@ public class GameMap {
 
     /**
      * Function loads continents in a map.
-     *
-     * @param p_file_path map file location.
      */
-    public void loadContinents(String p_file_path) throws Exception {
+    public void loadContinents() throws Exception {
         //create continent objects
         List<Continent> l_continents = new ArrayList<Continent>();
-        List<String> l_continents_list = MapCommonUtils.getMapDetails(p_file_path, "continents", "countries");
+        List<String> l_continents_list = MapCommonUtils.getMapDetails(d_file_path, "continents", "countries");
         Continent l_continent_obj;
         for (int l_index = 0; l_index < l_continents_list.size(); l_index++) {
             int l_special_num = parseInt(l_continents_list.get(l_index).split(" ")[1]);

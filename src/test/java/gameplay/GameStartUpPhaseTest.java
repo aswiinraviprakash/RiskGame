@@ -1,9 +1,7 @@
 package gameplay;
 
-import constants.GameConstants;
 import constants.GameMessageConstants;
 import gameutils.GameException;
-import mapparser.GameMap;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
