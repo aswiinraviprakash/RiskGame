@@ -558,8 +558,8 @@ public class EditMapPhase extends Phase {
                                 String l_map_path_input = l_command_parameters.get(0);
                                 if (!l_map_path_input.equals(d_map_file_name)) throw new GameException("Please enter the correct map file name");
 
-                                //boolean l_is_map_valid = d_game_map.validateGameMap();
-                                if (true) {
+                                boolean l_is_map_valid = d_game_map.validateGameMap();
+                                if (l_is_map_valid) {
                                     d_game_map = this.modifyMapFile(d_game_map, d_map_file_name);
                                     System.out.println("Map file saved");
                                 } else {

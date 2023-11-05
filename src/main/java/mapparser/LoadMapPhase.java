@@ -95,8 +95,7 @@ public class LoadMapPhase extends Phase {
 
                     l_game_map = new GameMap(d_map_path);
                     this.loadGameMap(l_game_map);
-                    // boolean l_map_valid = l_map.validateGameMap();
-                    boolean l_map_valid = true;
+                    boolean l_map_valid = l_game_map.validateGameMap();
                     if (l_map_valid) this.d_loaded_game_map = l_game_map;
                     else throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
 
@@ -114,8 +113,8 @@ public class LoadMapPhase extends Phase {
 
                 l_game_map = new GameMap(d_map_path);
                 this.loadGameMap(l_game_map);
-                //boolean l_map_valid = l_game_map.validateGameMap();
-                if (true) this.d_loaded_game_map = l_game_map;
+                boolean l_map_valid = l_game_map.validateGameMap();
+                if (l_map_valid) this.d_loaded_game_map = l_game_map;
                 else throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
             }
         } catch (GameException e) {

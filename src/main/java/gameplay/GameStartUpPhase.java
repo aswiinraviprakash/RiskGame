@@ -54,6 +54,8 @@ public class GameStartUpPhase extends Phase {
             d_completed_operations.add("loadmap");
             System.out.println(GameMessageConstants.D_GAMEMAP_LOADED);
 
+        } catch (GameException e) {
+            System.out.println("Load Map Failed: " + e.getMessage());
         } catch (Exception e) {
             throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
         }

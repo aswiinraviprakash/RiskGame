@@ -459,8 +459,7 @@ public class GameMap {
             throw new GameException(GameMessageConstants.D_MAP_EMPTY_BORDERS);
         }
         for (Country l_country_obj : getCountryObjects()) {
-            int l_country_index = d_countries.indexOf(l_country_obj);
-            List<Integer> l_country_border_list = d_borders.get(l_country_index);
+            List<Integer> l_country_border_list = d_borders.get(l_country_obj.getCountryID());
             l_country_border_list = l_country_border_list.subList(1, l_country_border_list.size());
             if (l_country_border_list == null || l_country_border_list.isEmpty()) {
                 throw new GameException("Country: " + l_country_obj.getCountryName() + " " + GameMessageConstants.D_MAP_COUNTRY_EMPTY_BORDERS);
@@ -527,7 +526,7 @@ public class GameMap {
         p_country_map.put(l_country_obj.getCountryID(), true);
 
         for (int l_country_id : p_continent_obj.getCountryIDList()) {
-            List<Integer> l_adjacent_ids = getBorders().get(l_country_id);
+            List<Integer> l_adjacent_ids = getBorders().get(l_country_obj.getCountryID());
             l_adjacent_ids = l_adjacent_ids.subList(1, l_adjacent_ids.size());
             if (l_adjacent_ids.contains(l_country_id)) {
                 if (!p_country_map.get(l_country_id)) {
