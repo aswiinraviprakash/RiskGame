@@ -527,8 +527,7 @@ public class GameMap {
         p_country_map.put(l_country_obj.getCountryID(), true);
 
         for (int l_country_id : p_continent_obj.getCountryIDList()) {
-            int l_border_index = getCountryObjects().indexOf(l_country_obj);
-            List<Integer> l_adjacent_ids = getBorders().get(l_border_index);
+            List<Integer> l_adjacent_ids = getBorders().get(l_country_id);
             l_adjacent_ids = l_adjacent_ids.subList(1, l_adjacent_ids.size());
             if (l_adjacent_ids.contains(l_country_id)) {
                 if (!p_country_map.get(l_country_id)) {
