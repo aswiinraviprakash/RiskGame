@@ -1,4 +1,4 @@
-package gameplay;
+package common;
 
 /**
  * Templates for phases in the game

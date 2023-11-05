@@ -1,5 +1,7 @@
 package gameplay;
 
+import common.Phase;
+
 public class EndGamePhase extends Phase {
 
     @Override

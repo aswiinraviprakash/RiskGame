@@ -4,11 +4,11 @@ import constants.GameConstants;
 import constants.GameMessageConstants;
 import gameutils.GameException;
 import mapparser.GameMap;
+import mapparser.LoadMapPhase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -28,11 +28,11 @@ public class IssueOrderPhaseTest {
 
             d_current_game_info = GameInformation.getInstance();
 
-            File l_file_dir = new File("").getCanonicalFile();
-            String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "valid-testmap.map";
-
-            File l_gamemap_file = new File(l_gamemap_filename);
-            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+            String l_gamemap_filename = "valid-testmap.map";
+            LoadMapPhase l_loadmap_phase = new LoadMapPhase(l_gamemap_filename, false);
+            l_loadmap_phase.setMapDirectory(GameConstants.D_MAP_TEST_DIRECTORY);
+            l_loadmap_phase.executePhase();
+            mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
 
             d_current_game_info.setCurrenGameMap(l_gamemap_obj);
 

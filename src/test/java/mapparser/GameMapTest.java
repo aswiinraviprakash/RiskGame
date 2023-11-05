@@ -1,7 +1,5 @@
 package mapparser;
 
-import java.io.File;
-
 import constants.GameConstants;
 import constants.GameMessageConstants;
 import gameutils.GameException;
@@ -19,11 +17,11 @@ public class GameMapTest {
     @Test
     public void testLoadValidMap() {
         try {
-            File l_file_dir = new File("").getCanonicalFile();
-            String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "valid-testmap.map";
 
-            File l_gamemap_file = new File(l_gamemap_filename);
-            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+            LoadMapPhase l_loadmap_phase = new LoadMapPhase("valid-testmap.map", true);
+            l_loadmap_phase.setMapDirectory(GameConstants.D_MAP_TEST_DIRECTORY);
+            l_loadmap_phase.executePhase();
+            mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
 
             // checking if continents loaded
             Assert.assertEquals(2, l_gamemap_obj.getContinentObjects().size());
@@ -43,11 +41,10 @@ public class GameMapTest {
     @Test
     public void testValidateMap() {
         try {
-            File l_file_dir = new File("").getCanonicalFile();
-            String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "valid-testmap.map";
-
-            File l_gamemap_file = new File(l_gamemap_filename);
-            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+            LoadMapPhase l_loadmap_phase = new LoadMapPhase("valid-testmap.map", true);
+            l_loadmap_phase.setMapDirectory(GameConstants.D_MAP_TEST_DIRECTORY);
+            l_loadmap_phase.executePhase();
+            mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
 
             // checking valid map case
             try {
@@ -64,11 +61,10 @@ public class GameMapTest {
     @Test
     public void testValidateMapEmpty() {
         try {
-            File l_file_dir = new File("").getCanonicalFile();
-            String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "invalid-testmap-empty.map";
-
-            File l_gamemap_file = new File(l_gamemap_filename);
-            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+            LoadMapPhase l_loadmap_phase = new LoadMapPhase("invalid-testmap-empty.map", true);
+            l_loadmap_phase.setMapDirectory(GameConstants.D_MAP_TEST_DIRECTORY);
+            l_loadmap_phase.executePhase();
+            mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
 
             // checking valid map case
             try {
@@ -86,11 +82,10 @@ public class GameMapTest {
     @Test
     public void testValidateMapBorderConnectivity() {
         try {
-            File l_file_dir = new File("").getCanonicalFile();
-            String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "invalid-testmap-connection-1.map";
-
-            File l_gamemap_file = new File(l_gamemap_filename);
-            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+            LoadMapPhase l_loadmap_phase = new LoadMapPhase("invalid-testmap-connection-1.map", true);
+            l_loadmap_phase.setMapDirectory(GameConstants.D_MAP_TEST_DIRECTORY);
+            l_loadmap_phase.executePhase();
+            mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
 
             // checking valid map case
             try {
@@ -108,11 +103,10 @@ public class GameMapTest {
     @Test
     public void testValidateMapCountryConnectivity() {
         try {
-            File l_file_dir = new File("").getCanonicalFile();
-            String l_gamemap_filename = l_file_dir.getParent() + GameConstants.D_MAP_TEST_DIRECTORY + "invalid-testmap-connection-2.map";
-
-            File l_gamemap_file = new File(l_gamemap_filename);
-            mapparser.GameMap l_gamemap_obj = new mapparser.GameMap(l_gamemap_filename);
+            LoadMapPhase l_loadmap_phase = new LoadMapPhase("invalid-testmap-connection-2.map", true);
+            l_loadmap_phase.setMapDirectory(GameConstants.D_MAP_TEST_DIRECTORY);
+            l_loadmap_phase.executePhase();
+            mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
 
             // checking valid map case
             try {
