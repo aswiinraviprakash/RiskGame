@@ -193,7 +193,7 @@ public class EditMapPhase extends Phase {
                 l_continent_name = p_parameter_list.get(1);
 
                 //check if the continent exists
-                boolean l_continent_exists = false;
+                boolean l_continent_exists = false, l_country_exists = false;
 
                 for (int l_index = 0; l_index < l_continents.size(); l_index++) {
                     if (l_continents.get(l_index).getContinentName().compareTo(l_continent_name) == 0) {
@@ -201,9 +201,17 @@ public class EditMapPhase extends Phase {
                         break;
                     }
                 }
+                
+                for (int l_index = 0; l_index < l_countries.size(); l_index++) {
+                    if (l_countries.get(l_index).getCountryName().compareTo(l_country_name) == 0) {
+                        l_country_exists = true;
+                        break;
+                    }
+                }
 
-                if (l_continent_exists) {
-                    //creating country object
+                if (l_continent_exists ) {
+                    if(!l_country_exists){
+                        //creating country object
                     int l_country_id = 1;
                     if (l_countries.size() != 0) {
                         l_country_id = l_countries.get(l_countries.size() - 1).getCountryID() + 1;
@@ -233,6 +241,10 @@ public class EditMapPhase extends Phase {
                     p_map.d_borders.put(l_country_id, l_new_border);
 
                     System.out.println("Added Country " + l_country_name);
+                    }else{
+                        throw new GameException("Country already exists");
+                    }
+                    
 
                 } else {
                     throw new GameException(GameMessageConstants.D_MAP_NO_CONTINENT);
