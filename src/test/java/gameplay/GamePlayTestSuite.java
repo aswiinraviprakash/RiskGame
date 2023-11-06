@@ -10,7 +10,8 @@ import org.junit.runners.Suite;
     ReinforcementPhaseTest.class,
     IssueOrderPhaseTest.class,
     BombOrderTest.class,
-    BlockadeOrderTest.class
+    BlockadeOrderTest.class,
+    AirliftOrderTest.class
 
 })
 

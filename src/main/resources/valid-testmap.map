@@ -1,0 +1,19 @@
+[continents]
+Continent-First 3
+Continent-Second 4
+
+[countries]
+1 Country-First 1
+2 Country-Second 1
+3 Country-Third 1
+4 Country-Fourth 2
+5 Country-Fifth 2
+6 Country-Sixth 2
+
+[borders]
+1 3 2 6 
+2 3 1 
+3 1 2 4 
+4 3 5 
+5 4 6 
+6 5 
