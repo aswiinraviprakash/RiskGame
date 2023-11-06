@@ -1,5 +1,7 @@
 package constants;
 
+import mapparser.GameMap.Country;
+
 /**
  * This class initializes all the constant messages that will be used in the application.
  */
@@ -24,6 +26,8 @@ public class GameMessageConstants {
 
     public static final String D_EDITCONTINENT = "editmap filename";
 
+    public static final String D_NEW_MAP = "Map Created";
+
     public static final String D_LOADMAP = "loadmap filename";
 
     public static final String D_PLAYER_COMMAND = "gameplayer -add playername -remove playername";
@@ -43,6 +47,8 @@ public class GameMessageConstants {
     public static final String D_ASSIGNCOUNTRIES_COMMAND = "assigncountries";
 
     public static final String D_SHOWMAP = "showmap";
+
+    public static final String D_VALIDATEMAP = "validatemap";
 
     // Error Message Constants
     public static final String D_INTERNAL_ERROR = "There seems to be some issue try restarting the Game";
@@ -84,8 +90,26 @@ public class GameMessageConstants {
     public static final String D_INVALID_COUNTRY = "The country does not belong to you";
     
     public static final String D_MAP_LOAD_FAILED = "There seems to be an issue loading your map. Please check the structure of Continent, Country and Borders in you map.";
+
+    public static final String D_MAP_LOAD_FAILED_EXIT = "Something is wrong with the map, type 'exit' to leave map editor menu  and choose another map file using editmap command";
     
     public static final String D_MAP_VALIDATION_ERROR = "There seems to be an issue with the map structure";
+
+    public static final String D_CRITICAL_MAP_NAME = "Please enter the correct map file name";
+
+    public static final String D_MAP_PROBLEM = "Something is wrong with the map";
+
+    public static final String D_EDIT_CONTINENT_ERROR = "Please enter the continent name and its bonus value";
+
+    public static final String D_EDIT_CONTINENT_VALID_BONUS = "Please enter a valid continent value";
+
+    public static final String D_SKIPPED_COUNTRY_CONTINENT = "Please enter the country name and continent name";
+    
+    public static final String D_MISSING_COUNTRY_NAME = "Please enter the Country name";
+
+    public static final String D_MISSING_CONTINENT_NAME = "Please enter the Continent name";
+
+
     
     
     public static final String D_MAP_EMPTY_CONTINENTS = "Continents seems to be empty in map";
@@ -101,11 +125,28 @@ public class GameMessageConstants {
     public static final String D_MAP_NO_COUNTRY = "Country does not exist";
 
     public static final String D_MAP_NO_CONTINENT = "Continent does not exist";
+
+    public static final String D_MAP_NO_NEIGHBOR = "Neighbor does not exist";
+
+    public static final String D_MAP_DUPLICATE_COUNTRY  = "Country already exists";
+
+    public static final String D_MAP_DUPLICATE_NEIGHBOR = "Neighbor already added";
+
+    public static final String D_MAP_MISSING_COUNTRY_AND_NEIGHBOR = "Please enter the country name and the neighboring country name";
+
+    public static final String D_MAP_INVALID_NEIGHBOR = "Country and neighboring country can not be the same";
+
+    public static final String D_MAP_INVALID_COUNTRY_NEIGHBOR = "Invalid Countries enterd";
+
     
     public static final String D_MAP_VALIDATION_PASS = "The map is valid";
     
     // Success Message Constants
     public static final String D_GAMEMAP_LOADED = "Game Map loaded successfully";
+
+    public static final String D_VALID_MAP = "The Map is Valid";
+
+    public static final String D_SAVE_MAP = "Map file saved";
 
     public static final String D_PLAYER_ADDED = "Player added successfully";
 
@@ -118,5 +159,17 @@ public class GameMessageConstants {
     public static final String D_ORDER_ISSUED = "Order issued successfully";
     
     public static final String D_MAP_SAVED = "The map is saved";
+
+    public static final String D_CONTINENT_ADDED = "Continent added successfully ";
+
+    public static final String D_CONTINENT_REMOVED = "Removed Continent ";
+
+    public static final String D_COUNTRY_ADDED = "Added Country ";
+
+    public static final String D_COUNTRY_REMOVED = "Removed Country ";
+
+    public static final String D_RELATION_ADDED = "Added neighbor relation between ";
+
+    public static final String D_RELATION_REMOVED = "Removed neighbor relation between ";
 
 }
