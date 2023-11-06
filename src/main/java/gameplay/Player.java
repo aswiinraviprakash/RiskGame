@@ -1,7 +1,10 @@
 package gameplay;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import mapparser.GameMap;
 
 /**
@@ -27,6 +30,8 @@ public class Player {
     public Order d_current_order = null;
 
     public List<GameMap.Country> d_conquered_countries = new ArrayList<>();
+
+    public HashMap<Card, Integer> d_available_cards = new HashMap();
 
     /**
      * Creates a new player with specified name.
@@ -95,6 +100,35 @@ public class Player {
      */
     public List<GameMap.Country> getConqueredCountries() {
         return this.d_conquered_countries;
+    }
+
+    public HashMap<Card, Integer> getAvailableCards() {
+        return this.d_available_cards;
+    }
+
+    public void addAvailableCard(Card l_card_obj) {
+        if (!d_available_cards.containsKey(l_card_obj)) {
+            d_available_cards.put(l_card_obj, 1);
+        } else {
+            int l_card_count = d_available_cards.get(l_card_obj);
+            d_available_cards.put(l_card_obj, l_card_count + 1);
+        }
+    }
+
+    public void removeAvailableCard(Card l_card_obj) {
+        if (d_available_cards.containsKey(l_card_obj)) {
+            int l_card_count = d_available_cards.get(l_card_obj);
+            d_available_cards.put(l_card_obj, l_card_count - 1);
+        }
+    }
+
+    public String printAvailableCards() {
+        String l_available_cards = "";
+        for (Map.Entry<Card, Integer> l_entry : d_available_cards.entrySet()) {
+            l_available_cards = l_available_cards + l_entry.getKey() + ": " + l_entry.getValue() + " ";
+        }
+
+        return l_available_cards;
     }
 
     /**

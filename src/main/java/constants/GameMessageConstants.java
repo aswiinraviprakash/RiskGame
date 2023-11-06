@@ -5,6 +5,14 @@ package constants;
  */
 public class GameMessageConstants {
 
+    // Order Types
+
+    public static final String DEPLOY = "Deploy";
+
+    public static final String ADVANCE = "Advance";
+
+    public static final String BOMB = "Bomb";
+
     // Command Format Constants
     public static final String D_EDITMAP = "editmap filename";
 
@@ -15,6 +23,10 @@ public class GameMessageConstants {
     public static final String D_PLAYER_COMMAND = "gameplayer -add playername -remove playername";
 
     public static final String D_DEPLOY_COMMAND = "deploy countryID num";
+
+    public static final String D_ADVANCE_COMMAND = "advance countrynamefrom countynameto numarmies";
+
+    public static final String D_BOMB_COMMAND = "bomb countryID";
 
     public static final String D_ASSIGNCOUNTRIES_COMMAND = "assigncountries";
 
@@ -39,7 +51,19 @@ public class GameMessageConstants {
 
     public static final String D_ARMIES_EXCEEDED = "Armies you are trying to deploy exceeded available limit";
 
-    public static final String D_COUNTRY_INVALID_FOR_PLAYER = "Player does'nt own the country your are trying to deploy armies";
+    public static final String D_COUNTRY_INVALID_FOR_PLAYER = "Player does'nt own the country your are trying to initiate order";
+
+    public static final String D_TO_COUNTRY_INVALID = "The destination country your are trying initiate order does'nt exists";
+
+    public static final String D_ATTACK_ARMIES_EXCEEDED = "Armies you are trying to move exceeded the available limit than in source country";
+
+    public static final String D_BOMB_DESTINATION_INVALID = "Destination country should not be owned by player";
+
+    public static final String D_COUNTRY_NOT_ADJACENT = "The source and destination countries you are trying to initiate order are not adjacent";
+
+    public static final String D_DESTINATION_COUNTRY_NOT_ADJACENT = "The destination country you are trying to initiate order is not adjacent";
+
+    public static final String D_CARD_INAVLID = "Player does'nt own any card for order: ";
     
     public static final String D_INVALID_COUNTRY = "The country does not belong to you";
     

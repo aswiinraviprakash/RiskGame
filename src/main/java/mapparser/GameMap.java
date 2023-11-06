@@ -191,31 +191,18 @@ public class GameMap {
         }
         
         public boolean isCountryAdjacent(String p_country_name){
-            
-            List<Country> l_countries = GameMap.this.d_countries;
             LinkedHashMap<Integer, List<Integer>> l_borders = GameMap.this.d_borders;
-            
-            int l_country_from_index = -1;
-            int l_country_to_index = -1;
 
-            for (int l_index = 0; l_index < l_countries.size(); l_index++) {
-                if (l_countries.get(l_index).getCountryName().compareTo(this.d_country_name) == 0) {
-                    l_country_from_index = l_index;
-                }
+            Country l_destination_obj = getCountryByName(p_country_name);
+            if (l_destination_obj == null) return false;
 
-                if (l_countries.get(l_index).getCountryName().compareTo(p_country_name) == 0) {
-                    l_country_to_index = l_index;
-                }
-            }
+            int l_destination_id = l_destination_obj.getCountryID();
 
-            if (l_country_from_index == -1 || l_country_to_index == -1) {
-                System.out.println("something went wrong");
-                return false;
-            }
+            if (!l_borders.containsKey(this.getCountryID())) return false;
 
-            boolean l_countries_adjacent = l_borders.get(l_country_from_index).contains(l_country_to_index) && l_borders.get(l_country_to_index).contains(l_country_from_index);
+            List<Integer> l_country_borders = l_borders.get(this.getCountryID());
 
-            return l_countries_adjacent;
+            return l_country_borders.contains(l_destination_id);
         }
 
         /**
@@ -460,6 +447,16 @@ public class GameMap {
     public Country getCountryById(int p_country_id) {
         for (Country l_country_obj : d_countries) {
             if (l_country_obj.getCountryID() == p_country_id) {
+                return l_country_obj;
+            }
+        }
+
+        return null;
+    }
+
+    public Country getCountryByName(String p_country_name) {
+        for (Country l_country_obj : d_countries) {
+            if (l_country_obj.getCountryName().equals(p_country_name)) {
                 return l_country_obj;
             }
         }
