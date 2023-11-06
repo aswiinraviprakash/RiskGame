@@ -76,7 +76,7 @@ public class LoadMapPhase extends Phase {
         l_buff_writer.newLine();
 
         l_buff_writer.close();
-        System.out.println("A new map created!");
+        System.out.println(GameMessageConstants.D_NEW_MAP);
     }
 
     @Override
