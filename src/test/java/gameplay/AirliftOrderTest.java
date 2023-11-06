@@ -63,7 +63,7 @@ public class AirliftOrderTest {
             l_player_second_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(1), l_countries.get(2), l_countries.get(5)}));
             
             d_source_country = l_player_first_obj.getConqueredCountries().get(0);
-            d_destination_country = l_player_second_obj.getConqueredCountries().get(1);
+            d_destination_country = l_player_second_obj.getConqueredCountries().get(0);
             int l_armies = 6;
             
             AirliftOrder l_airlift_phase = new AirliftOrder(d_source_country, d_destination_country, l_armies);
@@ -77,12 +77,78 @@ public class AirliftOrderTest {
         Assert.assertEquals(1, l_player_first_obj.getConqueredCountries().get(3).getArmyCount());
         Assert.assertEquals(4, l_player_first_obj.getConqueredCountries().size());
        // Assert.assertEquals(2, l_player_second_obj.getConqueredCountries().size());
-       // Assert.assertFalse(l_player_second_obj.getConqueredCountries().contains(d_destination_country));
+      //  Assert.assertFalse(l_player_second_obj.getConqueredCountries().contains(d_destination_country));
         Assert.assertTrue(l_player_first_obj.getConqueredCountries().contains(d_destination_country));
+        Assert.assertEquals(1, l_player_first_obj.getAvailableCards().size());
 
     }
 
     @Test
-    public void airLiftNonAttackNoOwnershipChangeTest() {
+    public void airLiftAttackNoOwnershipChangeTest() {
+        LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+        Player l_player_first_obj = l_player_list.get("playerfirst");
+        Player l_player_second_obj = l_player_list.get("playersecond");
+        List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
+
+        try {
+    
+            l_countries.get(1).setArmyCount(10);
+            
+            l_player_first_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(0), l_countries.get(3), l_countries.get(4)}));
+            l_player_second_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(1), l_countries.get(2), l_countries.get(5)}));
+            
+            d_source_country = l_player_first_obj.getConqueredCountries().get(0);
+            d_destination_country = l_player_second_obj.getConqueredCountries().get(0);
+            int l_armies = 4;
+            
+            AirliftOrder l_airlift_phase = new AirliftOrder(d_source_country, d_destination_country, l_armies);
+            l_airlift_phase.execute(l_player_first_obj);
+            
+            
+        } catch (Exception e) {
+        }
+
+        Assert.assertEquals(1, l_player_first_obj.getConqueredCountries().get(0).getArmyCount());
+        Assert.assertEquals(6, l_player_second_obj.getConqueredCountries().get(0).getArmyCount());
+        Assert.assertEquals(3, l_player_first_obj.getConqueredCountries().size());
+        Assert.assertEquals(3, l_player_second_obj.getConqueredCountries().size());
+        Assert.assertTrue(l_player_second_obj.getConqueredCountries().contains(d_destination_country));
+        Assert.assertTrue(l_player_first_obj.getConqueredCountries().contains(d_source_country));
+        Assert.assertFalse(l_player_second_obj.getConqueredCountries().contains(d_source_country));
+        Assert.assertFalse(l_player_first_obj.getConqueredCountries().contains(d_destination_country));
+        Assert.assertEquals(0, l_player_first_obj.getAvailableCards().size());
+        Assert.assertEquals(0, l_player_second_obj.getAvailableCards().size());
+
+    }
+    
+    @Test
+    public void airLiftNonAttackTest(){
+        LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+        Player l_player_first_obj = l_player_list.get("playerfirst");
+        Player l_player_second_obj = l_player_list.get("playersecond");
+        List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
+
+        try {
+            l_player_first_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(0), l_countries.get(3), l_countries.get(4)}));
+            l_player_second_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(1), l_countries.get(2), l_countries.get(5)}));
+            
+            d_source_country = l_player_first_obj.getConqueredCountries().get(0);
+            d_destination_country = l_player_first_obj.getConqueredCountries().get(1);
+            int l_armies = 4;
+            
+            AirliftOrder l_airlift_phase = new AirliftOrder(d_source_country, d_destination_country, l_armies);
+            l_airlift_phase.execute(l_player_first_obj);
+            
+            
+        } catch (Exception e) {
+        }
+
+        Assert.assertEquals(1, l_player_first_obj.getConqueredCountries().get(0).getArmyCount());
+       // Assert.assertEquals(9, l_player_first_obj.getConqueredCountries().get(1).getArmyCount());
+        Assert.assertEquals(3, l_player_first_obj.getConqueredCountries().size());
+        Assert.assertEquals(3, l_player_second_obj.getConqueredCountries().size());
+        Assert.assertEquals(0, l_player_first_obj.getAvailableCards().size());
+        Assert.assertEquals(0, l_player_second_obj.getAvailableCards().size());
+
     }
 }
