@@ -64,7 +64,7 @@ public class IssueOrderPhaseTest {
 
         try {
             IssueOrderPhase l_phase_obj = new IssueOrderPhase();
-            l_phase_obj.validateAndExecuteCommands("deploy Country-First 8", l_player_first_obj);
+            l_phase_obj.executeDeployOrder("deploy Country-First 8", l_player_first_obj);
             DeployOrder l_order_obj = (DeployOrder) l_player_first_obj.next_order();
 
             // checking successful issuing of deloy order
@@ -89,7 +89,7 @@ public class IssueOrderPhaseTest {
 
         try {
             IssueOrderPhase l_phase_obj = new IssueOrderPhase();
-            l_phase_obj.validateAndExecuteCommands("deploy Country-First 10", l_player_first_obj);
+            l_phase_obj.executeDeployOrder("deploy Country-First 10", l_player_first_obj);
         } catch (GameException e) {
             Assert.assertEquals(GameMessageConstants.D_ARMIES_EXCEEDED + "\nAvailable Armies: " + l_player_first_obj.getCurrentArmies(), e.getMessage());
         } catch (Exception e) {}
@@ -112,10 +112,10 @@ public class IssueOrderPhaseTest {
 
         try {
             IssueOrderPhase l_phase_obj = new IssueOrderPhase();
-            l_phase_obj.validateAndExecuteCommands("deloy Country-First 10", l_player_first_obj);
+            l_phase_obj.executeDeployOrder("deloy Country-First 10", l_player_first_obj);
             DeployOrder l_order_obj = (DeployOrder) l_player_first_obj.next_order();
         } catch (GameException e) {
-            Assert.assertEquals(GameMessageConstants.D_COMMAND_INVALID, e.getMessage());
+            Assert.assertEquals(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_DEPLOY_COMMAND, e.getMessage());
         } catch (Exception e) {}
     }
 }

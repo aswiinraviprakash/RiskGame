@@ -29,7 +29,7 @@ public class IssueOrderPhase extends Phase {
      * @param p_current_player Current player issuing an order.
      * @throws Exception If an error occurs during order execution.
      */
-    private void executeDeployOrder(String p_input_command, Player p_current_player) throws Exception {
+    public void executeDeployOrder(String p_input_command, Player p_current_player) throws Exception {
 
         GameCommandParser l_command_parser = new GameCommandParser(p_input_command);
         String l_primary_command = l_command_parser.getPrimaryCommand();
