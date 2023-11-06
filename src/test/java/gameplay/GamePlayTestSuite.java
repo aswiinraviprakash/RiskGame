@@ -8,7 +8,10 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
     GameStartUpPhaseTest.class,
     ReinforcementPhaseTest.class,
-    IssueOrderPhaseTest.class
+    IssueOrderPhaseTest.class,
+    BombOrderTest.class,
+    BlockadeOrderTest.class
+
 })
 
 /**

@@ -33,11 +33,11 @@ public class BombOrderTest {
             d_current_game_info.setCurrenGameMap(l_gamemap_obj);
 
             LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
-            Player l_player_obj = new Player("sourceplayer");
-            l_player_list.put("sourceplayer", l_player_obj);
+            Player l_player_obj = new Player("playerfirst");
+            l_player_list.put("playerfirst", l_player_obj);
 
-            l_player_obj = new Player("targetplayer");
-            l_player_list.put("targetplayer", l_player_obj);
+            l_player_obj = new Player("playersecond");
+            l_player_list.put("playersecond", l_player_obj);
             d_current_game_info.setPlayerList(l_player_list);
 
 
