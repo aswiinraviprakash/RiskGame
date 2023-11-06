@@ -1,55 +1,69 @@
-//package gameplay;
-//
-//import java.util.HashMap;
-//import java.util.Iterator;
-//import java.util.List;
-//
-///**
-// *
-// * @author USER
-// */
-//public class DiplomacyOrder extends Order {
-//
-//    private String d_player_name;
-//
-//    private GameInformation d_current_game_info;
-//
-//    public DiplomacyOrder(String p_player_name) {
-//        this.d_player_name = p_player_name;
-//
-//    }
-//
-//    @Override
-//    public void execute(Player p_player) {
-//        //prevent attacks between the current player and another player until the end of the turn
-//
-//        List<Order> l_orders_curr_player = p_player.getOrdersList();
-//
-//        List<Order> l_orders_opponent = this.d_current_game_info.getPlayerList().get(this.d_player_name).getOrdersList();
-//
-//        Player l_opponent_player = this.d_current_game_info.getPlayerList().get(this.d_player_name);
-//
-//        for (int l_index = 0; l_index < l_orders_opponent.size(); l_index++) {
-//            if (l_orders_opponent.get(l_index) instanceof AdvanceOrder) {
-//                //check if the order is in attack mode
-//                AdvanceOrder l_order = (AdvanceOrder) l_orders_opponent.get(l_index);
-//
-//                if (p_player.checkIfCountryConquered(l_order.getCountryTo())) {
-//                    //remove Order from order List
-//                    this.d_current_game_info.getPlayerList().remove(this.d_player_name);
-//                }
-//
-//            } else if (l_orders_opponent.get(l_index) instanceof AirliftOrder) {
-//
-//                AirliftOrder l_order = (AirliftOrder) l_orders_opponent.get(l_index);
-//
-//                if (p_player.checkIfCountryConquered(l_order.getCountryTo())) {
-//                    //remove Order from order List
-//                    this.d_current_game_info.getPlayerList().remove(this.d_player_name);
-//                }
-//
-//            }
-//        }
-//
-//    }
-//}
+package gameplay;
+
+import java.util.Iterator;
+import java.util.List;
+
+public class DiplomacyOrder extends Order {
+
+    private Player d_target_player;
+
+    public DiplomacyOrder(Player p_target_player) {
+        this.d_target_player = p_target_player;
+    }
+
+    public Player getTargetPlayer() {
+        return this.d_target_player;
+    }
+
+    @Override
+    public void execute(Player p_player_obj) throws Exception {
+
+        List<Order> l_player_orders = p_player_obj.getOrders();
+        String l_target_player_name = d_target_player.getPlayerName();
+
+        Iterator<Order> l_order_iterator = l_player_orders.iterator();
+        while (l_order_iterator.hasNext()) {
+            Order l_order = l_order_iterator.next();
+            String l_destination_player = "";
+            if (l_order instanceof AdvanceOrder) {
+
+                l_destination_player = ((AdvanceOrder) l_order).getDestinationCountry().getPlayerName();
+                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+
+            } else if (l_order instanceof BombOrder) {
+
+                l_destination_player = ((BombOrder) l_order).getDestinationCountry().getPlayerName();
+                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+
+            } else if (l_order instanceof AirliftOrder) {
+
+                l_destination_player = ((AirliftOrder) l_order).getDestinationCountry().getPlayerName();
+                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+
+            }
+        }
+
+        l_player_orders = d_target_player.getOrders();
+        l_target_player_name = p_player_obj.getPlayerName();
+        while (l_order_iterator.hasNext()) {
+            Order l_order = l_order_iterator.next();
+            String l_destination_player = "";
+            if (l_order instanceof AdvanceOrder) {
+
+                l_destination_player = ((AdvanceOrder) l_order).getDestinationCountry().getPlayerName();
+                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+
+            } else if (l_order instanceof BombOrder) {
+
+                l_destination_player = ((BombOrder) l_order).getDestinationCountry().getPlayerName();
+                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+
+            } else if (l_order instanceof AirliftOrder) {
+
+                l_destination_player = ((AirliftOrder) l_order).getDestinationCountry().getPlayerName();
+                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+
+            }
+        }
+    }
+}

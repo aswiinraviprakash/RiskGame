@@ -1,56 +1,23 @@
 package gameplay;
 
-import constants.GameMessageConstants;
-import gameutils.GameException;
-import java.util.List;
 import mapparser.GameMap;
 
-/**
- *
- * @author USER
- */
-public class BlockadeOrder extends Order{
+public class BlockadeOrder extends Order {
+
+    private GameMap.Country d_destination_country;
     
-    private String d_country_name;
-    
-    private GameInformation d_current_game_info;
-    
-    public BlockadeOrder(String p_country_name){
-        this.d_country_name = p_country_name;
-        
+    public BlockadeOrder(GameMap.Country p_destination_country){
+        this.d_destination_country = p_destination_country;
     }
     
     @Override
-    public void execute(Player p_player) throws Exception{
-        //triple the number of armies on one of the current player’s territories and make it a neutral territory
+    public void execute(Player p_player_obj) throws Exception {
+        if (!p_player_obj.getConqueredCountries().contains(d_destination_country)) return;
 
-        int l_armies_count = -1;
-        //check if the country is player's and remove from player's conquered countries
-        List<GameMap.Country> l_countries_conquered = p_player.d_conquered_countries;
-        if (p_player.checkIfCountryConquered(d_country_name)) {
-            for (int l_index = 0; l_index < l_countries_conquered.size(); l_index++) {
-                if (l_countries_conquered.get(l_index).getCountryName().compareTo(d_country_name) == 0) {
-                    d_current_game_info.getPlayerList().get(p_player.getPlayerName()).d_conquered_countries.remove(l_index);
-                    l_armies_count = l_countries_conquered.get(l_index).getArmyCount();
-                }
-            }
-        } else {
-            //can't execute the function because its not his country
-            throw new GameException(GameMessageConstants.D_INVALID_COUNTRY);
-        }
-
-        //if yes triple the number of armies in that country update in map class
-        if (l_armies_count == -1) {
-            throw new GameException(GameMessageConstants.D_INVALID_COUNTRY);
-        } else {
-
-            for (int l_index = 0; l_index < d_current_game_info.getGameMap().getCountryObjects().size(); l_index++) {
-                if (d_current_game_info.getGameMap().getCountryObjects().get(l_index).getCountryName().compareTo(d_country_name) == 0) {
-                    d_current_game_info.getGameMap().getCountryObjects().get(l_index).setArmyCount(l_armies_count * 3);
-                }
-            }
-        }
-
+        int l_destination_armies = d_destination_country.getArmyCount();
+        d_destination_country.setArmyCount(l_destination_armies * 3);
+        p_player_obj.getConqueredCountries().remove(d_destination_country);
+        d_destination_country.setPlayerName(null);
     }
     
 }

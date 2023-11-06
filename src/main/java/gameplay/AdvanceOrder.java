@@ -1,18 +1,8 @@
 package gameplay;
 
 import gameutils.GameException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import mapparser.GameMap;
-import mapparser.GameMap.Country;
 
-/**
- *
- * @author USER
- */
 public class AdvanceOrder extends Order {
 
     private GameMap.Country d_source_country;
@@ -29,10 +19,18 @@ public class AdvanceOrder extends Order {
         this.d_armies = p_armies;
     }
 
+    public GameMap.Country getDestinationCountry() {
+        return this.d_destination_country;
+    }
+
     public void attackDestinationCountry(Player p_current_player, Player p_destination_player) {
+
+        if (p_current_player != null && p_destination_player != null && (p_current_player.checkDiplomacyRelation(p_destination_player) || p_destination_player.checkDiplomacyRelation(p_current_player))) return;
 
         int l_destination_armies = d_destination_country.getArmyCount();
         int l_source_armies = d_source_country.getArmyCount();
+
+        if (d_armies > l_source_armies) return;
 
         if (d_armies > l_destination_armies) {
 
@@ -61,11 +59,13 @@ public class AdvanceOrder extends Order {
     }
 
     @Override
-    public void execute(Player p_current_player) throws GameException {
+    public void execute(Player p_player_obj) throws GameException {
 
         d_current_game_info = GameInformation.getInstance();
 
-        String l_player_name = p_current_player.getPlayerName();
+        if (!p_player_obj.getConqueredCountries().contains(d_source_country)) return;
+
+        String l_player_name = p_player_obj.getPlayerName();
         boolean isAttackMode = false;
 
         Player l_destination_player = null;
@@ -78,7 +78,7 @@ public class AdvanceOrder extends Order {
         }
 
         if (isAttackMode) {
-            attackDestinationCountry(p_current_player, l_destination_player);
+            attackDestinationCountry(p_player_obj, l_destination_player);
         } else {
             movesArmiesToDestinationCountry();
         }

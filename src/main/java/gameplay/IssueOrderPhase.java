@@ -60,7 +60,7 @@ public class IssueOrderPhase extends Phase {
         p_current_player.d_current_order = new DeployOrder(l_country_name, l_armies_number);
         p_current_player.issue_order();
         p_current_player.setCurrentArmies(p_current_player.getCurrentArmies() - l_armies_number);
-        System.out.println(GameMessageConstants.DEPLOY + " " + GameMessageConstants.D_ORDER_ISSUED);
+        System.out.println(GameMessageConstants.D_DEPLOY + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
     private void executeAdvanceOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
@@ -88,21 +88,22 @@ public class IssueOrderPhase extends Phase {
         // checking if countries are adjacent
         if (!l_from_country_obj.isCountryAdjacent(l_to_country_name)) throw new GameException(GameMessageConstants.D_COUNTRY_NOT_ADJACENT);
 
+        // checking armies count if it exceeded
         if (l_armies_number > l_from_country_obj.getArmyCount()) throw new GameException(GameMessageConstants.D_ATTACK_ARMIES_EXCEEDED + "\nAvailable Armies: " + l_from_country_obj.getArmyCount());
 
         p_current_player.d_current_order = new AdvanceOrder(l_from_country_obj, l_to_country_obj, l_armies_number);
         p_current_player.issue_order();
-        System.out.println(GameMessageConstants.ADVANCE + " " + GameMessageConstants.D_ORDER_ISSUED);
+        System.out.println(GameMessageConstants.D_ADVANCE + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
     private void executeBombOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
 
-        if (!p_current_player.getAvailableCards().containsKey(Card.BOMB)) throw new GameException(GameMessageConstants.D_CARD_INAVLID + GameMessageConstants.BOMB);
+        if (!p_current_player.getAvailableCards().containsKey(Card.BOMB) || p_current_player.getAvailableCards().get(Card.BOMB) == 0) throw new GameException(GameMessageConstants.D_CARD_INAVLID + GameMessageConstants.D_BOMB);
 
         GameCommandParser.CommandDetails l_command_detail = p_command_details.get(0);
 
         List<String> l_command_parameters = l_command_detail.getCommandParameters();
-        if (l_command_parameters.size() != 1) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_ADVANCE_COMMAND);
+        if (l_command_parameters.size() != 1) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_BOMB_COMMAND);
 
         String l_country_name = l_command_parameters.get(0);
 
@@ -128,7 +129,87 @@ public class IssueOrderPhase extends Phase {
         p_current_player.d_current_order = new BombOrder(l_country_obj);
         p_current_player.issue_order();
         p_current_player.removeAvailableCard(Card.BOMB);
-        System.out.println(GameMessageConstants.BOMB + " " + GameMessageConstants.D_ORDER_ISSUED);
+        System.out.println(GameMessageConstants.D_BOMB + " " + GameMessageConstants.D_ORDER_ISSUED);
+    }
+
+    private void executeBlockadeOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
+
+        if (!p_current_player.getAvailableCards().containsKey(Card.BLOCKADE) || p_current_player.getAvailableCards().get(Card.BLOCKADE) == 0) throw new GameException(GameMessageConstants.D_CARD_INAVLID + GameMessageConstants.D_BLOCKADE);
+
+        GameCommandParser.CommandDetails l_command_detail = p_command_details.get(0);
+
+        List<String> l_command_parameters = l_command_detail.getCommandParameters();
+        if (l_command_parameters.size() != 1) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_BLOCKADE_COMMAND);
+
+        String l_country_name = l_command_parameters.get(0);
+
+        GameMap.Country l_country_obj = d_current_game_info.getGameMap().getCountryByName(l_country_name);
+
+        // checking if destination country is valid
+        if (l_country_obj == null) throw new GameException(GameMessageConstants.D_TO_COUNTRY_INVALID);
+
+        // checking if destination country belongs to same player
+        String l_to_country_player = l_country_obj.getPlayerName();
+        if (l_to_country_player == null || !l_to_country_player.equals(p_current_player.getPlayerName())) throw new GameException(GameMessageConstants.D_BLOCKADE_DESTINATION_INVALID);
+
+        p_current_player.d_current_order = new BlockadeOrder(l_country_obj);
+        p_current_player.issue_order();
+        p_current_player.removeAvailableCard(Card.BLOCKADE);
+        System.out.println(GameMessageConstants.D_BLOCKADE + " " + GameMessageConstants.D_ORDER_ISSUED);
+    }
+
+    private void executeAirliftOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
+
+        if (!p_current_player.getAvailableCards().containsKey(Card.AIRLIFT) || p_current_player.getAvailableCards().get(Card.AIRLIFT) == 0) throw new GameException(GameMessageConstants.D_CARD_INAVLID + GameMessageConstants.D_AIRLIFT);
+
+        GameCommandParser.CommandDetails l_command_detail = p_command_details.get(0);
+
+        List<String> l_command_parameters = l_command_detail.getCommandParameters();
+        if (l_command_parameters.size() > 3 || !GameCommonUtils.isNumeric(l_command_parameters.get(2))) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_AIRLIFT_COMMAND);
+
+        String l_from_country_name = l_command_parameters.get(0);
+        String l_to_country_name = l_command_parameters.get(1);
+        int l_armies_number = Integer.parseInt(l_command_parameters.get(2));
+
+        GameMap.Country l_from_country_obj = d_current_game_info.getGameMap().getCountryByName(l_from_country_name);
+        GameMap.Country l_to_country_obj = d_current_game_info.getGameMap().getCountryByName(l_to_country_name);
+
+        // checking if source country belongs to player
+        if (l_from_country_obj == null) throw new GameException(GameMessageConstants.D_COUNTRY_INVALID_FOR_PLAYER);
+        String l_from_country_player = l_from_country_obj.getPlayerName();
+        if (l_from_country_player == null || !l_from_country_player.equals(p_current_player.getPlayerName())) throw new GameException(GameMessageConstants.D_COUNTRY_INVALID_FOR_PLAYER);
+
+        // checking if destination country is valid
+        if (l_to_country_obj == null) throw new GameException(GameMessageConstants.D_TO_COUNTRY_INVALID);
+
+        // checking armies count if it exceeded
+        if (l_armies_number > l_from_country_obj.getArmyCount()) throw new GameException(GameMessageConstants.D_ATTACK_ARMIES_EXCEEDED + "\nAvailable Armies: " + l_from_country_obj.getArmyCount());
+
+        p_current_player.d_current_order = new AirliftOrder(l_from_country_obj, l_to_country_obj, l_armies_number);
+        p_current_player.issue_order();
+        p_current_player.removeAvailableCard(Card.AIRLIFT);
+        System.out.println(GameMessageConstants.D_AIRLIFT + " " + GameMessageConstants.D_ORDER_ISSUED);
+    }
+
+    private void executeDiplomacy(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
+
+        if (!p_current_player.getAvailableCards().containsKey(Card.DIPLOMACY) || p_current_player.getAvailableCards().get(Card.DIPLOMACY) == 0) throw new GameException(GameMessageConstants.D_CARD_INAVLID + GameMessageConstants.D_DIPLOMACY);
+
+        GameCommandParser.CommandDetails l_command_detail = p_command_details.get(0);
+
+        List<String> l_command_parameters = l_command_detail.getCommandParameters();
+        if (l_command_parameters.size() != 1) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_DIPLOMACY_COMMAND);
+
+        String l_target_player = l_command_parameters.get(0);
+
+        if (!d_current_game_info.getPlayerList().containsKey(l_target_player)) throw new GameException(GameMessageConstants.D_DIPLOMCY_DESTINATION_INVALID);
+
+        Player l_target_player_obj = d_current_game_info.getPlayerList().get(l_target_player);
+
+        p_current_player.d_current_order = new DiplomacyOrder(l_target_player_obj);
+        p_current_player.issue_order();
+        p_current_player.removeAvailableCard(Card.DIPLOMACY);
+        System.out.println(GameMessageConstants.D_DIPLOMACY + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
     /**
@@ -162,6 +243,18 @@ public class IssueOrderPhase extends Phase {
             }
             case "bomb": {
                 executeBombOrder(l_command_details, p_current_player);
+                break;
+            }
+            case "blockade": {
+                executeBlockadeOrder(l_command_details, p_current_player);
+                break;
+            }
+            case "airlift": {
+                executeAirliftOrder(l_command_details, p_current_player);
+                break;
+            }
+            case "negotiate": {
+                executeDiplomacy(l_command_details, p_current_player);
                 break;
             }
             default:

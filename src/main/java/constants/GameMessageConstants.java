@@ -7,11 +7,17 @@ public class GameMessageConstants {
 
     // Order Types
 
-    public static final String DEPLOY = "Deploy";
+    public static final String D_DEPLOY = "Deploy";
 
-    public static final String ADVANCE = "Advance";
+    public static final String D_ADVANCE = "Advance";
 
-    public static final String BOMB = "Bomb";
+    public static final String D_BOMB = "Bomb";
+
+    public static final String D_BLOCKADE = "Blockade";
+
+    public static final String D_DIPLOMACY = "Negotiate";
+
+    public static final String D_AIRLIFT = "Airlift";
 
     // Command Format Constants
     public static final String D_EDITMAP = "editmap filename";
@@ -27,6 +33,12 @@ public class GameMessageConstants {
     public static final String D_ADVANCE_COMMAND = "advance countrynamefrom countynameto numarmies";
 
     public static final String D_BOMB_COMMAND = "bomb countryID";
+
+    public static final String D_BLOCKADE_COMMAND = "blockade countryID";
+
+    public static final String D_DIPLOMACY_COMMAND = "negotiate playerID";
+
+    public static final String D_AIRLIFT_COMMAND = "airlift countrynamefrom countynameto numarmies";
 
     public static final String D_ASSIGNCOUNTRIES_COMMAND = "assigncountries";
 
@@ -58,6 +70,10 @@ public class GameMessageConstants {
     public static final String D_ATTACK_ARMIES_EXCEEDED = "Armies you are trying to move exceeded the available limit than in source country";
 
     public static final String D_BOMB_DESTINATION_INVALID = "Destination country should not be owned by player";
+
+    public static final String D_BLOCKADE_DESTINATION_INVALID = "Destination country should be owned by player";
+
+    public static final String D_DIPLOMCY_DESTINATION_INVALID = "The destination player trying to negotiate seems to be invalid";
 
     public static final String D_COUNTRY_NOT_ADJACENT = "The source and destination countries you are trying to initiate order are not adjacent";
 

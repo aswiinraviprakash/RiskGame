@@ -1,206 +1,88 @@
 package gameplay;
 
 import gameutils.GameException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import mapparser.GameMap.Country;
+import mapparser.GameMap;
 
-/**
- *
- * @author USER
- */
 public class AirliftOrder extends Order {
 
-    private String d_country_from;
+    private GameMap.Country d_source_country;
 
-    private String d_country_to;
+    private GameMap.Country d_destination_country;
 
     private int d_armies;
 
     private GameInformation d_current_game_info;
 
-    public AirliftOrder(String p_country_from, String p_country_to, int p_armies) {
-        this.d_country_from = p_country_from;
-        this.d_country_to = p_country_to;
+    public AirliftOrder(GameMap.Country p_source_country, GameMap.Country p_destination_country, int p_armies) {
+        this.d_source_country = p_source_country;
+        this.d_destination_country = p_destination_country;
         this.d_armies = p_armies;
-
     }
 
-    public String getCountryFrom(){
-        return this.d_country_from;
+    public GameMap.Country getDestinationCountry() {
+        return this.d_destination_country;
     }
-    
-    public String getCountryTo(){
-        return this.d_country_to;
+
+    public void attackDestinationCountry(Player p_current_player, Player p_destination_player) {
+
+        if (p_current_player != null && p_destination_player != null && (p_current_player.checkDiplomacyRelation(p_destination_player) || p_destination_player.checkDiplomacyRelation(p_current_player))) return;
+
+        int l_destination_armies = d_destination_country.getArmyCount();
+        int l_source_armies = d_source_country.getArmyCount();
+
+        if (d_armies > l_source_armies) return;
+
+        if (d_armies > l_destination_armies) {
+
+            d_source_country.setArmyCount(l_source_armies - d_armies);
+            d_destination_country.setArmyCount(d_armies - l_destination_armies);
+            if (p_destination_player != null) {
+                p_destination_player.getConqueredCountries().remove(d_destination_country);
+            }
+            d_destination_country.setPlayerName(p_current_player.getPlayerName());
+            p_current_player.getConqueredCountries().add(d_destination_country);
+
+            Card l_random_card = Card.generateRandomCard();
+            p_current_player.addAvailableCard(l_random_card);
+
+        } else if (d_armies <= l_destination_armies) {
+            d_source_country.setArmyCount(l_source_armies - d_armies);
+            d_destination_country.setArmyCount(l_destination_armies - d_armies);
+        }
     }
-    
+
+    public void movesArmiesToDestinationCountry() {
+        int l_destination_armies = d_destination_country.getArmyCount();
+        int l_source_armies = d_source_country.getArmyCount();
+        d_source_country.setArmyCount(l_source_armies - d_armies);
+        d_destination_country.setArmyCount(l_destination_armies + d_armies);
+    }
+
     @Override
-    public void execute(Player p_player) throws GameException {
-        //move any number of army units from one of your territories to another territory, even if they are not adjacent
-        LinkedHashMap<Integer, List<Integer>> l_borders = d_current_game_info.getGameMap().d_borders;
-        List<Country> l_countries = d_current_game_info.getGameMap().d_countries;
+    public void execute(Player p_player_obj) throws GameException {
 
-        boolean l_attack_mode = false;
+        d_current_game_info = GameInformation.getInstance();
 
-        int l_country_from_index = -1;
-        int l_country_to_index = -1;
+        if (!p_player_obj.getConqueredCountries().contains(d_source_country)) return;
 
-        //check if the countries are adjacent
-        for (int l_index = 0; l_index < l_countries.size(); l_index++) {
-            if (l_countries.get(l_index).getCountryName().compareTo(this.d_country_from) == 0) {
-                l_country_from_index = l_index;
-            }
+        String l_player_name = p_player_obj.getPlayerName();
+        boolean isAttackMode = false;
 
-            if (l_countries.get(l_index).getCountryName().compareTo(this.d_country_to) == 0) {
-                l_country_to_index = l_index;
-            }
+        Player l_destination_player = null;
+        String l_destination_player_name = d_destination_country.getPlayerName();
+        if (l_destination_player_name == null) {
+            isAttackMode = true;
+        } else if (!(l_destination_player_name.equals(l_player_name))) {
+            isAttackMode = true;
+            l_destination_player = d_current_game_info.getPlayerList().get(l_destination_player_name);
         }
 
-        if (l_country_from_index == -1 || l_country_to_index == -1) {
-            System.out.println("something went wrong");
-            return;
-        }
-
-        //check if country_from is his country 
-        if (p_player.checkIfCountryConquered(this.d_country_from)) {  
-
-                //check if armies lesser
-                if (l_countries.get(l_country_from_index).getArmyCount() >= this.d_armies) {
-
-                    boolean l_already_conquered_country = false;
-                    Iterator<HashMap.Entry<String, Player>> iterator = d_current_game_info.getPlayerList().entrySet().iterator();
-
-                    //checking if someone already owns countryto
-                    while (iterator.hasNext()) {
-                        HashMap.Entry<String, Player> entry = iterator.next();
-                        String l_key = entry.getKey();
-                        Player l_value = entry.getValue();
-
-                        for (int l_j_index = 0; l_j_index < l_value.d_conquered_countries.size(); l_j_index++) {
-                            if (l_value.d_conquered_countries.get(l_j_index).getCountryName().compareTo(this.d_country_to) == 0) {
-                                l_already_conquered_country = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    //check if its attack mode
-                    if (!p_player.checkIfCountryConquered(this.d_country_to) && l_already_conquered_country) {
-
-                        //attack mode 
-                        int l_country_from_army = d_current_game_info.getGameMap().d_countries.get(l_country_from_index).getArmyCount();
-
-                        int l_country_to_army = d_current_game_info.getGameMap().d_countries.get(l_country_to_index).getArmyCount();
-
-                        if (this.d_armies >= l_country_to_army) {
-
-                            //ownership change
-                            //tocountryarmy = darmies - lcountrytoarmy
-                            d_current_game_info.getGameMap().d_countries.get(l_country_to_index)
-                                    .setArmyCount(this.d_armies - d_current_game_info.getGameMap().d_countries.get(l_country_to_index)
-                                            .getArmyCount());
-                            //fromcountryarmy = fromcountryarmy - darmies
-
-                            d_current_game_info.getGameMap().d_countries.get(l_country_from_index)
-                                    .setArmyCount(d_current_game_info.getGameMap().d_countries.get(l_country_from_index)
-                                            .getArmyCount() - this.d_armies);
-
-                            //change ownership -- tocountry will be player's
-                            Player l_player_to_country = null;
-
-                            l_countries = d_current_game_info.getGameMap().d_countries;
-
-                            iterator = d_current_game_info.getPlayerList().entrySet().iterator();
-
-                            while (iterator.hasNext()) {
-                                HashMap.Entry<String, Player> entry = iterator.next();
-                                String l_key = entry.getKey();
-                                Player l_value = entry.getValue();
-
-                                for (int l_j_index = 0; l_j_index < l_value.d_conquered_countries.size(); l_j_index++) {
-                                    if (l_value.d_conquered_countries.get(l_j_index).getCountryName().compareTo(this.d_country_to) == 0) {
-                                        l_player_to_country = l_value;
-                                        break;
-                                    }
-                                }
-                            }
-
-                            //update in player objects (changing ownership)
-                            d_current_game_info.getPlayerList().get(l_player_to_country.getPlayerName()).d_conquered_countries.remove(l_countries.get(l_country_to_index));
-                            d_current_game_info.getPlayerList().get(p_player.getPlayerName()).d_conquered_countries.add(l_countries.get(l_country_to_index));
-
-                        } else {
-
-                            //no change in ownership
-                            // tocountryarmy = lcountrytoarmy - darmies
-                            d_current_game_info.getGameMap().d_countries.get(l_country_to_index)
-                                    .setArmyCount(d_current_game_info.getGameMap().d_countries.get(l_country_to_index)
-                                            .getArmyCount() - this.d_armies);
-
-                            //fromcountryarmy = fromcountryarmy - darmies
-                            d_current_game_info.getGameMap().d_countries.get(l_country_from_index)
-                                    .setArmyCount(d_current_game_info.getGameMap().d_countries.get(l_country_from_index)
-                                            .getArmyCount() - this.d_armies);
-
-                        }
-
-                    } else if (p_player.checkIfCountryConquered(this.d_country_to)) {
-                        //non attacking 
-                        //moving armies
-                        d_current_game_info.getGameMap().d_countries.get(l_country_from_index)
-                                .setArmyCount(d_current_game_info.getGameMap().d_countries.get(l_country_from_index).getArmyCount() - this.d_armies);
-
-                        d_current_game_info.getGameMap().d_countries.get(l_country_to_index)
-                                .setArmyCount(d_current_game_info.getGameMap().d_countries.get(l_country_to_index).getArmyCount() + this.d_armies);
-
-                    } else {
-                        //neutral country
-                        int l_country_to_army = d_current_game_info.getGameMap().d_countries.get(l_country_to_index).getArmyCount();
-
-                        if (this.d_armies >= l_country_to_army) {
-
-                            //ownership change
-                            //tocountryarmy = darmies - lcountrytoarmy
-                            d_current_game_info.getGameMap().d_countries.get(l_country_to_index)
-                                    .setArmyCount(this.d_armies - d_current_game_info.getGameMap().d_countries.get(l_country_to_index)
-                                            .getArmyCount());
-                            //fromcountryarmy = fromcountryarmy - darmies
-
-                            d_current_game_info.getGameMap().d_countries.get(l_country_from_index)
-                                    .setArmyCount(d_current_game_info.getGameMap().d_countries.get(l_country_from_index)
-                                            .getArmyCount() - this.d_armies);
-
-                            //change ownership -- tocountry will be player's
-                            l_countries = d_current_game_info.getGameMap().d_countries;
-
-                            d_current_game_info.getPlayerList().get(p_player.getPlayerName()).d_conquered_countries.add(l_countries.get(l_country_to_index));
-
-                        } else {
-
-                            //no change in ownership
-                            // tocountryarmy = lcountrytoarmy - darmies
-                            d_current_game_info.getGameMap().d_countries.get(l_country_to_index)
-                                    .setArmyCount(d_current_game_info.getGameMap().d_countries.get(l_country_to_index)
-                                            .getArmyCount() - this.d_armies);
-
-                            //fromcountryarmy = fromcountryarmy - darmies
-                            d_current_game_info.getGameMap().d_countries.get(l_country_from_index)
-                                    .setArmyCount(d_current_game_info.getGameMap().d_countries.get(l_country_from_index)
-                                            .getArmyCount() - this.d_armies);
-
-                        }
-                    }
-                } else {
-                    System.out.println("armies lesser");
-                    return;
-                }
-
+        if (isAttackMode) {
+            attackDestinationCountry(p_player_obj, l_destination_player);
         } else {
-            System.out.println("Not your country");
-            return;
+            movesArmiesToDestinationCountry();
         }
+
     }
 
 }

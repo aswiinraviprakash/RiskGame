@@ -90,8 +90,19 @@ public class Player {
         return this.d_current_armies;
     }
 
-    public List<Order> getOrdersList(){
-        return this.d_orders_list;       // to get the list of orders from the player
+    public List<Order> getOrders() {
+        return this.d_orders_list;
+    }
+
+    public boolean checkDiplomacyRelation(Player p_target_player) {
+        for (Order l_order_obj : d_orders_list) {
+            if (l_order_obj instanceof DiplomacyOrder) {
+                Player l_target_player = ((DiplomacyOrder) l_order_obj).getTargetPlayer();
+                if (p_target_player.getPlayerName().equals(l_target_player.getPlayerName())) return true;
+            }
+        }
+
+        return false;
     }
 
     /**
