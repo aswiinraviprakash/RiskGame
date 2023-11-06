@@ -34,6 +34,12 @@ public class BlockadeOrderTest {
             HashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
             Player l_player_obj = new Player("playerfirst");
             l_player_list.put("playerfirst", l_player_obj);
+            
+            List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
+
+            l_countries.get(0).setPlayerName("playerfirst");
+            l_countries.get(3).setPlayerName("playerfirst");
+            l_countries.get(4).setPlayerName("playerfirst");
 
         } catch (Exception e) {}
     }
