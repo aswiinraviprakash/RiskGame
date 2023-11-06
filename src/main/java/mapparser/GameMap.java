@@ -189,12 +189,27 @@ public class GameMap {
         public String getPlayerName() {
             return this.d_player_name;
         }
+        
+        public boolean isCountryAdjacent(String p_country_name){
+            LinkedHashMap<Integer, List<Integer>> l_borders = GameMap.this.d_borders;
+
+            Country l_destination_obj = getCountryByName(p_country_name);
+            if (l_destination_obj == null) return false;
+
+            int l_destination_id = l_destination_obj.getCountryID();
+
+            if (!l_borders.containsKey(this.getCountryID())) return false;
+
+            List<Integer> l_country_borders = l_borders.get(this.getCountryID());
+
+            return l_country_borders.contains(l_destination_id);
+        }
 
         /**
          * Function sets a boolean value based on the country's conquered
          * status.
          *
-         * @param p_value boolean value indicating a couontry's conquered
+         * @param p_value boolean value indicating a country's conquered
          * status.
          */
         public void setIsCountryConqered(boolean p_value) {
@@ -432,6 +447,16 @@ public class GameMap {
     public Country getCountryById(int p_country_id) {
         for (Country l_country_obj : d_countries) {
             if (l_country_obj.getCountryID() == p_country_id) {
+                return l_country_obj;
+            }
+        }
+
+        return null;
+    }
+
+    public Country getCountryByName(String p_country_name) {
+        for (Country l_country_obj : d_countries) {
+            if (l_country_obj.getCountryName().equals(p_country_name)) {
                 return l_country_obj;
             }
         }
