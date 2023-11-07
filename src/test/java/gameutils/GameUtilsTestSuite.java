@@ -6,7 +6,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-    GameCommandParserTest.class
+    GameCommandParserTest.class,
+    MapCommonUtilTest.class
 })
 
 /**
