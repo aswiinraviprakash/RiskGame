@@ -11,18 +11,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- *
- * @author USER
+ * Test case for the airlift order.
  */
 public class AirliftOrderTest {
 
-    /**
-     * @param args the command line arguments
-     */
     private GameInformation d_current_game_info;
     private GameMap.Country d_destination_country;
     private GameMap.Country d_source_country;
 
+    /**
+     * Initialises test data.
+     */
     @Before
     public void initialiseTestData() {
         try {
@@ -57,6 +56,9 @@ public class AirliftOrderTest {
         }
     }
 
+    /**
+     * Test for verifying the ownership change after the airlift.
+     */
     @Test
     public void airLiftAttackOwnershipChangeTest() {
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
@@ -90,6 +92,9 @@ public class AirliftOrderTest {
 
     }
 
+    /**
+     *  Test for verifying no changes after the airlift.
+     */
     @Test
     public void airLiftAttackNoOwnershipChangeTest() {
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
@@ -127,6 +132,9 @@ public class AirliftOrderTest {
 
     }
 
+    /**
+     * Test when the airlift results in no attacks.
+     */
     @Test
     public void airLiftNonAttackTest() {
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();

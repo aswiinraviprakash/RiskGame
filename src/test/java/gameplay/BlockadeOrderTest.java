@@ -13,11 +13,17 @@ import java.util.List;
 
 import org.junit.Assert;
 
+/**
+ * Test class for Blockade order.
+ */
 public class BlockadeOrderTest {
 
     private GameInformation d_current_game_info;
     private GameMap.Country d_destination_country;
 
+    /**
+     * Initialising test data.
+     */
     @Before
     public void InitializeTestData() {
         try {
@@ -53,6 +59,9 @@ public class BlockadeOrderTest {
         }
     }
 
+    /**
+     * Test for the blockade order.
+     */
     @Test
     public void blockadeTest() {
         try {
@@ -75,6 +84,9 @@ public class BlockadeOrderTest {
         }
     }
 
+    /**
+     * Test for the blockade order when the opponent country uses it.
+     */
     @Test
     public void opponentCountryBlockadeTest() {
         try {

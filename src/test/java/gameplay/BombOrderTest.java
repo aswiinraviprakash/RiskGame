@@ -12,11 +12,17 @@ import java.util.List;
 
 import org.junit.Assert;
 
+/**
+ * Test class for bomb order.
+ */
 public class BombOrderTest {
 
     private GameInformation d_current_game_info;
     private GameMap.Country d_destination_country;
 
+    /**
+     * Initialising test data.
+     */
     @Before
     public void initializeTestData() {
         try {
@@ -52,6 +58,9 @@ public class BombOrderTest {
         }
     }
 
+    /**
+     * Test for bombing the enemy country.
+     */
     @Test
     public void BombingEnemyTerritoryTest() {
         try {
@@ -73,7 +82,10 @@ public class BombOrderTest {
         } catch (Exception e) {
         }
     }
-    
+
+    /**
+     * Test for bombing one self.
+     */
     public void BombingOwnCountryTest(){
         try {
             LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
