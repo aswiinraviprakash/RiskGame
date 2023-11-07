@@ -45,7 +45,7 @@ public class BlockadeOrderTest {
     }
 
     @Test
-    public void TestBlockade(){
+    public void blockadeTest(){
         try {
             HashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
             Player l_player_first_obj = l_player_list.get("playerfirst");
@@ -64,7 +64,7 @@ public class BlockadeOrderTest {
     }
 
     @Test
-    public void CheckOwnerShip(){
+    public void ownershipChangeTest(){
         try{
             HashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
             Player l_player_first_obj = l_player_list.get("playerfirst");

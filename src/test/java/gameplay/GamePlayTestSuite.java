@@ -11,7 +11,8 @@ import org.junit.runners.Suite;
     IssueOrderPhaseTest.class,
     BombOrderTest.class,
     BlockadeOrderTest.class,
-    AirliftOrderTest.class
+    AirliftOrderTest.class,
+    DiplomacyOrderTest.class
 
 })
 
