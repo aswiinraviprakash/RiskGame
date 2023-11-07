@@ -17,6 +17,7 @@
                 <configuration>
                     <outputDirectory>${basedir}/apidocumentation</outputDirectory>
                     <reportOutputDirectory>${basedir}/apidocumentation</reportOutputDirectory>
+                    <additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam>
                 </configuration>
             </plugin>
         </plugins>
@@ -34,4 +35,4 @@
             <version>4.13.2</version>
         </dependency>
     </dependencies>
-    </project>
+</project>

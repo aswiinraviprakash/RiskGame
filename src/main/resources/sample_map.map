@@ -1,0 +1,21 @@
+[continents]
+quebec 3
+ontario 4
+
+[countries]
+1 montreal 1
+2 quebec-city 1
+3 laval 1
+4 toronto 2
+5 ottawa 2
+6 windsor 2
+7 thunder-bay 2
+
+[borders]
+1 3 2 6 
+2 3 1 
+3 1 2 4 
+4 3 5 7 
+5 4 6 7
+6 5 7
+7 4 5 6  
