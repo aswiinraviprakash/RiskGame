@@ -10,7 +10,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-    GameMapTest.class
+    GameMapTest.class,
+    EditMapPhaseTest.class
 })
 
 public class MapParserTestSuite {
