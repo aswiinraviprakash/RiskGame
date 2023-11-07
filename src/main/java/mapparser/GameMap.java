@@ -125,6 +125,7 @@ public class GameMap {
          * @param p_is_country_conquered whether country is conquered or not.
          * @param p_army_count army count.
          * @param p_continent_name continent name.
+         * @param p_player_name player name.
          */
         public Country(int p_country_id, String p_country_name, boolean p_is_country_conquered, int p_army_count, String p_continent_name, String p_player_name) {
             this.d_country_id = p_country_id;
@@ -258,6 +259,7 @@ public class GameMap {
 
     /**
      * Function adds border values to the country.
+     * @throws Exception If there is an error in the execution or validation.
      */
     public void loadBorders() throws Exception {
 
@@ -290,6 +292,7 @@ public class GameMap {
 
     /**
      * Function loads countries in a continent.
+     * @throws Exception If there is an error in the execution or validation.
      */
     public void loadCountries() throws Exception {
 
@@ -314,6 +317,7 @@ public class GameMap {
 
     /**
      * Function loads continents in a map.
+     * @throws Exception If there is an error in the execution or validation.
      */
     public void loadContinents() throws Exception {
         //create continent objects
@@ -387,8 +391,8 @@ public class GameMap {
         
 
     /**
-     * Function is used to display continents, countries and armies in
-     * correspondence to the players.
+     * Function is used to display continents, countries and armies in correspondence to the players.
+     * @param p_show_player boolean value whether player exists or not.
      */
     
     public void showMap(boolean p_show_player) {
@@ -461,7 +465,7 @@ public class GameMap {
     /**
      * Function returns country object when the name is specified.
      * @param p_country_name country object is returned.
-     * @return
+     * @return country object.
      */
     public Country getCountryByName(String p_country_name) {
         for (Country l_country_obj : d_countries) {
@@ -477,7 +481,7 @@ public class GameMap {
      * Function validates the map, ensuring the continents and countries are set
      * in place.
      * @return boolean value of true or false.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     public boolean validateGameMap() throws Exception {
         if (d_continents.isEmpty()) {

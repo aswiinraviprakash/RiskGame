@@ -1,5 +1,8 @@
 package utils;
 
+/**
+ * Observer interface.
+ */
 public interface Observer {
 
     /**

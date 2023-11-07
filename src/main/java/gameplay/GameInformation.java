@@ -32,6 +32,10 @@ public class GameInformation {
 
     private GameInformation() {}
 
+    /**
+     * Method returns the information of the game at an instance.
+     * @return information of the game instance.
+     */
     public static GameInformation getInstance() {
         if (d_game_info_instance == null) d_game_info_instance = new GameInformation();
         return d_game_info_instance;

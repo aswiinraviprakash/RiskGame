@@ -1,5 +1,8 @@
 package utils;
 
+/**
+ * Observable interface.
+ */
 public interface Observable {
 
     /**

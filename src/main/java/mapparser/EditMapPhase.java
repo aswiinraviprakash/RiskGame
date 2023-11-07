@@ -39,7 +39,7 @@ public class EditMapPhase extends Phase {
     /**
      * Method deals with processing to the next phase.
      * @return object of execute order phase.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     @Override
     public Phase nextPhase() throws Exception {
@@ -52,7 +52,7 @@ public class EditMapPhase extends Phase {
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list contains continent name and the bonus value.
      * @return updated map object.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     public GameMap editContinent(GameMap p_map, String p_map_option, List<String> p_parameter_list) throws Exception {
         // editcontinent -add continentID continentvalue -remove continentID
@@ -183,7 +183,7 @@ public class EditMapPhase extends Phase {
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list country and continent value.
      * @return updated map object.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     public GameMap editCountry(GameMap p_map, String p_map_option, List<String> p_parameter_list) throws Exception {
 
@@ -327,7 +327,7 @@ public class EditMapPhase extends Phase {
      * @param p_parameter_list contains a country name and its neighbouring
      * countries.
      * @return updated map object.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     public GameMap editBorders(GameMap p_map, String p_map_option, List<String> p_parameter_list) throws Exception {
 
@@ -438,6 +438,7 @@ public class EditMapPhase extends Phase {
      * @param p_map map object.
      * @param p_file_name map file name.
      * @return updated map files.
+     * @throws Exception If there is an error in the execution or validation.
      */
     public GameMap modifyMapFile(GameMap p_map, String p_file_name) throws Exception {
 
@@ -507,7 +508,7 @@ public class EditMapPhase extends Phase {
 
     /**
      * Method executes the edit map phase.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     @Override
     public void executePhase() throws Exception {

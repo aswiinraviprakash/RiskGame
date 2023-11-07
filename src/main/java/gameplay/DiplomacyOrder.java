@@ -29,7 +29,7 @@ public class DiplomacyOrder extends Order {
     /**
      * Method executes the Diplomacy phase.
      * @param p_player_obj The player object for whom the order is executed.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     @Override
     public void execute(Player p_player_obj) throws Exception {

@@ -51,7 +51,7 @@ public class ReinforcementPhase extends Phase {
     /**
      * Method deals with processing to the next phase.
      * @return object of Issue order phase.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     @Override
     public Phase nextPhase() throws Exception {

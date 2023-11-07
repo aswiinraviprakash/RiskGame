@@ -20,7 +20,7 @@ public class BlockadeOrder extends Order {
     /**
      * Method executes the Blockade phase.
      * @param p_player_obj The player object for whom the order is executed.
-     * @throws Exception
+     * @throws Exception Game Exception.
      */
     @Override
     public void execute(Player p_player_obj) throws Exception {

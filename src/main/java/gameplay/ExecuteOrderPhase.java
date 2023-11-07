@@ -18,7 +18,7 @@ public class ExecuteOrderPhase extends Phase {
     /**
      * Method makes the game proceed to the next phase.
      * @return Reinforcement phase.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     @Override
     public Phase nextPhase() throws Exception {

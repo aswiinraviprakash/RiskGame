@@ -35,7 +35,7 @@ public class Player {
 
     /**
      * Creates a new player with specified name.
-     * @param l_player_name
+     * @param l_player_name player name.
      */
     public Player(String l_player_name) {
         this.d_player_name = l_player_name;
@@ -58,7 +58,7 @@ public class Player {
 
     /**
      * Adds conquered country to the list of countries by the player.
-     * @param p_conquered_country
+     * @param p_conquered_country conquered country name.
      */
     public void setConqueredCountry(GameMap.Country p_conquered_country) {
         this.d_conquered_countries.add(p_conquered_country);
@@ -101,7 +101,7 @@ public class Player {
     /**
      * Method checks the diplomacy status of the target player.
      * @param p_target_player target player object.
-     * @return
+     * @return whether the diplomacy exists or not.
      */
     public boolean checkDiplomacyRelation(Player p_target_player) {
         for (Order l_order_obj : d_orders_list) {

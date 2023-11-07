@@ -25,7 +25,7 @@ public class LoadMapPhase extends Phase {
     private String d_map_directory;
 
     /**
-     *
+     * Constructor for initialising member variables.
      * @param p_map_path map file location.
      * @param p_need_newmap indicative of requiring a new map or not.
      */
@@ -54,7 +54,7 @@ public class LoadMapPhase extends Phase {
     /**
      * Method makes the game proceed to the next phase.
      * @return null
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     @Override
     public Phase nextPhase() throws Exception {
@@ -64,7 +64,7 @@ public class LoadMapPhase extends Phase {
     /**
      * Method loads the complete game map.
      * @param p_game_map map object.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     public void loadGameMap(GameMap p_game_map) throws Exception {
 
@@ -106,7 +106,7 @@ public class LoadMapPhase extends Phase {
 
     /**
      * Method executes the edit map phase.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     @Override
     public void executePhase() throws Exception {

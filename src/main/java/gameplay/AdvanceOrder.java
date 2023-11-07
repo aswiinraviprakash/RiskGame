@@ -85,7 +85,7 @@ public class AdvanceOrder extends Order {
     /**
      * Method executes the advancing order phase.
      * @param p_player_obj The player object for whom the order is executed.
-     * @throws GameException
+     * @throws GameException Game Exception error.
      */
     @Override
     public void execute(Player p_player_obj) throws GameException {

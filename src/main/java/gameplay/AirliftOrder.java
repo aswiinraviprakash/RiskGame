@@ -85,7 +85,7 @@ public class AirliftOrder extends Order {
     /**
      * Method executes the airlifting phase.
      * @param p_player_obj The player object for whom the order is executed.
-     * @throws GameException
+     * @throws GameException Game Exception.
      */
     @Override
     public void execute(Player p_player_obj) throws GameException {
