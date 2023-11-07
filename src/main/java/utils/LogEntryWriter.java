@@ -9,9 +9,19 @@ import java.io.PrintWriter;
  */
 public class LogEntryWriter implements Observer {
     public String fileName;
+
+    /**
+     * Constructor initialising log file variable.
+     * @param fileName log file.
+     */
     public LogEntryWriter(String fileName) {
         this.fileName = fileName;
     }
+
+    /**
+     * Method to write the logs into the console.
+     * @param message the message to be updated
+     */
     @Override
     public void update(String message) {
         PrintWriter writer = null;

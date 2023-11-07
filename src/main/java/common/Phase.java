@@ -5,6 +5,10 @@ package common;
  */
 public abstract class Phase {
 
+    /**
+     * Abstract class for the next phase.
+     * @throws Exception
+     */
     public abstract Phase nextPhase() throws Exception;
 
     /**

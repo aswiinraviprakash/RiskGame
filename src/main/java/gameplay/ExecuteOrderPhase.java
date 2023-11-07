@@ -15,6 +15,11 @@ public class ExecuteOrderPhase extends Phase {
      */
     private GameInformation d_current_game_info;
 
+    /**
+     * Method makes the game proceed to the next phase.
+     * @return Reinforcement phase.
+     * @throws Exception
+     */
     @Override
     public Phase nextPhase() throws Exception {
         return new ReinforcementPhase();

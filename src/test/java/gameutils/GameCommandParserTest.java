@@ -11,7 +11,7 @@ import java.util.List;
 public class GameCommandParserTest {
 
     /**
-     * Test to check commands, with options.
+     * Test to check commands present which have options.
      */
     @Test
     public void testCommandWithOption() {
@@ -30,7 +30,7 @@ public class GameCommandParserTest {
     }
 
     /**
-     * Test to check commands, without options.
+     * Test to check commands that are without options.
      */
     @Test
     public void testCommandWithoutOption() {

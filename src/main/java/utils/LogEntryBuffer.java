@@ -7,13 +7,7 @@ import java.util.Objects;
  * The class deals with the logs written to a buffer.
  */
 public class LogEntryBuffer implements Observable {
-    /**
-     * A static object of LogEntryBuffer
-     */
     private static LogEntryBuffer Logger;
-    /**
-     * A list of observers
-     */
     private List<Observer> d_ObserverList = new ArrayList<>();
 
     /**
@@ -36,7 +30,6 @@ public class LogEntryBuffer implements Observable {
 
     /**
      * This method gets the information from the game and notifies the Observer.
-     *
      * @param p_s The message to be notified
      */
     public void logs(String p_s) {

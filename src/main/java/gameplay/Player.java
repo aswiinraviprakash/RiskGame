@@ -99,7 +99,7 @@ public class Player {
     }
 
     /**
-     *
+     * Method checks the diplomacy status of the target player.
      * @param p_target_player target player object.
      * @return
      */
@@ -130,6 +130,10 @@ public class Player {
         return this.d_available_cards;
     }
 
+    /**
+     * Method adds the card allotted to the player.
+     * @param l_card_obj Card obejct.
+     */
     public void addAvailableCard(Card l_card_obj) {
         if (!d_available_cards.containsKey(l_card_obj)) {
             d_available_cards.put(l_card_obj, 1);

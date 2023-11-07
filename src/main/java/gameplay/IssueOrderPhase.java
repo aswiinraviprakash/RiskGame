@@ -65,7 +65,7 @@ public class IssueOrderPhase extends Phase {
 
     /**
      * Method executes advanced order phase.
-     * @param p_command_details
+     * @param p_command_details command details.
      * @param p_current_player current player object.
      * @throws Exception
      */
@@ -104,7 +104,7 @@ public class IssueOrderPhase extends Phase {
 
     /**
      * Method executes bomb order phase.
-     * @param p_command_details
+     * @param p_command_details command details.
      * @param p_current_player current player object
      * @throws Exception
      */
@@ -146,7 +146,7 @@ public class IssueOrderPhase extends Phase {
 
     /**
      * Method executes blockade order phase.
-     * @param p_command_details
+     * @param p_command_details command details.
      * @param p_current_player current player object.
      * @throws Exception
      */
@@ -178,7 +178,7 @@ public class IssueOrderPhase extends Phase {
 
     /**
      * Method executes the airlift order phase.
-     * @param p_command_details
+     * @param p_command_details command details.
      * @param p_current_player current player object.
      * @throws Exception
      */
@@ -217,7 +217,7 @@ public class IssueOrderPhase extends Phase {
 
     /**
      * Method executes the diplomacy phase.
-     * @param p_command_details
+     * @param p_command_details command details.
      * @param p_current_player current player object.
      * @throws Exception
      */

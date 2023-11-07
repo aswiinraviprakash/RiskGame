@@ -48,7 +48,6 @@ public class EditMapPhase extends Phase {
 
     /**
      * Function is used for adding, removing continents.
-     *
      * @param p_map map object.
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list contains continent name and the bonus value.
@@ -180,7 +179,6 @@ public class EditMapPhase extends Phase {
 
     /**
      * Function is used for adding, removing countries.
-     *
      * @param p_map map object.
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list country and continent value.
@@ -324,7 +322,6 @@ public class EditMapPhase extends Phase {
 
     /**
      * Function is used for adding, removing neighbouring countries.
-     *
      * @param p_map map object.
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list contains a country name and its neighbouring
@@ -438,7 +435,6 @@ public class EditMapPhase extends Phase {
     /**
      * Function is used to create a new map file, to modify its contents and to
      * overwrite map files.
-     *
      * @param p_map map object.
      * @param p_file_name map file name.
      * @return updated map files.

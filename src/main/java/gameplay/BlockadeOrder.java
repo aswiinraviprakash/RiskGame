@@ -3,7 +3,7 @@ package gameplay;
 import mapparser.GameMap;
 
 /**
- *
+ * The class is responsible for the blockade.
  */
 public class BlockadeOrder extends Order {
 
