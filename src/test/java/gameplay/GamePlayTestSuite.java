@@ -6,9 +6,14 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
+    GameEngineTest.class,
     GameStartUpPhaseTest.class,
     ReinforcementPhaseTest.class,
-    IssueOrderPhaseTest.class
+    IssueOrderPhaseTest.class,
+    BombOrderTest.class,
+    BlockadeOrderTest.class,
+    AirliftOrderTest.class,
+    DiplomacyOrderTest.class
 })
 
 /**
