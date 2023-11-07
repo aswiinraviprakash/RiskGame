@@ -7,7 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import mapparser.GameMap;
-
 /**
  * This class is responsible for assigning reinforcement armies to players based on the number of countries they have conquered.
  */
@@ -62,6 +61,7 @@ public class ReinforcementPhase extends Phase {
     @Override
     public void executePhase() throws Exception {
         System.out.printf("%nAssigning reinforcements....%n");
+
         d_current_game_info = GameInformation.getInstance();
 
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
