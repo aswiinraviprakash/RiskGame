@@ -1,1 +1,0 @@
-"C:\Program Files\Java\jdk-20\bin\javadoc.exe" @options @packages
