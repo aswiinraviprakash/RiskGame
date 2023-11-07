@@ -7,8 +7,14 @@ import java.io.File;
 import java.util.ArrayList;
 import org.junit.Assert;
 
+/**
+ * Test class for validating map utilities and functions.
+ */
 public class MapCommonUtilTest {
 
+    /**
+     * Test for verifying continents.
+     */
     @Test
     public void mapParsingContinentTest() {
 
@@ -28,6 +34,9 @@ public class MapCommonUtilTest {
         Assert.assertEquals(2, l_map_data.size());
     }
 
+    /**
+     * Test for verifying countries.
+     */
     @Test
     public void mapParsingCountryTest() {
 
@@ -47,6 +56,9 @@ public class MapCommonUtilTest {
         Assert.assertEquals(6, l_map_data.size());
     }
 
+    /**
+     * Test for verifying the borders.
+     */
     @Test
     public void mapParsingBorderTest() {
 
