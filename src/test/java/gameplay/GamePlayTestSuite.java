@@ -14,7 +14,6 @@ import org.junit.runners.Suite;
     BlockadeOrderTest.class,
     AirliftOrderTest.class,
     DiplomacyOrderTest.class
-
 })
 
 /**

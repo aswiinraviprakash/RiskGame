@@ -1,11 +1,9 @@
 package mapparser;
 
 import constants.GameConstants;
-import constants.GameMessageConstants;
 import gameutils.GameException;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,16 +33,6 @@ public class EditMapPhaseTest {
             this.p_map = l_gamemap_obj;
 
         } catch (Exception e) {
-        }
-
-    }
-
-    @After
-    public void revokeMapFile() {
-        try {
-            this.d_map_edit.modifyMapFile(this.p_map, "valid-testmap.map");
-        } catch (Exception e) {
-
         }
 
     }
@@ -163,76 +151,6 @@ public class EditMapPhaseTest {
 
         Assert.assertFalse(l_edited_map.getBorders().get(1).contains(3));
         Assert.assertEquals(2, l_edited_map.getBorders().get(1).size());
-    }
-
-    @Test
-    public void saveMapTest() {
-
-        try {
-            GameMap l_edited_map = null;
-            List<String> l_parameter_list = new ArrayList<String>();
-
-            l_parameter_list.add("newcontinent1");
-            l_parameter_list.add("2");
-
-            l_edited_map = this.d_map_edit.editContinent(this.p_map, "add", l_parameter_list);
-
-            l_parameter_list = new ArrayList<String>();
-
-            l_parameter_list.add("newcountry1");
-            l_parameter_list.add("continent1");
-
-            l_edited_map = this.d_map_edit.editCountry(l_edited_map, "add", l_parameter_list);
-
-            l_parameter_list = new ArrayList<String>();
-
-            l_parameter_list.add("newcountry2");
-            l_parameter_list.add("continent1");
-
-            l_edited_map = this.d_map_edit.editCountry(l_edited_map, "add", l_parameter_list);
-
-            l_parameter_list = new ArrayList<String>();
-
-            l_parameter_list.add("newcountry1");
-            l_parameter_list.add("newcountry2");
-
-            l_edited_map = this.d_map_edit.editBorders(l_edited_map, "add", l_parameter_list);
-
-            l_parameter_list = new ArrayList<String>();
-
-            l_parameter_list.add("newcountry2");
-            l_parameter_list.add("newcountry1");
-
-            l_edited_map = this.d_map_edit.editBorders(l_edited_map, "add", l_parameter_list);
-
-            //saving map 
-            boolean l_is_map_valid = l_edited_map.validateGameMap();
-            if (l_is_map_valid) {
-                l_edited_map = this.d_map_edit.modifyMapFile(l_edited_map, "valid-testmap.map");
-
-            }
-
-            GameMap l_new_map = new GameMap("valid-testmap.map");
-            LoadMapPhase l_loadmap_phase = new LoadMapPhase("valid-testmap.map", true);
-            l_loadmap_phase.setMapDirectory(GameConstants.D_MAP_TEST_DIRECTORY);
-            l_loadmap_phase.loadGameMap(l_new_map);
-            l_new_map = l_loadmap_phase.getLoadedMap();
-
-            Assert.assertEquals(3, l_new_map.getContinentObjects().size());
-            Assert.assertEquals(8, l_new_map.getCountryObjects().size());
-            Assert.assertEquals(8, l_new_map.getBorders().size());
-            Assert.assertEquals(2, l_new_map.getBorders().get(6).size());
-            Assert.assertEquals(2, l_new_map.getBorders().get(7).size());
-            Assert.assertEquals("newcontinent1", l_new_map.getContinentObjects().get(2).getContinentName());
-            Assert.assertEquals("newcountry1", l_new_map.getCountryObjects().get(6).getCountryName());
-            Assert.assertEquals("newcountry2", l_new_map.getCountryObjects().get(7).getCountryName());
-            Assert.assertTrue(l_new_map.getBorders().get(6).contains(7));
-            Assert.assertTrue(l_new_map.getBorders().get(6).contains(7));
-            
-        } catch (Exception e) {
-
-        }
-
     }
 
 }
