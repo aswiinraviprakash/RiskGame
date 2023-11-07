@@ -1,21 +1,38 @@
 package gameplay;
 
+import gameutils.GameException;
 import mapparser.GameMap;
 
+/**
+ * The class deals with bombing of the countries using the bomb card.
+ */
 public class BombOrder extends Order {
 
     private GameMap.Country d_destination_country;
 
     private GameInformation d_current_game_info;
 
+    /**
+     * Constructor used to initialise the member variables.
+     * @param p_destination_country country chosen for attack.
+     */
     public BombOrder(GameMap.Country p_destination_country) {
         this.d_destination_country = p_destination_country;
     }
 
+    /**
+     * Function returns the country of attack or destination.
+     * @return country of attack.
+     */
     public GameMap.Country getDestinationCountry() {
         return this.d_destination_country;
     }
 
+    /**
+     * Method executes the bomb phase.
+     * @param p_player_obj The player object for whom the order is executed.
+     * @throws GameException
+     */
     @Override
     public void execute(Player p_player_obj) throws Exception {
 

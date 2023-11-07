@@ -2,14 +2,26 @@ package gameplay;
 
 import mapparser.GameMap;
 
+/**
+ *
+ */
 public class BlockadeOrder extends Order {
 
     private GameMap.Country d_destination_country;
-    
+
+    /**
+     * Constructor for initialising member variables.
+     * @param p_destination_country destination country.
+     */
     public BlockadeOrder(GameMap.Country p_destination_country){
         this.d_destination_country = p_destination_country;
     }
-    
+
+    /**
+     * Method executes the Blockade phase.
+     * @param p_player_obj The player object for whom the order is executed.
+     * @throws Exception
+     */
     @Override
     public void execute(Player p_player_obj) throws Exception {
         if (!p_player_obj.getConqueredCountries().contains(d_destination_country)) return;

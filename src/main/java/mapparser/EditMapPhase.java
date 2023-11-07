@@ -17,17 +17,30 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * The class deals with the map editing.
+ */
 public class EditMapPhase extends Phase {
 
     private GameMap d_game_map;
 
     private String d_map_file_name;
 
+    /**
+     * Constructor initialises the member variables.
+     * @param l_game_map loads game map.
+     * @param l_map_file_name contains the map file name.
+     */
     public EditMapPhase(GameMap l_game_map, String l_map_file_name) {
         this.d_game_map = l_game_map;
         this.d_map_file_name = l_map_file_name;
     }
 
+    /**
+     * Method deals with processing to the next phase.
+     * @return object of execute order phase.
+     * @throws Exception
+     */
     @Override
     public Phase nextPhase() throws Exception {
         return null;
@@ -496,6 +509,10 @@ public class EditMapPhase extends Phase {
         return l_new_map;
     }
 
+    /**
+     * Method executes the edit map phase.
+     * @throws Exception
+     */
     @Override
     public void executePhase() throws Exception {
 

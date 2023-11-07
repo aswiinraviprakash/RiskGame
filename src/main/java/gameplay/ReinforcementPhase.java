@@ -48,6 +48,11 @@ public class ReinforcementPhase extends Phase {
         p_player_obj.setCurrentArmies(l_armies_value);
     }
 
+    /**
+     * Method deals with processing to the next phase.
+     * @return object of Issue order phase.
+     * @throws Exception
+     */
     @Override
     public Phase nextPhase() throws Exception {
         return new IssueOrderPhase();

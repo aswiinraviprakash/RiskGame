@@ -11,6 +11,9 @@ import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
+/**
+ *
+ */
 public class LoadMapPhase extends Phase {
 
     private String d_map_path;
@@ -79,6 +82,10 @@ public class LoadMapPhase extends Phase {
         System.out.println(GameMessageConstants.D_NEW_MAP);
     }
 
+    /**
+     * Method executes the edit map phase.
+     * @throws Exception
+     */
     @Override
     public void executePhase() throws Exception {
         try {

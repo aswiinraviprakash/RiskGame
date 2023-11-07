@@ -42,7 +42,7 @@ public class GameMap {
         private List<Integer> d_country_list;
 
         /**
-         * COnstructor is used for initializing a continent.
+         * Constructor is used for initializing a continent.
          *
          * @param p_continent_name continent name
          * @param p_is_continent_conquered continent conquered or not.
@@ -453,6 +453,11 @@ public class GameMap {
         return null;
     }
 
+    /**
+     * Function returns country object when the name is specified.
+     * @param p_country_name country object is returned.
+     * @return
+     */
     public Country getCountryByName(String p_country_name) {
         for (Country l_country_obj : d_countries) {
             if (l_country_obj.getCountryName().equals(p_country_name)) {
@@ -541,7 +546,7 @@ public class GameMap {
     }
 
     /**
-     *
+     * Method ensures the country us bound by the conditions listed.
      * @param l_country_obj country object.
      * @param p_country_map holds country objects to check country connectivity.
      * @param p_continent_obj continent object.

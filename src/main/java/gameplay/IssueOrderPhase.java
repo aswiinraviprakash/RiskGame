@@ -24,7 +24,7 @@ public class IssueOrderPhase extends Phase {
     private GameInformation d_current_game_info;
 
     /**
-     * Excecutes deploy orders based on the provided command details.
+     * Executes deploy orders based on the provided command details.
      * @param p_input_command command given by user.
      * @param p_current_player Current player issuing an order.
      * @throws Exception If an error occurs during order execution.
@@ -63,6 +63,12 @@ public class IssueOrderPhase extends Phase {
         System.out.println(GameMessageConstants.D_DEPLOY + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * Method executes advanced order phase.
+     * @param p_command_details
+     * @param p_current_player current player object.
+     * @throws Exception
+     */
     private void executeAdvanceOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
 
         GameCommandParser.CommandDetails l_command_detail = p_command_details.get(0);
@@ -96,6 +102,12 @@ public class IssueOrderPhase extends Phase {
         System.out.println(GameMessageConstants.D_ADVANCE + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * Method executes bomb order phase.
+     * @param p_command_details
+     * @param p_current_player current player object
+     * @throws Exception
+     */
     private void executeBombOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
 
         if (!p_current_player.getAvailableCards().containsKey(Card.BOMB) || p_current_player.getAvailableCards().get(Card.BOMB) == 0) throw new GameException(GameMessageConstants.D_CARD_INAVLID + GameMessageConstants.D_BOMB);
@@ -132,6 +144,12 @@ public class IssueOrderPhase extends Phase {
         System.out.println(GameMessageConstants.D_BOMB + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * Method executes blockade order phase.
+     * @param p_command_details
+     * @param p_current_player current player object.
+     * @throws Exception
+     */
     private void executeBlockadeOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
 
         if (!p_current_player.getAvailableCards().containsKey(Card.BLOCKADE) || p_current_player.getAvailableCards().get(Card.BLOCKADE) == 0) throw new GameException(GameMessageConstants.D_CARD_INAVLID + GameMessageConstants.D_BLOCKADE);
@@ -158,6 +176,12 @@ public class IssueOrderPhase extends Phase {
         System.out.println(GameMessageConstants.D_BLOCKADE + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * Method executes the airlift order phase.
+     * @param p_command_details
+     * @param p_current_player current player object.
+     * @throws Exception
+     */
     private void executeAirliftOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
 
         if (!p_current_player.getAvailableCards().containsKey(Card.AIRLIFT) || p_current_player.getAvailableCards().get(Card.AIRLIFT) == 0) throw new GameException(GameMessageConstants.D_CARD_INAVLID + GameMessageConstants.D_AIRLIFT);
@@ -191,6 +215,12 @@ public class IssueOrderPhase extends Phase {
         System.out.println(GameMessageConstants.D_AIRLIFT + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * Method executes the diplomacy phase.
+     * @param p_command_details
+     * @param p_current_player current player object.
+     * @throws Exception
+     */
     private void executeDiplomacy(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player) throws Exception {
 
         if (!p_current_player.getAvailableCards().containsKey(Card.DIPLOMACY) || p_current_player.getAvailableCards().get(Card.DIPLOMACY) == 0) throw new GameException(GameMessageConstants.D_CARD_INAVLID + GameMessageConstants.D_DIPLOMACY);
@@ -262,6 +292,11 @@ public class IssueOrderPhase extends Phase {
         }
     }
 
+    /**
+     * Method deals with processing to the next phase.
+     * @return object of execute order phase.
+     * @throws Exception
+     */
     @Override
     public Phase nextPhase() throws Exception {
         return new ExecuteOrderPhase();

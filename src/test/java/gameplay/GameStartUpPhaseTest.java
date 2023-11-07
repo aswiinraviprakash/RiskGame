@@ -10,6 +10,9 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * Test class for Game startup up phase
+ */
 public class GameStartUpPhaseTest {
 
     /**
