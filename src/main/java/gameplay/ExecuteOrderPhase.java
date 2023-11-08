@@ -46,6 +46,18 @@ public class ExecuteOrderPhase extends Phase {
             }
         }
 
+        for (Map.Entry<String, Player> l_player : l_player_list.entrySet()) {
+            int l_total_countries = d_current_game_info.getGameMap().getCountryObjects().size();
+            Player l_current_player = l_player.getValue();
+            if (l_total_countries == l_current_player.getConqueredCountries().size()) {
+                System.out.println(l_current_player.getPlayerName() + " Won the Game !!!\n");
+                d_current_game_info.setCurrentPhase(new EndGamePhase());
+                return;
+            }
+        }
+
+        d_current_game_info.resetCardIssued();
+
         d_current_game_info.setCurrentPhase(this.nextPhase());
     }
 }

@@ -31,7 +31,7 @@ public class Player {
 
     public List<GameMap.Country> d_conquered_countries = new ArrayList<>();
 
-    public HashMap<Card, Integer> d_available_cards = new HashMap();
+    private HashMap<Card, Integer> d_available_cards = new HashMap();
 
     /**
      * Creates a new player with specified name.
