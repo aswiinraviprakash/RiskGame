@@ -14,7 +14,9 @@ import mapparser.GameMapEditor;
  * The GameMenu class is the entry point of the game.
  */
 public class GameMenu {
-
+    /**
+     * Adds the logger
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**

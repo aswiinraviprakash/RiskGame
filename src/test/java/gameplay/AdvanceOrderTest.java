@@ -13,6 +13,7 @@ import java.util.List;
 
 public class AdvanceOrderTest  {
 
+    
     private GameMap.Country d_destination_country;
     private GameMap.Country d_source_country;
     private GameInformation d_current_game_info;

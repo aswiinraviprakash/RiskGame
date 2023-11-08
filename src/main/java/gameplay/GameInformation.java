@@ -89,16 +89,24 @@ public class GameInformation {
         return this.d_current_game_map;
     }
 
+    /**
+     * @param p_player_name
+     */
     public void setCardIssuedPlayer(String p_player_name) {
         if (this.d_card_issued_players == null) this.d_card_issued_players = new ArrayList<>();
         d_card_issued_players.add(p_player_name);
     }
-
+    /**
+     * Checks if the player is issued a card
+     * @return Returns True or False
+     */
     public boolean isPlayerIssuedCard(String p_player_name) {
         if (this.d_card_issued_players == null) return false;
         return d_card_issued_players.contains(p_player_name);
     }
-
+    /**
+     * This method removes the card set to the players
+     */
     public void resetCardIssued() {
         this.d_card_issued_players = null;
     }

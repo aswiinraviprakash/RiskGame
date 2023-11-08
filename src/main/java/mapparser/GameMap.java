@@ -15,11 +15,16 @@ import java.util.Map;
  * The class loads map files and displays them.
  */
 public class GameMap {
+    /**
+     * Creating Borders, Countries and Continents
+     */
 
     public LinkedHashMap<Integer, List<Integer>> d_borders = new LinkedHashMap<Integer, List<Integer>>();
     public List<Country> d_countries = new ArrayList<Country>();
     public List<Continent> d_continents = new ArrayList<Continent>();
-
+    /** 
+     * filepath
+    */
     private String d_file_path;
 
     /**
