@@ -2,7 +2,14 @@ package mapparser;
 
 import constants.GameConstants;
 import constants.GameMessageConstants;
+import gameplay.GameInformation;
+import gameplay.Player;
 import gameutils.GameException;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -116,6 +123,87 @@ public class GameMapTest {
             } catch (Exception e) { }
 
         } catch (Exception e) { }
+    }
+    
+    @Test
+    public void showMapTestWithoutPlayers() {
+        ByteArrayOutputStream l_out_content = null;
+
+        try {
+            l_out_content = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(l_out_content));
+            l_out_content.reset();
+
+            LoadMapPhase l_loadmap_phase = new LoadMapPhase("showmap-test.map", true);
+            l_loadmap_phase.setMapDirectory(GameConstants.D_MAP_TEST_DIRECTORY);
+            l_loadmap_phase.executePhase();
+            mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
+            l_gamemap_obj.showMap(false);
+
+        } catch (Exception e) {
+
+        }
+
+        Assert.assertTrue(l_out_content.toString().length() > 0);
+
+    }
+
+    @Test
+    public void showMapTestWithPlayers() {
+
+        ByteArrayOutputStream l_out_content_player = null, l_out_content_no_player = null;
+        GameInformation d_current_game_info = null;
+        int l_no_player_length = -1;
+        int l_player_length = -1;
+
+        try {
+            d_current_game_info = GameInformation.getInstance();
+
+            LoadMapPhase l_loadmap_phase = new LoadMapPhase("showmap-test.map", true);
+            l_loadmap_phase.setMapDirectory(GameConstants.D_MAP_TEST_DIRECTORY);
+            l_loadmap_phase.executePhase();
+            mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
+
+            l_out_content_no_player = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(l_out_content_no_player));
+            l_out_content_no_player.reset();
+
+            l_gamemap_obj.showMap(false);
+            
+            l_no_player_length = l_out_content_no_player.toString().length();
+        
+            l_out_content_no_player.close();
+            
+            d_current_game_info.setCurrenGameMap(l_gamemap_obj);
+
+            LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+            Player l_player_obj = new Player("playerfirst");
+            l_player_list.put("playerfirst", l_player_obj);
+
+            List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
+
+            l_countries.get(0).setPlayerName("playerfirst");
+            l_countries.get(3).setPlayerName("playerfirst");
+            l_countries.get(4).setPlayerName("playerfirst");
+
+            Player l_player_first_obj = l_player_list.get("playerfirst");
+            l_player_first_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(0), l_countries.get(3), l_countries.get(4)}));
+
+            l_out_content_player = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(l_out_content_player));
+            l_out_content_player.reset();
+
+            l_gamemap_obj.showMap(true);
+            
+            l_player_length = l_out_content_player.toString().length();
+            
+            l_out_content_player.close();
+            
+        } catch (Exception e) {
+            
+        }
+        
+       Assert.assertTrue((l_player_length +l_no_player_length) > 0 );
     }
     
 }
