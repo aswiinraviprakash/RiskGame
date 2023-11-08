@@ -60,7 +60,6 @@ public class DiplomacyOrder extends Order {
 
                 l_destination_player = ((AirliftOrder) l_order).getDestinationCountry().getPlayerName();
                 if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
-
             }
         }
 
@@ -84,7 +83,6 @@ public class DiplomacyOrder extends Order {
 
                 l_destination_player = ((AirliftOrder) l_order).getDestinationCountry().getPlayerName();
                 if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
-
             }
         }
     }

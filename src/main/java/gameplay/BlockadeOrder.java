@@ -34,7 +34,6 @@ public class BlockadeOrder extends Order {
         d_destination_country.setArmyCount(l_destination_armies * 3);
         p_player_obj.getConqueredCountries().remove(d_destination_country);
         d_destination_country.setPlayerName(null);
-
     }
     
 }

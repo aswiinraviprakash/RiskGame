@@ -51,6 +51,5 @@ public class BombOrder extends Order {
 
         int l_destination_armies = d_destination_country.getArmyCount();
         d_destination_country.setArmyCount(l_destination_armies / 2);
-
     }
 }

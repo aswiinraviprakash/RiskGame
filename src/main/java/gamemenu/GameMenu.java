@@ -29,6 +29,8 @@ public class GameMenu {
 
             BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 
+            LogEntryWriter l_log_writer = new LogEntryWriter(d_logger);
+
             System.out.printf("Welcome to Risk War Game!!!%nMenu%n");
             d_logger.addLogger("Welcome to Risk War Game!!!%nMenu%n");
 
@@ -61,9 +63,7 @@ public class GameMenu {
             System.out.println(e);
             System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
             d_logger.addLogger(e.getMessage());
-            d_logger.addLogger("There seems to be some issue try restarting the Game");
-
-
+            d_logger.addLogger(GameMessageConstants.D_INTERNAL_ERROR);
         }
 
     }
