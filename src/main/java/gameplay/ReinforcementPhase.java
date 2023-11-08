@@ -18,7 +18,7 @@ public class ReinforcementPhase extends Phase {
     private GameInformation d_current_game_info;
 
     /**
-     * This method assigns armioes to players.
+     * This method assigns armies to players.
      * @param p_player_obj The player object to assign armies to.
      * @throws Exception Exception If there is an error while assigning armies.
      */
@@ -48,6 +48,11 @@ public class ReinforcementPhase extends Phase {
         p_player_obj.setCurrentArmies(l_armies_value);
     }
 
+    /**
+     * Method deals with processing to the next phase.
+     * @return object of Issue order phase.
+     * @throws Exception If there is an error in the execution or validation.
+     */
     @Override
     public Phase nextPhase() throws Exception {
         return new IssueOrderPhase();

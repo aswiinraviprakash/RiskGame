@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- *  Issue order test phase.
+ * Issue order test phase.
  */
 public class IssueOrderPhaseTest {
     private GameInformation d_current_game_info;

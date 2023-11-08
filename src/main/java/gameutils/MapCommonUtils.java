@@ -13,11 +13,12 @@ import java.util.List;
 public class MapCommonUtils {
 
     /**
-     *
-     * @param p_file_path The path to the map file.
+     * Method returns the complete map details.
+     * @param p_file_path The path to  the map file.
      * @param p_from_keyword Starting keyword to search for in the file.
      * @param p_to_keyword Ending keyword to search for in the file.
      * @return A list of map details.
+     * @throws Exception If there is an error in the execution or validation.
      */
     public static List<String> getMapDetails(String p_file_path, String p_from_keyword, String p_to_keyword) throws Exception {
         List<String> l_all_lines = null;

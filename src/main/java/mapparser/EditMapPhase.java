@@ -17,17 +17,30 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * The class deals with the map editing.
+ */
 public class EditMapPhase extends Phase {
 
     private GameMap d_game_map;
 
     private String d_map_file_name;
 
+    /**
+     * Constructor initialises the member variables.
+     * @param l_game_map loads game map.
+     * @param l_map_file_name contains the map file name.
+     */
     public EditMapPhase(GameMap l_game_map, String l_map_file_name) {
         this.d_game_map = l_game_map;
         this.d_map_file_name = l_map_file_name;
     }
 
+    /**
+     * Method deals with processing to the next phase.
+     * @return object of execute order phase.
+     * @throws Exception If there is an error in the execution or validation.
+     */
     @Override
     public Phase nextPhase() throws Exception {
         return null;
@@ -35,12 +48,11 @@ public class EditMapPhase extends Phase {
 
     /**
      * Function is used for adding, removing continents.
-     *
      * @param p_map map object.
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list contains continent name and the bonus value.
      * @return updated map object.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     public GameMap editContinent(GameMap p_map, String p_map_option, List<String> p_parameter_list) throws Exception {
         // editcontinent -add continentID continentvalue -remove continentID
@@ -167,12 +179,11 @@ public class EditMapPhase extends Phase {
 
     /**
      * Function is used for adding, removing countries.
-     *
      * @param p_map map object.
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list country and continent value.
      * @return updated map object.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     public GameMap editCountry(GameMap p_map, String p_map_option, List<String> p_parameter_list) throws Exception {
 
@@ -311,13 +322,12 @@ public class EditMapPhase extends Phase {
 
     /**
      * Function is used for adding, removing neighbouring countries.
-     *
      * @param p_map map object.
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list contains a country name and its neighbouring
      * countries.
      * @return updated map object.
-     * @throws Exception
+     * @throws Exception If there is an error in the execution or validation.
      */
     public GameMap editBorders(GameMap p_map, String p_map_option, List<String> p_parameter_list) throws Exception {
 
@@ -425,10 +435,10 @@ public class EditMapPhase extends Phase {
     /**
      * Function is used to create a new map file, to modify its contents and to
      * overwrite map files.
-     *
      * @param p_map map object.
      * @param p_file_name map file name.
      * @return updated map files.
+     * @throws Exception If there is an error in the execution or validation.
      */
     public GameMap modifyMapFile(GameMap p_map, String p_file_name) throws Exception {
 
@@ -496,6 +506,10 @@ public class EditMapPhase extends Phase {
         return l_new_map;
     }
 
+    /**
+     * Method executes the edit map phase.
+     * @throws Exception If there is an error in the execution or validation.
+     */
     @Override
     public void executePhase() throws Exception {
 

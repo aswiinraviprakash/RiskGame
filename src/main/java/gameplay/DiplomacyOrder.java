@@ -3,18 +3,34 @@ package gameplay;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * The class deals with the negotiation phase between the chosen players.
+ */
 public class DiplomacyOrder extends Order {
 
     private Player d_target_player;
 
+    /**
+     * Constructor initialises the target player objects.
+     * @param p_target_player target player object.
+     */
     public DiplomacyOrder(Player p_target_player) {
         this.d_target_player = p_target_player;
     }
 
+    /**
+     * Method returns the target player.
+     * @return target player object.
+     */
     public Player getTargetPlayer() {
         return this.d_target_player;
     }
 
+    /**
+     * Method executes the Diplomacy phase.
+     * @param p_player_obj The player object for whom the order is executed.
+     * @throws Exception If there is an error in the execution or validation.
+     */
     @Override
     public void execute(Player p_player_obj) throws Exception {
 

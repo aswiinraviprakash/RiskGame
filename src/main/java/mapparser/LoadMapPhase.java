@@ -11,6 +11,9 @@ import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
+/**
+ * The class deals with the loading of map into the game.
+ */
 public class LoadMapPhase extends Phase {
 
     private String d_map_path;
@@ -21,25 +24,48 @@ public class LoadMapPhase extends Phase {
 
     private String d_map_directory;
 
+    /**
+     * Constructor for initialising member variables.
+     * @param p_map_path map file location.
+     * @param p_need_newmap indicative of requiring a new map or not.
+     */
     public LoadMapPhase(String p_map_path, boolean p_need_newmap) {
         this.d_map_path = p_map_path;
         this.d_need_newmap = p_need_newmap;
         this.d_map_directory = GameConstants.D_MAP_DIRECTORY;
     }
 
+    /**
+     * Method sets map path.
+     * @param p_map_directory map file location.
+     */
     public void setMapDirectory(String p_map_directory) {
         this.d_map_directory = p_map_directory;
     }
 
+    /**
+     * Method returns loaded map.
+     * @return loaded map.
+     */
     public GameMap getLoadedMap() {
         return this.d_loaded_game_map;
     }
 
+    /**
+     * Method makes the game proceed to the next phase.
+     * @return null
+     * @throws Exception If there is an error in the execution or validation.
+     */
     @Override
     public Phase nextPhase() throws Exception {
         return null;
     }
 
+    /**
+     * Method loads the complete game map.
+     * @param p_game_map map object.
+     * @throws Exception If there is an error in the execution or validation.
+     */
     public void loadGameMap(GameMap p_game_map) throws Exception {
 
         // loading map objects
@@ -57,7 +83,6 @@ public class LoadMapPhase extends Phase {
 
     /**
      * Function creates a new map file.
-     *
      * @return map object.
      */
     private void initialiseMapFile() throws Exception {
@@ -79,6 +104,10 @@ public class LoadMapPhase extends Phase {
         System.out.println(GameMessageConstants.D_NEW_MAP);
     }
 
+    /**
+     * Method executes the edit map phase.
+     * @throws Exception If there is an error in the execution or validation.
+     */
     @Override
     public void executePhase() throws Exception {
         try {

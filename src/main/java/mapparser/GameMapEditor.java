@@ -17,6 +17,7 @@ public class GameMapEditor {
 
     /**
      * Function is used for the initial map editing phase.
+     * @throws Exception If there is an error in the execution or validation.
      */
     public void initialiseAndRunMapEditor() throws Exception {
 

@@ -1,9 +1,16 @@
 package gameplay;
 
+/**
+ * Distributes random cards to the players when the conditions are met.
+ */
 public enum Card {
 
     BOMB, BLOCKADE, AIRLIFT, DIPLOMACY;
 
+    /**
+     * Method selects cards at random.
+     * @return cards.
+     */
     public static Card generateRandomCard() {
         int l_rand_index = -1;
         //calculate the type of card to be assigned

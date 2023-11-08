@@ -3,6 +3,9 @@ package gameplay;
 import gameutils.GameException;
 import mapparser.GameMap;
 
+/**
+ * The class deals with airlifting of the armies to other countries.
+ */
 public class AirliftOrder extends Order {
 
     private GameMap.Country d_source_country;
@@ -13,16 +16,31 @@ public class AirliftOrder extends Order {
 
     private GameInformation d_current_game_info;
 
+    /**
+     * Constructor initialising the member variables.
+     * @param p_source_country country of origin.
+     * @param p_destination_country country of attack.
+     * @param p_armies army count.
+     */
     public AirliftOrder(GameMap.Country p_source_country, GameMap.Country p_destination_country, int p_armies) {
         this.d_source_country = p_source_country;
         this.d_destination_country = p_destination_country;
         this.d_armies = p_armies;
     }
 
+    /**
+     * Function returns the country of attack or destination.
+     * @return country of attack.
+     */
     public GameMap.Country getDestinationCountry() {
         return this.d_destination_country;
     }
 
+    /**
+     * Function deals with the attacking of the country by the current player using the airlifting card.
+     * @param p_current_player current player object.
+     * @param p_destination_player attacking player object.
+     */
     public void attackDestinationCountry(Player p_current_player, Player p_destination_player) {
 
         if (p_current_player != null && p_destination_player != null && (p_current_player.checkDiplomacyRelation(p_destination_player) || p_destination_player.checkDiplomacyRelation(p_current_player))) return;
@@ -54,6 +72,9 @@ public class AirliftOrder extends Order {
         }
     }
 
+    /**
+     * Armies are sent to the destination country.
+     */
     public void movesArmiesToDestinationCountry() {
         int l_destination_armies = d_destination_country.getArmyCount();
         int l_source_armies = d_source_country.getArmyCount();
@@ -61,6 +82,11 @@ public class AirliftOrder extends Order {
         d_destination_country.setArmyCount(l_destination_armies + d_armies);
     }
 
+    /**
+     * Method executes the airlifting phase.
+     * @param p_player_obj The player object for whom the order is executed.
+     * @throws GameException Game Exception.
+     */
     @Override
     public void execute(Player p_player_obj) throws GameException {
 

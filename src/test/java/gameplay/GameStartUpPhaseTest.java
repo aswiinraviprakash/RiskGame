@@ -10,11 +10,11 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * Test class for Game startup up phase
+ */
 public class GameStartUpPhaseTest {
 
-    /**
-     * Sets current game info.
-     */
     private GameInformation d_current_game_info;
 
     /**

@@ -35,7 +35,7 @@ public class Player {
 
     /**
      * Creates a new player with specified name.
-     * @param l_player_name
+     * @param l_player_name player name.
      */
     public Player(String l_player_name) {
         this.d_player_name = l_player_name;
@@ -58,7 +58,7 @@ public class Player {
 
     /**
      * Adds conquered country to the list of countries by the player.
-     * @param p_conquered_country
+     * @param p_conquered_country conquered country name.
      */
     public void setConqueredCountry(GameMap.Country p_conquered_country) {
         this.d_conquered_countries.add(p_conquered_country);
@@ -90,10 +90,19 @@ public class Player {
         return this.d_current_armies;
     }
 
+    /**
+     * Method to get a list of orders.
+     * @return order list.
+     */
     public List<Order> getOrders() {
         return this.d_orders_list;
     }
 
+    /**
+     * Method checks the diplomacy status of the target player.
+     * @param p_target_player target player object.
+     * @return whether the diplomacy exists or not.
+     */
     public boolean checkDiplomacyRelation(Player p_target_player) {
         for (Order l_order_obj : d_orders_list) {
             if (l_order_obj instanceof DiplomacyOrder) {
@@ -113,10 +122,18 @@ public class Player {
         return this.d_conquered_countries;
     }
 
+    /**
+     * Method returns the cards that are distributes to the players.
+     * @return alloted cards.
+     */
     public HashMap<Card, Integer> getAvailableCards() {
         return this.d_available_cards;
     }
 
+    /**
+     * Method adds the card allotted to the player.
+     * @param l_card_obj Card obejct.
+     */
     public void addAvailableCard(Card l_card_obj) {
         if (!d_available_cards.containsKey(l_card_obj)) {
             d_available_cards.put(l_card_obj, 1);
@@ -126,6 +143,10 @@ public class Player {
         }
     }
 
+    /**
+     * Method removes the card allowed to the player after use.
+     * @param l_card_obj card that is to be removed.
+     */
     public void removeAvailableCard(Card l_card_obj) {
         if (d_available_cards.containsKey(l_card_obj)) {
             int l_card_count = d_available_cards.get(l_card_obj);
@@ -133,6 +154,10 @@ public class Player {
         }
     }
 
+    /**
+     * Method is used for listing all the cards currently available to the player.
+     * @return cards that are allotted.
+     */
     public String printAvailableCards() {
         String l_available_cards = "";
         for (Map.Entry<Card, Integer> l_entry : d_available_cards.entrySet()) {

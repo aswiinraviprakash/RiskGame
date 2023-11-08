@@ -30,7 +30,7 @@ public class GameStartUpPhase extends Phase {
     private List<String> d_completed_operations = new ArrayList<>();
 
     /**
-     * Method to laad the Game map.
+     * Method to load the Game map.
      * @param p_command_details Parsed command details of original command.
      * @throws Exception Displays the message, Command seems to be invalid enter valid one.
      */
@@ -62,7 +62,7 @@ public class GameStartUpPhase extends Phase {
     }
 
     /**
-     * To add or remove players
+     * Method to add or remove players
      * @param p_command_details Parsed command details of original command.
      * @throws Exception If it is empty example format is displayed.
      */
@@ -111,7 +111,7 @@ public class GameStartUpPhase extends Phase {
     }
 
     /**
-     * Method to assign countries to players
+     * Method to assign countries to players.
      * @param p_command_details Parsed command details of original command.
      * @throws Exception Command seems to be invalid.
      */
@@ -178,6 +178,11 @@ public class GameStartUpPhase extends Phase {
         }
     }
 
+    /**
+     * Method deals with processing to the next phase.
+     * @return object of reinforcement phase.
+     * @throws Exception If there is an error in the execution or validation.
+     */
     @Override
     public Phase nextPhase() throws Exception {
         return new ReinforcementPhase();
