@@ -10,10 +10,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author USER
- */
 public class ExecuteOrderPhaseTest {
     
     private GameInformation d_current_game_info;

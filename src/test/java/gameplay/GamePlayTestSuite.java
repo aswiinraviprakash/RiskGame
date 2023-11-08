@@ -15,6 +15,7 @@ import org.junit.runners.Suite;
     AirliftOrderTest.class,
     DiplomacyOrderTest.class,
     AdvanceOrderTest.class,
+    ExecuteOrderPhaseTest.class
 })
 
 /**
