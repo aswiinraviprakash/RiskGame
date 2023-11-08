@@ -36,7 +36,7 @@ public class ExecuteOrderPhase extends Phase {
     @Override
     public void executePhase() throws Exception {
         System.out.printf("%nExecuting orders issued....%n");
-        d_logger.addLogger("%nExecuting orders issued....%n");
+        d_logger.addLogger("....Executing orders issued....");
         d_current_game_info = GameInformation.getInstance();
 
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();

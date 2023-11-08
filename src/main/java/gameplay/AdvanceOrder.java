@@ -94,7 +94,7 @@ public class AdvanceOrder extends Order {
     public void execute(Player p_player_obj) throws GameException {
 
         d_current_game_info = GameInformation.getInstance();
-        d_logger.addLogger("Start of Advance order");
+        d_logger.addLogger("Advance order Initiated");
         if (!p_player_obj.getConqueredCountries().contains(d_source_country)) return;
 
         String l_player_name = p_player_obj.getPlayerName();
@@ -116,8 +116,6 @@ public class AdvanceOrder extends Order {
             movesArmiesToDestinationCountry();
             d_logger.addLogger("Advance order in Friendly territory");
         }
-
-        d_logger.addLogger("End of Advance Order");
     }
 
 }

@@ -1,2 +1,0 @@
-Welcome to Risk War Game!!!%nMenu%n
-Type: mapeditor - Map Editor / gameplay - GamePlay / exit - Exit%n%n

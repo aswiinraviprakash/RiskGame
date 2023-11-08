@@ -69,7 +69,7 @@ public class ReinforcementPhase extends Phase {
     @Override
     public void executePhase() throws Exception {
         System.out.printf("%nAssigning reinforcements....%n");
-        d_logger.addLogger("%nAssigning reinforcements....%n");
+        d_logger.addLogger("Assigning reinforcements");
 
         d_current_game_info = GameInformation.getInstance();
 

@@ -18,6 +18,7 @@ import java.util.List;
 public class LoadMapPhase extends Phase {
 
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+
     private String d_map_path;
 
     private GameMap d_loaded_game_map;

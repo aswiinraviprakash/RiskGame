@@ -11,6 +11,7 @@ import java.util.List;
 public class DiplomacyOrder extends Order {
 
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+
     private Player d_target_player;
 
     /**
@@ -37,7 +38,7 @@ public class DiplomacyOrder extends Order {
     @Override
     public void execute(Player p_player_obj) throws Exception {
 
-        d_logger.addLogger("Start of Diplomacy Order");
+        d_logger.addLogger("Diplomacy Order Initiated");
         List<Order> l_player_orders = p_player_obj.getOrders();
         String l_target_player_name = d_target_player.getPlayerName();
 
@@ -86,6 +87,5 @@ public class DiplomacyOrder extends Order {
 
             }
         }
-        d_logger.addLogger("End of Diplomacy Order");
     }
 }

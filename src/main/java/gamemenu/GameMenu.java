@@ -29,10 +29,8 @@ public class GameMenu {
 
             BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 
-            LogEntryWriter l_log_writer = new LogEntryWriter(d_logger);
-
             System.out.printf("Welcome to Risk War Game!!!%nMenu%n");
-            d_logger.addLogger("Welcome to Risk War Game!!!%nMenu%n");
+            //d_logger.addLogger("Welcome to Risk War Game!!!%nMenu%n");
 
             System.out.printf("Type: mapeditor - Map Editor / gameplay - GamePlay / exit - Exit%n%n");
             String l_menu_option = l_reader.readLine();

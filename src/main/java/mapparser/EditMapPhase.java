@@ -31,6 +31,7 @@ public class EditMapPhase extends Phase {
     }
 
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+
     private GameMap d_game_map;
 
     private String d_map_file_name;

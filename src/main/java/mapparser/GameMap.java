@@ -17,11 +17,11 @@ import java.util.Map;
  */
 public class GameMap {
 
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+
     /**
      * Hashmap to store the Borders
      */
-    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
-
     public LinkedHashMap<Integer, List<Integer>> d_borders = new LinkedHashMap<Integer, List<Integer>>();
 
     
@@ -420,6 +420,7 @@ public class GameMap {
         List<Integer> l_country_border_list = new ArrayList<Integer>();
         System.out.println("");
         System.out.println("!!!YOUR GAME MAP!!!!");
+        d_logger.addLogger("Map is Displayed");
 
         for (int l_index = 0; l_index < l_countries.size(); l_index++) {
             String l_player_name = "";

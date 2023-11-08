@@ -17,6 +17,7 @@ import gameutils.GameException;
 public class GameMapEditor {
 
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+
     /**
      * Function is used for the initial map editing phase.
      * @throws Exception If there is an error in the execution or validation.
@@ -39,13 +40,13 @@ public class GameMapEditor {
 
                 if (l_primary_command.equals("editmap")) {
 
-                    if (l_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_EDITMAP); d_logger.addLogger("Invalid Command");
+                    if (l_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_EDITMAP);
 
                     GameCommandParser.CommandDetails l_command_detail = l_command_details.get(0);
-                    if (l_command_detail.getHasCommandOption()) throw new GameException(GameMessageConstants.D_COMMAND_NO_OPTION_SUPPORT + "\nExample Format: " + GameMessageConstants.D_EDITMAP); d_logger.addLogger("Invalid Command");
+                    if (l_command_detail.getHasCommandOption()) throw new GameException(GameMessageConstants.D_COMMAND_NO_OPTION_SUPPORT + "\nExample Format: " + GameMessageConstants.D_EDITMAP);
 
                     List<String> l_command_parameters = l_command_detail.getCommandParameters();
-                    if (!(l_command_parameters.size() == 1)) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_EDITMAP); d_logger.addLogger("Invalid Command");
+                    if (!(l_command_parameters.size() == 1)) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_EDITMAP);
                     String l_map_file_name = l_command_parameters.get(0);
 
                     // Initializing loadmap phase
