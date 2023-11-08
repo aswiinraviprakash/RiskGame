@@ -63,7 +63,7 @@ public class DiplomacyOrderTest {
     @Test
     public void diplomacyTest() {
 
-        LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+        LinkedHashMap<String, PlayerGa> l_player_list = d_current_game_info.getPlayerList();
         Player l_player_first_obj = l_player_list.get("playerfirst");
         Player l_player_second_obj = l_player_list.get("playersecond");
         List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
