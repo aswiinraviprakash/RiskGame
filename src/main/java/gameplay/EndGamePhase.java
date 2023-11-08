@@ -17,6 +17,7 @@ public class EndGamePhase extends Phase {
     }
 
     /**
+     * {@inheritDoc}
      * Method deals with the End game phase.
      */
     @Override
