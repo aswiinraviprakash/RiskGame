@@ -22,7 +22,7 @@ jobs:
           cache: maven
       - name: Generate Java Documentation
         run: |
-          mvn javadoc:javadoc
+          mvn javadoc:javadoc -Xdoclint:all
           git config user.name aswiinraviprakash
           git config user.email aswiinr19@gmail.com
           git fetch
