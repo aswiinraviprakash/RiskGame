@@ -236,7 +236,6 @@ public class GameMap {
      * Functions adds countries to its respective continents.
      *
      * @param p_continent continent object
-     * @return list of country IDs.
      */
     public void addCountryToContinentObj(Continent p_continent) {
         List<Country> l_countries = this.getCountryObjects();

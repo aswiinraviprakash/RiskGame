@@ -1,9 +1,5 @@
 package gameplay;
 
-/**
- *
- * @author USER
- */
 public enum Card {
 
     BOMB, BLOCKADE, AIRLIFT, DIPLOMACY;

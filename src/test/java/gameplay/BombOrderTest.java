@@ -73,8 +73,9 @@ public class BombOrderTest {
         } catch (Exception e) {
         }
     }
-    
-    public void BombingOwnCountryTest(){
+
+    @Test
+    public void BombingOwnCountryTest() {
         try {
             LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
             Player l_player_first_obj = l_player_list.get("playerfirst");
