@@ -7,7 +7,6 @@ public enum Card {
     /**
      * The various cards available are {@link #BOMB}, {@link #BLOCKADE}, {@link #AIRLIFT} and {@link #DIPLOMACY}
      */
-
     BOMB, BLOCKADE, AIRLIFT, DIPLOMACY;
 
     /**
