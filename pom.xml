@@ -17,7 +17,7 @@
                 <configuration>
                     <outputDirectory>${basedir}/apidocumentation</outputDirectory>
                     <reportOutputDirectory>${basedir}/apidocumentation</reportOutputDirectory>
-                    <doclint>true</doclint>
+                    <doclint>all</doclint>
                 </configuration>
             </plugin>
         </plugins>
