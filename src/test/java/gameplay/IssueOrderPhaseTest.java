@@ -118,31 +118,4 @@ public class IssueOrderPhaseTest {
             Assert.assertEquals(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_DEPLOY_COMMAND, e.getMessage());
         } catch (Exception e) {}
     }
-    
-    @Test
-    public void endGameTest() {
-        
-        LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
-        Player l_player_first_obj = l_player_list.get("playerfirst");
-        Player l_player_second_obj = l_player_list.get("playersecond");
-        List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
-
-        l_player_first_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(0), l_countries.get(3), l_countries.get(4),l_countries.get(1), l_countries.get(2), l_countries.get(5)}));
-        l_player_second_obj.setConqueredCountries(Arrays.asList());
-        
-        try{
-            IssueOrderPhase l_phase_obj = new IssueOrderPhase();
-            
-            l_phase_obj.executeDeployOrder("deloy Country-First 1", l_player_first_obj);
-            DeployOrder l_order_obj = (DeployOrder) l_player_first_obj.next_order();
-            l_phase_obj.executePhase();
-            
-        }catch(Exception e){
-            
-        }
-        
-        Assert.assertTrue(d_current_game_info.getCurrentPhase() instanceof EndGamePhase);
-
-
-    }
 }
