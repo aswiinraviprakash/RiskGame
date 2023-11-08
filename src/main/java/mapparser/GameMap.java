@@ -1,5 +1,6 @@
 package mapparser;
 
+import common.LogEntryBuffer;
 import constants.GameConstants;
 import constants.GameMessageConstants;
 import gameutils.GameException;
@@ -19,6 +20,8 @@ public class GameMap {
     /**
      * Hashmap to store the Borders
      */
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+
     public LinkedHashMap<Integer, List<Integer>> d_borders = new LinkedHashMap<Integer, List<Integer>>();
 
     

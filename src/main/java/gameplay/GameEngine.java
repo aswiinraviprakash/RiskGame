@@ -65,7 +65,7 @@ public class GameEngine {
             System.out.println(e.getMessage());
             d_logger.addLogger(e.getMessage());
         } catch (Exception e) {
-            d_logger.addLogger(e.toString());
+            d_logger.addLogger(e.getMessage());
             throw e;
         }
 

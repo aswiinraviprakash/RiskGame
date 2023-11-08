@@ -1,5 +1,6 @@
 package mapparser;
 
+import common.LogEntryBuffer;
 import common.Phase;
 import constants.GameConstants;
 import constants.GameMessageConstants;
@@ -22,6 +23,14 @@ import java.util.List;
  */
 public class EditMapPhase extends Phase {
 
+    @Override
+    public String toString() {
+        return "EditMapPhase{" +
+                "d_game_map=" + d_game_map +
+                '}';
+    }
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
     private GameMap d_game_map;
 
     private String d_map_file_name;
@@ -101,6 +110,7 @@ public class EditMapPhase extends Phase {
                 p_map.d_continents.add(l_continent_obj);
 
                 System.out.println(GameMessageConstants.D_CONTINENT_ADDED + l_continent_name);
+                d_logger.addLogger("Continent Added");
             }
 
         } else if (p_map_option.compareTo("remove") == 0) {
@@ -167,6 +177,7 @@ public class EditMapPhase extends Phase {
                 }
 
                 System.out.println(GameMessageConstants.D_CONTINENT_REMOVED + l_continent_name);
+                d_logger.addLogger("Continent Removed");
             }
 
         } else {
@@ -252,6 +263,7 @@ public class EditMapPhase extends Phase {
                     p_map.d_borders.put(l_country_id, l_new_border);
 
                     System.out.println(GameMessageConstants.D_COUNTRY_ADDED + l_country_name);
+                    d_logger.addLogger("Country Added");
                     }else{
                         throw new GameException(GameMessageConstants.D_MAP_DUPLICATE_COUNTRY);
                     }
@@ -307,6 +319,7 @@ public class EditMapPhase extends Phase {
                     });
 
                     System.out.println(GameMessageConstants.D_COUNTRY_REMOVED + l_country_name);
+                    d_logger.addLogger("Country Removed");
 
                 } else {
                     throw new GameException(GameMessageConstants.D_MAP_NO_COUNTRY);
@@ -375,6 +388,7 @@ public class EditMapPhase extends Phase {
             } else {
                 if (p_map.d_borders.get(l_country_id).contains(l_neighbor_country_id)) {
                     System.out.println(GameMessageConstants.D_MAP_DUPLICATE_NEIGHBOR);
+                    d_logger.addLogger("Duplicate Neighbor");
                 } else {
 
                     //refactored
@@ -382,6 +396,7 @@ public class EditMapPhase extends Phase {
                     l_new_border_list.add(l_neighbor_country_id);
                     p_map.d_borders.replace(l_country_id, l_new_border_list);
                     System.out.println(GameMessageConstants.D_RELATION_ADDED + l_country_name + " and " + l_neighbor_country_name);
+                    d_logger.addLogger("Border Added");
                 }
             }
 
@@ -415,6 +430,7 @@ public class EditMapPhase extends Phase {
             } else {
                 if (!p_map.d_borders.get(l_country_id).contains(l_neighbor_country_id)) {
                     System.out.println(GameMessageConstants.D_MAP_NO_NEIGHBOR);
+                    d_logger.addLogger("Neighbor does not exist");
                 } else {
                     //refactored
 
@@ -422,6 +438,7 @@ public class EditMapPhase extends Phase {
                     l_new_border_list.remove(Integer.valueOf(l_neighbor_country_id));
                     p_map.d_borders.replace(l_country_id, l_new_border_list);
                     System.out.println(GameMessageConstants.D_RELATION_REMOVED + l_country_name + " and " + l_neighbor_country_name);
+                    d_logger.addLogger("Removed neighbor relation");
                 }
             }
 
@@ -588,6 +605,7 @@ public class EditMapPhase extends Phase {
                                 if (l_is_map_valid) {
                                     d_game_map = this.modifyMapFile(d_game_map, d_map_file_name);
                                     System.out.println(GameMessageConstants.D_SAVE_MAP);
+                                    d_logger.addLogger("Map file saved");
                                 } else {
                                     throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED_EXIT);
                                 }
@@ -603,6 +621,7 @@ public class EditMapPhase extends Phase {
 
             } catch (GameException e) {
                 System.out.println(e.getMessage());
+                d_logger.addLogger(e.getMessage());
             } catch (Exception e) {
                 throw e;
             }

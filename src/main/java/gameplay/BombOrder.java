@@ -1,6 +1,7 @@
 package gameplay;
 
 import gameutils.GameException;
+import common.LogEntryBuffer;
 import mapparser.GameMap;
 
 /**
@@ -8,6 +9,7 @@ import mapparser.GameMap;
  */
 public class BombOrder extends Order {
 
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
     private GameMap.Country d_destination_country;
 
     private GameInformation d_current_game_info;
@@ -37,9 +39,11 @@ public class BombOrder extends Order {
     public void execute(Player p_player_obj) throws Exception {
 
         d_current_game_info = GameInformation.getInstance();
+        d_logger.addLogger("Start of Bomb Order");
 
         if (p_player_obj.getConqueredCountries().contains(d_destination_country)) return;
 
+        d_logger.addLogger("Bomb order Intiated");
         String l_destination_player = d_destination_country.getPlayerName();
         Player l_destination_player_obj = d_current_game_info.getPlayerList().get(l_destination_player);
 
@@ -47,6 +51,7 @@ public class BombOrder extends Order {
 
         int l_destination_armies = d_destination_country.getArmyCount();
         d_destination_country.setArmyCount(l_destination_armies / 2);
+        d_logger.addLogger("End of Bomb order");
 
     }
 }

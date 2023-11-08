@@ -1,5 +1,6 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import gameutils.GameException;
 import mapparser.GameMap;
 
@@ -7,6 +8,8 @@ import mapparser.GameMap;
  * The class is advancing the armies for an attack on the desired country.
  */
 public class AdvanceOrder extends Order {
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     private GameMap.Country d_source_country;
 
@@ -91,7 +94,7 @@ public class AdvanceOrder extends Order {
     public void execute(Player p_player_obj) throws GameException {
 
         d_current_game_info = GameInformation.getInstance();
-
+        d_logger.addLogger("Start of Advance order");
         if (!p_player_obj.getConqueredCountries().contains(d_source_country)) return;
 
         String l_player_name = p_player_obj.getPlayerName();
@@ -108,10 +111,13 @@ public class AdvanceOrder extends Order {
 
         if (isAttackMode) {
             attackDestinationCountry(p_player_obj, l_destination_player);
+            d_logger.addLogger("Advance order in attack");
         } else {
             movesArmiesToDestinationCountry();
+            d_logger.addLogger("Advance order in Friendly territory");
         }
 
+        d_logger.addLogger("End of Advance Order");
     }
 
 }

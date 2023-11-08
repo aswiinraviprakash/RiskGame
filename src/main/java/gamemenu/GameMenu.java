@@ -62,8 +62,8 @@ public class GameMenu {
         } catch (Exception e) {
             System.out.println(e);
             System.out.println(GameMessageConstants.D_INTERNAL_ERROR);
-            d_logger.addLogger(String.valueOf(e));
-            d_logger.addLogger(GameMessageConstants.D_INTERNAL_ERROR);
+            d_logger.addLogger(e.getMessage());
+            d_logger.addLogger("There seems to be some issue try restarting the Game");
 
 
         }

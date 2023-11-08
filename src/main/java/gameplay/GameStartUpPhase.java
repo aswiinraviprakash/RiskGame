@@ -56,7 +56,7 @@ public class GameStartUpPhase extends Phase {
             d_current_game_info.setCurrenGameMap(l_gamemap_obj);
             d_completed_operations.add("loadmap");
             System.out.println(GameMessageConstants.D_GAMEMAP_LOADED);
-            d_logger.addLogger(GameMessageConstants.D_GAMEMAP_LOADED);
+            d_logger.addLogger("Game Map loaded successfully");
 
         } catch (GameException e) {
             System.out.println("Load Map Failed: " + e.getMessage());
@@ -96,7 +96,7 @@ public class GameStartUpPhase extends Phase {
                 d_current_game_info.setPlayerList(l_player_list);
 
                 System.out.println(GameMessageConstants.D_PLAYER_ADDED);
-                d_logger.addLogger(GameMessageConstants.D_PLAYER_ADDED);
+                d_logger.addLogger("Player added successfully");
 
             } else if (l_command_option.equals("remove")) {
 
@@ -107,7 +107,7 @@ public class GameStartUpPhase extends Phase {
                     d_current_game_info.setPlayerList(l_player_list);
 
                     System.out.println(GameMessageConstants.D_PLAYER_REMOVED);
-                    d_logger.addLogger(GameMessageConstants.D_PLAYER_REMOVED);
+                    d_logger.addLogger("Player removed successfully");
                 }
 
             } else {
@@ -151,7 +151,7 @@ public class GameStartUpPhase extends Phase {
 
         d_completed_operations.add("assigncountries");
         System.out.println(GameMessageConstants.D_COUNTRIES_ASSIGNED);
-        d_logger.addLogger(GameMessageConstants.D_COUNTRIES_ASSIGNED);
+        d_logger.addLogger("Countries assigned successfully");
     }
 
     /**
@@ -212,7 +212,7 @@ public class GameStartUpPhase extends Phase {
             try {
                 if (d_completed_operations.contains("assigncountries")) {
                     System.out.println(GameMessageConstants.D_GAME_STARTUP_SUCCESS);
-                    d_logger.addLogger(GameMessageConstants.D_GAME_STARTUP_SUCCESS);
+                    d_logger.addLogger("Game startup completed");
                     d_current_game_info.setCurrentPhase(this.nextPhase());
                     return;
                 }
@@ -229,7 +229,7 @@ public class GameStartUpPhase extends Phase {
                 System.out.println(e.getMessage());
                 d_logger.addLogger(e.getMessage());
             } catch (Exception e) {
-                d_logger.addLogger(e.toString());
+                d_logger.addLogger(e.getMessage());
                 throw e;
             }
         }

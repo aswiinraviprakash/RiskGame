@@ -1,5 +1,6 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import gameutils.GameException;
 import mapparser.GameMap;
 
@@ -8,6 +9,7 @@ import mapparser.GameMap;
  */
 public class AirliftOrder extends Order {
 
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
     private GameMap.Country d_source_country;
 
     private GameMap.Country d_destination_country;
@@ -91,6 +93,7 @@ public class AirliftOrder extends Order {
     public void execute(Player p_player_obj) throws GameException {
 
         d_current_game_info = GameInformation.getInstance();
+        d_logger.addLogger("Start of Airlift Order");
 
         if (!p_player_obj.getConqueredCountries().contains(d_source_country)) return;
 
@@ -108,10 +111,12 @@ public class AirliftOrder extends Order {
 
         if (isAttackMode) {
             attackDestinationCountry(p_player_obj, l_destination_player);
+            d_logger.addLogger("Airlift in Attack");
         } else {
             movesArmiesToDestinationCountry();
+            d_logger.addLogger("Airlift in friendly territory");
         }
-
+        d_logger.addLogger("End of Airlift");
     }
 
 }

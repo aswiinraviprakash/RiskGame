@@ -1,5 +1,6 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import mapparser.GameMap;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  */
 public class DeployOrder extends Order {
 
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
     /**
      * Contains country name.
      */
@@ -53,6 +55,7 @@ public class DeployOrder extends Order {
      */
     @Override
     public void execute(Player p_player_obj) {
+        d_logger.addLogger("Start of Deploy Order");
         List<GameMap.Country> l_conquered_countries = p_player_obj.getConqueredCountries();
         for (GameMap.Country l_country_obj : l_conquered_countries) {
             if (l_country_obj.getCountryName().equals(getCountryName())) {
@@ -60,6 +63,7 @@ public class DeployOrder extends Order {
                 break;
             }
         }
+        d_logger.addLogger("End of Deploy Order");
     }
 
 }
