@@ -1,7 +1,6 @@
 package gameplay;
 
 import constants.GameConstants;
-import junit.framework.TestCase;
 import mapparser.GameMap;
 import mapparser.LoadMapPhase;
 import org.junit.Assert;
@@ -13,8 +12,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class AdvanceOrderTest  {
-
-
 
     private GameMap.Country d_destination_country;
     private GameMap.Country d_source_country;
@@ -49,7 +46,6 @@ public class AdvanceOrderTest  {
     /**
      *  Test to verify that the advance order does not execute when the number of armies to advance is greater than the number of armies in the source country.
      */
-
     @Test
     public void advanceorderExceedingArmies()
     {

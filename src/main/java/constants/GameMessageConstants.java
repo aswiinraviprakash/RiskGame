@@ -1,14 +1,11 @@
 package constants;
 
-import mapparser.GameMap.Country;
-
 /**
  * This class initializes all the constant messages that will be used in the application.
  */
 public class GameMessageConstants {
 
     // Order Types
-
     public static final String D_DEPLOY = "Deploy";
 
     public static final String D_ADVANCE = "Advance";
