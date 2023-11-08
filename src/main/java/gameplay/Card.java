@@ -4,10 +4,26 @@ package gameplay;
  * Distributes random cards to the players when the conditions are met.
  */
 public enum Card {
+    
     /**
-     * The various cards available are {@link #BOMB}, {@link #BLOCKADE}, {@link #AIRLIFT} and {@link #DIPLOMACY}
+     * BOMB card
      */
-    BOMB, BLOCKADE, AIRLIFT, DIPLOMACY;
+    BOMB,
+
+    /**
+     * The various cards available are  
+     */
+    BLOCKADE,
+
+    /**
+     * The various cards available are  
+     */
+    AIRLIFT,
+
+    /**
+     * The various cards available are  
+     */
+    DIPLOMACY;
 
     /**
      * Method selects cards at random.

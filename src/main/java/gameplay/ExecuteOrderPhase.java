@@ -26,7 +26,7 @@ public class ExecuteOrderPhase extends Phase {
     }
 
     /**
-     * {@inheritedDOc}
+     * {@inheritDoc}
      * Iterates over the player list and executes each player's orders one by one.
      * @throws Exception Throws exception if an error occurs.
      */
