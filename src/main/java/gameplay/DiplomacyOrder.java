@@ -45,6 +45,7 @@ public class DiplomacyOrder extends Order {
 
         l_player_orders = d_target_player.getOrders();
         l_target_player_name = p_player_obj.getPlayerName();
+        l_order_iterator = l_player_orders.iterator();
         while (l_order_iterator.hasNext()) {
             Order l_order = l_order_iterator.next();
             String l_destination_player = "";

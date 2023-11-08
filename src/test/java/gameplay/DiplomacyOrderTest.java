@@ -84,7 +84,7 @@ public class DiplomacyOrderTest {
             
             l_diplomacy_phase.execute(l_player_first_obj);
             
-           // Assert.assertEquals(0,l_player_second_obj.getOrders().size());
+           Assert.assertEquals(0,l_player_second_obj.getOrders().size());
             
         } catch (Exception e) {
 

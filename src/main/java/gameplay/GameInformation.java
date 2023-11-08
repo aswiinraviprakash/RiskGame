@@ -1,5 +1,6 @@
 package gameplay;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import common.Phase;
@@ -21,6 +22,8 @@ public class GameInformation {
      * Contains Player list.
      */
     private LinkedHashMap<String, Player> d_player_list = new LinkedHashMap<>();
+
+    private ArrayList<String> d_card_issued_players = null;
 
     /**
      * Contains game map.
@@ -80,6 +83,20 @@ public class GameInformation {
      */
     public mapparser.GameMap getGameMap() {
         return this.d_current_game_map;
+    }
+
+    public void setCardIssuedPlayer(String p_player_name) {
+        if (this.d_card_issued_players == null) this.d_card_issued_players = new ArrayList<>();
+        d_card_issued_players.add(p_player_name);
+    }
+
+    public boolean isPlayerIssuedCard(String p_player_name) {
+        if (this.d_card_issued_players == null) return false;
+        return d_card_issued_players.contains(p_player_name);
+    }
+
+    public void resetCardIssued() {
+        this.d_card_issued_players = null;
     }
 
 }

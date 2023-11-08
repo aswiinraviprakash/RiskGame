@@ -42,8 +42,11 @@ public class AdvanceOrder extends Order {
             d_destination_country.setPlayerName(p_current_player.getPlayerName());
             p_current_player.getConqueredCountries().add(d_destination_country);
 
-            Card l_random_card = Card.generateRandomCard();
-            p_current_player.addAvailableCard(l_random_card);
+            if (!d_current_game_info.isPlayerIssuedCard(p_current_player.getPlayerName())) {
+                Card l_random_card = Card.generateRandomCard();
+                p_current_player.addAvailableCard(l_random_card);
+                d_current_game_info.setCardIssuedPlayer(p_current_player.getPlayerName());
+            }
 
         } else if (d_armies <= l_destination_armies) {
             d_source_country.setArmyCount(l_source_armies - d_armies);
