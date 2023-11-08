@@ -1,11 +1,14 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import common.Phase;
 
 /**
  * Class deals with the End game phase, which is the final phase.
  */
 public class EndGamePhase extends Phase {
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**
      * Method is used to proceed to the next phase.
@@ -28,6 +31,8 @@ public class EndGamePhase extends Phase {
             System.out.println("----Game Results----");
             GameInformation.getInstance().getGameMap().showMap(true);
         }
+
+        d_logger.addLogger("----GAME TERMINATED----");
     }
 
 }

@@ -1,5 +1,6 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import common.Phase;
 import gameutils.GameException;
 
@@ -7,9 +8,8 @@ import gameutils.GameException;
  * This class is responsible for executing the entire game process.
  */
 public class GameEngine {
-    /**
-     * 
-     */
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**
      * Prints information about the game.
@@ -35,6 +35,8 @@ public class GameEngine {
      */
     public void initializeAndRunEngine() throws Exception {
         System.out.println("---GAME STARTED---");
+        d_logger.addLogger("---GAME STARTED---");
+
 
         try {
 
@@ -61,7 +63,9 @@ public class GameEngine {
 
         } catch (GameException e) {
             System.out.println(e.getMessage());
+            d_logger.addLogger(e.getMessage());
         } catch (Exception e) {
+            d_logger.addLogger(e.toString());
             throw e;
         }
 

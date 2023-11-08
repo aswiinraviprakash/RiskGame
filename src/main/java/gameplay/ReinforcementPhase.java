@@ -1,5 +1,6 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import common.Phase;
 import constants.GameConstants;
 
@@ -11,6 +12,8 @@ import mapparser.GameMap;
  * This class is responsible for assigning reinforcement armies to players based on the number of countries they have conquered.
  */
 public class ReinforcementPhase extends Phase {
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**
      * Contains current game information
@@ -66,6 +69,7 @@ public class ReinforcementPhase extends Phase {
     @Override
     public void executePhase() throws Exception {
         System.out.printf("%nAssigning reinforcements....%n");
+        d_logger.addLogger("%nAssigning reinforcements....%n");
 
         d_current_game_info = GameInformation.getInstance();
 
