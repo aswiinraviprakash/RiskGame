@@ -8,8 +8,14 @@ import mapparser.GameMap;
  */
 public class BlockadeOrder extends Order {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
+    /**
+     * member to store destination country
+     */
     private GameMap.Country d_destination_country;
 
     /**

@@ -23,10 +23,19 @@ import java.util.List;
  */
 public class EditMapPhase extends Phase {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
+    /**
+     * member to store Gamemap instance
+     */
     private GameMap d_game_map;
 
+    /**
+     * member to store map filename
+     */
     private String d_map_file_name;
 
     /**

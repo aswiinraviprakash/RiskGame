@@ -10,8 +10,14 @@ import java.util.List;
  */
 public class DiplomacyOrder extends Order {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
+    /**
+     * member to store target player
+     */
     private Player d_target_player;
 
     /**

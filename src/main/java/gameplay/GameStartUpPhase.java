@@ -20,6 +20,9 @@ import java.util.Collections;
  */
 public class GameStartUpPhase extends Phase {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**

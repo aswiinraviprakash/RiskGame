@@ -11,6 +11,9 @@ import mapparser.GameMap;
  */
 public class GameInformation {
 
+    /**
+     * member to store gameinformation instance
+     */
     private static GameInformation d_game_info_instance = null;
 
     /**
@@ -23,6 +26,9 @@ public class GameInformation {
      */
     private LinkedHashMap<String, Player> d_player_list = new LinkedHashMap<>();
 
+    /**
+     * member to store players issued with a card
+     */
     private ArrayList<String> d_card_issued_players = null;
 
     /**
@@ -30,6 +36,9 @@ public class GameInformation {
      */
     private mapparser.GameMap d_current_game_map;
 
+    /**
+     * private constructor for creating gameinformation object
+     */
     private GameInformation() {}
 
     /**

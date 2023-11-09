@@ -27,6 +27,9 @@ public enum Card {
      */
     DIPLOMACY;
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**

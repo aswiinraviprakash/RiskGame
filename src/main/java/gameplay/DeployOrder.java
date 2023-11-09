@@ -11,6 +11,9 @@ import java.util.List;
  */
 public class DeployOrder extends Order {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**

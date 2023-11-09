@@ -17,6 +17,9 @@ import java.util.Map;
  */
 public class GameMap {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**

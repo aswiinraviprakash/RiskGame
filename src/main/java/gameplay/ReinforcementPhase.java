@@ -13,6 +13,9 @@ import mapparser.GameMap;
  */
 public class ReinforcementPhase extends Phase {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**

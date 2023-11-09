@@ -19,6 +19,9 @@ import java.util.Map;
  */
 public class IssueOrderPhase extends Phase {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**

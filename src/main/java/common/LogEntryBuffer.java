@@ -4,6 +4,10 @@ package common;
  * Class that acts as an Observable for the entire game
  */
 public class LogEntryBuffer extends Observable {
+
+    /**
+     * member to store log buffer instance
+     */
     private static LogEntryBuffer d_logger_instance = null;
 
     /**

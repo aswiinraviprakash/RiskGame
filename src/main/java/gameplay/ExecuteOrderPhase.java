@@ -11,10 +11,13 @@ import java.util.Map;
  */
 public class ExecuteOrderPhase extends Phase {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**
-     * Contains number of armies.
+     * member to store gameinformation instance
      */
     private GameInformation d_current_game_info;
 
