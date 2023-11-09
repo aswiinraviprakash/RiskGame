@@ -14,9 +14,19 @@ import org.junit.Assert;
 
 public class BombOrderTest {
 
+    /**
+     * Contains Current Game Information
+     */
     private GameInformation d_current_game_info;
+
+    /**
+     * Contains Destination Country
+     */
     private GameMap.Country d_destination_country;
 
+    /**
+     * Initializing Data for Test
+     */
     @Before
     public void initializeTestData() {
         try {
@@ -52,6 +62,9 @@ public class BombOrderTest {
         }
     }
 
+    /**
+     * Test to check if Bomb Order is Successful in Opponent Territory.
+     */
     @Test
     public void BombingEnemyTerritoryTest() {
         try {
@@ -74,6 +87,9 @@ public class BombOrderTest {
         }
     }
 
+    /**
+     * Test to check if Bomb Order fails in Friendly Territory.
+     */
     @Test
     public void BombingOwnCountryTest() {
         try {

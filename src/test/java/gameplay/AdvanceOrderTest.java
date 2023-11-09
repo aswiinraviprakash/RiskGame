@@ -11,13 +11,29 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ *  Test Class for Advance Order
+ */
 public class AdvanceOrderTest  {
 
-    
+    /**
+     * Destination Country
+     */
     private GameMap.Country d_destination_country;
+
+    /**
+     * Source Country
+     */
     private GameMap.Country d_source_country;
+
+    /**
+     * Contains the Current Game Information
+     */
     private GameInformation d_current_game_info;
 
+    /**
+     * Initializing Data for the Tests
+     */
     @Before
     public void initialiseTestData() {
         try {
@@ -44,7 +60,7 @@ public class AdvanceOrderTest  {
     }
 
     /**
-     *  Test to verify that the advance order does not execute when the number of armies to advance is greater than the number of armies in the source country.
+     *  Test to erify that tvhe advance order does not execute when the number of armies to advance is greater than the number of armies in the source country.
      */
     @Test
     public void advanceorderExceedingArmies()

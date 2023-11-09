@@ -8,13 +8,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- *
- * @author USER
+ * Test class for Game Engine
  */
 public class GameEngineTest {
 
+    /**
+     * Contains all the Phases
+     */
     List<Phase> l_phases = new ArrayList<Phase>();
 
+    /**
+     * Initializing Data for Tests
+     */
     @Before
     public void initialiseTestData() {
 
@@ -27,6 +32,9 @@ public class GameEngineTest {
         l_phases.add(new ExecuteOrderPhase());
     }
 
+    /**
+     * Test for game startup phase
+     */
     @Test
     public void gameStartUpPhaseTest() {
         
