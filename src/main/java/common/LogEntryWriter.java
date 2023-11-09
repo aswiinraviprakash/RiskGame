@@ -14,7 +14,7 @@ public class LogEntryWriter implements Observer {
 
     /**
      * Method to instantiate logEntryWriter
-     * @param p_logbuffer
+     * @param p_logbuffer LogBuffer parameter
      */
     public LogEntryWriter(LogEntryBuffer p_logbuffer) {
         p_logbuffer.addObserver(this);
@@ -26,7 +26,7 @@ public class LogEntryWriter implements Observer {
 
     
     /** Method to write the log message
-     * @param p_log_message
+     * @param p_log_message Log message parameter
      */
     public void writeLogFile(String p_log_message) {
         PrintWriter l_writer = null;
@@ -46,7 +46,7 @@ public class LogEntryWriter implements Observer {
 
     /**
      * Checks the directory
-     * @param p_directory_path
+     * @param p_directory_path directory path parameter 
      */
     private void checkDirectory(String p_directory_path) {
         File l_directory = new File(p_directory_path);
