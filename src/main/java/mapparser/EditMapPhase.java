@@ -399,7 +399,7 @@ public class EditMapPhase extends Phase {
                     l_new_border_list.add(l_neighbor_country_id);
                     p_map.d_borders.replace(l_country_id, l_new_border_list);
                     System.out.println(GameMessageConstants.D_RELATION_ADDED + l_country_name + " and " + l_neighbor_country_name);
-                    d_logger.addLogger(GameMessageConstants.D_RELATION_ADDED);
+                    d_logger.addLogger("Added Neighbor Relation");
                 }
             }
 
@@ -441,7 +441,7 @@ public class EditMapPhase extends Phase {
                     l_new_border_list.remove(Integer.valueOf(l_neighbor_country_id));
                     p_map.d_borders.replace(l_country_id, l_new_border_list);
                     System.out.println(GameMessageConstants.D_RELATION_REMOVED + l_country_name + " and " + l_neighbor_country_name);
-                    d_logger.addLogger(GameMessageConstants.D_RELATION_REMOVED);
+                    d_logger.addLogger("Removed Neighbor Relation");
                 }
             }
 
