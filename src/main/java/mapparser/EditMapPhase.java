@@ -23,13 +23,6 @@ import java.util.List;
  */
 public class EditMapPhase extends Phase {
 
-    @Override
-    public String toString() {
-        return "EditMapPhase{" +
-                "d_game_map=" + d_game_map +
-                '}';
-    }
-
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     private GameMap d_game_map;
