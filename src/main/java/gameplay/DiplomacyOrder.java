@@ -55,17 +55,17 @@ public class DiplomacyOrder extends Order {
             if (l_order instanceof AdvanceOrder) {
 
                 l_destination_player = ((AdvanceOrder) l_order).getDestinationCountry().getPlayerName();
-                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+                if (l_target_player_name.equals(l_destination_player)) l_order_iterator.remove();
 
             } else if (l_order instanceof BombOrder) {
 
                 l_destination_player = ((BombOrder) l_order).getDestinationCountry().getPlayerName();
-                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+                if (l_target_player_name.equals(l_destination_player)) l_order_iterator.remove();
 
             } else if (l_order instanceof AirliftOrder) {
 
                 l_destination_player = ((AirliftOrder) l_order).getDestinationCountry().getPlayerName();
-                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+                if (l_target_player_name.equals(l_destination_player)) l_order_iterator.remove();
             }
         }
 
@@ -78,17 +78,17 @@ public class DiplomacyOrder extends Order {
             if (l_order instanceof AdvanceOrder) {
 
                 l_destination_player = ((AdvanceOrder) l_order).getDestinationCountry().getPlayerName();
-                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+                if (l_target_player_name.equals(l_destination_player)) l_order_iterator.remove();
 
             } else if (l_order instanceof BombOrder) {
 
                 l_destination_player = ((BombOrder) l_order).getDestinationCountry().getPlayerName();
-                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+                if (l_target_player_name.equals(l_destination_player)) l_order_iterator.remove();
 
             } else if (l_order instanceof AirliftOrder) {
 
                 l_destination_player = ((AirliftOrder) l_order).getDestinationCountry().getPlayerName();
-                if (l_target_player_name.equals(l_destination_player)) l_player_orders.remove(l_order);
+                if (l_target_player_name.equals(l_destination_player)) l_order_iterator.remove();
             }
         }
     }
