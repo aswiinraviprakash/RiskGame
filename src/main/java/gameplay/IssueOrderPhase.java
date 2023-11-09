@@ -243,7 +243,6 @@ public class IssueOrderPhase extends Phase {
     }
 
     /**
-     * {@inheritDoc}
      * Validates and Executes commands for Issue_order_phase.
      * @param p_input_command Input command provided by the player.
      * @param p_current_player Current player issuing the command.
@@ -293,6 +292,7 @@ public class IssueOrderPhase extends Phase {
     }
 
     /**
+     * {@inheritDoc}
      * Method deals with processing to the next phase.
      * @return object of execute order phase.
      * @throws Exception If there is an error in the execution or validation.

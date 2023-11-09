@@ -90,6 +90,7 @@ public class GameInformation {
     }
 
     /**
+     * Method to set cards to the player
      * @param p_player_name
      */
     public void setCardIssuedPlayer(String p_player_name) {
@@ -98,6 +99,7 @@ public class GameInformation {
     }
     /**
      * Checks if the player is issued a card
+     * @param p_player_name 
      * @return Returns True or False
      */
     public boolean isPlayerIssuedCard(String p_player_name) {

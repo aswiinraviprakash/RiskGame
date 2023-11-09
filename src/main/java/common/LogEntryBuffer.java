@@ -12,7 +12,7 @@ public class LogEntryBuffer extends Observable {
     private String d_log_message;
 
     /**
-     * 
+     * LogEntryBuffer Constructor
      */
     private LogEntryBuffer() {}
 

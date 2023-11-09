@@ -15,13 +15,23 @@ import java.util.Map;
  * The class loads map files and displays them.
  */
 public class GameMap {
-    /**
-     * Creating Borders, Countries and Continents
-     */
 
+    /**
+     * Borders
+     */
     public LinkedHashMap<Integer, List<Integer>> d_borders = new LinkedHashMap<Integer, List<Integer>>();
+
+    
+    /**
+     * Countries
+     */
     public List<Country> d_countries = new ArrayList<Country>();
+
+    /**
+     *
+     */
     public List<Continent> d_continents = new ArrayList<Continent>();
+    
     /** 
      * filepath
     */
@@ -398,8 +408,7 @@ public class GameMap {
     /**
      * Function is used to display continents, countries and armies in correspondence to the players.
      * @param p_show_player boolean value whether player exists or not.
-     */
-    
+     */    
     public void showMap(boolean p_show_player) {
         List<Country> l_countries = this.getCountryObjects();
         List<Continent> l_continents = this.getContinentObjects();
