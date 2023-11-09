@@ -11,9 +11,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ExecuteOrderPhaseTest {
-    
+
+    /**
+     * Contains Destination Country
+     */
     private GameInformation d_current_game_info;
-    
+
+    /**
+     * Initializing Test Data
+     */
     @Before
     public void initializeTestData() {
         try {
@@ -38,7 +44,10 @@ public class ExecuteOrderPhaseTest {
 
         } catch (Exception e) {}
     }
-    
+
+    /**
+     * Test to Check if Game Ending is Successful
+     */
     @Test
     public void endGameTest() {
         

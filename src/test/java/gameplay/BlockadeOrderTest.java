@@ -15,9 +15,19 @@ import org.junit.Assert;
 
 public class BlockadeOrderTest {
 
+    /**
+     * Contains Current Game Information
+     */
     private GameInformation d_current_game_info;
+
+    /**
+     * Contains Destination Country
+     */
     private GameMap.Country d_destination_country;
 
+    /**
+     * Initializing Data for Test
+     */
     @Before
     public void InitializeTestData() {
         try {
@@ -53,6 +63,9 @@ public class BlockadeOrderTest {
         }
     }
 
+    /**
+     * Test to check if the Blockade Test is Successful, when used in a Friendly Territory
+     */
     @Test
     public void blockadeTest() {
         try {
@@ -75,6 +88,9 @@ public class BlockadeOrderTest {
         }
     }
 
+    /**
+     * Test to check if the Blockade test is Unsuccessful, when used in an Opponent Territory
+     */
     @Test
     public void opponentCountryBlockadeTest() {
         try {

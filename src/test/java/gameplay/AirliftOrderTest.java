@@ -12,17 +12,28 @@ import org.junit.Test;
 
 /**
  *
- * @author USER
+ * Test Class for Airlift Order
  */
 public class AirliftOrderTest {
 
     /**
-     * @param args the command line arguments
+     * Contains Current Game Information
      */
     private GameInformation d_current_game_info;
+
+    /**
+     * Contains Destination Country
+     */
     private GameMap.Country d_destination_country;
+
+    /**
+     * Contains Source Country
+     */
     private GameMap.Country d_source_country;
 
+    /**
+     * Initializing Data for Tests.
+     */
     @Before
     public void initialiseTestData() {
         try {
@@ -57,6 +68,10 @@ public class AirliftOrderTest {
         }
     }
 
+
+    /**
+     * Test to Check if Ownership Changes.
+     */
     @Test
     public void airLiftAttackOwnershipChangeTest() {
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
@@ -90,6 +105,9 @@ public class AirliftOrderTest {
 
     }
 
+    /**
+     * Test when attack fails, because of Lesser Number of Armies.
+     */
     @Test
     public void airLiftAttackNoOwnershipChangeTest() {
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
@@ -127,6 +145,9 @@ public class AirliftOrderTest {
 
     }
 
+    /**
+     *  Test for sending armies to Friendly Territory
+     */
     @Test
     public void airLiftNonAttackTest() {
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();

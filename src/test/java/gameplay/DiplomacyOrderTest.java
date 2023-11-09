@@ -12,14 +12,23 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
- * @author USER
+ * Test class for Diplomacy Order
  */
 public class DiplomacyOrderTest {
 
+    /**
+     * Contains Current Game Information
+     */
     private GameInformation d_current_game_info;
+
+    /**
+     * Contains the Destination player
+     */
     private Player d_target_player;
 
+    /**
+     * Initializing Test Data
+     */
     @Before
     public void initialiseTestData() {
         try {
@@ -55,6 +64,9 @@ public class DiplomacyOrderTest {
         }
     }
 
+    /**
+     * Test to check if Diplomacy is Successful
+     */
     @Test
     public void diplomacyTest() {
 
