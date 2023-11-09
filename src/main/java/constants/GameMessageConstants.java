@@ -387,11 +387,11 @@ public class GameMessageConstants {
     /**
      * Success Message Constants
      */
-    public static final String D_RELATION_ADDED = "Added neighbor relation between";
+    public static final String D_RELATION_ADDED = "Added neighbor relation between ";
 
     /**
      * Success Message Constants
      */
-    public static final String D_RELATION_REMOVED = "Removed neighbor relation between";
+    public static final String D_RELATION_REMOVED = "Removed neighbor relation between ";
 
 }
