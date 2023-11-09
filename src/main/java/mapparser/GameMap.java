@@ -28,7 +28,7 @@ public class GameMap {
     public List<Country> d_countries = new ArrayList<Country>();
 
     /**
-     *
+     * Continents
      */
     public List<Continent> d_continents = new ArrayList<Continent>();
     
