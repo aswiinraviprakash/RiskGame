@@ -17,14 +17,29 @@ import java.util.List;
  */
 public class LoadMapPhase extends Phase {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
+    /**
+     * member to store map path
+     */
     private String d_map_path;
 
+    /**
+     * member to store loaded gamemap instance
+     */
     private GameMap d_loaded_game_map;
 
+    /**
+     * member to check need for new map
+     */
     private boolean d_need_newmap;
 
+    /**
+     * member to store map directory
+     */
     private String d_map_directory;
 
     /**

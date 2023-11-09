@@ -6,10 +6,13 @@ import java.util.List;
 
 /**
  * This class is responsible for parsing user input commands into primary commands and their details.
- * It spplits an input command into its primary command and
+ * It splits an input command into its primary command and
  */
 public class GameCommandParser {
 
+    /**
+     * member to store entire command
+     */
     private final String d_entire_command;
 
     /**

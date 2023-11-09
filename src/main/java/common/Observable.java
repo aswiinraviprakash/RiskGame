@@ -7,6 +7,10 @@ import java.util.List;
  * Observable is an Abstract class used for performing observable methods
  */
 public abstract class Observable {
+
+    /**
+     * member to store list of observers
+     */
     private List<Observer> d_observers = new ArrayList<>();
 
     /**

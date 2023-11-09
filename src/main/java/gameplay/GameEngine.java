@@ -9,6 +9,9 @@ import gameutils.GameException;
  */
 public class GameEngine {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**

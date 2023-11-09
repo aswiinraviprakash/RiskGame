@@ -9,14 +9,29 @@ import mapparser.GameMap;
  */
 public class AirliftOrder extends Order {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
+    /**
+     * member to store source country
+     */
     private GameMap.Country d_source_country;
 
+    /**
+     * member to store destination country
+     */
     private GameMap.Country d_destination_country;
 
+    /**
+     * member to store armies
+     */
     private int d_armies;
 
+    /**
+     * member to store gameinformation instance
+     */
     private GameInformation d_current_game_info;
 
     /**

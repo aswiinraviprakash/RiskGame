@@ -20,6 +20,7 @@ public class GameMenu {
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**
+     * dirver class for executing the entire game
      * @param args String[] args The main class parameter
      * Main class gets the input from the player.
      */

@@ -16,6 +16,9 @@ import gameutils.GameException;
  */
 public class GameMapEditor {
 
+    /**
+     * member to store logger instance
+     */
     private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**
