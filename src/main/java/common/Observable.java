@@ -11,7 +11,7 @@ public abstract class Observable {
 
     /**
      * Method to Add Observers
-     * @param p_observer
+     * @param p_observer Observer parameter
      */
     public void addObserver(Observer p_observer) {
         this.d_observers.add(p_observer);
@@ -19,7 +19,7 @@ public abstract class Observable {
 
     /**
      * Method to remove Observers
-     * @param p_observer
+     * @param p_observer Observer parameter
      */
     public void removeObserver(Observer p_observer) {
         if (!this.d_observers.isEmpty()) this.d_observers.remove(p_observer);
@@ -27,7 +27,7 @@ public abstract class Observable {
 
     /**
      * Method to notify Observers
-     * @param p_observable
+     * @param p_observable Observer parameter
      */
     public void notifyObservers(Observable p_observable) {
         for (Observer l_observer : this.d_observers) {

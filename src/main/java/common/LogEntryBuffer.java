@@ -35,7 +35,7 @@ public class LogEntryBuffer extends Observable {
 
     /**
      * This method is used to add loggers
-     * @param p_log_message
+     * @param p_log_message log message parameter
      */
     public void addLogger(String p_log_message) {
         this.d_log_message = p_log_message;

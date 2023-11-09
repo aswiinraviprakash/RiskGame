@@ -17,23 +17,23 @@ import java.util.Map;
 public class GameMap {
 
     /**
-     * Borders
+     * Hashmap to store the Borders
      */
     public LinkedHashMap<Integer, List<Integer>> d_borders = new LinkedHashMap<Integer, List<Integer>>();
 
     
     /**
-     * Countries
+     * List to store the Countries
      */
     public List<Country> d_countries = new ArrayList<Country>();
 
     /**
-     * Continents
+     * List to store the Continents
      */
     public List<Continent> d_continents = new ArrayList<Continent>();
     
     /** 
-     * filepath
+     * path of the file
     */
     private String d_file_path;
 

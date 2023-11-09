@@ -27,10 +27,19 @@ public class Player {
      */
     private List<Order> d_orders_list = new ArrayList<>();
 
+    /**
+     * The current order
+     */
     public Order d_current_order = null;
 
+    /**
+     * List of conquered countries
+     */
     public List<GameMap.Country> d_conquered_countries = new ArrayList<>();
 
+    /**
+     * Available cards
+     */
     private HashMap<Card, Integer> d_available_cards = new HashMap();
 
     /**
