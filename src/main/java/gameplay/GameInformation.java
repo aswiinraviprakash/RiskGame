@@ -90,7 +90,8 @@ public class GameInformation {
     }
 
     /**
-     * @param p_player_name
+     * Method to set cards to the player
+     * @param p_player_name Parameter to assign the name of the player
      */
     public void setCardIssuedPlayer(String p_player_name) {
         if (this.d_card_issued_players == null) this.d_card_issued_players = new ArrayList<>();
@@ -98,6 +99,7 @@ public class GameInformation {
     }
     /**
      * Checks if the player is issued a card
+     * @param p_player_name Parameter to assign the name of the player
      * @return Returns True or False
      */
     public boolean isPlayerIssuedCard(String p_player_name) {

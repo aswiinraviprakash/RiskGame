@@ -8,6 +8,7 @@ public abstract class Phase {
     /**
      * Abstract class for the next phase.
      * @throws Exception If there is an error in the execution or validation.
+     * @return Returns the next phase
      */
     public abstract Phase nextPhase() throws Exception;
 
