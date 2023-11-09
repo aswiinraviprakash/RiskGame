@@ -113,7 +113,7 @@ public class EditMapPhase extends Phase {
                 p_map.d_continents.add(l_continent_obj);
 
                 System.out.println(GameMessageConstants.D_CONTINENT_ADDED + l_continent_name);
-                d_logger.addLogger(GameMessageConstants.D_CONTINENT_ADDED + l_continent_name);
+                d_logger.addLogger(GameMessageConstants.D_CONTINENT_ADDED);
             }
 
         } else if (p_map_option.compareTo("remove") == 0) {
@@ -180,7 +180,7 @@ public class EditMapPhase extends Phase {
                 }
 
                 System.out.println(GameMessageConstants.D_CONTINENT_REMOVED + l_continent_name);
-                d_logger.addLogger(GameMessageConstants.D_CONTINENT_REMOVED + l_continent_name);
+                d_logger.addLogger(GameMessageConstants.D_CONTINENT_REMOVED);
             }
 
         } else {
@@ -266,7 +266,7 @@ public class EditMapPhase extends Phase {
                     p_map.d_borders.put(l_country_id, l_new_border);
 
                     System.out.println(GameMessageConstants.D_COUNTRY_ADDED + l_country_name);
-                    d_logger.addLogger(GameMessageConstants.D_COUNTRY_ADDED + l_country_name);
+                    d_logger.addLogger(GameMessageConstants.D_COUNTRY_ADDED);
                     }else{
                         throw new GameException(GameMessageConstants.D_MAP_DUPLICATE_COUNTRY);
                     }
@@ -322,7 +322,7 @@ public class EditMapPhase extends Phase {
                     });
 
                     System.out.println(GameMessageConstants.D_COUNTRY_REMOVED + l_country_name);
-                    d_logger.addLogger(GameMessageConstants.D_COUNTRY_REMOVED + l_country_name);
+                    d_logger.addLogger(GameMessageConstants.D_COUNTRY_REMOVED);
 
                 } else {
                     throw new GameException(GameMessageConstants.D_MAP_NO_COUNTRY);
@@ -399,7 +399,7 @@ public class EditMapPhase extends Phase {
                     l_new_border_list.add(l_neighbor_country_id);
                     p_map.d_borders.replace(l_country_id, l_new_border_list);
                     System.out.println(GameMessageConstants.D_RELATION_ADDED + l_country_name + " and " + l_neighbor_country_name);
-                    d_logger.addLogger(GameMessageConstants.D_RELATION_ADDED);
+                    d_logger.addLogger("Added Neighbor Relation");
                 }
             }
 
@@ -441,7 +441,7 @@ public class EditMapPhase extends Phase {
                     l_new_border_list.remove(Integer.valueOf(l_neighbor_country_id));
                     p_map.d_borders.replace(l_country_id, l_new_border_list);
                     System.out.println(GameMessageConstants.D_RELATION_REMOVED + l_country_name + " and " + l_neighbor_country_name);
-                    d_logger.addLogger(GameMessageConstants.D_RELATION_REMOVED);
+                    d_logger.addLogger("Removed Neighbor Relation");
                 }
             }
 

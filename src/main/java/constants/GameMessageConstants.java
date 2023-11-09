@@ -192,7 +192,7 @@ public class GameMessageConstants {
     /**
      * Error Message Constants
      */
-    public static final String D_CARD_INAVLID = "Player does'nt own any card for order: ";
+    public static final String D_CARD_INAVLID = "Player does not own any card for order: ";
 
     /**
      * Error Message Constants
@@ -312,7 +312,7 @@ public class GameMessageConstants {
     /**
      * Error Message Constants
      */
-    public static final String D_MAP_INVALID_COUNTRY_NEIGHBOR = "Invalid Countries enterd";
+    public static final String D_MAP_INVALID_COUNTRY_NEIGHBOR = "Invalid Countries entered";
 
     /**
      * Error Message Constants
