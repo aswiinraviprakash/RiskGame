@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import common.LogEntryBuffer;
 import common.Phase;
 import constants.GameMessageConstants;
 import gameutils.GameCommandParser;
@@ -14,6 +15,8 @@ import gameutils.GameException;
  * editing, or creating a new map.
  */
 public class GameMapEditor {
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**
      * Function is used for the initial map editing phase.
@@ -61,6 +64,7 @@ public class GameMapEditor {
 
             } catch (GameException e) {
                 System.out.println(e.getMessage());
+                d_logger.addLogger(e.getMessage());
             } catch (Exception e) {
                 throw e;
             }

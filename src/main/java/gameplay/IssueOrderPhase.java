@@ -1,5 +1,6 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import common.Phase;
 import constants.GameMessageConstants;
 import gameutils.GameCommandParser;
@@ -17,6 +18,8 @@ import java.util.Map;
  * Class for players to issue orders.
  */
 public class IssueOrderPhase extends Phase {
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**
      * Contains current game information.
@@ -61,6 +64,7 @@ public class IssueOrderPhase extends Phase {
         p_current_player.issue_order();
         p_current_player.setCurrentArmies(p_current_player.getCurrentArmies() - l_armies_number);
         System.out.println(GameMessageConstants.D_DEPLOY + " " + GameMessageConstants.D_ORDER_ISSUED);
+        d_logger.addLogger(GameMessageConstants.D_DEPLOY + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
     /**
@@ -100,6 +104,7 @@ public class IssueOrderPhase extends Phase {
         p_current_player.d_current_order = new AdvanceOrder(l_from_country_obj, l_to_country_obj, l_armies_number);
         p_current_player.issue_order();
         System.out.println(GameMessageConstants.D_ADVANCE + " " + GameMessageConstants.D_ORDER_ISSUED);
+        d_logger.addLogger(GameMessageConstants.D_ADVANCE + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
     /**
@@ -142,6 +147,7 @@ public class IssueOrderPhase extends Phase {
         p_current_player.issue_order();
         p_current_player.removeAvailableCard(Card.BOMB);
         System.out.println(GameMessageConstants.D_BOMB + " " + GameMessageConstants.D_ORDER_ISSUED);
+        d_logger.addLogger(GameMessageConstants.D_BOMB + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
     /**
@@ -174,6 +180,7 @@ public class IssueOrderPhase extends Phase {
         p_current_player.issue_order();
         p_current_player.removeAvailableCard(Card.BLOCKADE);
         System.out.println(GameMessageConstants.D_BLOCKADE + " " + GameMessageConstants.D_ORDER_ISSUED);
+        d_logger.addLogger(GameMessageConstants.D_BLOCKADE + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
     /**
@@ -213,6 +220,7 @@ public class IssueOrderPhase extends Phase {
         p_current_player.issue_order();
         p_current_player.removeAvailableCard(Card.AIRLIFT);
         System.out.println(GameMessageConstants.D_AIRLIFT + " " + GameMessageConstants.D_ORDER_ISSUED);
+        d_logger.addLogger(GameMessageConstants.D_AIRLIFT + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
     /**
@@ -240,6 +248,7 @@ public class IssueOrderPhase extends Phase {
         p_current_player.issue_order();
         p_current_player.removeAvailableCard(Card.DIPLOMACY);
         System.out.println(GameMessageConstants.D_DIPLOMACY + " " + GameMessageConstants.D_ORDER_ISSUED);
+        d_logger.addLogger(GameMessageConstants.D_DIPLOMACY + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
     /**

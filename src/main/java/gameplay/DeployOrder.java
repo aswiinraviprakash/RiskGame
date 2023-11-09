@@ -1,5 +1,6 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import mapparser.GameMap;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
  * Class represents an order to deploy a certain number of armies to a specific country.
  */
 public class DeployOrder extends Order {
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**
      * Contains country name.
@@ -53,6 +56,7 @@ public class DeployOrder extends Order {
      */
     @Override
     public void execute(Player p_player_obj) {
+        d_logger.addLogger("Deploy Order Initiated");
         List<GameMap.Country> l_conquered_countries = p_player_obj.getConqueredCountries();
         for (GameMap.Country l_country_obj : l_conquered_countries) {
             if (l_country_obj.getCountryName().equals(getCountryName())) {

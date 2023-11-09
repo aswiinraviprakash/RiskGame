@@ -1,5 +1,6 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import common.Phase;
 
 import java.util.LinkedHashMap;
@@ -9,6 +10,8 @@ import java.util.Map;
  * Responsible for executing the orders issued by the players during the game.
  */
 public class ExecuteOrderPhase extends Phase {
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     /**
      * Contains number of armies.
@@ -33,6 +36,7 @@ public class ExecuteOrderPhase extends Phase {
     @Override
     public void executePhase() throws Exception {
         System.out.printf("%nExecuting orders issued....%n");
+        d_logger.addLogger("....Executing orders issued....");
         d_current_game_info = GameInformation.getInstance();
 
         LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();

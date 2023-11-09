@@ -1,5 +1,6 @@
 package mapparser;
 
+import common.LogEntryBuffer;
 import common.Phase;
 import constants.GameConstants;
 import constants.GameMessageConstants;
@@ -15,6 +16,8 @@ import java.util.List;
  * The class deals with the loading of map into the game.
  */
 public class LoadMapPhase extends Phase {
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     private String d_map_path;
 
@@ -68,6 +71,7 @@ public class LoadMapPhase extends Phase {
      */
     public void loadGameMap(GameMap p_game_map) throws Exception {
 
+        d_logger.addLogger("Game Map Loaded");
         // loading map objects
         p_game_map.loadBorders();
         p_game_map.loadContinents();
@@ -102,6 +106,7 @@ public class LoadMapPhase extends Phase {
 
         l_buff_writer.close();
         System.out.println(GameMessageConstants.D_NEW_MAP);
+        d_logger.addLogger("Map Created");
     }
 
     /**
@@ -128,6 +133,7 @@ public class LoadMapPhase extends Phase {
                     if (l_map_valid) this.d_loaded_game_map = l_game_map;
                     else throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
 
+
                 } else {
 
                     this.initialiseMapFile();
@@ -140,6 +146,7 @@ public class LoadMapPhase extends Phase {
             } else {
                 if (!l_file.exists()) throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
 
+
                 l_game_map = new GameMap(d_map_path);
                 this.loadGameMap(l_game_map);
                 boolean l_map_valid = l_game_map.validateGameMap();
@@ -147,6 +154,7 @@ public class LoadMapPhase extends Phase {
                 else throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
             }
         } catch (GameException e) {
+            d_logger.addLogger(e.getMessage());
             throw e;
         } catch (Exception e) {
             throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);

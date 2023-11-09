@@ -1,11 +1,14 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import mapparser.GameMap;
 
 /**
  * The class is responsible for the blockade.
  */
 public class BlockadeOrder extends Order {
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     private GameMap.Country d_destination_country;
 
@@ -24,6 +27,7 @@ public class BlockadeOrder extends Order {
      */
     @Override
     public void execute(Player p_player_obj) throws Exception {
+        d_logger.addLogger("Blockade Order Initiated");
         if (!p_player_obj.getConqueredCountries().contains(d_destination_country)) return;
 
         int l_destination_armies = d_destination_country.getArmyCount();

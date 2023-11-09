@@ -1,5 +1,6 @@
 package gameplay;
 
+import common.LogEntryBuffer;
 import gameutils.GameException;
 import mapparser.GameMap;
 
@@ -7,6 +8,8 @@ import mapparser.GameMap;
  * The class deals with airlifting of the armies to other countries.
  */
 public class AirliftOrder extends Order {
+
+    private static LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
     private GameMap.Country d_source_country;
 
@@ -91,6 +94,7 @@ public class AirliftOrder extends Order {
     public void execute(Player p_player_obj) throws GameException {
 
         d_current_game_info = GameInformation.getInstance();
+        d_logger.addLogger("Airlift Order Initiated");
 
         if (!p_player_obj.getConqueredCountries().contains(d_source_country)) return;
 
@@ -108,10 +112,11 @@ public class AirliftOrder extends Order {
 
         if (isAttackMode) {
             attackDestinationCountry(p_player_obj, l_destination_player);
+            d_logger.addLogger("Airlift in Attack");
         } else {
             movesArmiesToDestinationCountry();
+            d_logger.addLogger("Airlift in Friendly Territory");
         }
-
     }
 
 }
