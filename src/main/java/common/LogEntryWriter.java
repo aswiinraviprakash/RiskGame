@@ -7,8 +7,15 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.File;
 
+/**
+ * LogEntryWriter class implements the Observer Interface
+ */
 public class LogEntryWriter implements Observer {
 
+    /**
+     * Method to instantiate logEntryWriter
+     * @param p_logbuffer
+     */
     public LogEntryWriter(LogEntryBuffer p_logbuffer) {
         p_logbuffer.addObserver(this);
     }
@@ -17,6 +24,10 @@ public class LogEntryWriter implements Observer {
         writeLogFile(((LogEntryBuffer) p_obervable).getLoggedMessage());
     }
 
+    
+    /** Method to write the log message
+     * @param p_log_message
+     */
     public void writeLogFile(String p_log_message) {
         PrintWriter l_writer = null;
         try {
@@ -33,6 +44,10 @@ public class LogEntryWriter implements Observer {
         }
     }
 
+    /**
+     * Checks the directory
+     * @param p_directory_path
+     */
     private void checkDirectory(String p_directory_path) {
         File l_directory = new File(p_directory_path);
         if (!l_directory.exists() || !l_directory.isDirectory()) {
