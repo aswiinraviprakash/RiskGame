@@ -5,6 +5,7 @@ Western_Provinces-South 3
 Western_Provinces-North 2
 Nunavut 3
 Northwestern_Territories 2
+Asia 5
 
 [countries]
 1 New_Brunswick 1
@@ -38,6 +39,8 @@ Northwestern_Territories 2
 29 NT-Victoria_Island-West 6
 30 Northwest_Territories-Continental 6
 31 Yukon_Territory 6
+32 India 7
+33 China 7
 
 [borders]
 1 8 2 3 
@@ -71,3 +74,5 @@ Northwestern_Territories 2
 29 24 27 28 30 
 30 17 18 19 21 28 29 31 
 31 17 30 
+32 33 
+33 32 
