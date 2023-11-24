@@ -40,6 +40,7 @@ public class EditMapPhase extends Phase {
 
     /**
      * Constructor initialises the member variables.
+     *
      * @param l_game_map loads game map.
      * @param l_map_file_name contains the map file name.
      */
@@ -50,6 +51,7 @@ public class EditMapPhase extends Phase {
 
     /**
      * Method deals with processing to the next phase.
+     *
      * @return object of execute order phase.
      * @throws Exception If there is an error in the execution or validation.
      */
@@ -60,6 +62,7 @@ public class EditMapPhase extends Phase {
 
     /**
      * Function is used for adding, removing continents.
+     *
      * @param p_map map object.
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list contains continent name and the bonus value.
@@ -193,6 +196,7 @@ public class EditMapPhase extends Phase {
 
     /**
      * Function is used for adding, removing countries.
+     *
      * @param p_map map object.
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list country and continent value.
@@ -226,7 +230,7 @@ public class EditMapPhase extends Phase {
                         break;
                     }
                 }
-                
+
                 for (int l_index = 0; l_index < l_countries.size(); l_index++) {
                     if (l_countries.get(l_index).getCountryName().compareTo(l_country_name) == 0) {
                         l_country_exists = true;
@@ -234,43 +238,42 @@ public class EditMapPhase extends Phase {
                     }
                 }
 
-                if (l_continent_exists ) {
-                    if(!l_country_exists){
+                if (l_continent_exists) {
+                    if (!l_country_exists) {
                         //creating country object
-                    int l_country_id = 1;
-                    if (l_countries.size() != 0) {
-                        l_country_id = l_countries.get(l_countries.size() - 1).getCountryID() + 1;
-                    }
-
-                    GameMap.Country l_country_obj = p_map.new Country(l_country_id, l_country_name,
-                            GameConstants.D_DEFAULT_IS_CONQUERED, GameConstants.D_DEFAULT_ARMY_COUNT,
-                            l_continent_name, null);
-
-                    //updating map.countries list
-                    p_map.d_countries.add(l_country_obj);
-
-                    //updating continent object's country list
-                    for (int l_index = 0; l_index < l_continents.size(); l_index++) {
-                        if (l_continents.get(l_index).getContinentName().compareTo(l_continent_name) == 0) {
-                            GameMap.Continent l_continent_obj = p_map.d_continents.get(l_index);
-                            l_continent_obj.getCountryIDList().add(l_country_id);
-                            break;
+                        int l_country_id = 1;
+                        if (l_countries.size() != 0) {
+                            l_country_id = l_countries.get(l_countries.size() - 1).getCountryID() + 1;
                         }
-                    }
 
-                    //adding new country to borders
-                    ArrayList<Integer> l_new_border = new ArrayList<Integer>();
-                    l_new_border.add(l_country_id);
+                        GameMap.Country l_country_obj = p_map.new Country(l_country_id, l_country_name,
+                                GameConstants.D_DEFAULT_IS_CONQUERED, GameConstants.D_DEFAULT_ARMY_COUNT,
+                                l_continent_name, null);
 
-                    //refactored
-                    p_map.d_borders.put(l_country_id, l_new_border);
+                        //updating map.countries list
+                        p_map.d_countries.add(l_country_obj);
 
-                    System.out.println(GameMessageConstants.D_COUNTRY_ADDED + l_country_name);
-                    d_logger.addLogger(GameMessageConstants.D_COUNTRY_ADDED);
-                    }else{
+                        //updating continent object's country list
+                        for (int l_index = 0; l_index < l_continents.size(); l_index++) {
+                            if (l_continents.get(l_index).getContinentName().compareTo(l_continent_name) == 0) {
+                                GameMap.Continent l_continent_obj = p_map.d_continents.get(l_index);
+                                l_continent_obj.getCountryIDList().add(l_country_id);
+                                break;
+                            }
+                        }
+
+                        //adding new country to borders
+                        ArrayList<Integer> l_new_border = new ArrayList<Integer>();
+                        l_new_border.add(l_country_id);
+
+                        //refactored
+                        p_map.d_borders.put(l_country_id, l_new_border);
+
+                        System.out.println(GameMessageConstants.D_COUNTRY_ADDED + l_country_name);
+                        d_logger.addLogger(GameMessageConstants.D_COUNTRY_ADDED);
+                    } else {
                         throw new GameException(GameMessageConstants.D_MAP_DUPLICATE_COUNTRY);
                     }
-                    
 
                 } else {
                     throw new GameException(GameMessageConstants.D_MAP_NO_CONTINENT);
@@ -338,6 +341,7 @@ public class EditMapPhase extends Phase {
 
     /**
      * Function is used for adding, removing neighbouring countries.
+     *
      * @param p_map map object.
      * @param p_map_option indicates the operation needed to be performed.
      * @param p_parameter_list contains a country name and its neighbouring
@@ -455,12 +459,67 @@ public class EditMapPhase extends Phase {
     /**
      * Function is used to create a new map file, to modify its contents and to
      * overwrite map files.
+     *
      * @param p_map map object.
      * @param p_file_name map file name.
      * @return updated map files.
      * @throws Exception If there is an error in the execution or validation.
      */
-    public GameMap modifyMapFile(GameMap p_map, String p_file_name) throws Exception {
+    public GameMap modifyMapFileConquest(GameMap p_map, String p_file_name) throws Exception {
+
+        List<GameMap.Country> l_countries = p_map.getCountryObjects();
+        List<GameMap.Continent> l_continents = p_map.getContinentObjects();
+        LinkedHashMap<Integer, List<Integer>> l_borders = p_map.getBorders();
+
+        GameMap l_new_map = null;
+
+        File l_file_dir = new File("").getCanonicalFile();
+        String l_load_file_path = l_file_dir.getParent() + GameConstants.D_MAP_DIRECTORY + p_file_name;
+
+        try {
+            File l_fout = new File(l_load_file_path);
+            FileOutputStream l_fos = new FileOutputStream(l_fout);
+
+            BufferedWriter l_bw = new BufferedWriter(new OutputStreamWriter(l_fos));
+
+            l_bw.write("[Continents]");
+            l_bw.newLine();
+
+            for (int l_index = 0; l_index < l_continents.size(); l_index++) {
+                GameMap.Continent l_continent_obj = l_continents.get(l_index);
+                l_bw.write(l_continent_obj.getContinentName() + "=" + l_continent_obj.getSpecialNumber());
+                l_bw.newLine();
+            }
+            l_bw.newLine();
+            l_bw.write("[Territories]");
+            l_bw.newLine();
+
+            for (int l_index = 0; l_index < l_countries.size(); l_index++) {
+                GameMap.Country l_country_obj = l_countries.get(l_index);
+                String l_country_name = l_country_obj.getCountryName();
+                int l_country_id = l_country_obj.getCountryID();
+                String l_continent_name = l_country_obj.getContinentName();
+                List<Integer> l_border_list_id = l_borders.get(l_country_id);
+                l_bw.write(l_country_name + "," + l_continent_name + ",");
+                for (int l_j_index = 0; l_j_index < l_border_list_id.size() - 1; l_j_index++) {
+                    l_bw.write(p_map.getCountryById(l_border_list_id.get(l_j_index)) + ",");
+                }
+
+                l_bw.write(p_map.getCountryById(l_border_list_id.get(l_border_list_id.size() - 1)) + "");
+
+                l_bw.newLine();
+            }
+            
+            l_bw.close();
+
+        } catch (IOException e) {
+            throw e;
+        }
+
+        return l_new_map;
+    }
+
+    public GameMap modifyMapFileDomination(GameMap p_map, String p_file_name) throws Exception {
 
         List<GameMap.Country> l_countries = p_map.getCountryObjects();
         List<GameMap.Continent> l_continents = p_map.getContinentObjects();
@@ -516,7 +575,7 @@ public class EditMapPhase extends Phase {
             l_bw.close();
 
         } catch (IOException e) {
-           throw e;
+            throw e;
         }
 
         LoadMapPhase l_loadmap_phase = new LoadMapPhase(p_file_name, false);
@@ -528,6 +587,7 @@ public class EditMapPhase extends Phase {
 
     /**
      * Method executes the edit map phase.
+     *
      * @throws Exception If there is an error in the execution or validation.
      */
     @Override
@@ -556,12 +616,14 @@ public class EditMapPhase extends Phase {
                         System.out.println(GameMessageConstants.D_VALID_MAP);
                         d_logger.addLogger(GameMessageConstants.D_VALID_MAP);
                     } else {
-                        throw new GameException(GameMessageConstants. D_MAP_PROBLEM);
+                        throw new GameException(GameMessageConstants.D_MAP_PROBLEM);
                     }
 
                 } else {
 
-                    if (l_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
+                    if (l_command_details.isEmpty()) {
+                        throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
+                    }
 
                     for (GameCommandParser.CommandDetails l_command_detail : l_command_details) {
 
@@ -569,7 +631,9 @@ public class EditMapPhase extends Phase {
                             case "editcontinent": {
 
                                 List<String> l_command_parameters = l_command_detail.getCommandParameters();
-                                if (l_command_parameters.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_EDITCONTINENT);
+                                if (l_command_parameters.isEmpty()) {
+                                    throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_EDITCONTINENT);
+                                }
 
                                 String l_command_option = l_command_detail.getCommandOption();
 
@@ -579,7 +643,9 @@ public class EditMapPhase extends Phase {
                             case "editcountry": {
 
                                 List<String> l_command_parameters = l_command_detail.getCommandParameters();
-                                if (l_command_parameters.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_EDITCONTINENT);
+                                if (l_command_parameters.isEmpty()) {
+                                    throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_EDITCONTINENT);
+                                }
 
                                 String l_command_option = l_command_detail.getCommandOption();
 
@@ -589,7 +655,9 @@ public class EditMapPhase extends Phase {
                             case "editneighbor": {
 
                                 List<String> l_command_parameters = l_command_detail.getCommandParameters();
-                                if (l_command_parameters.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_EDITCONTINENT);
+                                if (l_command_parameters.isEmpty()) {
+                                    throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_EDITCONTINENT);
+                                }
 
                                 String l_command_option = l_command_detail.getCommandOption();
 
@@ -597,19 +665,38 @@ public class EditMapPhase extends Phase {
                                 break;
                             }
                             case "savemap": {
-                                if (l_command_details.size() != 1) throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
+                                if (l_command_details.size() != 1) {
+                                    throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
+                                }
 
                                 List<String> l_command_parameters = l_command_detail.getCommandParameters();
-                                if (l_command_parameters.size() != 1) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID);
+                                if (l_command_parameters.size() != 1) {
+                                    throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID);
+                                }
 
                                 String l_map_path_input = l_command_parameters.get(0);
-                                if (!l_map_path_input.equals(d_map_file_name)) throw new GameException(GameMessageConstants.D_CRITICAL_MAP_NAME);
+                                if (!l_map_path_input.equals(d_map_file_name)) {
+                                    throw new GameException(GameMessageConstants.D_CRITICAL_MAP_NAME);
+                                }
 
                                 boolean l_is_map_valid = d_game_map.validateGameMap();
                                 if (l_is_map_valid) {
-                                    d_game_map = this.modifyMapFile(d_game_map, d_map_file_name);
-                                    System.out.println(GameMessageConstants.D_SAVE_MAP);
-                                    d_logger.addLogger(GameMessageConstants.D_SAVE_MAP);
+                                    //ask for the type of format
+                                    System.out.println("What file format do you want to save this file in? ");
+                                    l_map_command = l_reader.readLine();
+                                    if (l_map_command.compareTo("Domination") == 0) {
+                                        d_game_map = this.modifyMapFileDomination(d_game_map, d_map_file_name);
+                                        System.out.println(GameMessageConstants.D_SAVE_MAP);
+                                        d_logger.addLogger(GameMessageConstants.D_SAVE_MAP);
+                                    } else if (l_map_command.compareTo("Conquest") == 0) {
+                                        d_game_map = this.modifyMapFileConquest(d_game_map, d_map_file_name);
+                                        System.out.println(GameMessageConstants.D_SAVE_MAP);
+                                        d_logger.addLogger(GameMessageConstants.D_SAVE_MAP);
+
+                                    } else {
+                                        throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID);
+                                    }
+
                                 } else {
                                     throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED_EXIT);
                                 }

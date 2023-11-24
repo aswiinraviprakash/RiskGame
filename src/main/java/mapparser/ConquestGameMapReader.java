@@ -1,0 +1,144 @@
+package mapparser;
+
+import constants.GameConstants;
+import gameutils.MapCommonUtils;
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import mapparser.GameMap.Continent;
+import mapparser.GameMap.Country;
+
+/**
+ *
+ * @author USER
+ */
+public class ConquestGameMapReader {
+    
+    String d_file_path;
+    GameMap d_game_map;
+    
+    public ConquestGameMapReader(String p_file_path, GameMap p_game_map){
+        this.d_file_path = p_file_path;
+        this.d_game_map = p_game_map;
+    }
+    
+    public LinkedHashMap<Integer, List<Integer>> readBorders(){
+        List<String> l_map_details = new ArrayList<String>();
+        List<String> l_countries = new ArrayList<String>();
+        List<Country> l_country_obj = new ArrayList<Country>();
+        
+        try {
+            l_map_details = MapCommonUtils.getMapDetails(this.d_file_path, "Territories", "end");
+        } catch (Exception e) {
+        }
+
+        HashMap<Integer, List<String>> l_border_str = new HashMap<Integer, List<String>>();
+        HashMap<String, Integer> l_country_id_map = new HashMap<String, Integer>();
+
+        int l_id = 1;
+        int starting_index = 4;
+        for (int l_index = 0; l_index < l_map_details.size(); l_index++) {
+            int l_country_id = l_id++;
+            String l_country_name = l_map_details.get(l_index).split(",")[0];
+            if (l_map_details.get(l_index).split(",")[1].matches("[0-9]")) {
+                String l_continent_name = l_map_details.get(l_index).split(",")[3];
+
+            } else {
+                String l_continent_name = l_map_details.get(l_index).split(",")[1];
+                starting_index = 2;
+            }
+
+            List<String> l_borders = new ArrayList<String>();
+            for (int l_j_index = starting_index; l_j_index < l_map_details.get(l_index).split(",").length; l_j_index++) {
+                l_borders.add(l_map_details.get(l_index).split(",")[l_j_index]);
+            }
+
+            l_border_str.put(l_country_id, l_borders);
+            l_country_id_map.put(l_country_name, l_country_id);
+        }
+        
+        LinkedHashMap<Integer, List<Integer>> l_borders = new LinkedHashMap<Integer, List<Integer>>();
+
+        for (Map.Entry<Integer, List<String>> entry : l_border_str.entrySet()) {
+            Integer key = entry.getKey();
+            List<String> value = entry.getValue();
+            List<Integer> l_border_list_country = new ArrayList<Integer>();
+            l_border_list_country.add(key);
+            for (int l_index = 0; l_index < value.size(); l_index++) {
+                l_border_list_country.add(l_country_id_map.get(value.get(l_index)));
+            }
+            l_borders.put(key, l_border_list_country);
+        }
+       
+        return l_borders;
+    }
+    
+    public List<Continent> readContinents(){
+        
+        List<String> l_map_details = new ArrayList<String>();
+        List<String> l_continents = new ArrayList<String>();
+        List<Continent> l_continent_obj = new ArrayList<Continent>();
+
+        //get continents
+        try {
+            l_map_details = MapCommonUtils.getMapDetails(this.d_file_path, "Continents", "Territories");
+        } catch (Exception e) {
+        }
+
+        for (int l_index = 0; l_index < l_map_details.size(); l_index++) {
+            String l_continent_name = l_map_details.get(l_index).split("=")[0];
+            int l_special_number = parseInt(l_map_details.get(l_index).split("=")[1]);
+            GameMap.Continent l_continent = this.d_game_map. new Continent(l_continent_name,GameConstants.D_DEFAULT_IS_CONQUERED,l_special_number,null); 
+            l_continent_obj.add(l_continent);
+        }
+        return l_continent_obj;
+    }
+    
+    public List<Country> readCountries(){
+        
+        List<String> l_map_details = new ArrayList<String>();
+        List<String> l_countries = new ArrayList<String>();
+        List<Country> l_country_obj = new ArrayList<Country>();
+        
+        
+        try {
+            l_map_details = MapCommonUtils.getMapDetails(this.d_file_path, "Territories", "end");
+        } catch (Exception e) {
+        }
+
+        HashMap<Integer, List<String>> l_border_str = new HashMap<Integer, List<String>>();
+        HashMap<String, Integer> l_country_id_map = new HashMap<String, Integer>();
+
+        int l_country_id = 1;
+        int starting_index = 4;
+        for (int l_index = 0; l_index < l_map_details.size(); l_index++) {
+            String l_country_name = l_map_details.get(l_index).split(",")[0];
+            String l_continent_name = "";
+            if (l_map_details.get(l_index).split(",")[1].matches("[0-9]")) {
+                l_continent_name = l_map_details.get(l_index).split(",")[3];
+
+            } else {
+                l_continent_name = l_map_details.get(l_index).split(",")[1];
+                starting_index = 2;
+            }
+            
+            GameMap.Country l_country = this.d_game_map. new Country(l_country_id++,l_country_name,GameConstants.D_DEFAULT_IS_CONQUERED,GameConstants.D_DEFAULT_ARMY_COUNT,l_continent_name,null);
+            l_country_obj.add(l_country);
+           
+        }
+        return l_country_obj;
+    }
+    
+//    public ConquestGameMap readConquestGameMap(String p_file_path){
+//        ConquestGameMap l_conquest_map = new ConquestGameMap();
+//        
+//        
+//        
+//        return l_conquest_map;
+//        
+//    }
+    //load borders, load countries, load continents (map file path)
+}
