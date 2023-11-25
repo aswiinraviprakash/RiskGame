@@ -14,7 +14,8 @@ public class MapCommonUtils {
 
     /**
      * Method returns the complete map details.
-     * @param p_file_path The path to  the map file.
+     *
+     * @param p_file_path The path to the map file.
      * @param p_from_keyword Starting keyword to search for in the file.
      * @param p_to_keyword Ending keyword to search for in the file.
      * @return A list of map details.
@@ -52,4 +53,16 @@ public class MapCommonUtils {
         return l_map_details;
     }
 
+    public static String checkMapType(String p_file_path) throws Exception{
+        List<String> l_all_lines = null;
+        List<String> l_map_details = new ArrayList<String>();
+        l_all_lines = Files.readAllLines(Paths.get(p_file_path));
+        
+        if(l_all_lines.contains("[Territories]"))
+            return "ConquestMap";
+        else if(l_all_lines.contains("[countries]"))
+            return "DominationMap";
+        else
+            return "";
+    }
 }

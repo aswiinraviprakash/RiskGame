@@ -5,7 +5,7 @@ import common.Phase;
 import constants.GameConstants;
 import constants.GameMessageConstants;
 import gameutils.GameException;
-
+import gameutils.MapCommonUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.BufferedWriter;
@@ -44,6 +44,7 @@ public class LoadMapPhase extends Phase {
 
     /**
      * Constructor for initialising member variables.
+     *
      * @param p_map_path map file location.
      * @param p_need_newmap indicative of requiring a new map or not.
      */
@@ -55,6 +56,7 @@ public class LoadMapPhase extends Phase {
 
     /**
      * Method sets map path.
+     *
      * @param p_map_directory map file location.
      */
     public void setMapDirectory(String p_map_directory) {
@@ -63,6 +65,7 @@ public class LoadMapPhase extends Phase {
 
     /**
      * Method returns loaded map.
+     *
      * @return loaded map.
      */
     public GameMap getLoadedMap() {
@@ -71,6 +74,7 @@ public class LoadMapPhase extends Phase {
 
     /**
      * Method makes the game proceed to the next phase.
+     *
      * @return null
      * @throws Exception If there is an error in the execution or validation.
      */
@@ -81,16 +85,31 @@ public class LoadMapPhase extends Phase {
 
     /**
      * Method loads the complete game map.
+     *
      * @param p_game_map map object.
      * @throws Exception If there is an error in the execution or validation.
      */
+    
+    //move load
     public void loadGameMap(GameMap p_game_map) throws Exception {
 
-        d_logger.addLogger("Game Map Loaded");
-        // loading map objects
-        p_game_map.loadBorders();
-        p_game_map.loadContinents();
-        p_game_map.loadCountries();
+       String l_map_type = MapCommonUtils.checkMapType(this.d_map_path);
+       if(l_map_type.compareTo("DominationMap") == 0){
+           DominationGameMapReader l_dom_reader = new DominationGameMapReader(this.d_map_path, p_game_map);
+           l_dom_reader.loadContinents();
+           l_dom_reader.loadCountries();
+           l_dom_reader.loadBorders();
+           
+       }else if(l_map_type.compareTo("ConquestMap") == 0){    
+            ConquestGameMapReader l_conq_reader = new ConquestGameMapReader(this.d_map_path,p_game_map);
+           MapReaderAdapter l_adapter = new MapReaderAdapter(l_conq_reader);
+           l_adapter.loadContinents();
+           l_adapter.loadCountries();
+           l_adapter.loadBorders();
+           
+       }else{
+           throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
+       }
 
         List<GameMap.Continent> l_continents = p_game_map.getContinentObjects();
 
@@ -98,10 +117,13 @@ public class LoadMapPhase extends Phase {
         for (int l_index = 0; l_index < l_continents.size(); l_index++) {
             p_game_map.addCountryToContinentObj(l_continents.get(l_index));
         }
+        
+         d_logger.addLogger("Game Map Loaded");
     }
 
     /**
      * Function creates a new map file.
+     *
      * @return map object.
      */
     private void initialiseMapFile() throws Exception {
@@ -126,11 +148,12 @@ public class LoadMapPhase extends Phase {
 
     /**
      * Method executes the edit map phase.
+     *
      * @throws Exception If there is an error in the execution or validation.
      */
     @Override
     public void executePhase() throws Exception {
-        try {
+         try {
             File l_file;
             File l_file_dir = new File("").getCanonicalFile();
             d_map_path = l_file_dir.getParent() + this.d_map_directory + d_map_path;
@@ -174,5 +197,6 @@ public class LoadMapPhase extends Phase {
         } catch (Exception e) {
             throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
         }
+    
     }
 }
