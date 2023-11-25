@@ -96,15 +96,19 @@ public class LoadMapPhase extends Phase {
        String l_map_type = MapCommonUtils.checkMapType(this.d_map_path);
        if(l_map_type.compareTo("DominationMap") == 0){
            DominationGameMapReader l_dom_reader = new DominationGameMapReader(this.d_map_path, p_game_map);
-           l_dom_reader.loadBorders();
            l_dom_reader.loadContinents();
            l_dom_reader.loadCountries();
-       }if(l_map_type.compareTo("ConquestMap") == 0){
+           l_dom_reader.loadBorders();
+           
+       }else if(l_map_type.compareTo("ConquestMap") == 0){    
             ConquestGameMapReader l_conq_reader = new ConquestGameMapReader(this.d_map_path,p_game_map);
-           MapReaderAdapter l_adapter = new MapReaderAdapter(this.d_map_path, l_conq_reader, p_game_map);
-           l_adapter.loadBorders();
+           MapReaderAdapter l_adapter = new MapReaderAdapter(l_conq_reader);
            l_adapter.loadContinents();
            l_adapter.loadCountries();
+           l_adapter.loadBorders();
+           
+       }else{
+           throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
        }
 
         List<GameMap.Continent> l_continents = p_game_map.getContinentObjects();

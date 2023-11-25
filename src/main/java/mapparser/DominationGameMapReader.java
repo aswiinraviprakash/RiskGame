@@ -29,7 +29,7 @@ public class DominationGameMapReader{
 
         //load border array from map file
         //refactored
-        List<String> l_borders_list = MapCommonUtils.getMapDetails(d_file_path, "borders", "end");
+        List<String> l_borders_list = MapCommonUtils.getMapDetails(d_file_path, "[borders]", "end");
 
         LinkedHashMap<Integer, List<Integer>> l_borders = new LinkedHashMap<Integer, List<Integer>>();
 
@@ -64,7 +64,7 @@ public class DominationGameMapReader{
         List<GameMap.Continent> l_continents = d_game_map.getContinentObjects();
 
         List<GameMap.Country> l_countries = new ArrayList<GameMap.Country>();
-        List<String> l_countries_list = MapCommonUtils.getMapDetails(d_file_path, "countries", "borders");
+        List<String> l_countries_list = MapCommonUtils.getMapDetails(d_file_path, "[countries]", "[borders]");
 
         for (int l_index = 0; l_index < l_countries_list.size(); l_index++) {
             int l_country_id = parseInt(l_countries_list.get(l_index).split(" ")[0]);
@@ -76,7 +76,8 @@ public class DominationGameMapReader{
             l_countries.add(l_country_obj);
         }
 
-        this.d_game_map.d_continents = l_continents;
+        this.d_game_map.d_countries = l_countries;
+        
 
     }
 
@@ -87,7 +88,7 @@ public class DominationGameMapReader{
     public void loadContinents() throws Exception {
         //create continent objects
         List<GameMap.Continent> l_continents = new ArrayList<GameMap.Continent>();
-        List<String> l_continents_list = MapCommonUtils.getMapDetails(d_file_path, "continents", "countries");
+        List<String> l_continents_list = MapCommonUtils.getMapDetails(d_file_path, "[continents]", "[countries]");
         GameMap.Continent l_continent_obj;
         for (int l_index = 0; l_index < l_continents_list.size(); l_index++) {
             int l_special_num = parseInt(l_continents_list.get(l_index).split(" ")[1]);

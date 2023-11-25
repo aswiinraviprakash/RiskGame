@@ -501,11 +501,11 @@ public class EditMapPhase extends Phase {
                 String l_continent_name = l_country_obj.getContinentName();
                 List<Integer> l_border_list_id = l_borders.get(l_country_id);
                 l_bw.write(l_country_name + "," + l_continent_name + ",");
-                for (int l_j_index = 0; l_j_index < l_border_list_id.size() - 1; l_j_index++) {
-                    l_bw.write(p_map.getCountryById(l_border_list_id.get(l_j_index)) + ",");
+                for (int l_j_index = 1; l_j_index < l_border_list_id.size() - 1; l_j_index++) {
+                    l_bw.write(p_map.getCountryById(l_border_list_id.get(l_j_index)).getCountryName() + ",");
                 }
 
-                l_bw.write(p_map.getCountryById(l_border_list_id.get(l_border_list_id.size() - 1)) + "");
+                l_bw.write(p_map.getCountryById(l_border_list_id.get(l_border_list_id.size() - 1)).getCountryName());
 
                 l_bw.newLine();
             }
@@ -513,9 +513,13 @@ public class EditMapPhase extends Phase {
             l_bw.close();
 
         } catch (IOException e) {
-            throw e;
+            e.printStackTrace();
         }
 
+        LoadMapPhase l_loadmap_phase = new LoadMapPhase(p_file_name, false);
+        l_loadmap_phase.executePhase();
+        l_new_map = l_loadmap_phase.getLoadedMap();
+        
         return l_new_map;
     }
 
