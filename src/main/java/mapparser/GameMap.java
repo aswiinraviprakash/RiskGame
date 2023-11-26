@@ -1,14 +1,10 @@
 package mapparser;
 
 import common.LogEntryBuffer;
-import constants.GameConstants;
 import constants.GameMessageConstants;
 import gameutils.GameException;
-import gameutils.MapCommonUtils;
 import java.util.ArrayList;
 import java.util.List;
-import static java.lang.Integer.parseInt;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

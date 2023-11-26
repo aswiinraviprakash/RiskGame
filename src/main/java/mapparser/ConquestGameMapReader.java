@@ -4,7 +4,6 @@ import constants.GameConstants;
 import constants.GameMessageConstants;
 import gameutils.GameException;
 import gameutils.MapCommonUtils;
-import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -22,12 +21,12 @@ public class ConquestGameMapReader {
     String d_file_path;
     GameMap d_game_map;
     
-    public ConquestGameMapReader(String p_file_path, GameMap p_game_map){
+    public ConquestGameMapReader(String p_file_path, GameMap p_game_map) {
         this.d_file_path = p_file_path;
         this.d_game_map = p_game_map;
     }
     
-    public LinkedHashMap<Integer, List<Integer>> readBorders() throws Exception{
+    public LinkedHashMap<Integer, List<Integer>> readBorders() throws Exception {
         List<String> l_map_details = new ArrayList<String>();
         List<String> l_countries = new ArrayList<String>();
         List<Country> l_country_obj = new ArrayList<Country>();
@@ -79,7 +78,7 @@ public class ConquestGameMapReader {
         return l_borders;
     }
     
-    public List<Continent> readContinents() throws Exception{
+    public List<Continent> readContinents() throws Exception {
         
         List<String> l_map_details = new ArrayList<String>();
         List<String> l_continents = new ArrayList<String>();
@@ -94,30 +93,28 @@ public class ConquestGameMapReader {
 
         for (int l_index = 0; l_index < l_map_details.size(); l_index++) {
             String l_continent_name = l_map_details.get(l_index).split("=")[0];
-            int l_special_number = parseInt(l_map_details.get(l_index).split("=")[1]);
-            GameMap.Continent l_continent = this.d_game_map. new Continent(l_continent_name,GameConstants.D_DEFAULT_IS_CONQUERED,l_special_number,null); 
+            int l_special_number = Integer.parseInt(l_map_details.get(l_index).split("=")[1]);
+            GameMap.Continent l_continent = this.d_game_map. new Continent(l_continent_name, GameConstants.D_DEFAULT_IS_CONQUERED, l_special_number, null);
             l_continent_obj.add(l_continent);
         }
        
         return l_continent_obj;
     }
     
-    public List<Country> readCountries() throws Exception{
+    public List<Country> readCountries() throws Exception {
         
         List<String> l_map_details = new ArrayList<String>();
         List<String> l_countries = new ArrayList<String>();
         List<Country> l_country_obj = new ArrayList<Country>();
-        
-        
+
         try {
             l_map_details = MapCommonUtils.getMapDetails(this.d_file_path, "[Territories]", "end");
         } catch (Exception e) {
             throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
         }
-        
-        
-        for(int l_index = 0; l_index < l_map_details.size(); l_index++){
-            if(l_map_details.get(l_index).compareTo("") == 0){
+
+        for (int l_index = 0; l_index < l_map_details.size(); l_index++){
+            if (l_map_details.get(l_index).compareTo("") == 0) {
                 l_map_details.remove(l_index);
             }
         }
@@ -133,12 +130,11 @@ public class ConquestGameMapReader {
                 l_continent_name = l_map_details.get(l_index).split(",")[1];
             }
             
-            GameMap.Country l_country = this.d_game_map. new Country(l_country_id++,l_country_name,GameConstants.D_DEFAULT_IS_CONQUERED,GameConstants.D_DEFAULT_ARMY_COUNT,l_continent_name,null);
+            GameMap.Country l_country = this.d_game_map. new Country(l_country_id++, l_country_name, GameConstants.D_DEFAULT_IS_CONQUERED, GameConstants.D_DEFAULT_ARMY_COUNT, l_continent_name, null);
             l_country_obj.add(l_country);
            
         }
-        
-        
+
         return l_country_obj;
     }
     

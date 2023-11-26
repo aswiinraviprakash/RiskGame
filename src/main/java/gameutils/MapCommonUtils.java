@@ -53,14 +53,14 @@ public class MapCommonUtils {
         return l_map_details;
     }
 
-    public static String checkMapType(String p_file_path) throws Exception{
+    public static String checkMapType(String p_file_path) throws Exception {
         List<String> l_all_lines = null;
         List<String> l_map_details = new ArrayList<String>();
         l_all_lines = Files.readAllLines(Paths.get(p_file_path));
         
-        if(l_all_lines.contains("[Territories]"))
+        if (l_all_lines.contains("[Territories]"))
             return "ConquestMap";
-        else if(l_all_lines.contains("[countries]"))
+        else if (l_all_lines.contains("[countries]"))
             return "DominationMap";
         else
             return "";

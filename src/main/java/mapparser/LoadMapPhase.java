@@ -89,27 +89,24 @@ public class LoadMapPhase extends Phase {
      * @param p_game_map map object.
      * @throws Exception If there is an error in the execution or validation.
      */
-    
-    //move load
     public void loadGameMap(GameMap p_game_map) throws Exception {
 
-       String l_map_type = MapCommonUtils.checkMapType(this.d_map_path);
-       if(l_map_type.compareTo("DominationMap") == 0){
+        String l_map_type = MapCommonUtils.checkMapType(this.d_map_path);
+        if (l_map_type.compareTo("DominationMap") == 0) {
            DominationGameMapReader l_dom_reader = new DominationGameMapReader(this.d_map_path, p_game_map);
            l_dom_reader.loadContinents();
            l_dom_reader.loadCountries();
            l_dom_reader.loadBorders();
            
-       }else if(l_map_type.compareTo("ConquestMap") == 0){    
-            ConquestGameMapReader l_conq_reader = new ConquestGameMapReader(this.d_map_path,p_game_map);
-           MapReaderAdapter l_adapter = new MapReaderAdapter(l_conq_reader);
+        } else if (l_map_type.compareTo("ConquestMap") == 0) {
+           MapReaderAdapter l_adapter = new MapReaderAdapter(new ConquestGameMapReader(this.d_map_path, p_game_map));
            l_adapter.loadContinents();
            l_adapter.loadCountries();
            l_adapter.loadBorders();
            
-       }else{
+        } else {
            throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
-       }
+        }
 
         List<GameMap.Continent> l_continents = p_game_map.getContinentObjects();
 
@@ -118,7 +115,7 @@ public class LoadMapPhase extends Phase {
             p_game_map.addCountryToContinentObj(l_continents.get(l_index));
         }
         
-         d_logger.addLogger("Game Map Loaded");
+        d_logger.addLogger("Game Map Loaded");
     }
 
     /**
@@ -164,26 +161,19 @@ public class LoadMapPhase extends Phase {
 
             if (this.d_need_newmap) {
                 if (l_file.exists()) {
-
                     l_game_map = new GameMap(d_map_path);
                     this.loadGameMap(l_game_map);
                     boolean l_map_valid = l_game_map.validateGameMap();
                     if (l_map_valid) this.d_loaded_game_map = l_game_map;
                     else throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
-
-
                 } else {
-
                     this.initialiseMapFile();
                     l_game_map = new GameMap(d_map_path);
                     this.loadGameMap(l_game_map);
                     this.d_loaded_game_map = l_game_map;
-
                 }
-
             } else {
                 if (!l_file.exists()) throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
-
 
                 l_game_map = new GameMap(d_map_path);
                 this.loadGameMap(l_game_map);
