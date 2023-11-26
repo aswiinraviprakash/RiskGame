@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import common.Phase;
+import java.io.Serializable;
 import mapparser.GameMap;
 
 /**
  *  This class is used to set current phase, current map and other information.
  */
-public class GameInformation {
+public class GameInformation implements Serializable{
 
     /**
      * member to store gameinformation instance

@@ -192,7 +192,7 @@ public class GameMessageConstants {
     /**
      * Error Message Constants
      */
-    public static final String D_CARD_INAVLID = "Player does not own any card for order: ";
+    public static final String D_CARD_INAVLID = "Player does'nt own any card for order: ";
 
     /**
      * Error Message Constants
@@ -312,7 +312,7 @@ public class GameMessageConstants {
     /**
      * Error Message Constants
      */
-    public static final String D_MAP_INVALID_COUNTRY_NEIGHBOR = "Invalid Countries entered";
+    public static final String D_MAP_INVALID_COUNTRY_NEIGHBOR = "Invalid Countries enterd";
 
     /**
      * Error Message Constants
@@ -393,5 +393,17 @@ public class GameMessageConstants {
      * Success Message Constants
      */
     public static final String D_RELATION_REMOVED = "Removed neighbor relation between ";
+    
+    public static final String D_SAVE_GAME_ERROR = "Error while saving the game ";
+    
+    public static final String D_LOAD_GAME_ERROR = "Error while loading the game ";
+    
+    public static final String D_LOAD_GAME_SUCCESS = "Successfully loaded the game ";
+    
+    public static final String D_SAVE_GAME_SUCCESS = "Successfully saved the game ";
+    
+    
+    
+    
 
 }
