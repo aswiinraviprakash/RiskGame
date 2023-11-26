@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gameplay.strategy.PlayerStrategy;
 import mapparser.GameMap;
 
 /**
@@ -42,6 +43,8 @@ public class Player {
      */
     private HashMap<Card, Integer> d_available_cards = new HashMap();
 
+    private PlayerStrategy d_player_strategy;
+
     /**
      * Creates a new player with specified name.
      * @param l_player_name player name.
@@ -53,8 +56,11 @@ public class Player {
     /**
      * Adds current order to the players list of orders.
      */
-    public void issue_order() {
-        if (d_current_order != null) d_orders_list.add(this.d_current_order);
+    public void issue_order() throws Exception {
+        List<Order> l_player_orders = this.d_player_strategy.createOrders(this);
+        if (l_player_orders != null && !l_player_orders.isEmpty()) {
+            d_orders_list.addAll(l_player_orders);
+        }
     }
 
     /**
@@ -105,6 +111,14 @@ public class Player {
      */
     public List<Order> getOrders() {
         return this.d_orders_list;
+    }
+
+    public void setPlayerStrategy(PlayerStrategy p_player_strategy) {
+        this.d_player_strategy = p_player_strategy;
+    }
+
+    public PlayerStrategy getPlayerStrategy() {
+        return this.d_player_strategy;
     }
 
     /**

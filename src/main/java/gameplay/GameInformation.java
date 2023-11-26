@@ -36,6 +36,8 @@ public class GameInformation {
      */
     private mapparser.GameMap d_current_game_map;
 
+    private Player d_last_session_player;
+
     /**
      * private constructor for creating gameinformation object
      */
@@ -98,6 +100,14 @@ public class GameInformation {
         return this.d_current_game_map;
     }
 
+    public void setLastSessionPlayer(Player p_player_obj) {
+        this.d_last_session_player = p_player_obj;
+    }
+
+    public Player getLastSessionPlayer() {
+        return this.d_last_session_player;
+    }
+
     /**
      * Method to set cards to the player
      * @param p_player_name Parameter to assign the name of the player
@@ -106,6 +116,7 @@ public class GameInformation {
         if (this.d_card_issued_players == null) this.d_card_issued_players = new ArrayList<>();
         d_card_issued_players.add(p_player_name);
     }
+
     /**
      * Checks if the player is issued a card
      * @param p_player_name Parameter to assign the name of the player
@@ -115,6 +126,7 @@ public class GameInformation {
         if (this.d_card_issued_players == null) return false;
         return d_card_issued_players.contains(p_player_name);
     }
+
     /**
      * This method removes the card set to the players
      */
