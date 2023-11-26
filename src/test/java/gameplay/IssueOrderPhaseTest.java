@@ -2,6 +2,8 @@ package gameplay;
 
 import constants.GameConstants;
 import constants.GameMessageConstants;
+import gameplay.strategy.HumanPlayerStrategy;
+import gameplay.strategy.PlayerStrategy;
 import gameutils.GameException;
 import mapparser.GameMap;
 import mapparser.LoadMapPhase;
@@ -9,6 +11,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,9 +41,11 @@ public class IssueOrderPhaseTest {
 
             LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
             Player l_player_obj = new Player("playerfirst");
+            l_player_obj.setPlayerStrategy(new HumanPlayerStrategy());
             l_player_list.put("playerfirst", l_player_obj);
 
             l_player_obj = new Player("playersecond");
+            l_player_obj.setPlayerStrategy(new HumanPlayerStrategy());
             l_player_list.put("playersecond", l_player_obj);
             d_current_game_info.setPlayerList(l_player_list);
 
@@ -64,8 +69,10 @@ public class IssueOrderPhaseTest {
 
         try {
             IssueOrderPhase l_phase_obj = new IssueOrderPhase();
-            l_phase_obj.executeDeployOrder("deploy Country-First 8", l_player_first_obj);
-            DeployOrder l_order_obj = (DeployOrder) l_player_first_obj.next_order();
+            PlayerStrategy l_player_strategy = l_player_first_obj.getPlayerStrategy();
+            List<Order> l_player_orders = new ArrayList<>();
+            ((HumanPlayerStrategy)l_player_strategy).executeDeployOrder("deploy Country-First 8", l_player_first_obj, l_player_orders);
+            DeployOrder l_order_obj = (DeployOrder) l_player_orders.get(0);
 
             // checking successful issuing of deloy order
             Assert.assertEquals(8, l_order_obj.getArmiesNumber());
@@ -89,7 +96,9 @@ public class IssueOrderPhaseTest {
 
         try {
             IssueOrderPhase l_phase_obj = new IssueOrderPhase();
-            l_phase_obj.executeDeployOrder("deploy Country-First 10", l_player_first_obj);
+            PlayerStrategy l_player_strategy = l_player_first_obj.getPlayerStrategy();
+            List<Order> l_player_orders = new ArrayList<>();
+            ((HumanPlayerStrategy)l_player_strategy).executeDeployOrder("deploy Country-First 10", l_player_first_obj, l_player_orders);
         } catch (GameException e) {
             Assert.assertEquals(GameMessageConstants.D_ARMIES_EXCEEDED + "\nAvailable Armies: " + l_player_first_obj.getCurrentArmies(), e.getMessage());
         } catch (Exception e) {}
@@ -112,7 +121,9 @@ public class IssueOrderPhaseTest {
 
         try {
             IssueOrderPhase l_phase_obj = new IssueOrderPhase();
-            l_phase_obj.executeDeployOrder("deloy Country-First 10", l_player_first_obj);
+            PlayerStrategy l_player_strategy = l_player_first_obj.getPlayerStrategy();
+            List<Order> l_player_orders = new ArrayList<>();
+            ((HumanPlayerStrategy)l_player_strategy).executeDeployOrder("deloy Country-First 10", l_player_first_obj, l_player_orders);
             DeployOrder l_order_obj = (DeployOrder) l_player_first_obj.next_order();
         } catch (GameException e) {
             Assert.assertEquals(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_DEPLOY_COMMAND, e.getMessage());

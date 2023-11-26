@@ -2,6 +2,7 @@ package gameplay;
 
 import common.LogEntryBuffer;
 import common.Phase;
+import gameplay.strategy.HumanPlayerStrategy;
 import gameutils.GameCommandParser;
 import constants.GameMessageConstants;
 import gameutils.GameException;
@@ -95,6 +96,7 @@ public class GameStartUpPhase extends Phase {
                     throw new GameException(GameMessageConstants.D_PLAYER_EXISTS);
                 }
                 Player l_player_obj = new Player(l_player_name);
+                l_player_obj.setPlayerStrategy(new HumanPlayerStrategy());
                 l_player_list.put(l_player_name, l_player_obj);
                 d_current_game_info.setPlayerList(l_player_list);
 
