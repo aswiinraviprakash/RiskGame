@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"common"},{"l":"constants"},{"l":"gamemenu"},{"l":"gameplay"},{"l":"gameutils"},{"l":"mapparser"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"common"},{"l":"constants"},{"l":"gamemenu"},{"l":"gameplay"},{"l":"gameplay.strategy"},{"l":"gameutils"},{"l":"mapparser"}];updateSearchResults();
