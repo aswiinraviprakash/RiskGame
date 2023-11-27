@@ -32,6 +32,6 @@ public class GameConstants {
      */
     public static final String D_LOG_FILE_NAME = "gamelog.txt";
 
-    public static final String D_SAVE_DIRECTORY = File.separator + "RiskGame" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator+ "SavedFiles" + File.separator;
+    public static final String D_SAVE_DIRECTORY = File.separator + "RiskGame" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator+ "savedfiles" + File.separator;
 
 }

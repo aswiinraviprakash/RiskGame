@@ -1,6 +1,7 @@
 package common;
 
 import constants.GameConstants;
+import gameutils.GameCommonUtils;
 
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
@@ -32,7 +33,7 @@ public class LogEntryWriter implements Observer {
         PrintWriter l_writer = null;
         try {
 
-            checkDirectory("logfiles");
+            GameCommonUtils.checkAndCreateDirectory("logfiles");
             String l_log_file_path = "logfiles" + File.separator + GameConstants.D_LOG_FILE_NAME;
             l_writer = new PrintWriter(new BufferedWriter(new FileWriter(l_log_file_path, true)));
             l_writer.println(p_log_message);
@@ -41,17 +42,6 @@ public class LogEntryWriter implements Observer {
             System.out.println("There seems to some issue with logging");
         } finally {
             l_writer.close();
-        }
-    }
-
-    /**
-     * Checks the directory
-     * @param p_directory_path directory path parameter 
-     */
-    private void checkDirectory(String p_directory_path) {
-        File l_directory = new File(p_directory_path);
-        if (!l_directory.exists() || !l_directory.isDirectory()) {
-            l_directory.mkdirs();
         }
     }
 
