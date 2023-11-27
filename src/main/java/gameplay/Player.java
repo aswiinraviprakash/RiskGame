@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gameplay.order.DiplomacyOrder;
+import gameplay.order.Order;
 import gameplay.strategy.PlayerStrategy;
 import mapparser.GameMap;
 

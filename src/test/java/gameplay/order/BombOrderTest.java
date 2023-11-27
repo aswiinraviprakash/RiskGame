@@ -1,5 +1,8 @@
-package gameplay;
+package gameplay.order;
 
+import gameplay.GameInformation;
+import gameplay.Player;
+import gameplay.order.BombOrder;
 import mapparser.GameMap;
 import mapparser.LoadMapPhase;
 import constants.GameConstants;
@@ -7,13 +10,12 @@ import org.junit.Test;
 import org.junit.Before;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.junit.Assert;
 
-public class BlockadeOrderTest {
+public class BombOrderTest {
 
     /**
      * Contains Current Game Information
@@ -29,7 +31,7 @@ public class BlockadeOrderTest {
      * Initializing Data for Test
      */
     @Before
-    public void InitializeTestData() {
+    public void initializeTestData() {
         try {
 
             d_current_game_info = GameInformation.getInstance();
@@ -58,58 +60,56 @@ public class BlockadeOrderTest {
             l_countries.get(1).setPlayerName("playersecond");
             l_countries.get(2).setPlayerName("playersecond");
             l_countries.get(5).setPlayerName("playersecond");
-
+            
         } catch (Exception e) {
         }
     }
 
     /**
-     * Test to check if the Blockade Test is Successful, when used in a Friendly Territory
+     * Test to check if Bomb Order is Successful in Opponent Territory.
      */
     @Test
-    public void blockadeTest() {
+    public void BombingEnemyTerritoryTest() {
         try {
-            HashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
-            Player l_player_first_obj = l_player_list.get("playerfirst");
-            List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
-
-            l_player_first_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(0), l_countries.get(3), l_countries.get(4)}));
-
-            d_destination_country = l_player_first_obj.getConqueredCountries().get(0);
-
-            BlockadeOrder l_blockade_phase = new BlockadeOrder(d_destination_country);
-            l_blockade_phase.execute(l_player_first_obj);
-
-            Assert.assertEquals(15, d_destination_country.getArmyCount());
-            Assert.assertEquals(2, l_player_first_obj.getConqueredCountries().size());
-            Assert.assertFalse(l_player_first_obj.getConqueredCountries().contains(d_destination_country));
-
-        } catch (Exception e) {
-        }
-    }
-
-    /**
-     * Test to check if the Blockade test is Unsuccessful, when used in an Opponent Territory
-     */
-    @Test
-    public void opponentCountryBlockadeTest() {
-        try {
-            HashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+            LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
             Player l_player_first_obj = l_player_list.get("playerfirst");
             Player l_player_second_obj = l_player_list.get("playersecond");
             List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
 
             l_player_first_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(0), l_countries.get(3), l_countries.get(4)}));
             l_player_second_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(1), l_countries.get(2), l_countries.get(5)}));
-            
+
             d_destination_country = l_player_second_obj.getConqueredCountries().get(0);
 
-            BlockadeOrder l_blockade_phase = new BlockadeOrder(d_destination_country);
-            l_blockade_phase.execute(l_player_first_obj);
-            
-            Assert.assertEquals(5, d_destination_country.getArmyCount());
-            Assert.assertEquals(3, l_player_first_obj.getConqueredCountries().size());
-            Assert.assertTrue(l_player_second_obj.getConqueredCountries().contains(d_destination_country));
+            BombOrder l_bomb_phase = new BombOrder(d_destination_country);
+            l_bomb_phase.execute(l_player_first_obj);
+
+            Assert.assertEquals(2, l_player_second_obj.getConqueredCountries().get(0).getArmyCount());
+
+        } catch (Exception e) {
+        }
+    }
+
+    /**
+     * Test to check if Bomb Order fails in Friendly Territory.
+     */
+    @Test
+    public void BombingOwnCountryTest() {
+        try {
+            LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+            Player l_player_first_obj = l_player_list.get("playerfirst");
+            Player l_player_second_obj = l_player_list.get("playersecond");
+            List<GameMap.Country> l_countries = d_current_game_info.getGameMap().getCountryObjects();
+
+            l_player_first_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(0), l_countries.get(3), l_countries.get(4)}));
+            l_player_second_obj.setConqueredCountries(Arrays.asList(new GameMap.Country[]{l_countries.get(1), l_countries.get(2), l_countries.get(5)}));
+
+            d_destination_country = l_player_first_obj.getConqueredCountries().get(0);
+
+            BombOrder l_bomb_phase = new BombOrder(d_destination_country);
+            l_bomb_phase.execute(l_player_first_obj);
+
+            Assert.assertEquals(5, l_player_first_obj.getConqueredCountries().get(0).getArmyCount());
 
         } catch (Exception e) {
         }

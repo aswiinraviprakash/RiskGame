@@ -1,6 +1,6 @@
 package gameplay.strategy;
 
-import gameplay.Order;
+import gameplay.order.Order;
 import gameplay.Player;
 
 import java.util.List;
