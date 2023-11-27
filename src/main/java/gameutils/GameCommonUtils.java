@@ -1,5 +1,7 @@
 package gameutils;
 
+import java.io.File;
+
 /**
  * This class provides utility methods for operations.
  */
@@ -16,6 +18,17 @@ public class GameCommonUtils {
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    /**
+     * Checks and create the directory if not present
+     * @param p_directory_path directory path parameter
+     */
+    public static void checkAndCreateDirectory(String p_directory_path) {
+        File l_directory = new File(p_directory_path);
+        if (!l_directory.exists() || !l_directory.isDirectory()) {
+            l_directory.mkdirs();
         }
     }
 
