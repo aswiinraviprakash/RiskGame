@@ -2,6 +2,7 @@ common
 constants
 gamemenu
 gameplay
+gameplay.order
 gameplay.strategy
 gameutils
 mapparser
