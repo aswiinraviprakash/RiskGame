@@ -1,5 +1,7 @@
-package gameplay;
+package gameplay.order;
 
+import gameplay.GameInformation;
+import gameplay.Player;
 import gameutils.GameException;
 import common.LogEntryBuffer;
 import mapparser.GameMap;

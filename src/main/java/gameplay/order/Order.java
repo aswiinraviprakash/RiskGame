@@ -1,4 +1,6 @@
-package gameplay;
+package gameplay.order;
+
+import gameplay.Player;
 
 /**
  *Executes the order for a player.

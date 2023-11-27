@@ -1,6 +1,9 @@
-package gameplay;
+package gameplay.order;
 
 import constants.GameConstants;
+import gameplay.GameInformation;
+import gameplay.Player;
+import gameplay.order.AdvanceOrder;
 import mapparser.GameMap;
 import mapparser.LoadMapPhase;
 import org.junit.Assert;

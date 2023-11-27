@@ -1,6 +1,11 @@
-package gameplay;
+package gameplay.order;
 
 import java.util.LinkedHashMap;
+
+import gameplay.GameInformation;
+import gameplay.Player;
+import gameplay.order.AirliftOrder;
+import gameplay.order.DiplomacyOrder;
 import mapparser.GameMap;
 import mapparser.LoadMapPhase;
 import org.junit.Before;

@@ -1,6 +1,7 @@
-package gameplay;
+package gameplay.order;
 
 import common.LogEntryBuffer;
+import gameplay.Player;
 
 import java.util.Iterator;
 import java.util.List;

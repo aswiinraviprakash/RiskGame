@@ -2,6 +2,7 @@ package gameplay;
 
 import common.LogEntryBuffer;
 import common.Phase;
+import gameplay.order.Order;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

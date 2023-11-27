@@ -1,13 +1,16 @@
-package gameplay;
+package gameplay.order;
 
 import common.LogEntryBuffer;
+import gameplay.Card;
+import gameplay.GameInformation;
+import gameplay.Player;
 import gameutils.GameException;
 import mapparser.GameMap;
 
 /**
- * The class is advancing the armies for an attack on the desired country.
+ * The class deals with airlifting of the armies to other countries.
  */
-public class AdvanceOrder extends Order {
+public class AirliftOrder extends Order {
 
     /**
      * member to store logger instance
@@ -40,14 +43,14 @@ public class AdvanceOrder extends Order {
      * @param p_destination_country country of attack.
      * @param p_armies army count.
      */
-    public AdvanceOrder(GameMap.Country p_source_country, GameMap.Country p_destination_country, int p_armies) {
+    public AirliftOrder(GameMap.Country p_source_country, GameMap.Country p_destination_country, int p_armies) {
         this.d_source_country = p_source_country;
         this.d_destination_country = p_destination_country;
         this.d_armies = p_armies;
     }
 
     /**
-     * Method returns the country of attack or destination.
+     * Function returns the country of attack or destination.
      * @return country of attack.
      */
     public GameMap.Country getDestinationCountry() {
@@ -55,7 +58,7 @@ public class AdvanceOrder extends Order {
     }
 
     /**
-     * Method attacks the destination country initiated by the current player.
+     * Function deals with the attacking of the country by the current player using the airlifting card.
      * @param p_current_player current player object.
      * @param p_destination_player attacking player object.
      */
@@ -91,7 +94,7 @@ public class AdvanceOrder extends Order {
     }
 
     /**
-     * Method transfers the armies to the destination country.
+     * Armies are sent to the destination country.
      */
     public void movesArmiesToDestinationCountry() {
         int l_destination_armies = d_destination_country.getArmyCount();
@@ -101,15 +104,16 @@ public class AdvanceOrder extends Order {
     }
 
     /**
-     * Method executes the advancing order phase.
+     * Method executes the airlifting phase.
      * @param p_player_obj The player object for whom the order is executed.
-     * @throws GameException Game Exception error.
+     * @throws GameException Game Exception.
      */
     @Override
     public void execute(Player p_player_obj) throws GameException {
 
         d_current_game_info = GameInformation.getInstance();
-        d_logger.addLogger("Advance order Initiated");
+        d_logger.addLogger("Airlift Order Initiated");
+
         if (!p_player_obj.getConqueredCountries().contains(d_source_country)) return;
 
         String l_player_name = p_player_obj.getPlayerName();
@@ -126,10 +130,10 @@ public class AdvanceOrder extends Order {
 
         if (isAttackMode) {
             attackDestinationCountry(p_player_obj, l_destination_player);
-            d_logger.addLogger("Advance order in attack");
+            d_logger.addLogger("Airlift in Attack");
         } else {
             movesArmiesToDestinationCountry();
-            d_logger.addLogger("Advance order in Friendly territory");
+            d_logger.addLogger("Airlift in Friendly Territory");
         }
     }
 
