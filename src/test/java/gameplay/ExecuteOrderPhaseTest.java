@@ -25,6 +25,9 @@ public class ExecuteOrderPhaseTest {
         try {
 
             d_current_game_info = GameInformation.getInstance();
+            GameMode l_current_game_mode = new GameMode();
+            l_current_game_mode.setGameMode(GameMode.Mode.D_SINGLE_GAME_MODE);
+            d_current_game_info.setGameMode(l_current_game_mode);
 
             String l_gamemap_filename = "valid-testmap.map";
             LoadMapPhase l_loadmap_phase = new LoadMapPhase(l_gamemap_filename, false);
