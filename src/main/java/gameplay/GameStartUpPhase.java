@@ -184,23 +184,21 @@ public class GameStartUpPhase extends Phase {
                 BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
                 System.out.println("add player for human player strategy (gameplayer -add playername)");
                 String l_player_command = l_reader.readLine();
-                while (l_player_command != null && !l_player_command.equals("continue")) {
+                while (l_player_command != null) {
                     try {
 
                         if (!l_player_command.startsWith("gameplayer")) {
                             throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
                         } else {
                             validateAndExecuteCommands(l_player_command);
-                            l_player_command = "continue";
+                            break;
                         }
 
                     } catch (GameException e) {
                         System.out.println(e.getMessage());
                     }
 
-                    if (!l_player_command.equals("continue")) {
-                        l_player_command = l_reader.readLine();
-                    }
+                    l_player_command = l_reader.readLine();
                 }
                 break;
             }
@@ -233,13 +231,13 @@ public class GameStartUpPhase extends Phase {
         System.out.println("start by loading the map file");
         String l_command_input = l_reader.readLine();
 
-        while (l_command_input != null && !l_command_input.equals("continue")) {
+        while (l_command_input != null) {
             try {
                 if (!l_command_input.startsWith("loadmap")) {
                     throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
                 } else {
                     validateAndExecuteCommands(l_command_input);
-                    l_command_input = "continue";
+                    break;
                 }
 
             } catch (GameException e) {
@@ -248,18 +246,26 @@ public class GameStartUpPhase extends Phase {
                 throw e;
             }
 
-            if (!l_command_input.equals("continue")) {
-                l_command_input = l_reader.readLine();
-            }
+            l_command_input = l_reader.readLine();
         }
 
         // handling startegies
 
         System.out.println("enter the player startegies");
         l_command_input = l_reader.readLine();
-        while (l_command_input != null && !l_command_input.equals("continue")) {
+        while (l_command_input != null) {
             try {
-                validateAndAddStrategy(l_command_input);
+                if (l_command_input.equals("continue")) {
+
+                    if (d_current_game_info.getPlayerList().size() >= 2) {
+                        break;
+                    } else {
+                        throw new GameException(GameMessageConstants.D_STRATEGIES_INSUFFICIENT);
+                    }
+
+                } else {
+                    validateAndAddStrategy(l_command_input);
+                }
             } catch (GameException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
@@ -272,13 +278,13 @@ public class GameStartUpPhase extends Phase {
         System.out.println("start assigning countries to players");
         l_command_input = l_reader.readLine();
 
-        while (l_command_input != null && !l_command_input.equals("continue")) {
+        while (l_command_input != null) {
             try {
                 if (!l_command_input.startsWith("assigncountries")) {
                     throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
                 } else {
                     validateAndExecuteCommands(l_command_input);
-                    l_command_input = "continue";
+                    break;
                 }
 
             } catch (GameException e) {
@@ -287,9 +293,7 @@ public class GameStartUpPhase extends Phase {
                 throw e;
             }
 
-            if (!l_command_input.equals("continue")) {
-                l_command_input = l_reader.readLine();
-            }
+            l_command_input = l_reader.readLine();
         }
     }
 
