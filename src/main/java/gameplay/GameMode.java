@@ -16,7 +16,7 @@ public class GameMode implements Serializable {
 
         private String d_current_map;
 
-        private String d_game_number;
+        private int d_game_number;
 
         private String d_game_winner;
 
@@ -30,11 +30,11 @@ public class GameMode implements Serializable {
             this.d_current_map = p_current_map;
         }
 
-        public String getGameNumber() {
+        public int getGameNumber() {
             return d_game_number;
         }
 
-        public void setGameNumber(String p_game_number) {
+        public void setGameNumber(int p_game_number) {
             this.d_game_number = p_game_number;
         }
 
@@ -64,6 +64,10 @@ public class GameMode implements Serializable {
     private int d_number_of_games;
 
     private int d_number_of_turns;
+
+    private int d_total_number_of_games;
+
+    private GameDetails d_current_game_details;
 
     private int d_current_game_number;
 
@@ -105,8 +109,16 @@ public class GameMode implements Serializable {
         this.d_current_game_number = p_current_game_number;
     }
 
-    public void setMapNumber(int p_current_map_number) {
+    public void setCurrentMapNumber(int p_current_map_number) {
         this.d_current_map_number = p_current_map_number;
+    }
+
+    public void setTotalNumberOfGames(int p_total_number_of_games) {
+        this.d_total_number_of_games = p_total_number_of_games;
+    }
+
+    public void setCurrentGameDetails(GameDetails p_current_game_details) {
+        this.d_current_game_details = p_current_game_details;
     }
 
     public int getCurrentGameNumber() {
@@ -132,6 +144,22 @@ public class GameMode implements Serializable {
 
     public List<GameDetails> getGameDetails() {
         return this.d_game_details;
+    }
+
+    public List<String> getStrategies() {
+        return this.d_game_strategies;
+    }
+
+    public List<String> getGameMaps() {
+        return this.d_game_maps;
+    }
+
+    public int getTotalNumberOfGames() {
+        return this.d_total_number_of_games;
+    }
+
+    public GameDetails getCurrentGameDetails() {
+        return this.d_current_game_details;
     }
 
 }

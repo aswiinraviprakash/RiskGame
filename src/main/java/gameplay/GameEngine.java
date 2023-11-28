@@ -7,9 +7,11 @@ import constants.GameMessageConstants;
 import gameutils.GameCommandParser;
 import gameutils.GameCommonUtils;
 import gameutils.GameException;
+import mapparser.LoadMapPhase;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -125,6 +127,16 @@ public class GameEngine {
                 case "M": {
                     String[] l_command_values = l_command_parameters.get(0).split(",");
                     for (String l_command_value : l_command_values) {
+                        try {
+                            LoadMapPhase l_loadmap_phase = new LoadMapPhase(l_command_value, false);
+                            l_loadmap_phase.executePhase();
+                            mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
+                        } catch (GameException e) {
+                            throw new GameException("Load Map Failed for map " + l_command_value +": "+ e.getMessage());
+                        } catch (Exception e) {
+                            throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
+                        }
+
                         l_game_mode.setGameMap(l_command_value);
                     }
                     break;
@@ -132,6 +144,8 @@ public class GameEngine {
                 case "P": {
                     String[] l_command_values = l_command_parameters.get(0).split(",");
                     for (String l_command_value : l_command_values) {
+                        if (!GameConstants.D_GAME_COMPUTER_STRATEGIES.contains(l_command_value)) throw new GameException(l_command_value + ": "+ GameMessageConstants.D_STRATEGIES_INVALID);
+                        if (l_game_mode.getStrategies().contains(l_command_value)) throw new GameException(GameMessageConstants.D_STRATEGIES_DUPLICATE);
                         l_game_mode.setGameStrategy(l_command_value);
                     }
                     break;
@@ -192,6 +206,15 @@ public class GameEngine {
         }
     }
 
+    private static void printTournamentModeResults() {
+        GameMode l_current_game_mode = GameInformation.getInstance().getGameMode();
+        List<GameMode.GameDetails> l_game_details = l_current_game_mode.getGameDetails();
+
+        for (GameMode.GameDetails l_game_detail : l_game_details) {
+            System.out.println("Map: " + l_game_detail.getCurrentMap() + " Game: " + l_game_detail.getGameNumber() + " Winner: " + l_game_detail.getGameWinner() + " turns: " + l_game_detail.getTurnsPlayed());
+        }
+    }
+
     /**
      * This Method executes Startup phase.
      * @throws Exception Throws exception when an error occurs, else continues till End Game.
@@ -241,7 +264,66 @@ public class GameEngine {
                 }
 
             } else if (l_current_game_mode.getGameMode().equals(GameMode.Mode.D_TOURNAMENT_MODE)) {
+                int l_total_number_games = l_current_game_mode.getNumberOfGames() * l_current_game_mode.getGameMaps().size();
+                l_current_game_mode.setTotalNumberOfGames(l_total_number_games);
 
+                l_current_game_mode.setCurrentGameNumber(1);
+                l_current_game_mode.setCurrentMapNumber(1);
+
+                for (int l_index = 1; l_index <= l_total_number_games; l_index++) {
+                    GameMode.GameDetails l_game_details = l_current_game_mode.new GameDetails();
+                    int l_current_game_number = l_current_game_mode.getCurrentGameNumber();
+                    int l_current_map_number = l_current_game_mode.getCurrentMapNumber();
+                    String l_current_map = l_current_game_mode.getGameMaps().get(l_current_map_number - 1);
+
+                    l_game_details.setGameNumber(l_current_game_number);
+                    l_game_details.setCurrentMap(l_current_map);
+                    l_current_game_mode.setCurrentGameDetails(l_game_details);
+
+                    Phase l_current_phase_obj = new GameStartUpPhase();
+                    l_game_information.setCurrentPhase(l_current_phase_obj);
+
+                    // Executing StartUp phase
+                    l_current_phase_obj.executePhase();
+
+                    l_current_phase_obj = l_game_information.getCurrentPhase();
+
+                    while (!(l_current_phase_obj instanceof EndGamePhase)) {
+                        l_current_phase_obj.executePhase();
+
+                        l_current_phase_obj = l_game_information.getCurrentPhase();
+                        if (l_current_phase_obj instanceof ReinforcementPhase) {
+
+                            l_game_details = l_current_game_mode.getCurrentGameDetails();
+                            int l_turns_played = l_game_details.getTurnsPlayed();
+                            l_turns_played = l_turns_played + 1;
+                            l_game_details.setTurnsPlayed(l_turns_played);
+
+                            if (l_turns_played == l_current_game_mode.getNumberOfTurns()) {
+                                l_game_details.setGameWinner(null);
+                                l_current_game_mode.setGameDetail(l_game_details);
+                                break;
+                            }
+                        }
+                    }
+
+                    l_current_game_mode.setCurrentGameDetails(null);
+                    l_current_map_number = l_current_map_number + 1;
+                    if (l_current_map_number > l_current_game_mode.getGameMaps().size()) {
+                        l_current_game_number = l_current_game_number + 1;
+                        l_current_map_number = 1;
+
+                    }
+                    l_current_game_mode.setCurrentMapNumber(l_current_map_number);
+                    l_current_game_mode.setCurrentGameNumber(l_current_game_number);
+
+                    // resetting game values
+                    l_game_information.setPlayerList(new LinkedHashMap<>());
+                    l_game_information.setCurrenGameMap(null);
+                    l_game_information.setCurrentPhase(null);
+                }
+
+                printTournamentModeResults();
             }
 
         } catch (GameException e) {

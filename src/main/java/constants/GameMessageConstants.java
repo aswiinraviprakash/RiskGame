@@ -329,6 +329,8 @@ public class GameMessageConstants {
 
     public static final String D_STRATEGIES_INVALID = "Strategy seems to be invalid enter valid one";
 
+    public static final String D_STRATEGIES_DUPLICATE = "Duplicate strategy found kindly enter unique values";
+
     /**
      * Success Message Constants
      */

@@ -1,6 +1,9 @@
 package constants;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This package contains all the constant classes.
@@ -39,5 +42,7 @@ public class GameConstants {
 
         D_LOAD_GAME
     }
+
+    public static final List<String> D_GAME_COMPUTER_STRATEGIES = Arrays.asList("human", "aggressive", "benevolent", "random", "cheater");
 
 }

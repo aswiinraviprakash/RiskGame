@@ -64,8 +64,19 @@ public class ExecuteOrderPhase extends Phase {
             int l_total_countries = d_current_game_info.getGameMap().getCountryObjects().size();
             Player l_current_player = l_player.getValue();
             if (l_total_countries == l_current_player.getConqueredCountries().size()) {
-                System.out.println(l_current_player.getPlayerName() + " Won the Game !!!\n");
+                GameMode l_game_mode = d_current_game_info.getGameMode();
+
+                if (l_game_mode.getGameMode().equals(GameMode.Mode.D_TOURNAMENT_MODE)) {
+                    GameMode.GameDetails l_game_details = l_game_mode.getCurrentGameDetails();
+                    l_game_details.setGameWinner(l_current_player.getPlayerName());
+                    l_game_details.setTurnsPlayed(l_game_details.getTurnsPlayed() + 1);
+                    l_game_mode.setGameDetail(l_game_details);
+                } else {
+                    System.out.println(l_current_player.getPlayerName() + " Won the Game !!!\n");
+                }
+
                 d_current_game_info.setCurrentPhase(new EndGamePhase());
+                d_current_game_info.resetCardIssued();
                 return;
             }
         }
