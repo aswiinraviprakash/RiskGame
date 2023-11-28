@@ -1,5 +1,7 @@
 package gameutils;
 
+import constants.GameConstants;
+
 import java.io.File;
 
 /**
@@ -25,7 +27,10 @@ public class GameCommonUtils {
      * Checks and create the directory if not present
      * @param p_directory_path directory path parameter
      */
-    public static void checkAndCreateDirectory(String p_directory_path) {
+    public static void checkAndCreateDirectory(String p_directory_path) throws Exception {
+        File l_file_dir = new File("").getCanonicalFile();
+        p_directory_path = l_file_dir.getParent() + p_directory_path;
+
         File l_directory = new File(p_directory_path);
         if (!l_directory.exists() || !l_directory.isDirectory()) {
             l_directory.mkdirs();

@@ -1,9 +1,11 @@
 package common;
 
+import java.io.Serializable;
+
 /**
  * Templates for phases in the game
  */
-public abstract class Phase {
+public abstract class Phase implements Serializable {
 
     /**
      * Abstract class for the next phase.

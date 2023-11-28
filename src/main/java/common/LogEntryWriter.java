@@ -33,7 +33,7 @@ public class LogEntryWriter implements Observer {
         PrintWriter l_writer = null;
         try {
 
-            GameCommonUtils.checkAndCreateDirectory("logfiles");
+            GameCommonUtils.checkAndCreateDirectory(File.separator + "RiskGame" + File.separator + "logfiles");
             String l_log_file_path = "logfiles" + File.separator + GameConstants.D_LOG_FILE_NAME;
             l_writer = new PrintWriter(new BufferedWriter(new FileWriter(l_log_file_path, true)));
             l_writer.println(p_log_message);

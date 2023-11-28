@@ -1,6 +1,9 @@
 package constants;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This package contains all the constant classes.
@@ -33,5 +36,13 @@ public class GameConstants {
     public static final String D_LOG_FILE_NAME = "gamelog.txt";
 
     public static final String D_SAVE_DIRECTORY = File.separator + "RiskGame" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator+ "savedfiles" + File.separator;
+
+    public enum GameState {
+        D_START_GAME,
+
+        D_LOAD_GAME
+    }
+
+    public static final List<String> D_GAME_COMPUTER_STRATEGIES = Arrays.asList("human", "aggressive", "benevolent", "random", "cheater");
 
 }

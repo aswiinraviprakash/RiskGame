@@ -1,5 +1,6 @@
 package gameplay;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import mapparser.GameMap;
 /**
  * Contains a players name,current armies, and issued orders.
  */
-public class Player {
+public class Player implements Serializable {
 
     /**
      * Used for storing name of the player.

@@ -2,10 +2,12 @@ package gameplay.order;
 
 import gameplay.Player;
 
+import java.io.Serializable;
+
 /**
  *Executes the order for a player.
  */
-public abstract class Order {
+public abstract class Order implements Serializable {
 
     /**
      * Execute a player's action or order.

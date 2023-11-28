@@ -5,12 +5,14 @@ import java.util.LinkedHashMap;
 
 import common.Phase;
 import java.io.Serializable;
+
+import constants.GameConstants;
 import mapparser.GameMap;
 
 /**
  *  This class is used to set current phase, current map and other information.
  */
-public class GameInformation implements Serializable{
+public class GameInformation implements Serializable {
 
     /**
      * member to store gameinformation instance
@@ -38,6 +40,12 @@ public class GameInformation implements Serializable{
     private mapparser.GameMap d_current_game_map;
 
     private Player d_last_session_player;
+
+    private Phase d_last_session_phase;
+
+    private GameMode d_game_mode;
+
+    private GameConstants.GameState d_game_state;
 
     /**
      * private constructor for creating gameinformation object
@@ -109,6 +117,30 @@ public class GameInformation implements Serializable{
         return this.d_last_session_player;
     }
 
+    public void setLastSessionPhase(Phase l_last_session_phase) {
+        this.d_last_session_phase = l_last_session_phase;
+    }
+
+    public Phase getLastSessionPhase() {
+        return this.d_last_session_phase;
+    }
+
+    public void setGameMode (GameMode p_game_mode) {
+        this.d_game_mode = p_game_mode;
+    }
+
+    public GameMode getGameMode() {
+        return this.d_game_mode;
+    }
+
+    public void setGameState(GameConstants.GameState p_game_state) {
+        this.d_game_state = p_game_state;
+    }
+
+    public GameConstants.GameState getGameState() {
+        return this.d_game_state;
+    }
+
     /**
      * Method to set cards to the player
      * @param p_player_name Parameter to assign the name of the player
@@ -133,6 +165,10 @@ public class GameInformation implements Serializable{
      */
     public void resetCardIssued() {
         this.d_card_issued_players = null;
+    }
+
+    public static void loadGameInfoInstance(GameInformation p_game_info_instance) {
+        d_game_info_instance = p_game_info_instance;
     }
 
 }

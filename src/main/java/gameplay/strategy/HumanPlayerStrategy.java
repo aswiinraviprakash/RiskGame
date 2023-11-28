@@ -13,6 +13,7 @@ import gameplay.order.BlockadeOrder;
 import gameplay.order.DiplomacyOrder;
 import gameplay.Card;
 import gameplay.EndGamePhase;
+import gameplay.SaveGamePhase;
 import gameutils.GameCommandParser;
 import gameutils.GameCommonUtils;
 import gameutils.GameException;
@@ -20,10 +21,11 @@ import mapparser.GameMap;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HumanPlayerStrategy implements PlayerStrategy {
+public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
 
     /**
      * member to store logger instance
@@ -51,6 +53,11 @@ public class HumanPlayerStrategy implements PlayerStrategy {
             if (!l_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_SHOWMAP);
             GameMap l_gamemap_obj = d_current_game_info.getGameMap();
             l_gamemap_obj.showMap(true);
+            return;
+        }
+
+        if (l_primary_command.equals("savegame")) {
+            executeSaveGame(p_input_command, p_current_player);
             return;
         }
 
@@ -260,6 +267,24 @@ public class HumanPlayerStrategy implements PlayerStrategy {
         d_logger.addLogger(GameMessageConstants.D_DIPLOMACY + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    private void executeSaveGame(String p_input_command, Player p_current_player) throws Exception {
+        GameCommandParser l_command_parser = new GameCommandParser(p_input_command);
+        List<GameCommandParser.CommandDetails> l_command_details = l_command_parser.getParsedCommandDetails();
+
+        if (l_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_SAVEGAME);
+
+        GameCommandParser.CommandDetails l_command_detail = l_command_details.get(0);
+        if (l_command_detail.getHasCommandOption()) throw new GameException(GameMessageConstants.D_COMMAND_NO_OPTION_SUPPORT + "\nExample Format: " + GameMessageConstants.D_SAVEGAME);
+
+        List<String> l_command_parameters = l_command_detail.getCommandParameters();
+        if (!(l_command_parameters.size() == 1)) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_SAVEGAME);
+
+        d_current_game_info.setLastSessionPlayer(p_current_player);
+        d_current_game_info.setLastSessionPhase(d_current_game_info.getCurrentPhase());
+        SaveGamePhase l_save_game = new SaveGamePhase(l_command_parameters.get(0));
+        l_save_game.executePhase();
+    }
+
     /**
      * Validates and Executes commands for Issue_order_phase.
      * @param p_input_command Input command provided by the player.
@@ -275,6 +300,11 @@ public class HumanPlayerStrategy implements PlayerStrategy {
             if (!l_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_SHOWMAP);
             GameMap l_gamemap_obj = d_current_game_info.getGameMap();
             l_gamemap_obj.showMap(true);
+            return;
+        }
+
+        if (l_primary_command.equals("savegame")) {
+            executeSaveGame(p_input_command, p_current_player);
             return;
         }
 
@@ -329,6 +359,10 @@ public class HumanPlayerStrategy implements PlayerStrategy {
             System.out.println("Remaining Armies: " + l_current_armies);
             try {
                 System.out.println();
+                if (d_current_game_info.getCurrentPhase() instanceof EndGamePhase) {
+                    return null;
+                }
+
                 l_input_command = l_reader.readLine();
                 if (l_input_command.equals("endgame")) {
                     d_current_game_info.setCurrentPhase(new EndGamePhase());
@@ -356,6 +390,10 @@ public class HumanPlayerStrategy implements PlayerStrategy {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
                 throw e;
+            }
+
+            if (d_current_game_info.getCurrentPhase() instanceof EndGamePhase) {
+                return null;
             }
 
             if (!p_player_obj.printAvailableCards().isEmpty()) System.out.println("Available Cards -> " + p_player_obj.printAvailableCards());
