@@ -55,6 +55,10 @@ public class GameMessageConstants {
      */
     public static final String D_LOADMAP = "loadmap filename";
 
+    public static final String D_LOADGAME = "loadgame filename";
+
+    public static final String D_SAVEGAME = "savegame filename";
+
     /**
      * Command Format Constants
      */
@@ -104,6 +108,10 @@ public class GameMessageConstants {
      * Command Format Constants
      */
     public static final String D_VALIDATEMAP = "validatemap";
+
+    public static final String D_SINGLEGAME_MODE = "singlegame";
+
+    public static final String D_TOURNAMENT_MODE = "tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns";
 
     /**
      * Error Message Constants
@@ -319,6 +327,8 @@ public class GameMessageConstants {
      */
     public static final String D_MAP_VALIDATION_PASS = "The map is valid";
 
+    public static final String D_STRATEGIES_INVALID = "Strategy seems to be invalid enter valid one";
+
     /**
      * Success Message Constants
      */
@@ -333,6 +343,8 @@ public class GameMessageConstants {
      * Success Message Constants
      */
     public static final String D_SAVE_MAP = "Map file saved";
+
+    public static final String D_GAME_LOAD_FAILED = "There seems to be an issue loading your game. try loading proper game file";
 
     /**
      * Success Message Constants
@@ -396,14 +408,8 @@ public class GameMessageConstants {
     
     public static final String D_SAVE_GAME_ERROR = "Error while saving the game ";
     
-    public static final String D_LOAD_GAME_ERROR = "Error while loading the game ";
-    
     public static final String D_LOAD_GAME_SUCCESS = "Successfully loaded the game ";
     
     public static final String D_SAVE_GAME_SUCCESS = "Successfully saved the game ";
-    
-    
-    
-    
 
 }

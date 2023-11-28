@@ -53,6 +53,7 @@ public class IssueOrderPhase extends Phase {
 
             // issuing player orders
             l_player_obj.issue_order();
+            l_last_session_player = null;
 
             if (d_current_game_info.getCurrentPhase() instanceof EndGamePhase) {
                 return;

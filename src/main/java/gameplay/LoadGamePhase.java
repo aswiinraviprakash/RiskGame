@@ -40,15 +40,22 @@ public class LoadGamePhase extends Phase {
      public void loadGame() throws Exception {
          try {
 
-             String l_load_file_path = GameConstants.D_SAVE_DIRECTORY + File.separator + this.d_file_path + ".ser";
-             FileInputStream l_saveFile =  new FileInputStream(l_load_file_path);
-             ObjectInputStream save = new ObjectInputStream(l_saveFile);
+             File l_file_dir = new File("").getCanonicalFile();
+             String l_load_file_path = l_file_dir.getParent() + GameConstants.D_SAVE_DIRECTORY + this.d_file_path + ".ser";
+
+             File l_file = new File(l_load_file_path);
+             if (!l_file.exists()) throw new GameException(GameMessageConstants.D_GAME_LOAD_FAILED);
+
+             FileInputStream l_save_file = new FileInputStream(l_file);
+             ObjectInputStream save = new ObjectInputStream(l_save_file);
              d_current_game_info = (GameInformation) save.readObject();
+             GameInformation.loadGameInfoInstance(d_current_game_info);
+             GameInformation.getInstance().setGameState(GameConstants.GameState.D_LOAD_GAME);
              save.close();
              System.out.println(GameMessageConstants.D_LOAD_GAME_SUCCESS);
 
          } catch (Exception e) {
-             throw new GameException(GameMessageConstants.D_LOAD_GAME_ERROR);
+             throw new GameException(GameMessageConstants.D_GAME_LOAD_FAILED);
          }
      }
 }

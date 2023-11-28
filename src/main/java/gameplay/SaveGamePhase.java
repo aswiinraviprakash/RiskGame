@@ -40,8 +40,11 @@ public class SaveGamePhase extends Phase {
         try {
             GameCommonUtils.checkAndCreateDirectory(GameConstants.D_SAVE_DIRECTORY);
 
-            String l_save_file_path = GameConstants.D_SAVE_DIRECTORY + File.separator + this.d_file_path + ".ser";
-            ObjectOutputStream l_save = new ObjectOutputStream(new FileOutputStream(l_save_file_path));
+            File l_file_dir = new File("").getCanonicalFile();
+            String l_save_file_path = l_file_dir.getParent() + GameConstants.D_SAVE_DIRECTORY + this.d_file_path + ".ser";
+            File l_file_obj = new File(l_save_file_path);
+
+            ObjectOutputStream l_save = new ObjectOutputStream(new FileOutputStream(l_file_obj));
             l_save.writeObject(d_current_game_info);
             l_save.close();
             System.out.println(GameMessageConstants.D_SAVE_GAME_SUCCESS);

@@ -2,7 +2,15 @@ package gameplay;
 
 import common.LogEntryBuffer;
 import common.Phase;
+import constants.GameConstants;
+import constants.GameMessageConstants;
+import gameutils.GameCommandParser;
+import gameutils.GameCommonUtils;
 import gameutils.GameException;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * This class is responsible for executing the entire game process.
@@ -32,6 +40,158 @@ public class GameEngine {
         }
     }
 
+    private void handleLoadGame(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
+        if (p_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_LOADGAME);
+
+        GameCommandParser.CommandDetails l_command_detail = p_command_details.get(0);
+        if (l_command_detail.getHasCommandOption()) throw new GameException(GameMessageConstants.D_COMMAND_NO_OPTION_SUPPORT + "\nExample Format: " + GameMessageConstants.D_LOADGAME);
+
+        List<String> l_command_parameters = l_command_detail.getCommandParameters();
+        if (!(l_command_parameters.size() == 1)) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_LOADGAME);
+
+        try {
+
+            String l_game_filename = l_command_parameters.get(0);
+            LoadGamePhase l_loadgame_phase = new LoadGamePhase(l_game_filename);
+            l_loadgame_phase.executePhase();
+
+        } catch (Exception e) {
+            d_logger.addLogger(GameMessageConstants.D_GAME_LOAD_FAILED);
+            throw new GameException(GameMessageConstants.D_GAME_LOAD_FAILED);
+        }
+
+    }
+
+    private void handleSingleGameMode(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
+        if (!p_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_SINGLEGAME_MODE);
+
+        System.out.println("start new game(startgame) or load game(loadgame filename)");
+        BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
+        String l_input_command = l_reader.readLine();
+
+        while (l_input_command != null && !l_input_command.equals("continue")) {
+            GameCommandParser l_command_parser = new GameCommandParser(l_input_command);
+            String l_primary_command = l_command_parser.getPrimaryCommand();
+            List<GameCommandParser.CommandDetails> l_command_details = l_command_parser.getParsedCommandDetails();
+
+            try {
+                switch (l_primary_command) {
+                    case "startgame": {
+                        GameMode gameMode = new GameMode();
+                        gameMode.setGameMode(GameMode.Mode.D_SINGLE_GAME_MODE);
+                        GameInformation l_current_game_info = GameInformation.getInstance();
+                        l_current_game_info.setGameMode(gameMode);
+                        l_current_game_info.setGameState(GameConstants.GameState.D_START_GAME);
+                        l_input_command = "continue";
+                        break;
+                    }
+                    case "loadgame": {
+                        handleLoadGame(l_command_details);
+                        l_input_command = "continue";
+                        break;
+                    }
+                    default:
+                        throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
+                }
+            } catch (GameException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                throw e;
+            }
+
+            if (!l_input_command.equals("continue")) {
+                l_input_command = l_reader.readLine();
+            }
+        }
+
+    }
+
+    private void handleTournamentMode(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
+
+        if (p_command_details.size() != 4) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_TOURNAMENT_MODE);
+
+        String[] l_command_options = new String[] {"M", "P", "G", "D"};
+        GameMode l_game_mode = new GameMode();
+        l_game_mode.setGameMode(GameMode.Mode.D_TOURNAMENT_MODE);
+
+        int l_index = 0;
+        for (String l_command : l_command_options) {
+            GameCommandParser.CommandDetails l_command_detail = p_command_details.get(l_index);
+            if (!l_command_detail.getCommandOption().equals(l_command)) throw new GameException(GameMessageConstants.D_COMMAND_OPTION_INVALID + "\nExample Format: " + GameMessageConstants.D_TOURNAMENT_MODE);
+            List<String> l_command_parameters = l_command_detail.getCommandParameters();
+            if (l_command_parameters.size() != 1) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_TOURNAMENT_MODE);
+
+            switch (l_command) {
+                case "M": {
+                    String[] l_command_values = l_command_parameters.get(0).split(",");
+                    for (String l_command_value : l_command_values) {
+                        l_game_mode.setGameMap(l_command_value);
+                    }
+                    break;
+                }
+                case "P": {
+                    String[] l_command_values = l_command_parameters.get(0).split(",");
+                    for (String l_command_value : l_command_values) {
+                        l_game_mode.setGameStrategy(l_command_value);
+                    }
+                    break;
+                }
+                case "G": {
+                    if (!GameCommonUtils.isNumeric(l_command_parameters.get(0))) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_TOURNAMENT_MODE);
+                    l_game_mode.setNumberOfGames(Integer.parseInt(l_command_parameters.get(0)));
+                    break;
+                }
+                case "D": {
+                    if (!GameCommonUtils.isNumeric(l_command_parameters.get(0))) throw new GameException(GameMessageConstants.D_COMMAND_PARAMETER_INVALID + "\nExample Format: " + GameMessageConstants.D_TOURNAMENT_MODE);
+                    l_game_mode.setNumberOfTurns(Integer.parseInt(l_command_parameters.get(0)));
+                    break;
+                }
+            }
+            l_index = l_index + 1;
+        }
+
+        GameInformation l_current_game_info = GameInformation.getInstance();
+        l_current_game_info.setGameMode(l_game_mode);
+    }
+
+    private void handleGameModes() throws Exception {
+
+        System.out.println("select the game mode -> singlegame or tournament");
+        BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
+        String l_input_command = l_reader.readLine();
+
+        while (l_input_command != null && !l_input_command.equals("continue")) {
+            GameCommandParser l_command_parser = new GameCommandParser(l_input_command);
+            String l_primary_command = l_command_parser.getPrimaryCommand();
+            List<GameCommandParser.CommandDetails> l_command_details = l_command_parser.getParsedCommandDetails();
+
+            try {
+                switch (l_primary_command) {
+                    case "singlegame": {
+                        handleSingleGameMode(l_command_details);
+                        l_input_command = "continue";
+                        break;
+                    }
+                    case "tournament": {
+                        handleTournamentMode(l_command_details);
+                        l_input_command = "continue";
+                        break;
+                    }
+                    default:
+                        throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
+                }
+            } catch (GameException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                throw e;
+            }
+
+            if (!l_input_command.equals("continue")) {
+                l_input_command = l_reader.readLine();
+            }
+        }
+    }
+
     /**
      * This Method executes Startup phase.
      * @throws Exception Throws exception when an error occurs, else continues till End Game.
@@ -40,28 +200,48 @@ public class GameEngine {
         System.out.println("---GAME STARTED---");
         d_logger.addLogger("---GAME STARTED---");
 
-
         try {
 
+            // handling game modes
+            handleGameModes();
+
             GameInformation l_game_information = GameInformation.getInstance();
-            Phase l_current_phase_obj = new GameStartUpPhase();
-            l_game_information.setCurrentPhase(l_current_phase_obj);
+            GameMode l_current_game_mode = l_game_information.getGameMode();
 
-            // Executing StartUp phase
-            l_current_phase_obj.executePhase();
+            if (l_current_game_mode.getGameMode().equals(GameMode.Mode.D_SINGLE_GAME_MODE)) {
 
-            l_current_phase_obj = l_game_information.getCurrentPhase();
-            if (!validatePhases(l_current_phase_obj)) {
-                return;
-            }
+                Phase l_current_phase_obj;
 
-            while (!(l_current_phase_obj instanceof EndGamePhase)) {
-                l_current_phase_obj.executePhase();
+                if (l_game_information.getGameState().equals(GameConstants.GameState.D_START_GAME)) {
+                    l_current_phase_obj = new GameStartUpPhase();
+                    l_game_information.setCurrentPhase(l_current_phase_obj);
+
+                    // Executing StartUp phase
+                    l_current_phase_obj.executePhase();
+
+                } else if (l_game_information.getGameState().equals(GameConstants.GameState.D_LOAD_GAME)) {
+
+                    l_current_phase_obj = l_game_information.getLastSessionPhase();
+                    l_game_information.setCurrentPhase(l_current_phase_obj);
+                    l_game_information.setLastSessionPhase(null);
+                }
 
                 l_current_phase_obj = l_game_information.getCurrentPhase();
                 if (!validatePhases(l_current_phase_obj)) {
                     return;
                 }
+
+                while (!(l_current_phase_obj instanceof EndGamePhase)) {
+                    l_current_phase_obj.executePhase();
+
+                    l_current_phase_obj = l_game_information.getCurrentPhase();
+                    if (!validatePhases(l_current_phase_obj)) {
+                        return;
+                    }
+                }
+
+            } else if (l_current_game_mode.getGameMode().equals(GameMode.Mode.D_TOURNAMENT_MODE)) {
+
             }
 
         } catch (GameException e) {

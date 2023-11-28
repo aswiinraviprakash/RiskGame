@@ -3,6 +3,8 @@ package mapparser;
 import common.LogEntryBuffer;
 import constants.GameMessageConstants;
 import gameutils.GameException;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedHashMap;
@@ -11,7 +13,7 @@ import java.util.Map;
 /**
  * The class loads map files and displays them.
  */
-public class GameMap {
+public class GameMap implements Serializable {
 
     /**
      * member to store logger instance
@@ -50,7 +52,7 @@ public class GameMap {
     /**
      * The class is used for creation of continents.
      */
-    public class Continent {
+    public class Continent implements Serializable {
 
         private String d_continent_name;
         private boolean d_is_continent_conquered;
@@ -125,7 +127,7 @@ public class GameMap {
     /**
      * The class is used for creation of countries.
      */
-    public class Country {
+    public class Country implements Serializable {
 
         private int d_country_id;
         private String d_country_name;

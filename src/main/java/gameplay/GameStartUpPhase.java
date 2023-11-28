@@ -3,6 +3,7 @@ package gameplay;
 import common.LogEntryBuffer;
 import common.Phase;
 import gameplay.strategy.HumanPlayerStrategy;
+import gameplay.strategy.PlayerStrategy;
 import gameutils.GameCommandParser;
 import constants.GameMessageConstants;
 import gameutils.GameException;
@@ -11,7 +12,6 @@ import mapparser.LoadMapPhase;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Collections;
@@ -30,11 +30,6 @@ public class GameStartUpPhase extends Phase {
      * Contains current game information.
      */
     public GameInformation d_current_game_info;
-
-    /**
-     * Contains completed operations.
-     */
-    private List<String> d_completed_operations = new ArrayList<>();
 
     /**
      * Method to load the Game map.
@@ -58,14 +53,12 @@ public class GameStartUpPhase extends Phase {
             mapparser.GameMap l_gamemap_obj = l_loadmap_phase.getLoadedMap();
 
             d_current_game_info.setCurrenGameMap(l_gamemap_obj);
-            d_completed_operations.add("loadmap");
             System.out.println(GameMessageConstants.D_GAMEMAP_LOADED);
             d_logger.addLogger(GameMessageConstants.D_GAMEMAP_LOADED);
 
         } catch (GameException e) {
-            System.out.println("Load Map Failed: " + e.getMessage());
             d_logger.addLogger("Load Map Failed: " + e.getMessage());
-
+            throw new GameException("Load Map Failed: " + e.getMessage());
         } catch (Exception e) {
             throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
         }
@@ -119,8 +112,6 @@ public class GameStartUpPhase extends Phase {
                 throw new GameException(GameMessageConstants.D_COMMAND_OPTION_INVALID + "\nExample Format : " + GameMessageConstants.D_PLAYER_COMMAND);
             }
         }
-
-        if (d_current_game_info.getPlayerList().size() >= 2) d_completed_operations.add("gameplayer");
     }
 
     /**
@@ -154,7 +145,6 @@ public class GameStartUpPhase extends Phase {
             l_end_index = l_end_index + l_countriesto_assign;
         }
 
-        d_completed_operations.add("assigncountries");
         System.out.println(GameMessageConstants.D_COUNTRIES_ASSIGNED);
         d_logger.addLogger(GameMessageConstants.D_COUNTRIES_ASSIGNED);
     }
@@ -180,17 +170,135 @@ public class GameStartUpPhase extends Phase {
                 break;
             }
             case "assigncountries": {
-                if (d_completed_operations.contains("loadmap") && d_completed_operations.contains("gameplayer")) {
-                    assignCountriesToPlayers(l_command_details);
-                } else {
-                    throw new GameException(GameMessageConstants.D_STARTUP_STEPS_INAVLID);
-                }
+                assignCountriesToPlayers(l_command_details);
                 break;
             }
             default:
                 throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
         }
     }
+
+    private void validateAndAddStrategies() throws Exception {
+
+        System.out.println("enter the player startegies");
+        BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
+        String l_command_input = l_reader.readLine();
+
+        while (l_command_input != null && !l_command_input.equals("continue")) {
+
+            try {
+                switch (l_command_input) {
+                    case "human": {
+                        System.out.println("add player for human player strategy (gameplayer -add playername)");
+                        String l_player_command = l_reader.readLine();
+                        while (l_player_command != null && !l_player_command.equals("continue")) {
+                            try {
+
+                                if (!l_player_command.startsWith("gameplayer")) {
+                                    throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
+                                } else {
+                                    validateAndExecuteCommands(l_player_command);
+                                    l_player_command = "continue";
+                                }
+
+                            } catch (GameException e) {
+                                System.out.println(e.getMessage());
+                            }
+
+                            if (!l_player_command.equals("continue")) {
+                                l_player_command = l_reader.readLine();
+                            }
+                        }
+                        break;
+                    }
+                    case "aggressive": {
+                        Player l_player_obj = new Player("aggressive");
+                        l_player_obj.setPlayerStrategy(new HumanPlayerStrategy());
+                        LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+                        l_player_list.put("aggressive", l_player_obj);
+                        d_current_game_info.setPlayerList(l_player_list);
+                        break;
+                    }
+                    case "benevolent": {
+                        break;
+                    }
+                    case "random": {
+                        break;
+                    }
+                    case "cheater": {
+                        break;
+                    }
+                    default:
+                        throw new GameException(GameMessageConstants.D_STRATEGIES_INVALID);
+                }
+
+            } catch (GameException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                throw e;
+            }
+
+            l_command_input = l_reader.readLine();
+        }
+    }
+
+    private void handleSingleGameMode() throws Exception {
+
+        BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("start by loading the map file");
+        String l_command_input = l_reader.readLine();
+
+        while (l_command_input != null && !l_command_input.equals("continue")) {
+            try {
+                if (!l_command_input.startsWith("loadmap")) {
+                    throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
+                } else {
+                    validateAndExecuteCommands(l_command_input);
+                    l_command_input = "continue";
+                }
+
+            } catch (GameException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                throw e;
+            }
+
+            if (!l_command_input.equals("continue")) {
+                l_command_input = l_reader.readLine();
+            }
+        }
+
+        // handling startegies
+        validateAndAddStrategies();
+
+        System.out.println("start assigning countries to players");
+        l_command_input = l_reader.readLine();
+
+        while (l_command_input != null && !l_command_input.equals("continue")) {
+            try {
+                if (!l_command_input.startsWith("assigncountries")) {
+                    throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
+                } else {
+                    validateAndExecuteCommands(l_command_input);
+                    l_command_input = "continue";
+                }
+
+            } catch (GameException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                throw e;
+            }
+
+            if (!l_command_input.equals("continue")) {
+                l_command_input = l_reader.readLine();
+            }
+        }
+    }
+
+    private void handleTournamentMode() {
+
+    }
+
 
     /**
      * Method deals with processing to the next phase.
@@ -213,30 +321,19 @@ public class GameStartUpPhase extends Phase {
         d_current_game_info = GameInformation.getInstance();
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 
-        while (true) {
-            try {
-                if (d_completed_operations.contains("assigncountries")) {
-                    System.out.println(GameMessageConstants.D_GAME_STARTUP_SUCCESS);
-                    d_logger.addLogger(GameMessageConstants.D_GAME_STARTUP_SUCCESS);
-                    d_current_game_info.setCurrentPhase(this.nextPhase());
-                    return;
-                }
-
-                System.out.println();
-                String l_input_command = l_reader.readLine();
-                if (l_input_command.equals("endgame")) {
-                    d_current_game_info.setCurrentPhase(new EndGamePhase());
-                    return;
-                }
-                validateAndExecuteCommands(l_input_command);
-
-            } catch (GameException e) {
-                System.out.println(e.getMessage());
-                d_logger.addLogger(e.getMessage());
-            } catch (Exception e) {
-                d_logger.addLogger(e.getMessage());
-                throw e;
+        try {
+            if (d_current_game_info.getGameMode().getGameMode().equals(GameMode.Mode.D_SINGLE_GAME_MODE)) {
+                handleSingleGameMode();
+            } else if (d_current_game_info.getGameState().equals(GameMode.Mode.D_TOURNAMENT_MODE)) {
+                handleTournamentMode();
             }
+
+            System.out.println(GameMessageConstants.D_GAME_STARTUP_SUCCESS);
+            d_logger.addLogger(GameMessageConstants.D_GAME_STARTUP_SUCCESS);
+            d_current_game_info.setCurrentPhase(this.nextPhase());
+        } catch (Exception e) {
+            d_logger.addLogger(e.getMessage());
+            throw e;
         }
     }
 

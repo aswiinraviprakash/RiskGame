@@ -1,12 +1,13 @@
 package common;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Observable is an Abstract class used for performing observable methods
  */
-public abstract class Observable {
+public abstract class Observable implements Serializable {
 
     /**
      * member to store list of observers

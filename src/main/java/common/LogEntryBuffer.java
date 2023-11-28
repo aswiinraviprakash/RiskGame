@@ -1,5 +1,7 @@
 package common;
 
+import java.io.Serializable;
+
 /**
  * Class that acts as an Observable for the entire game
  */
