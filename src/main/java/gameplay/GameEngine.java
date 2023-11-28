@@ -71,7 +71,8 @@ public class GameEngine {
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
         String l_input_command = l_reader.readLine();
 
-        while (l_input_command != null && !l_input_command.equals("continue")) {
+        gametype:
+        while (l_input_command != null) {
             GameCommandParser l_command_parser = new GameCommandParser(l_input_command);
             String l_primary_command = l_command_parser.getPrimaryCommand();
             List<GameCommandParser.CommandDetails> l_command_details = l_command_parser.getParsedCommandDetails();
@@ -84,13 +85,11 @@ public class GameEngine {
                         GameInformation l_current_game_info = GameInformation.getInstance();
                         l_current_game_info.setGameMode(gameMode);
                         l_current_game_info.setGameState(GameConstants.GameState.D_START_GAME);
-                        l_input_command = "continue";
-                        break;
+                        break gametype;
                     }
                     case "loadgame": {
                         handleLoadGame(l_command_details);
-                        l_input_command = "continue";
-                        break;
+                        break gametype;
                     }
                     default:
                         throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
@@ -101,9 +100,7 @@ public class GameEngine {
                 throw e;
             }
 
-            if (!l_input_command.equals("continue")) {
-                l_input_command = l_reader.readLine();
-            }
+            l_input_command = l_reader.readLine();
         }
 
     }
@@ -174,7 +171,8 @@ public class GameEngine {
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
         String l_input_command = l_reader.readLine();
 
-        while (l_input_command != null && !l_input_command.equals("continue")) {
+        gamemode:
+        while (l_input_command != null) {
             GameCommandParser l_command_parser = new GameCommandParser(l_input_command);
             String l_primary_command = l_command_parser.getPrimaryCommand();
             List<GameCommandParser.CommandDetails> l_command_details = l_command_parser.getParsedCommandDetails();
@@ -183,13 +181,11 @@ public class GameEngine {
                 switch (l_primary_command) {
                     case "singlegame": {
                         handleSingleGameMode(l_command_details);
-                        l_input_command = "continue";
-                        break;
+                        break gamemode;
                     }
                     case "tournament": {
                         handleTournamentMode(l_command_details);
-                        l_input_command = "continue";
-                        break;
+                        break gamemode;
                     }
                     default:
                         throw new GameException(GameMessageConstants.D_COMMAND_INVALID);
@@ -200,9 +196,7 @@ public class GameEngine {
                 throw e;
             }
 
-            if (!l_input_command.equals("continue")) {
-                l_input_command = l_reader.readLine();
-            }
+            l_input_command = l_reader.readLine();
         }
     }
 
