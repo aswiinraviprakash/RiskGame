@@ -129,11 +129,34 @@ public class GameMap implements Serializable {
      */
     public class Country implements Serializable {
 
+        /**
+         * Country ID
+         */
         private int d_country_id;
+
+        /**
+         * Country name
+         */
         private String d_country_name;
+
+        /**
+         * Army Count
+         */
         private int d_army_count;
+
+        /**
+         * Boolean for is conquered
+         */
         private boolean d_is_country_conquered;
+
+        /**
+         * Contains continent name
+         */
         private String d_continent_name;
+
+        /**
+         * Contains player name
+         */
         private String d_player_name;
 
         /**

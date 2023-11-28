@@ -16,16 +16,36 @@ import mapparser.GameMap.Country;
  *
  * @author USER
  */
+
+/**
+ * Map reader class for conquest mode
+ */
 public class ConquestGameMapReader {
-    
+
+    /**
+     * Contains File path
+     */
     String d_file_path;
+    /**
+     * The gamemap for mode
+     */
     GameMap d_game_map;
-    
+
+    /**
+     * Constructor that sets file path and game map
+     * @param p_file_path file path
+     * @param p_game_map game map
+     */
     public ConquestGameMapReader(String p_file_path, GameMap p_game_map) {
         this.d_file_path = p_file_path;
         this.d_game_map = p_game_map;
     }
-    
+
+    /**
+     * Linked Hashmap to read borders
+     * @return the borders list
+     * @throws Exception There seems to be an issue loading your map.
+     */
     public LinkedHashMap<Integer, List<Integer>> readBorders() throws Exception {
         List<String> l_map_details = new ArrayList<String>();
         List<String> l_countries = new ArrayList<String>();
@@ -77,7 +97,12 @@ public class ConquestGameMapReader {
        
         return l_borders;
     }
-    
+
+    /**
+     * List to read continents
+     * @return continent object
+     * @throws Exception There seems to be an issue loading your map.
+     */
     public List<Continent> readContinents() throws Exception {
         
         List<String> l_map_details = new ArrayList<String>();
@@ -100,7 +125,12 @@ public class ConquestGameMapReader {
        
         return l_continent_obj;
     }
-    
+
+    /**
+     * List to read countries
+     * @return country object
+     * @throws Exception There seems to be an issue loading your map.
+     */
     public List<Country> readCountries() throws Exception {
         
         List<String> l_map_details = new ArrayList<String>();

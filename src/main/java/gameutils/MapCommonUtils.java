@@ -53,6 +53,12 @@ public class MapCommonUtils {
         return l_map_details;
     }
 
+    /**
+     * Method to check map type
+     * @param p_file_path contains map path
+     * @return String Type of mode
+     * @throws Exception any exception that rises inside this code block
+     */
     public static String checkMapType(String p_file_path) throws Exception {
         List<String> l_all_lines = null;
         List<String> l_map_details = new ArrayList<String>();
