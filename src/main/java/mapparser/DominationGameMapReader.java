@@ -14,14 +14,29 @@ import java.util.List;
 public class DominationGameMapReader {
     //call load operations in constructor
     //load functions here
+    /**
+     * Contains file path
+     */
     String d_file_path;
+    /**
+     * Contains game map
+     */
     GameMap d_game_map;
-    
+
+    /**
+     * Map reader for domination mode
+     * @param p_file_path file path
+     * @param p_game_map game map
+     */
     public DominationGameMapReader(String p_file_path, GameMap p_game_map) {
         this.d_file_path = p_file_path;
         this.d_game_map = p_game_map;
     }
-    
+
+    /**
+     * Load borders for domination mode
+     * @throws Exception
+     */
     public void loadBorders() throws Exception {
 
         //load border array from map file

@@ -77,10 +77,19 @@ public class GameCommandParser {
      */
     public class CommandDetails {
 
+        /**
+         * Boolean to check for command option
+         */
         private boolean d_has_command_option;
 
+        /**
+         * String containing command option
+         */
         private String d_command_option;
 
+        /**
+         * List of String with parameters
+         */
         private List<String> d_command_parameters;
 
         /**
