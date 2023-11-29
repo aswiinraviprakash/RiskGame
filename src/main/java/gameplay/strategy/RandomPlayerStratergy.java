@@ -410,6 +410,7 @@ public class RandomPlayerStratergy implements PlayerStrategy {
 
     }
 
+
     public List<Order> createOrders(Player p_player_obj) throws Exception {
 
         System.out.println("Player: "+ p_player_obj.getPlayerName() + " turn");
@@ -423,14 +424,20 @@ public class RandomPlayerStratergy implements PlayerStrategy {
 
         // executing deploy order on random countries
         System.out.println("Issuing deploy order...");
+        d_logger.addLogger("Issuing deploy order...");
+
         executeDeployOrder(p_player_obj, l_player_orders);
 
         // executing attack on random opponent countries
         System.out.println("Issuing attack order...");
+        d_logger.addLogger("Issuing attack order...");
+
         executeAttackOrder(p_player_obj, l_player_orders);
 
         // executing move armies on random
         System.out.println("Issuing move armies between country...");
+        d_logger.addLogger("Issuing move armies order...");
+
         executeMoveArmies(p_player_obj, l_player_orders);
 
         return l_player_orders;

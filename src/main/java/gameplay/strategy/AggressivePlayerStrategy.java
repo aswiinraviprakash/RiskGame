@@ -224,6 +224,7 @@ public class AggressivePlayerStrategy implements PlayerStrategy, Serializable {
 
         // executing deploy order on strongest country
         System.out.println("Issuing deploy order...");
+        d_logger.addLogger("Issuing deploy order...");
         executeDeployOrder(p_player_obj, l_strongest_country, l_player_orders);
 
         // executing attack on strongest opponent country

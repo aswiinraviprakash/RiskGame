@@ -348,7 +348,7 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
     @Override
     public List<Order> createOrders(Player p_player_obj) throws Exception {
 
-        System.out.printf("%nstart issuing your orders or enter endgame to terminate%n");
+        System.out.printf("%n start issuing your orders or enter endgame to terminate%n");
         d_current_game_info = GameInformation.getInstance();
 
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
@@ -397,6 +397,8 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
             } catch (Exception e) {
                 throw e;
             }
+
+            //d_logger.addLogger("Orders issued");
 
             if (d_current_game_info.getCurrentPhase() instanceof EndGamePhase) {
                 return null;
