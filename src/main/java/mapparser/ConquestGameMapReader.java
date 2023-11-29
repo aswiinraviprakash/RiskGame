@@ -12,10 +12,6 @@ import java.util.Map;
 import mapparser.GameMap.Continent;
 import mapparser.GameMap.Country;
 
-/**
- *
- * @author USER
- */
 
 /**
  * Map reader class for conquest mode
@@ -26,8 +22,9 @@ public class ConquestGameMapReader {
      * Contains File path
      */
     String d_file_path;
+
     /**
-     * The gamemap for mode
+     * The game map for mode
      */
     GameMap d_game_map;
 

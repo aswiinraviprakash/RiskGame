@@ -65,7 +65,6 @@ public class ReinforcementPhase extends Phase {
     }
 
     /**
-     *{@inheritDoc}
      * Responsible for assigning reinforcement armies to players based on the number of countries they have conquered.
      * @throws Exception If an exception occurs, it is rethrown.
      */

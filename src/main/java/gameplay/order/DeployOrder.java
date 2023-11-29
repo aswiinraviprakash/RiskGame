@@ -54,7 +54,6 @@ public class DeployOrder extends Order {
     }
 
     /**
-     * {@inheritDoc}
      * Responsible for deploying armies to a specific country owned by a player.
      * @param p_player_obj The player object to whom the armies will be deployed.
      */

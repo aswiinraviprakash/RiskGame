@@ -63,7 +63,7 @@ public class GameMapTest {
     }
 
     /**
-     * Function checks whether
+     * Function checks whether map is empty
      */
     @Test
     public void testValidateMapEmpty() {
@@ -124,7 +124,10 @@ public class GameMapTest {
 
         } catch (Exception e) { }
     }
-    
+
+    /**
+     * Test for show map test without players
+     */
     @Test
     public void showMapTestWithoutPlayers() {
         ByteArrayOutputStream l_out_content = null;
@@ -148,6 +151,9 @@ public class GameMapTest {
 
     }
 
+    /**
+     * Show map test with players
+     */
     @Test
     public void showMapTestWithPlayers() {
 

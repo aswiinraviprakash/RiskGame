@@ -39,12 +39,24 @@ public class GameInformation implements Serializable {
      */
     private mapparser.GameMap d_current_game_map;
 
+    /**
+     * Contains last session of player
+     */
     private Player d_last_session_player;
 
+    /**
+     * Contains last session phase
+     */
     private Phase d_last_session_phase;
 
+    /**
+     * Contains game mode
+     */
     private GameMode d_game_mode;
 
+    /**
+     * Contains gme state
+     */
     private GameConstants.GameState d_game_state;
 
     /**
@@ -109,34 +121,66 @@ public class GameInformation implements Serializable {
         return this.d_current_game_map;
     }
 
+    /**
+     * Setter to last session player
+     * @param p_player_obj
+     */
     public void setLastSessionPlayer(Player p_player_obj) {
         this.d_last_session_player = p_player_obj;
     }
 
+    /**
+     * Getter for last session player
+     * @return last session player
+     */
     public Player getLastSessionPlayer() {
         return this.d_last_session_player;
     }
 
+    /**
+     * Setter for last session phase
+     * @param l_last_session_phase last session player
+     */
     public void setLastSessionPhase(Phase l_last_session_phase) {
         this.d_last_session_phase = l_last_session_phase;
     }
 
+    /**
+     * Getter for last session phase
+     * @return last session phase
+     */
     public Phase getLastSessionPhase() {
         return this.d_last_session_phase;
     }
 
+    /**
+     * Setter for set game mode
+     * @param p_game_mode game mode
+     */
     public void setGameMode (GameMode p_game_mode) {
         this.d_game_mode = p_game_mode;
     }
 
+    /**
+     * Getter for game mode
+     * @return
+     */
     public GameMode getGameMode() {
         return this.d_game_mode;
     }
 
+    /**
+     * Setter for state
+     * @param p_game_state
+     */
     public void setGameState(GameConstants.GameState p_game_state) {
         this.d_game_state = p_game_state;
     }
 
+    /**
+     * Getter for game state
+     * @return game state
+     */
     public GameConstants.GameState getGameState() {
         return this.d_game_state;
     }
@@ -167,6 +211,10 @@ public class GameInformation implements Serializable {
         this.d_card_issued_players = null;
     }
 
+    /**
+     * Method to load game information instance
+     * @param p_game_info_instance
+     */
     public static void loadGameInfoInstance(GameInformation p_game_info_instance) {
         d_game_info_instance = p_game_info_instance;
     }

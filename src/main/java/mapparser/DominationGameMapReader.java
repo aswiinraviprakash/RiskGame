@@ -7,10 +7,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/**
- *
- * @author USER
- */
 public class DominationGameMapReader {
     //call load operations in constructor
     //load functions here
@@ -18,6 +14,7 @@ public class DominationGameMapReader {
      * Contains file path
      */
     String d_file_path;
+
     /**
      * Contains game map
      */

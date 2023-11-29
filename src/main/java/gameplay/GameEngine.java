@@ -42,6 +42,11 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Method to hadndle load game
+     * @param p_command_details list of command details
+     * @throws Exception throws if any errors are caught in the code block
+     */
     private void handleLoadGame(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
         if (p_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_LOADGAME);
 
@@ -64,6 +69,11 @@ public class GameEngine {
 
     }
 
+    /**
+     *
+     * @param p_command_details list of commmand details
+     * @throws Exception throws if any errors are caught in the code block
+     */
     private void handleSingleGameMode(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
         if (!p_command_details.isEmpty()) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_SINGLEGAME_MODE);
 
@@ -105,6 +115,11 @@ public class GameEngine {
 
     }
 
+    /**
+     *  Method to handle tournament mode
+     * @param p_command_details list of command details
+     * @throws Exception throws if any errors are caught in the code block
+     */
     private void handleTournamentMode(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
 
         if (p_command_details.size() != 4) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_TOURNAMENT_MODE);
@@ -165,6 +180,10 @@ public class GameEngine {
         l_current_game_info.setGameMode(l_game_mode);
     }
 
+    /**
+     * Method to handle game modes
+     * @throws Exception throws if any errors are caught in the code block
+     */
     private void handleGameModes() throws Exception {
 
         System.out.println("select the game mode -> singlegame or tournament");
@@ -200,6 +219,9 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Method to print tournament results
+     */
     private static void printTournamentModeResults() {
         GameMode l_current_game_mode = GameInformation.getInstance().getGameMode();
         List<GameMode.GameDetails> l_game_details = l_current_game_mode.getGameDetails();
