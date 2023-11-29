@@ -15,6 +15,9 @@ import java.util.List;
  */
 public class GameStartUpPhaseTest {
 
+    /**
+     * Game information object
+     */
     private GameInformation d_current_game_info;
 
     /**

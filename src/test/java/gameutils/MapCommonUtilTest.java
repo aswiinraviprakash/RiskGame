@@ -7,8 +7,13 @@ import java.io.File;
 import java.util.ArrayList;
 import org.junit.Assert;
 
+/**
+ * Test class for map common utisl
+ */
 public class MapCommonUtilTest {
-
+    /**
+     * Test for map parsing
+     */
     @Test
     public void mapParsingContinentTest() {
 
@@ -28,6 +33,9 @@ public class MapCommonUtilTest {
         Assert.assertEquals(2, l_map_data.size());
     }
 
+    /**
+     * Test for parsing countries
+     */
     @Test
     public void mapParsingCountryTest() {
 
@@ -47,6 +55,9 @@ public class MapCommonUtilTest {
         Assert.assertEquals(6, l_map_data.size());
     }
 
+    /**
+     * Test for parsing borders in map
+     */
     @Test
     public void mapParsingBorderTest() {
 

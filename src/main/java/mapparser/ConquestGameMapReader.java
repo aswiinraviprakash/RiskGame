@@ -22,8 +22,9 @@ public class ConquestGameMapReader {
      * Contains File path
      */
     String d_file_path;
+
     /**
-     * The gamemap for mode
+     * The game map for mode
      */
     GameMap d_game_map;
 
