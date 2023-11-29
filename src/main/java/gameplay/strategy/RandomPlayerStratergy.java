@@ -20,6 +20,9 @@ import java.util.Random;
 import mapparser.GameMap;
 import mapparser.GameMap.Country;
 
+/**
+ * This class represents the behaviour of Random Player Strategy
+ */
 public class RandomPlayerStratergy implements PlayerStrategy {
 
     /**
@@ -32,6 +35,12 @@ public class RandomPlayerStratergy implements PlayerStrategy {
      */
     private GameInformation d_current_game_info;
     
+    /**
+     * Executes the Advance Order
+     * @param p_current_player The current Player
+     * @param p_player_orders The list of Player's orders
+     * @throws Exception Throws Exception if the method fails
+     */
     public void executeMoveArmies(Player p_current_player, List<Order> p_player_orders) throws Exception {
         Random l_random = new Random();
         Country l_from_country_obj;
@@ -104,6 +113,12 @@ public class RandomPlayerStratergy implements PlayerStrategy {
         d_logger.addLogger(GameMessageConstants.D_ADVANCE + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * Executes the Blockade Order
+     * @param p_current_player The Current player
+     * @param p_player_orders The player's orders
+     * @throws Exception Throws Exception if the Order Fails.
+     */
     public void executeBlockade(Player p_current_player, List<Order> p_player_orders) throws Exception {
         Random l_random = new Random();
         Country l_country_blockade;
@@ -126,6 +141,12 @@ public class RandomPlayerStratergy implements PlayerStrategy {
         d_logger.addLogger(GameMessageConstants.D_BLOCKADE + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * Executes the Bomb order
+     * @param p_current_player The current player
+     * @param p_player_orders The player's orders
+     * @throws Exception Throws exception if the method fails.
+     */
     public void executeBomb(Player p_current_player, List<Order> p_player_orders) throws Exception {
         Random l_random = new Random();
         Country l_country_bomb;
@@ -182,6 +203,12 @@ public class RandomPlayerStratergy implements PlayerStrategy {
         d_logger.addLogger(GameMessageConstants.D_BOMB + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * Executes the Airlift Order
+     * @param p_current_player The current player
+     * @param p_player_orders The player's orders
+     * @throws Exception Throws Exception if the method Fails.
+     */
     public void executeAirlift(Player p_current_player, List<Order> p_player_orders) throws Exception {
         Random l_random = new Random();
         Country l_from_country_obj;
@@ -241,6 +268,12 @@ public class RandomPlayerStratergy implements PlayerStrategy {
         d_logger.addLogger(GameMessageConstants.D_AIRLIFT + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * Executes the Advance Order.
+     * @param p_current_player The current player
+     * @param p_player_orders The player's orders
+     * @throws Exception If the method fails.
+     */
     public void executeAdvanceOrder(Player p_current_player, List<Order> p_player_orders) throws Exception {
         Random l_random = new Random();
         Country l_from_country_obj;
@@ -313,6 +346,12 @@ public class RandomPlayerStratergy implements PlayerStrategy {
         d_logger.addLogger(GameMessageConstants.D_ADVANCE + " " + GameMessageConstants.D_ORDER_ISSUED);
     }
 
+    /**
+     * Executes the Attack Order
+     * @param p_current_player The current Player
+     * @param p_player_orders The list of player's orders
+     * @throws Exception Throws Exception if the order fails
+     */
     public void executeAttackOrder(Player p_current_player, List<Order> p_player_orders) throws Exception {
 
         Random l_random = new Random();
@@ -370,6 +409,12 @@ public class RandomPlayerStratergy implements PlayerStrategy {
 
     }
 
+    /**
+     * Executes the Deploy Order
+     * @param p_current_player The current player
+     * @param p_player_orders The list of player's orders
+     * @throws Exception Throws Exception if the method fails
+     */
     public void executeDeployOrder(Player p_current_player, List<Order> p_player_orders) throws Exception {
 
         int l_army_deploy = p_current_player.getCurrentArmies();

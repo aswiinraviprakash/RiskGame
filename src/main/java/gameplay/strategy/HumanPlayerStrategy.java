@@ -25,6 +25,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the behaviour of the HumanPlayer Strategy
+ */
 public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
 
     /**
@@ -41,6 +44,7 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
      * Executes deploy orders based on the provided command details.
      * @param p_input_command command given by user.
      * @param p_current_player Current player issuing an order.
+     * @param p_player_orders List of orders of the current player.
      * @throws Exception If an error occurs during order execution.
      */
     public void executeDeployOrder(String p_input_command, Player p_current_player, List<Order> p_player_orders) throws Exception {
@@ -289,6 +293,7 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
      * Validates and Executes commands for Issue_order_phase.
      * @param p_input_command Input command provided by the player.
      * @param p_current_player Current player issuing the command.
+     * @param p_player_orders List of player's orders
      * @throws Exception If an error occurs during validation or execution.
      */
     public void validateAndExecuteCommands(String p_input_command, Player p_current_player, List<Order> p_player_orders) throws Exception {
@@ -341,8 +346,8 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
 
     /**
      * Method to create orders
-     * @param p_player_obj
-     * @return
+     * @param p_player_obj The player object.
+     * @return Returns the List of Orders.
      * @throws Exception if any exception is caught in the code block
      */
     @Override

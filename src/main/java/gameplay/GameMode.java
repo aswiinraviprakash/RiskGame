@@ -13,8 +13,15 @@ public class GameMode implements Serializable {
      * Enum for mode
      */
     public enum Mode {
+        
+        /**
+         * Enum for the Game mode
+         */
         D_SINGLE_GAME_MODE,
 
+        /**
+         * Enum for the Tournament Mode
+         */
         D_TOURNAMENT_MODE
     }
 
@@ -45,7 +52,7 @@ public class GameMode implements Serializable {
 
         /**
          * Getter for current map
-         * @return
+         * @return Returns the current map
          */
         public String getCurrentMap() {
             return d_current_map;
@@ -61,7 +68,7 @@ public class GameMode implements Serializable {
 
         /**
          * Getter for game number
-         * @return
+         * @return Returns the Game's number
          */
         public int getGameNumber() {
             return d_game_number;
@@ -77,7 +84,7 @@ public class GameMode implements Serializable {
 
         /**
          * Getter for game winner
-         * @return
+         * @return Returns the Winner of the game
          */
         public String getGameWinner() {
             return d_game_winner;
@@ -165,7 +172,7 @@ public class GameMode implements Serializable {
 
     /**
      * Setter for game mode
-     * @param p_current_game_mode
+     * @param p_current_game_mode The parameter for the game mode
      */
     public void setGameMode(Mode p_current_game_mode) {
         this.d_current_game_mode = p_current_game_mode;
@@ -269,7 +276,7 @@ public class GameMode implements Serializable {
 
     /**
      * Getter for number of games
-     * @return
+     * @return Returns the number of Games
      */
     public int getNumberOfGames() {
         return this.d_number_of_games;

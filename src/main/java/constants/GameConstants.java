@@ -44,8 +44,15 @@ public class GameConstants {
      * Enum for gamestate
      */
     public enum GameState {
+        
+        /**
+         * Enum Variable for Start Game
+         */
         D_START_GAME,
 
+        /**
+         * Enum Variable for Load Game
+         */
         D_LOAD_GAME
     }
 

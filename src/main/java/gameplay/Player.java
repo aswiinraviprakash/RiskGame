@@ -46,6 +46,9 @@ public class Player implements Serializable {
      */
     private HashMap<Card, Integer> d_available_cards = new HashMap();
 
+    /**
+     * The Player Strategy
+     */
     private PlayerStrategy d_player_strategy;
 
     /**
@@ -58,6 +61,7 @@ public class Player implements Serializable {
 
     /**
      * Adds current order to the players list of orders.
+     * @throws Exception If the issue order fails
      */
     public void issue_order() throws Exception {
         List<Order> l_player_orders = this.d_player_strategy.createOrders(this);
@@ -116,10 +120,18 @@ public class Player implements Serializable {
         return this.d_orders_list;
     }
 
+    /**
+     * Sets the player's strategy
+     * @param p_player_strategy The player strategy
+     */
     public void setPlayerStrategy(PlayerStrategy p_player_strategy) {
         this.d_player_strategy = p_player_strategy;
     }
 
+    /**
+     * Gets the player's strategy
+     * @return Returns the player's strategy
+     */
     public PlayerStrategy getPlayerStrategy() {
         return this.d_player_strategy;
     }
