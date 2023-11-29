@@ -87,7 +87,7 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
      * Method executes advanced order phase.
      * @param p_command_details command details.
      * @param p_current_player current player object.
-     * @throws Exception
+     * @throws Exception if any exception is caught in the code block
      */
     private void executeAdvanceOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player, List<Order> p_player_orders) throws Exception {
 
@@ -127,7 +127,7 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
      * Method executes bomb order phase.
      * @param p_command_details command details.
      * @param p_current_player current player object
-     * @throws Exception
+     * @throws Exception if any exception is caught in the code block
      */
     private void executeBombOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player, List<Order> p_player_orders) throws Exception {
 
@@ -203,7 +203,7 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
      * Method executes the airlift order phase.
      * @param p_command_details command details.
      * @param p_current_player current player object.
-     * @throws Exception
+     * @throws Exception if any exception is caught in the code block
      */
     private void executeAirliftOrder(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player, List<Order> p_player_orders) throws Exception {
 
@@ -243,7 +243,7 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
      * Method executes the diplomacy phase.
      * @param p_command_details command details.
      * @param p_current_player current player object.
-     * @throws Exception
+     * @throws Exception if any exception is caught in the code block
      */
     private void executeDiplomacy(List<GameCommandParser.CommandDetails> p_command_details, Player p_current_player, List<Order> p_player_orders) throws Exception {
 
@@ -339,6 +339,12 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
         }
     }
 
+    /**
+     * Method to create orders
+     * @param p_player_obj
+     * @return
+     * @throws Exception if any exception is caught in the code block
+     */
     @Override
     public List<Order> createOrders(Player p_player_obj) throws Exception {
 
