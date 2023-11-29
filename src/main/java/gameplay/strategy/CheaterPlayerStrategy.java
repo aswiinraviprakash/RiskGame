@@ -22,6 +22,10 @@ public class CheaterPlayerStrategy implements PlayerStrategy {
      */
     private GameInformation d_current_game_info;
 
+    /**
+     * This method is used to Conquer any neighboring territories to that of the cheater countries
+     * @param p_current_player Current player
+     */
     public void conquerEnemyCountries(Player p_current_player) {
 
         GameMap l_game_map = d_current_game_info.getGameMap();
@@ -69,6 +73,10 @@ public class CheaterPlayerStrategy implements PlayerStrategy {
         }
     }
 
+    /**
+     * This method doubles the armies of the captured countries
+     * @param p_current_player The current player
+     */
     public void doubleArmiesForCountries(Player p_current_player) {
         GameMap l_game_map = d_current_game_info.getGameMap();
 
