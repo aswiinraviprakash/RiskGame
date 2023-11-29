@@ -142,6 +142,8 @@ public class CheaterPlayerStrategy implements PlayerStrategy {
         // doubling armies on countries with enemy neighbors
         doubleArmiesForCountries(p_player_obj);
 
+        d_logger.addLogger("Issue orders deployed");
+
         return new ArrayList<Order>();
     }
 }
