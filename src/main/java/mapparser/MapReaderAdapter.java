@@ -6,7 +6,7 @@ import mapparser.GameMap.Continent;
 import mapparser.GameMap.Country;
 
 /**
- * Adpater pattern c
+ * Class for map reader adapter
  */
 public class MapReaderAdapter extends DominationGameMapReader {
 
@@ -56,7 +56,7 @@ public class MapReaderAdapter extends DominationGameMapReader {
     }
 
     /**
-     * getter for ConquestMapReader Object
+     * Getter for ConquestMapReader Object
      * @return ConquestMapReader Object
      */
     public ConquestGameMapReader getConquestMap() {

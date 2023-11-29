@@ -10,34 +10,60 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 /**
- *
- * @author USER
+ * Class for load game phase
  */
 public class LoadGamePhase extends Phase {
 
+    /**
+     * String file path
+     */
     private String d_file_path;
-    
+
+    /**
+     * Contains current game info
+     */
     private GameInformation d_current_game_info;
-    
+
+    /**
+     * Method for load game phase
+     * @param p_file_path
+     */
     public LoadGamePhase(String p_file_path) {
         this.d_file_path = p_file_path;
     }
 
+    /**
+     * Getter for loaded game information
+     * @return current game information
+     */
     public GameInformation getLoadedGameInformation() {
         return this.d_current_game_info;
     }
-    
+
+    /**
+     * Method for next phase
+     * @return game startup phase
+     * @throws Exception
+     */
     @Override
     public Phase nextPhase() throws Exception {
         return new GameStartUpPhase();
     }
-    
+
+    /**
+     * Method for execute phase
+     * @throws Exception if any exception are caught in the code block
+     */
     @Override
      public void executePhase() throws Exception {
          this.loadGame();
      }
 
-     public void loadGame() throws Exception {
+    /**
+     * Method to load game
+     * @throws Exception if any exception are caught in the code block
+     */
+    public void loadGame() throws Exception {
          try {
 
              File l_file_dir = new File("").getCanonicalFile();

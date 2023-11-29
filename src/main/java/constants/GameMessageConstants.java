@@ -55,8 +55,14 @@ public class GameMessageConstants {
      */
     public static final String D_LOADMAP = "loadmap filename";
 
+    /**
+     * Command Format Constants
+     */
     public static final String D_LOADGAME = "loadgame filename";
 
+    /**
+     * Command Format Constants
+     */
     public static final String D_SAVEGAME = "savegame filename";
 
     /**
@@ -109,8 +115,14 @@ public class GameMessageConstants {
      */
     public static final String D_VALIDATEMAP = "validatemap";
 
+    /**
+     * Command Format Constants
+     */
     public static final String D_SINGLEGAME_MODE = "singlegame";
 
+    /**
+     * Command Format Constants
+     */
     public static final String D_TOURNAMENT_MODE = "tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns";
 
     /**
@@ -327,10 +339,19 @@ public class GameMessageConstants {
      */
     public static final String D_MAP_VALIDATION_PASS = "The map is valid";
 
+    /**
+     * Error Message Constants
+     */
     public static final String D_STRATEGIES_INVALID = "Strategy seems to be invalid enter valid one";
 
+    /**
+     * Error Message Constants
+     */
     public static final String D_STRATEGIES_DUPLICATE = "Duplicate strategy found kindly enter unique values";
 
+    /**
+     * Error Message Constants
+     */
     public static final String D_STRATEGIES_INSUFFICIENT = "Select atleast two strategies to proceed";
 
     /**
@@ -348,6 +369,9 @@ public class GameMessageConstants {
      */
     public static final String D_SAVE_MAP = "Map file saved";
 
+    /**
+     * Error Message Constants
+     */
     public static final String D_GAME_LOAD_FAILED = "There seems to be an issue loading your game. try loading proper game file";
 
     /**
@@ -409,11 +433,20 @@ public class GameMessageConstants {
      * Success Message Constants
      */
     public static final String D_RELATION_REMOVED = "Removed neighbor relation between ";
-    
+
+    /**
+     * Success Message Constants
+     */
     public static final String D_SAVE_GAME_ERROR = "Error while saving the game ";
-    
+
+    /**
+     * Success Message Constants
+     */
     public static final String D_LOAD_GAME_SUCCESS = "Successfully loaded the game ";
-    
+
+    /**
+     * Success Message Constants
+     */
     public static final String D_SAVE_GAME_SUCCESS = "Successfully saved the game ";
 
 }

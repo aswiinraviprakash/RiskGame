@@ -11,29 +11,54 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 /**
- *
- * @author USER
+ * Class for Save game phase
  */
 public class SaveGamePhase extends Phase {
 
+    /**
+     * Contains file path
+     */
     private String d_file_path;
-    
+
+    /**
+     * Contains current game information
+     */
     private GameInformation d_current_game_info;
 
+    /**
+     * Method to save game phase
+     * @param p_file_path
+     */
     public SaveGamePhase(String p_file_path) {
         this.d_file_path = p_file_path;
     }
 
+    /**
+     * {@inheritDoc}
+     * Method for next phase
+     * @return end game phase method
+     * @throws Exception of any exception caught in the code block
+     */
     @Override
     public Phase nextPhase() throws Exception {
         return new EndGamePhase();
     }
 
+    /**
+     * {@inheritDoc}
+     * Method to execute phase
+     * @throws Exception of any exception caught in the code block
+     */
     @Override
     public void executePhase() throws Exception {
         this.saveGame();
     }
 
+    /**
+     * {@inheritDoc}
+     * Method to save game
+     * @throws Exception of any exception caught in the code block
+     */
     public void saveGame() throws Exception {
         d_current_game_info = GameInformation.getInstance();
 
