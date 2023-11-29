@@ -124,7 +124,10 @@ public class GameMapTest {
 
         } catch (Exception e) { }
     }
-    
+
+    /**
+     * Test for show map without players
+     */
     @Test
     public void showMapTestWithoutPlayers() {
         ByteArrayOutputStream l_out_content = null;
@@ -148,6 +151,9 @@ public class GameMapTest {
 
     }
 
+    /**
+     * Test for show map with players
+     */
     @Test
     public void showMapTestWithPlayers() {
 

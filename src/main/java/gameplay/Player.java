@@ -45,6 +45,9 @@ public class Player {
      */
     private HashMap<Card, Integer> d_available_cards = new HashMap();
 
+    /**
+     * Contains player strategy
+     */
     private PlayerStrategy d_player_strategy;
 
     /**
@@ -115,10 +118,18 @@ public class Player {
         return this.d_orders_list;
     }
 
+    /**
+     * Setter for player strategy
+     * @param p_player_strategy player strategy object
+     */
     public void setPlayerStrategy(PlayerStrategy p_player_strategy) {
         this.d_player_strategy = p_player_strategy;
     }
 
+    /**
+     * Getter for player strategy
+     * @return player strategy object
+     */
     public PlayerStrategy getPlayerStrategy() {
         return this.d_player_strategy;
     }

@@ -9,17 +9,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- *
- * @author USER
+ * Edit map phase test
  */
 public class EditMapPhaseTest {
 
     /**
-     * @param args the command line arguments
+     * Edit map phase object
      */
     public EditMapPhase d_map_edit;
+
+    /**
+     * Game map object
+     */
     public GameMap p_map;
 
+    /**
+     * Test load map method
+     */
     @Before
     public void loadMap() {
         try {
@@ -37,6 +43,9 @@ public class EditMapPhaseTest {
 
     }
 
+    /**
+     * Test for adding continent
+     */
     @Test
     public void addContinentTest() {
 
@@ -57,6 +66,9 @@ public class EditMapPhaseTest {
         Assert.assertEquals(4, l_edited_map.getContinentObjects().get(l_edited_map.getContinentObjects().size() - 1).getSpecialNumber());
     }
 
+    /**
+     * Test for removing continent
+     */
     @Test
     public void removeContinentTest() {
         GameMap l_edited_map = null;
@@ -75,6 +87,9 @@ public class EditMapPhaseTest {
 
     }
 
+    /**
+     * Test for adding country
+     */
     @Test
     public void addCountryTest() {
 
@@ -96,6 +111,9 @@ public class EditMapPhaseTest {
 
     }
 
+    /**
+     * Test for removing country
+     */
     @Test
     public void removeCountryTest() {
 
@@ -115,6 +133,9 @@ public class EditMapPhaseTest {
 
     }
 
+    /**
+     * Test for adding borders
+     */
     @Test
     public void addBorderTest() {
 
@@ -135,6 +156,9 @@ public class EditMapPhaseTest {
 
     }
 
+    /**
+     * Test for removing border
+     */
     @Test
     public void removeBorderTest() {
         GameMap l_edited_map = null;

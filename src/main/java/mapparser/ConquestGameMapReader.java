@@ -13,8 +13,7 @@ import mapparser.GameMap.Continent;
 import mapparser.GameMap.Country;
 
 /**
- *
- * @author USER
+ * Conques map reader
  */
 
 /**
@@ -23,17 +22,31 @@ import mapparser.GameMap.Country;
 public class ConquestGameMapReader {
 
     /**
+<<<<<<< Updated upstream
      * Contains File path
      */
     String d_file_path;
     /**
      * The gamemap for mode
+=======
+     * Contains file path
+     */
+    String d_file_path;
+
+    /**
+     * Contains game map
+>>>>>>> Stashed changes
      */
     GameMap d_game_map;
 
     /**
+<<<<<<< Updated upstream
      * Constructor that sets file path and game map
      * @param p_file_path file path
+=======
+     * Conquest map reader
+     * @param p_file_path path for amp
+>>>>>>> Stashed changes
      * @param p_game_map game map
      */
     public ConquestGameMapReader(String p_file_path, GameMap p_game_map) {
@@ -42,9 +55,15 @@ public class ConquestGameMapReader {
     }
 
     /**
+<<<<<<< Updated upstream
      * Linked Hashmap to read borders
      * @return the borders list
      * @throws Exception There seems to be an issue loading your map.
+=======
+     * Read borders
+     * @return borders of territories
+     * @throws Exception if any exceptions are caught
+>>>>>>> Stashed changes
      */
     public LinkedHashMap<Integer, List<Integer>> readBorders() throws Exception {
         List<String> l_map_details = new ArrayList<String>();
@@ -99,9 +118,15 @@ public class ConquestGameMapReader {
     }
 
     /**
+<<<<<<< Updated upstream
      * List to read continents
      * @return continent object
      * @throws Exception There seems to be an issue loading your map.
+=======
+     * Reads continents
+     * @return continent object
+     * @throws Exception if any exceptions are caught
+>>>>>>> Stashed changes
      */
     public List<Continent> readContinents() throws Exception {
         
@@ -127,9 +152,15 @@ public class ConquestGameMapReader {
     }
 
     /**
+<<<<<<< Updated upstream
      * List to read countries
      * @return country object
      * @throws Exception There seems to be an issue loading your map.
+=======
+     * Reads countries
+     * @return country object
+     * @throws Exception if any exceptions are caught
+>>>>>>> Stashed changes
      */
     public List<Country> readCountries() throws Exception {
         
@@ -143,7 +174,7 @@ public class ConquestGameMapReader {
             throw new GameException(GameMessageConstants.D_MAP_LOAD_FAILED);
         }
 
-        for (int l_index = 0; l_index < l_map_details.size(); l_index++){
+        for  (int l_index = 0; l_index < l_map_details.size(); l_index++){
             if (l_map_details.get(l_index).compareTo("") == 0) {
                 l_map_details.remove(l_index);
             }

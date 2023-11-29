@@ -32,6 +32,23 @@ public class GameConstants {
      */
     public static final String D_LOG_FILE_NAME = "gamelog.txt";
 
+    /**
+     * Directory for saved files
+     */
     public static final String D_SAVE_DIRECTORY = File.separator + "RiskGame" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator+ "savedfiles" + File.separator;
 
+<<<<<<< Updated upstream
+=======
+    public enum GameState {
+        D_START_GAME,
+
+        D_LOAD_GAME
+    }
+
+    /**
+     * Behaviour Types
+     */
+    public static final List<String> D_GAME_COMPUTER_STRATEGIES = Arrays.asList("human", "aggressive", "benevolent", "random", "cheater");
+
+>>>>>>> Stashed changes
 }

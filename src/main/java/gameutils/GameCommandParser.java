@@ -78,17 +78,29 @@ public class GameCommandParser {
     public class CommandDetails {
 
         /**
+<<<<<<< Updated upstream
          * Boolean to check for command option
+=======
+         * contains boolean value for command options
+>>>>>>> Stashed changes
          */
         private boolean d_has_command_option;
 
         /**
+<<<<<<< Updated upstream
          * String containing command option
+=======
+         * contains command option
+>>>>>>> Stashed changes
          */
         private String d_command_option;
 
         /**
+<<<<<<< Updated upstream
          * List of String with parameters
+=======
+         * List for command parameters
+>>>>>>> Stashed changes
          */
         private List<String> d_command_parameters;
 

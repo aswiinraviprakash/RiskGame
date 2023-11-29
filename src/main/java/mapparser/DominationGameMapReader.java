@@ -8,25 +8,41 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- *
- * @author USER
+ * Class for Domination game map reader
  */
 public class DominationGameMapReader {
     //call load operations in constructor
     //load functions here
+<<<<<<< Updated upstream
     /**
      * Contains file path
      */
     String d_file_path;
     /**
      * Contains game map
+=======
+
+    /**
+     * contains file path
+     */
+    String d_file_path;
+
+    /**
+     * contains game map
+>>>>>>> Stashed changes
      */
     GameMap d_game_map;
 
     /**
+<<<<<<< Updated upstream
      * Map reader for domination mode
      * @param p_file_path file path
      * @param p_game_map game map
+=======
+     * Domination game map reader
+     * @param p_file_path contains file path
+     * @param p_game_map contains game map
+>>>>>>> Stashed changes
      */
     public DominationGameMapReader(String p_file_path, GameMap p_game_map) {
         this.d_file_path = p_file_path;
@@ -34,8 +50,13 @@ public class DominationGameMapReader {
     }
 
     /**
+<<<<<<< Updated upstream
      * Load borders for domination mode
      * @throws Exception
+=======
+     * Loads borders
+     * @throws Exception if any exceptions are caught
+>>>>>>> Stashed changes
      */
     public void loadBorders() throws Exception {
 

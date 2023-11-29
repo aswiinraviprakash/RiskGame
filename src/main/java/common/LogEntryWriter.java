@@ -21,6 +21,10 @@ public class LogEntryWriter implements Observer {
         p_logbuffer.addObserver(this);
     }
 
+    /**
+     * Method to update the observable
+     * @param p_obervable Observer parameter
+     */
     public void update(Observable p_obervable) {
         writeLogFile(((LogEntryBuffer) p_obervable).getLoggedMessage());
     }

@@ -393,13 +393,26 @@ public class GameMessageConstants {
      * Success Message Constants
      */
     public static final String D_RELATION_REMOVED = "Removed neighbor relation between ";
-    
+
+    /**
+     * Error while saving game
+     */
     public static final String D_SAVE_GAME_ERROR = "Error while saving the game ";
+<<<<<<< Updated upstream
     
     public static final String D_LOAD_GAME_ERROR = "Error while loading the game ";
     
+=======
+
+    /**
+     * Successfully loaded the game
+     */
+>>>>>>> Stashed changes
     public static final String D_LOAD_GAME_SUCCESS = "Successfully loaded the game ";
-    
+
+    /**
+     * Successfully saved the game
+     */
     public static final String D_SAVE_GAME_SUCCESS = "Successfully saved the game ";
     
     

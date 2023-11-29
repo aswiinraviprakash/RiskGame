@@ -101,14 +101,73 @@ public class GameInformation implements Serializable{
         return this.d_current_game_map;
     }
 
+    /**
+     * Setter for last session player
+     * @param p_player_obj player object
+     */
     public void setLastSessionPlayer(Player p_player_obj) {
         this.d_last_session_player = p_player_obj;
     }
 
+    /**
+     *  Getter for last session player
+     * @return player last_session_player
+     */
     public Player getLastSessionPlayer() {
         return this.d_last_session_player;
     }
 
+<<<<<<< Updated upstream
+=======
+    /**
+     * Setter for LastSession Phase
+     * @param l_last_session_phase object
+     */
+    public void setLastSessionPhase(Phase l_last_session_phase) {
+        this.d_last_session_phase = l_last_session_phase;
+    }
+
+    /**
+     * Getter for LastSession Phase
+     * @return last_session_player
+     */
+    public Phase getLastSessionPhase() {
+        return this.d_last_session_phase;
+    }
+
+    /**
+     * Setter for game mode
+     * @param p_game_mode object
+     */
+    public void setGameMode (GameMode p_game_mode) {
+        this.d_game_mode = p_game_mode;
+    }
+
+    /**
+     * Getter for game mode
+     * @return game made
+     */
+    public GameMode getGameMode() {
+        return this.d_game_mode;
+    }
+
+    /**
+     * Setter for game state
+     * @param p_game_state object
+     */
+    public void setGameState(GameConstants.GameState p_game_state) {
+        this.d_game_state = p_game_state;
+    }
+
+    /**
+     * Getter for game mode
+     * @return game state
+     */
+    public GameConstants.GameState getGameState() {
+        return this.d_game_state;
+    }
+
+>>>>>>> Stashed changes
     /**
      * Method to set cards to the player
      * @param p_player_name Parameter to assign the name of the player
@@ -135,4 +194,15 @@ public class GameInformation implements Serializable{
         this.d_card_issued_players = null;
     }
 
+<<<<<<< Updated upstream
+=======
+    /**
+     * Method to load Game INformation Instance
+     * @param p_game_info_instance
+     */
+    public static void loadGameInfoInstance(GameInformation p_game_info_instance) {
+        d_game_info_instance = p_game_info_instance;
+    }
+
+>>>>>>> Stashed changes
 }
