@@ -254,7 +254,6 @@ public class GameMap implements Serializable {
         /**
          * Function sets a boolean value based on the country's conquered
          * status.
-         *
          * @param p_value boolean value indicating a country's conquered
          * status.
          */
@@ -283,7 +282,6 @@ public class GameMap implements Serializable {
 
     /**
      * Functions adds countries to its respective continents.
-     *
      * @param p_continent continent object
      */
     public void addCountryToContinentObj(Continent p_continent) {
@@ -299,11 +297,6 @@ public class GameMap implements Serializable {
         p_continent.setCountries(l_country_id_list);
     }
 
-    /**
-     * Function adds border values to the country.
-     * @throws Exception If there is an error in the execution or validation.
-     */
-    
 
     /**
      * Function returns continent ID given its name.

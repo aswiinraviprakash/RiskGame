@@ -22,7 +22,6 @@ public class IssueOrderPhase extends Phase {
     private GameInformation d_current_game_info;
 
     /**
-     * {@inheritDoc}
      * Method deals with processing to the next phase.
      * @return object of execute order phase.
      * @throws Exception If there is an error in the execution or validation.
@@ -33,7 +32,6 @@ public class IssueOrderPhase extends Phase {
     }
 
     /**
-     * {@inheritDoc}
      *  Allows player to issue orders.
      * @throws Exception If an error occurs.
      */

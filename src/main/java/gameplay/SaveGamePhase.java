@@ -34,7 +34,6 @@ public class SaveGamePhase extends Phase {
     }
 
     /**
-     * {@inheritDoc}
      * Method for next phase
      * @return end game phase method
      * @throws Exception of any exception caught in the code block
@@ -45,7 +44,6 @@ public class SaveGamePhase extends Phase {
     }
 
     /**
-     * {@inheritDoc}
      * Method to execute phase
      * @throws Exception of any exception caught in the code block
      */
@@ -55,7 +53,6 @@ public class SaveGamePhase extends Phase {
     }
 
     /**
-     * {@inheritDoc}
      * Method to save game
      * @throws Exception of any exception caught in the code block
      */

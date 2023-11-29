@@ -51,7 +51,6 @@ public class EditMapPhase extends Phase {
 
     /**
      * Method deals with processing to the next phase.
-     *
      * @return object of execute order phase.
      * @throws Exception If there is an error in the execution or validation.
      */
@@ -523,6 +522,13 @@ public class EditMapPhase extends Phase {
         return l_new_map;
     }
 
+    /**
+     * Modify map file domination
+     * @param p_map contains map
+     * @param p_file_name contains file name
+     * @return new map
+     * @throws Exception any error caught in the code block
+     */
     public GameMap modifyMapFileDomination(GameMap p_map, String p_file_name) throws Exception {
 
         List<GameMap.Country> l_countries = p_map.getCountryObjects();
@@ -591,7 +597,6 @@ public class EditMapPhase extends Phase {
 
     /**
      * Method executes the edit map phase.
-     *
      * @throws Exception If there is an error in the execution or validation.
      */
     @Override
