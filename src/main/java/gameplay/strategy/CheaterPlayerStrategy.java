@@ -5,10 +5,6 @@ import gameplay.order.Order;
 
 import java.util.List;
 
-/**
- *
- * @author USER
- */
 public class CheaterPlayerStrategy implements PlayerStrategy {
 
 

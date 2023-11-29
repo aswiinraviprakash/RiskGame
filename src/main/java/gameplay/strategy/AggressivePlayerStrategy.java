@@ -28,7 +28,7 @@ public class AggressivePlayerStrategy implements PlayerStrategy, Serializable {
      */
     private GameInformation d_current_game_info;
 
-    public void executeMoveArmies(Player p_player_obj, Country p_strongest_country, List<Order> p_player_orders) {
+    public void executeMoveArmies(Player p_player_obj, Country p_strongest_country, List<Order> p_player_orders) throws Exception {
 
         GameMap l_game_map = d_current_game_info.getGameMap();
         List<Country> l_player_countries = p_player_obj.getConqueredCountries();
@@ -177,6 +177,8 @@ public class AggressivePlayerStrategy implements PlayerStrategy, Serializable {
 
     public List<Order> createOrders(Player p_player_obj) throws Exception {
 
+        System.out.println("Player: "+ p_player_obj.getPlayerName() + " turn");
+
         d_current_game_info = GameInformation.getInstance();
 
         List<Order> l_player_orders = new ArrayList<>();
@@ -200,12 +202,15 @@ public class AggressivePlayerStrategy implements PlayerStrategy, Serializable {
         }
 
         // executing deploy order on strongest country
+        System.out.println("Issuing deploy order...");
         executeDeployOrder(p_player_obj, l_strongest_country, l_player_orders);
 
         // executing attack on strongest opponent country
+        System.out.println("Issuing attack order...");
         executeAttackOrder(p_player_obj, l_strongest_country, l_player_orders);
 
         // executing moves armies on next strongest country
+        System.out.println("Issuing move armies between country...");
         executeMoveArmies(p_player_obj, l_strongest_country, l_player_orders);
 
         return l_player_orders;
