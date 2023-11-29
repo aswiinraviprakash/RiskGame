@@ -219,15 +219,39 @@ public class GameEngine {
         }
     }
 
+
     /**
      * Method to print tournament results
      */
+    public static void drawTable() {
+        String tables_border = "+---------------";
+        for (int i = 0; i < 4; i++) {
+            System.out.print(tables_border);
+        }
+        System.out.format("+%n");
+        System.out.format("%-16s %-16s %-16s %-16s", "Game", "Map", "Result", "Turns");
+        System.out.format("%n");
+        for (int i = 0; i < 4; i++) {
+            System.out.format(tables_border);
+        }
+        System.out.format("+%n");
+    }
+
     private static void printTournamentModeResults() {
         GameMode l_current_game_mode = GameInformation.getInstance().getGameMode();
         List<GameMode.GameDetails> l_game_details = l_current_game_mode.getGameDetails();
-
+        int counter = 1;
         for (GameMode.GameDetails l_game_detail : l_game_details) {
-            System.out.println("Map: " + l_game_detail.getCurrentMap() + " Game: " + l_game_detail.getGameNumber() + " Winner: " + l_game_detail.getGameWinner() + " turns: " + l_game_detail.getTurnsPlayed());
+            if (l_game_detail.getGameNumber() == counter) {
+                drawTable();
+                ++counter;
+            }
+            if (l_game_detail.getGameWinner() == null) {
+                System.out.format("%-16s %-16s %-16s %-16s%n", l_game_detail.getGameNumber(), l_game_detail.getCurrentMap(), "Draw", l_game_detail.getTurnsPlayed());
+            }
+            else {
+                System.out.format("%-16s %-16s %-16s %-16s%n", l_game_detail.getGameNumber(), l_game_detail.getCurrentMap(), l_game_detail.getGameWinner() , l_game_detail.getTurnsPlayed());
+            }
         }
     }
 
