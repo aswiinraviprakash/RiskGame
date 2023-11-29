@@ -123,7 +123,7 @@ public class GameInformation implements Serializable {
 
     /**
      * Setter to last session player
-     * @param p_player_obj
+     * @param p_player_obj The player object
      */
     public void setLastSessionPlayer(Player p_player_obj) {
         this.d_last_session_player = p_player_obj;
@@ -163,7 +163,7 @@ public class GameInformation implements Serializable {
 
     /**
      * Getter for game mode
-     * @return
+     * @return Returns the current Game Mode
      */
     public GameMode getGameMode() {
         return this.d_game_mode;
@@ -171,7 +171,7 @@ public class GameInformation implements Serializable {
 
     /**
      * Setter for state
-     * @param p_game_state
+     * @param p_game_state The variable for the state setter
      */
     public void setGameState(GameConstants.GameState p_game_state) {
         this.d_game_state = p_game_state;
@@ -213,7 +213,7 @@ public class GameInformation implements Serializable {
 
     /**
      * Method to load game information instance
-     * @param p_game_info_instance
+     * @param p_game_info_instance The parameter for the GameInformation object
      */
     public static void loadGameInfoInstance(GameInformation p_game_info_instance) {
         d_game_info_instance = p_game_info_instance;

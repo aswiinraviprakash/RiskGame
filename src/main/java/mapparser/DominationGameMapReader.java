@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * This class is used to read the Map file in the Domination format
+ */
 public class DominationGameMapReader {
     //call load operations in constructor
     //load functions here
@@ -32,7 +35,7 @@ public class DominationGameMapReader {
 
     /**
      * Load borders for domination mode
-     * @throws Exception
+     * @throws Exception Throws Exception if the borders are not right
      */
     public void loadBorders() throws Exception {
 

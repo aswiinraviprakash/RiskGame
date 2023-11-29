@@ -27,7 +27,7 @@ public class SaveGamePhase extends Phase {
 
     /**
      * Method to save game phase
-     * @param p_file_path
+     * @param p_file_path The Save file Path
      */
     public SaveGamePhase(String p_file_path) {
         this.d_file_path = p_file_path;

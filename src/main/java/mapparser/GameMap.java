@@ -54,9 +54,24 @@ public class GameMap implements Serializable {
      */
     public class Continent implements Serializable {
 
+        /**
+         * Continent Name
+         */
         private String d_continent_name;
+
+        /**
+         * varible to determine if the continent is conquered or not
+         */
         private boolean d_is_continent_conquered;
+
+        /**
+         * Special Number
+         */
         private int d_special_number;
+
+        /**
+         * List of Countries
+         */
         private List<Integer> d_country_list;
 
         /**

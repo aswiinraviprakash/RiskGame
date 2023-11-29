@@ -26,7 +26,7 @@ public class LoadGamePhase extends Phase {
 
     /**
      * Method for load game phase
-     * @param p_file_path
+     * @param p_file_path The Loadgame file path
      */
     public LoadGamePhase(String p_file_path) {
         this.d_file_path = p_file_path;
@@ -43,7 +43,7 @@ public class LoadGamePhase extends Phase {
     /**
      * Method for next phase
      * @return game startup phase
-     * @throws Exception
+     * @throws Exception Throws exception if the nextPhase() call is unsuccessful.
      */
     @Override
     public Phase nextPhase() throws Exception {

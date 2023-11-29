@@ -14,6 +14,9 @@ import gameplay.GameInformation;
 import mapparser.GameMap;
 import mapparser.GameMap.Country;
 
+/**
+ * This Class represents the Benevolent Player Strategy
+ */
 public class BenevolentPlayerStrategy implements PlayerStrategy, Serializable {
 
     /**

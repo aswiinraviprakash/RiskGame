@@ -26,6 +26,7 @@ public class GameCommonUtils {
     /**
      * Checks and create the directory if not present
      * @param p_directory_path directory path parameter
+     * @throws Exception Throws Exception if the file is not created
      */
     public static void checkAndCreateDirectory(String p_directory_path) throws Exception {
         File l_file_dir = new File("").getCanonicalFile();

@@ -16,6 +16,9 @@ import java.util.List;
 import mapparser.GameMap;
 import mapparser.GameMap.Country;
 
+/**
+ * This class is represents the Aggressive Player Strategy
+ */
 public class AggressivePlayerStrategy implements PlayerStrategy, Serializable {
 
     /**

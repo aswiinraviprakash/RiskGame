@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * This class Represents the Cheater Behaviour Strategy
+ */
 public class CheaterPlayerStrategy implements PlayerStrategy {
 
     /**
