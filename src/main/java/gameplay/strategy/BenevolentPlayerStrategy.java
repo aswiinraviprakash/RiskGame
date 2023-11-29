@@ -26,6 +26,13 @@ public class BenevolentPlayerStrategy implements PlayerStrategy, Serializable {
      */
     private GameInformation d_current_game_info;
 
+    /**
+     * This method finds the weakest countries each turn and performs deploy and advance order to them
+     * @param p_player_obj The player object
+     * @param p_weakest_country Weakest country
+     * @param p_player_orders The list of orders
+     * @throws Exception Throws Exception
+     */
     public void executeMoveArmies(Player p_player_obj, Country p_weakest_country, List<Order> p_player_orders) throws Exception {
 
         GameMap l_game_map = d_current_game_info.getGameMap();
@@ -98,6 +105,13 @@ public class BenevolentPlayerStrategy implements PlayerStrategy, Serializable {
         }
     }
 
+    /**
+     * Executes the deploy order
+     * @param p_current_player The current player
+     * @param p_weakest_country The weakest country
+     * @param p_player_orders The list of player orders
+     * @throws Exception Throws Exception error
+     */
     public void executeDeployOrder(Player p_current_player, Country p_weakest_country, List<Order> p_player_orders) throws Exception {
 
         String l_weakest_country_name = p_weakest_country.getCountryName();

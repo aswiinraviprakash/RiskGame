@@ -28,6 +28,13 @@ public class AggressivePlayerStrategy implements PlayerStrategy, Serializable {
      */
     private GameInformation d_current_game_info;
 
+    /**
+     * This method is used to Deploy armies to the player's strongest country
+     * @param p_player_obj The player
+     * @param p_strongest_country The strongest country
+     * @param p_player_orders The list of Player's orders
+     * @throws Exception Throws Exception
+     */
     public void executeMoveArmies(Player p_player_obj, Country p_strongest_country, List<Order> p_player_orders) throws Exception {
 
         GameMap l_game_map = d_current_game_info.getGameMap();
@@ -99,6 +106,13 @@ public class AggressivePlayerStrategy implements PlayerStrategy, Serializable {
         }
     }
 
+    /**
+     * This method is used to initiate the attack
+     * @param p_current_player The current player
+     * @param p_strongest_country The strongsest country
+     * @param p_player_orders The List of player orders
+     * @throws Exception Throws Exception 
+     */
     public void executeAttackOrder(Player p_current_player, Country p_strongest_country, List<Order> p_player_orders) throws Exception {
 
         GameMap l_game_map = d_current_game_info.getGameMap();
@@ -161,6 +175,13 @@ public class AggressivePlayerStrategy implements PlayerStrategy, Serializable {
         }
     }
 
+    /**
+     * This method is used to execute the Deploy Order
+     * @param p_current_player The current Order
+     * @param p_strongest_country The strongest countries
+     * @param p_player_orders The List of Player orders
+     * @throws Exception Throws Exception 
+     */
     public void executeDeployOrder(Player p_current_player, Country p_strongest_country, List<Order> p_player_orders) throws Exception {
 
         String l_strongest_country_name = p_strongest_country.getCountryName();
