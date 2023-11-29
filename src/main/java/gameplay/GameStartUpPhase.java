@@ -3,6 +3,10 @@ package gameplay;
 import common.LogEntryBuffer;
 import common.Phase;
 import gameplay.strategy.HumanPlayerStrategy;
+import gameplay.strategy.AggressivePlayerStrategy;
+import gameplay.strategy.BenevolentPlayerStrategy;
+import gameplay.strategy.RandomPlayerStratergy;
+import gameplay.strategy.CheaterPlayerStrategy;
 import gameutils.GameCommandParser;
 import constants.GameMessageConstants;
 import gameutils.GameException;
@@ -204,19 +208,34 @@ public class GameStartUpPhase extends Phase {
             }
             case "aggressive": {
                 Player l_player_obj = new Player("aggressive");
-                l_player_obj.setPlayerStrategy(new HumanPlayerStrategy());
+                l_player_obj.setPlayerStrategy(new AggressivePlayerStrategy());
                 LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
                 l_player_list.put("aggressive", l_player_obj);
                 d_current_game_info.setPlayerList(l_player_list);
                 break;
             }
             case "benevolent": {
+                Player l_player_obj = new Player("benevolent");
+                l_player_obj.setPlayerStrategy(new BenevolentPlayerStrategy());
+                LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+                l_player_list.put("benevolent", l_player_obj);
+                d_current_game_info.setPlayerList(l_player_list);
                 break;
             }
             case "random": {
+                Player l_player_obj = new Player("random");
+                l_player_obj.setPlayerStrategy(new RandomPlayerStratergy());
+                LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+                l_player_list.put("random", l_player_obj);
+                d_current_game_info.setPlayerList(l_player_list);
                 break;
             }
             case "cheater": {
+                Player l_player_obj = new Player("cheater");
+                l_player_obj.setPlayerStrategy(new CheaterPlayerStrategy());
+                LinkedHashMap<String, Player> l_player_list = d_current_game_info.getPlayerList();
+                l_player_list.put("cheater", l_player_obj);
+                d_current_game_info.setPlayerList(l_player_list);
                 break;
             }
             default:
