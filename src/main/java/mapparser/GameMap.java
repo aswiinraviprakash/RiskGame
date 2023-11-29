@@ -236,7 +236,7 @@ public class GameMap implements Serializable {
          * @param p_country_name country name.
          * @return whether a country is adjacent to the given inputed country.
          */
-        public boolean isCountryAdjacent(String p_country_name){
+        public boolean isCountryAdjacent(String p_country_name) {
             LinkedHashMap<Integer, List<Integer>> l_borders = GameMap.this.d_borders;
 
             Country l_destination_obj = getCountryByName(p_country_name);

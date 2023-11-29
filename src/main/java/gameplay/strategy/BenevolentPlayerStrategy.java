@@ -2,19 +2,21 @@ package gameplay.strategy;
 
 import common.LogEntryBuffer;
 import constants.GameMessageConstants;
-import gameplay.DeployOrder;
+import gameplay.order.AdvanceOrder;
+import gameplay.order.DeployOrder;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import gameplay.Player;
-import gameplay.Order;
+import gameplay.order.Order;
 import gameplay.GameInformation;
-import gameutils.GameException;
+import mapparser.GameMap;
 import mapparser.GameMap.Country;
 
 
-public class BenevolentPlayerStrategy implements PlayerStrategy {
-    
-    
+public class BenevolentPlayerStrategy implements PlayerStrategy, Serializable {
+
     /**
      * member to store logger instance
      */
@@ -24,75 +26,124 @@ public class BenevolentPlayerStrategy implements PlayerStrategy {
      * Contains current game information.
      */
     private GameInformation d_current_game_info;
-    
-    
-    @Override
-    public List<Order> createOrders(Player p_player_obj) throws Exception{
-        
-        List<Order> l_player_orders = new ArrayList<>();
-        
-        d_current_game_info = GameInformation.getInstance();
 
-        //deploy order
-        System.out.println("Issuing deploy order");
+    public void executeMoveArmies(Player p_player_obj, Country p_weakest_country, List<Order> p_player_orders) {
 
-        executeDeployOrder(p_player_obj, l_player_orders);
+        GameMap l_game_map = d_current_game_info.getGameMap();
+        List<Country> l_player_countries = p_player_obj.getConqueredCountries();
 
+        Country l_next_weakest_country = null;
+        int l_next_weakest_army_min = Integer.MAX_VALUE;
 
-        //issue order - moving armies
-        System.out.println("Moving armies");
-        
-        executeMoveArmies(p_player_obj, l_player_orders);
+        for (Country l_player_country : l_player_countries) {
+            if (l_player_country.getCountryID() == p_weakest_country.getCountryID()) {
+                continue;
+            }
 
-        return l_player_orders;
-    }
-    
-    public void executeDeployOrder(Player p_current_player, List<Order> p_player_orders) throws Exception{
-        String l_country_name = null;
-        int l_armies_number = -1;
-        
-        //find the weakest country
-        
-        List<Country> l_countries = p_current_player.d_conquered_countries;
-        Country l_weak_country = null;
-        
-        int l_min_count = Integer.MAX_VALUE;
-        
-        for(int l_index = 0; l_index < l_countries.size(); l_index++){
-            if(l_countries.get(l_index).getArmyCount() < l_min_count){
-                l_min_count = l_countries.get(l_index).getArmyCount();
-                l_weak_country = l_countries.get(l_index);
+            int l_country_army_count = l_player_country.getArmyCount();
+            if (l_country_army_count >= l_next_weakest_army_min) {
+                continue;
+            }
+
+            if (!l_game_map.getBorders().containsKey(l_player_country.getCountryID())) {
+                continue;
+            }
+            List<Integer> l_country_borders = l_game_map.getBorders().get(l_player_country.getCountryID());
+
+            boolean l_has_neighbor_player = false;
+            for (Integer l_country_border : l_country_borders) {
+
+                if (l_country_border == l_player_country.getCountryID()) {
+                    continue;
+                }
+
+                Country l_neighbor_country = l_game_map.getCountryById(l_country_border);
+                String l_neighbor_player_name = l_neighbor_country.getPlayerName();
+
+                if (l_neighbor_country != null && l_neighbor_player_name != null && l_neighbor_player_name.equals(p_player_obj.getPlayerName())) {
+                    if (l_neighbor_country.getArmyCount() > 2 && (l_neighbor_country.getArmyCount() - (l_neighbor_country.getArmyCount() / 2)) > l_country_army_count) {
+                        l_has_neighbor_player = true;
+                        break;
+                    }
+                }
+            }
+
+            if (l_has_neighbor_player) {
+                l_next_weakest_country = l_player_country;
+                l_next_weakest_army_min = l_country_army_count;
             }
         }
-        
-        l_country_name = l_weak_country.getCountryName();
-        l_armies_number = p_current_player.getCurrentArmies();
-        
-        if(l_weak_country == null || l_armies_number == -1) throw new GameException(GameMessageConstants.D_INTERNAL_ERROR);
-        
-        Order l_current_order = new DeployOrder(l_country_name, l_armies_number);
+
+        if (l_next_weakest_country == null) {
+            return;
+        }
+
+        List<Integer> l_weak_country_borders = l_game_map.getBorders().get(l_next_weakest_country.getCountryID());
+        for (Integer l_country_border : l_weak_country_borders) {
+
+            if (l_country_border == l_next_weakest_country.getCountryID()) {
+                continue;
+            }
+
+            Country l_neighbor_country = l_game_map.getCountryById(l_country_border);
+            String l_neighbor_player_name = l_neighbor_country.getPlayerName();
+
+            if (l_neighbor_country != null && l_neighbor_player_name != null && l_neighbor_player_name.equals(p_player_obj.getPlayerName())) {
+                if (l_neighbor_country.getArmyCount() > 2 && (l_neighbor_country.getArmyCount() - (l_neighbor_country.getArmyCount() / 2)) > l_next_weakest_country.getArmyCount()) {
+                    Order l_current_order = new AdvanceOrder(l_neighbor_country, l_next_weakest_country, l_neighbor_country.getArmyCount() / 2);
+                    p_player_orders.add(l_current_order);
+                    System.out.println(GameMessageConstants.D_ADVANCE + " " + GameMessageConstants.D_ORDER_ISSUED);
+                    d_logger.addLogger(GameMessageConstants.D_ADVANCE + " " + GameMessageConstants.D_ORDER_ISSUED);
+                }
+            }
+        }
+    }
+
+    public void executeDeployOrder(Player p_current_player, Country p_weakest_country, List<Order> p_player_orders) throws Exception {
+
+        String l_weakest_country_name = p_weakest_country.getCountryName();
+        int l_current_armies = p_current_player.getCurrentArmies();
+
+        Order l_current_order = new DeployOrder(l_weakest_country_name, l_current_armies);
         p_player_orders.add(l_current_order);
         p_current_player.setCurrentArmies(0);
+
         System.out.println(GameMessageConstants.D_DEPLOY + " " + GameMessageConstants.D_ORDER_ISSUED);
         d_logger.addLogger(GameMessageConstants.D_DEPLOY + " " + GameMessageConstants.D_ORDER_ISSUED);
-        
+
     }
-    
-    public void executeMoveArmies(Player p_current_player, List<Order> p_player_orders) throws Exception{
-        //find the weakest country
-        
-        List<Country> l_countries = p_current_player.d_conquered_countries;
-        Country l_weak_country = null;
-        
-        int l_min_count = Integer.MAX_VALUE;
-        
-        for(int l_index = 0; l_index < l_countries.size(); l_index++){
-            if(l_countries.get(l_index).getArmyCount() < l_min_count){
-                l_min_count = l_countries.get(l_index).getArmyCount();
-                l_weak_country = l_countries.get(l_index);
-            }
+
+    @Override
+    public List<Order> createOrders(Player p_player_obj) throws Exception {
+
+        d_current_game_info = GameInformation.getInstance();
+
+        List<Order> l_player_orders = new ArrayList<>();
+        List<Country> l_counquered_countries = p_player_obj.getConqueredCountries();
+
+        if (l_counquered_countries.isEmpty()) {
+            return l_player_orders;
         }
-             
-        
+
+        // finding country with maximum armies
+        int l_min_arimies = Integer.MAX_VALUE;
+        Country l_weakest_country = null;
+
+        for (Country l_country : l_counquered_countries) {
+
+            if (l_country.getArmyCount() < l_min_arimies) {
+                l_min_arimies = l_country.getArmyCount();
+                l_weakest_country = l_country;
+            }
+
+        }
+
+        // executing deploy order on weakest country
+        executeDeployOrder(p_player_obj, l_weakest_country, l_player_orders);
+
+        // executing move armies on next weakest country
+        executeMoveArmies(p_player_obj, l_weakest_country, l_player_orders);
+
+        return l_player_orders;
     }
 }
