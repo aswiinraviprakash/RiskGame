@@ -6,6 +6,7 @@ import gameplay.Player;
 import gameplay.order.Order;
 import mapparser.GameMap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * This class Represents the Cheater Behaviour Strategy
  */
-public class CheaterPlayerStrategy implements PlayerStrategy {
+public class CheaterPlayerStrategy implements PlayerStrategy, Serializable {
 
     /**
      * member to store logger instance

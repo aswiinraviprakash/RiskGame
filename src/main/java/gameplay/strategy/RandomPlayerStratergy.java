@@ -11,6 +11,8 @@ import gameplay.order.DeployOrder;
 import gameplay.GameInformation;
 import gameplay.order.Order;
 import gameplay.Player;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +25,7 @@ import mapparser.GameMap.Country;
 /**
  * This class represents the behaviour of Random Player Strategy
  */
-public class RandomPlayerStratergy implements PlayerStrategy {
+public class RandomPlayerStratergy implements PlayerStrategy, Serializable {
 
     /**
      * member to store logger instance
@@ -367,7 +369,6 @@ public class RandomPlayerStratergy implements PlayerStrategy {
 
                 List<Card> l_random_card_select = new ArrayList<Card>();
                 HashMap<Card, Integer> l_cards = p_current_player.getAvailableCards();
-                System.out.println(l_cards.size());
                 if (l_cards.isEmpty()) {
                     continue;
                 }
