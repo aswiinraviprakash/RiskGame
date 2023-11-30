@@ -103,7 +103,7 @@ public class RandomPlayerStratergy implements PlayerStrategy {
         //generate army count
         l_armies_number = l_random.nextInt(l_from_country_obj.getArmyCount());
 
-        if (l_armies_number <= 0 && l_armies_number > l_from_country_obj.getArmyCount()) {
+        if (l_armies_number <= 0 || l_armies_number > l_from_country_obj.getArmyCount()) {
             return;
         }
         
@@ -257,7 +257,7 @@ public class RandomPlayerStratergy implements PlayerStrategy {
 
         // number of armies moved
         l_armies_number = l_random.nextInt(l_from_country_obj.getArmyCount());
-        if (l_armies_number <= 0 && l_armies_number > l_from_country_obj.getArmyCount()) {
+        if (l_armies_number <= 0 || l_armies_number > l_from_country_obj.getArmyCount()) {
             return;
         }
 
@@ -336,7 +336,7 @@ public class RandomPlayerStratergy implements PlayerStrategy {
         //generate army count
         l_armies_number = l_random.nextInt(l_from_country_obj.getArmyCount());
 
-        if (l_armies_number <= 0 && l_armies_number > l_from_country_obj.getArmyCount()) {
+        if (l_armies_number <= 0 || l_armies_number > l_from_country_obj.getArmyCount()) {
             return;
         }
 
@@ -438,7 +438,7 @@ public class RandomPlayerStratergy implements PlayerStrategy {
             }
 
             l_random_army = l_random.nextInt(l_army_deploy) + 1;
-            if (l_random_army > l_army_deploy) {
+            if (l_random_army > l_army_deploy || l_random_army <= 0) {
                 continue;
             }
 

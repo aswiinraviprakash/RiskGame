@@ -99,6 +99,9 @@ public class AirliftOrder extends Order {
     public void movesArmiesToDestinationCountry() {
         int l_destination_armies = d_destination_country.getArmyCount();
         int l_source_armies = d_source_country.getArmyCount();
+
+        if (d_armies > l_source_armies) return;
+
         d_source_country.setArmyCount(l_source_armies - d_armies);
         d_destination_country.setArmyCount(l_destination_armies + d_armies);
     }

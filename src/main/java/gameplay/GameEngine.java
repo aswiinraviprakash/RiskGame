@@ -262,6 +262,7 @@ public class GameEngine {
     public void initializeAndRunEngine() throws Exception {
         System.out.println("---GAME STARTED---");
         d_logger.addLogger("---GAME STARTED---");
+        GameInformation.loadGameInfoInstance(null);
 
         try {
 
