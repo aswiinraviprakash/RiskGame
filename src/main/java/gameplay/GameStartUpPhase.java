@@ -181,7 +181,7 @@ public class GameStartUpPhase extends Phase {
         }
     }
 
-    private void validateAndAddStrategy(String l_command_input) throws Exception {
+    public void validateAndAddStrategy(String l_command_input) throws Exception {
 
         switch (l_command_input) {
             case "human": {
