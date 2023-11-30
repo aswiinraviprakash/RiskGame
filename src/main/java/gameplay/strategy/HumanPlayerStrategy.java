@@ -391,6 +391,7 @@ public class HumanPlayerStrategy implements PlayerStrategy, Serializable {
 
         // Executing other order types
         System.out.println("start issuing other orders");
+        
         System.out.println("Player: "+ p_player_obj.getPlayerName() + " turn");
         if (!p_player_obj.printAvailableCards().isEmpty()) System.out.println("Available Cards -> " + p_player_obj.printAvailableCards());
         l_input_command = l_reader.readLine();

@@ -158,10 +158,14 @@ public class BenevolentPlayerStrategy implements PlayerStrategy, Serializable {
 
         // executing deploy order on weakest country
         System.out.println("Issuing deploy order...");
+        d_logger.addLogger("Issuing deploy order...");
+
         executeDeployOrder(p_player_obj, l_weakest_country, l_player_orders);
 
         // executing move armies on next weakest country
         System.out.println("Issuing move armies between country...");
+        d_logger.addLogger("Issuing move armies between country...");
+
         executeMoveArmies(p_player_obj, l_weakest_country, l_player_orders);
 
         return l_player_orders;
