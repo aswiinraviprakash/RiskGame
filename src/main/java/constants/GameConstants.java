@@ -41,6 +41,11 @@ public class GameConstants {
     public static final String D_SAVE_DIRECTORY = File.separator + "RiskGame" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator+ "savedfiles" + File.separator;
 
     /**
+     * String for test directory
+     */
+    public static final String D_SAVE_TEST_DIRECTORY = File.separator + "RiskGame" + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator+ "savedfiles" + File.separator;
+
+    /**
      * Enum for gamestate
      */
     public enum GameState {
