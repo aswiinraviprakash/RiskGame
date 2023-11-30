@@ -120,7 +120,7 @@ public class GameEngine {
      * @param p_command_details list of command details
      * @throws Exception throws if any errors are caught in the code block
      */
-    private void handleTournamentMode(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
+    public void handleTournamentMode(List<GameCommandParser.CommandDetails> p_command_details) throws Exception {
 
         if (p_command_details.size() != 4) throw new GameException(GameMessageConstants.D_COMMAND_INVALID + "\nExample Format: " + GameMessageConstants.D_TOURNAMENT_MODE);
 

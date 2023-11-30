@@ -1,14 +1,15 @@
 package gameplay;
 
 import constants.GameMessageConstants;
+import gameplay.strategy.AggressivePlayerStrategy;
+import gameplay.strategy.BenevolentPlayerStrategy;
+import gameplay.strategy.CheaterPlayerStrategy;
+import gameplay.strategy.RandomPlayerStratergy;
 import gameutils.GameException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.File;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 /**
  * Test class for Game startup up phase
@@ -75,4 +76,49 @@ public class GameStartUpPhaseTest {
             Assert.assertEquals(GameMessageConstants.D_PLAYER_NOTFOUND, e.getMessage());
         } catch (Exception e) { }
     }
+
+    /**
+     * Test for checking add startegies valid.
+     */
+    @Test
+    public void testAddStrategiesValid() {
+        GameStartUpPhase l_phase_obj = new GameStartUpPhase();
+        l_phase_obj.d_current_game_info = this.d_current_game_info;
+
+        try {
+            l_phase_obj.validateAndAddStrategy("aggressive");
+            Assert.assertEquals(true, d_current_game_info.getPlayerList().containsKey("aggressive"));
+            Assert.assertEquals(true, d_current_game_info.getPlayerList().get("aggressive").getPlayerStrategy() instanceof AggressivePlayerStrategy);
+            l_phase_obj.validateAndAddStrategy("random");
+            Assert.assertEquals(true, d_current_game_info.getPlayerList().containsKey("random"));
+            Assert.assertEquals(true, d_current_game_info.getPlayerList().get("random").getPlayerStrategy() instanceof RandomPlayerStratergy);
+            l_phase_obj.validateAndAddStrategy("benevolent");
+            Assert.assertEquals(true, d_current_game_info.getPlayerList().containsKey("benevolent"));
+            Assert.assertEquals(true, d_current_game_info.getPlayerList().get("benevolent").getPlayerStrategy() instanceof BenevolentPlayerStrategy);
+            l_phase_obj.validateAndAddStrategy("cheater");
+            Assert.assertEquals(true, d_current_game_info.getPlayerList().containsKey("cheater"));
+            Assert.assertEquals(true, d_current_game_info.getPlayerList().get("cheater").getPlayerStrategy() instanceof CheaterPlayerStrategy);
+
+        } catch (Exception e){}
+
+    }
+
+    /**
+     * Test for checking add startegies invalid.
+     */
+    @Test
+    public void testAddStrategiesInValid() {
+        GameStartUpPhase l_phase_obj = new GameStartUpPhase();
+        l_phase_obj.d_current_game_info = this.d_current_game_info;
+
+        try {
+            l_phase_obj.validateAndAddStrategy("aggressivetest");
+
+        } catch (Exception e){
+            Assert.assertEquals(GameMessageConstants.D_STRATEGIES_INVALID, e.getMessage());
+        }
+
+    }
+
+
 }
