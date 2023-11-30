@@ -181,6 +181,12 @@ public class GameStartUpPhase extends Phase {
         }
     }
 
+    /**
+     * To validate and add strategy
+     * This method takes a String, validates it, and performs action based on the primary command
+     * @param l_command_input The input command to validate and execute.
+     * @throws Exception Throws exception if there is an error in the command or if the command is invalid.
+     */
     public void validateAndAddStrategy(String l_command_input) throws Exception {
 
         switch (l_command_input) {
@@ -244,6 +250,11 @@ public class GameStartUpPhase extends Phase {
 
     }
 
+    /**
+     * The method used for handling single game mode
+     *
+     * @throws Exception Throws exception if there is an error.
+     */
     private void handleSingleGameMode() throws Exception {
 
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
@@ -316,6 +327,11 @@ public class GameStartUpPhase extends Phase {
         }
     }
 
+    /**
+     * The method used for handling tournament mode
+     *
+     * @throws Exception Throws exception if there is an error.
+     */
     private void handleTournamentMode() throws Exception {
         GameMode l_current_game_mode = d_current_game_info.getGameMode();
         GameMode.GameDetails l_current_game_detail = l_current_game_mode.getCurrentGameDetails();

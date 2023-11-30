@@ -16,7 +16,8 @@ import org.junit.runners.Suite;
     ReinforcementPhaseTest.class,
     IssueOrderPhaseTest.class,
     ExecuteOrderPhaseTest.class,
-    SaveLoadGameTest.class
+    SaveGamePhaseTest.class,
+    LoadGamePhaseTest.class
 })
 
 /**

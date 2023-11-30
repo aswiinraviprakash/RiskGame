@@ -21,6 +21,11 @@ public class SaveGamePhase extends Phase {
     private String d_file_path;
 
     /**
+     * Contains file directory
+     */
+    private String d_save_directory;
+
+    /**
      * Contains current game information
      */
     private GameInformation d_current_game_info;
@@ -31,6 +36,15 @@ public class SaveGamePhase extends Phase {
      */
     public SaveGamePhase(String p_file_path) {
         this.d_file_path = p_file_path;
+        this.d_save_directory = GameConstants.D_SAVE_DIRECTORY;
+    }
+
+    /**
+     * method for setting directory
+     * @param p_save_directory directory path
+     */
+    public void setSaveDirectory(String p_save_directory) {
+        this.d_save_directory = p_save_directory;
     }
 
     /**
@@ -60,10 +74,10 @@ public class SaveGamePhase extends Phase {
         d_current_game_info = GameInformation.getInstance();
 
         try {
-            GameCommonUtils.checkAndCreateDirectory(GameConstants.D_SAVE_DIRECTORY);
+            GameCommonUtils.checkAndCreateDirectory(d_save_directory);
 
             File l_file_dir = new File("").getCanonicalFile();
-            String l_save_file_path = l_file_dir.getParent() + GameConstants.D_SAVE_DIRECTORY + this.d_file_path + ".ser";
+            String l_save_file_path = l_file_dir.getParent() + d_save_directory + this.d_file_path + ".ser";
             File l_file_obj = new File(l_save_file_path);
 
             ObjectOutputStream l_save = new ObjectOutputStream(new FileOutputStream(l_file_obj));
